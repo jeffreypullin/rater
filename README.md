@@ -12,14 +12,11 @@ To install the pacakge use:
 # we need a specific version of rstantools:
 devtools::install_github(“stan-dev/rstantools”, ref = "c3c59fb")
 
-# you may need to run: 
-# remove.packages("rstantools")
-# and restart R if rstantools is already loaded
+# you may need to run: `remove.packages("rstantools")` and restart R if rstantools is already loaded
 
 devtools::install_github("Voltemand/rateR")
 
-# There will be many compiler warnings. Don't worry, there are harmless
-# but difficult to remove unfortunatly
+# There will be many compiler warnings. Don't worry, they are harmles but difficult to remove unfortunatly
 ```
 
 Example usage:
