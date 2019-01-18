@@ -19,10 +19,9 @@ mcmc <- function(data, model, ...) {
 
   stan_data <- c(data_list, prior_list)
 
-  # for defualt
   draws <- rstan::sampling(stanmodels[[get_file(model)]], stan_data, ...)
 
-  draws
+  #draws
 
 }
 
