@@ -9,9 +9,17 @@ This pacakge is still in the very early stages of development interfaces will ch
 To install the pacakge use:
 
 ``` r
-# we need a specific version of rstantools
+# we need a specific version of rstantools:
 devtools::install_github(“stan-dev/rstantools”, ref = "c3c59fb")
+
+# you may need to run: 
+# remove.packages("rstantools")
+# and restart R if rstantools is already loaded
+
 devtools::install_github("Voltemand/rateR")
+
+# There will be many compiler warnings. Don't worry, there are harmless
+# but difficult to remove unfortunatly
 ```
 
 Example usage:
