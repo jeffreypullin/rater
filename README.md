@@ -16,7 +16,7 @@ devtools::install_github(“stan-dev/rstantools”, ref = "c3c59fb")
 
 devtools::install_github("Voltemand/rateR")
 
-# There will be many compiler warnings. Don't worry, they are harmles but difficult to remove unfortunatly
+# There will be many compiler warnings. Don't worry they are harmles but difficult to remove
 ```
 
 Example usage:
