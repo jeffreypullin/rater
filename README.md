@@ -2,7 +2,7 @@
 
 The rateR package is designed to allow the easy fitting of Bayesian versions of nosiy categorical rating models using [Stan](https://mc-stan.org/).
 
-##IMPORTANT
+***IMPORTANT***
 
 This pacakge is still in the very early stages of development interfaces will change *without* warning
 
