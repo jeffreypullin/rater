@@ -1,5 +1,5 @@
 # Helper function
-# Could also dispatch on class
+# Could also dispatch on class - does
 
 get_name <- function(model){
   if (class(model)[[1]] == "dawid_skene") {
@@ -9,10 +9,11 @@ get_name <- function(model){
   }
 }
 
+# May not be necceasary
+# could just call it the name
 get_file <- function(model) {
-  path <- "/Users/jeffreypullin/Documents/R/rateR/inst/stan"
   if (class(model)[[1]] == "dawid_skene") {
-    file.path(path, "dawid_skene.stan")
+    "dawid_skene"
   } else {
     stop("Model type not supported", call. = FALSE)
   }
