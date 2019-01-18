@@ -37,7 +37,14 @@ validate_data <- function(data) {
     stop("Data must be in 'long' format", call. = FALSE)
   }
 
-  # Should check data is numeric
+  inds <- numeric(0)
+  for (i in 1:3){
+    if (!is.numeric(data[, i])) {
+      inds <- c(inds, i)
+    }
+  }
+  stop("Columns", paste(inds, collapse = ", "), "are not numeric",
+    call. = FALSE)
 
 }
 
