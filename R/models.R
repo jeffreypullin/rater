@@ -5,11 +5,16 @@
 #'   parameters for use in \code{\link{mcmc}()}.
 #'
 #' @return a \code{model} object that can be passed to \code{\link{mcmc}}.
+#'
 
 NULL
 
-#' @rdname samplers
-
+#' @rdname models
+#' @export
+#'
+#' @param alpha
+#' @param beta
+#'
 dawid_skene <- function(alpha = NULL,
                         beta = NULL) {
 
@@ -21,30 +26,26 @@ dawid_skene <- function(alpha = NULL,
   obj
 }
 
-
+#' print a fit model object
+#' @export
 print.model <- function(x, print_code = FALSE) {
+  cat("\n\n")
+  cat(get_name(x), "\n\n")
+  params <- x$parameters
 
-  cat(get_name(x))
-  #cat("the model")
+  cat("Prior parameters:\n\n")
 
-  #cat(, "\n\n", sep = "")
+  for (i in 1:length(params)) {
+    cat(names(params))
 
-  #params <- x$parameters
-  #cat("Prior parameters:\n\n")
-  #for (i in 1:length(params)) {
-  #  if (!is.null(params[[i]])) {
-  #    cat(paste0(names(params)[[i]], ":"), "\n\n")
-  #    print(params[[i]])
-  #    cat("\n")
-  #  }
-  #}
+    if (!is.null(params[[i]])) {
 
-  #if (print_code) {
-  #  cat("Stan code:\n")
-  #  cat("\n")
-  #  # TODO dispatch here
-  #  path <- "./src/stan_files/dawid_skene.stan"
-  #  writeLines(readLines(path))
-  #}
+      cat("\n\n")
+      print(params[[i]])
+      cat("\n")
 
+    } else {
+      cat(" default\n\nn")
+    }
+  }
 }

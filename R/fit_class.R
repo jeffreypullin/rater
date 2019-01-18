@@ -1,3 +1,5 @@
+#' print a fit object
+#' @export
 print.fit <- function(fit) {
 
   cat("Model:\n\n")
@@ -11,6 +13,6 @@ print.fit <- function(fit) {
   print(fit$draws)
   cat("\n")
 
-  options(max.print = max.print_defaul)
+  options(max.print = max.print_default)
 
 }
