@@ -7,12 +7,9 @@
 #' passed to the Stan fitting interface
 #'
 #' @return An object of type fit containing the fitted parameters
-#'
-#' @examples
-#'
-#'
+#' @export
 
-mcmc <- function(data, model, control = NULL) {
+mcmc <- function(data, model, ...) {
 
   validate_data(data)
 
@@ -22,9 +19,8 @@ mcmc <- function(data, model, control = NULL) {
 
   stan_data <- c(data_list, prior_list)
 
-  stan_model <- rstan::stan_model(get_file(model))
-
-  draws <- rstan::sampling(stan_model, stan_data)
+  # for defualt
+  draws <- rstan::sampling(stanmodels$get_file(model), stan_data, ...)
 
   draws
 
@@ -75,9 +71,26 @@ parse_priors <- function(model, data_list) {
     beta_default <- matrix(1, nrow = K, ncol = K)
     diag(beta_default) <- 2.5 * K
 
-    out$beta <-  beta_defualt
+    out$beta <-  beta_default
   }
 
+  validate_priors(out, K)
+
   out
+
+}
+
+# might need to see the model type eventually
+validate_priors <- function(params, K) {
+
+  if (length(params$alpha) != K) {
+    stop("Alpha must of length", K, "the number of categories in the data",
+         call. = FALSE)
+  }
+
+  # make more informative
+  if(dim(params$beta) != rep(K, 2)) {
+    stop("Beta must be of dimension", K "x" K, ".", call. = FALSE)
+  }
 
 }
