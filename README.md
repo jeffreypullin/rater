@@ -9,6 +9,8 @@ This pacakge is still in the very early stages of development interfaces will ch
 To install the pacakge use:
 
 ``` r
+# we need a specific version of rstantools
+devtools::install_github(“stan-dev/rstantools”, ref = "c3c59fb")
 devtools::install_github("Voltemand/rateR")
 ```
 
