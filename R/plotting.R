@@ -13,6 +13,8 @@ validate_fit <- function(fit) {
 #' @param fit rateR fit object
 #' @return Plot of the population prevelance esitmates extracted in fits
 #'
+#' @export
+#' @import ggplot2
 plot_prevalance <- function(fit) {
 
   validate_fit(fit)
@@ -46,6 +48,8 @@ plot_prevalance <- function(fit) {
 #' @param fit rateR fit object
 #' @return Plot of the rate accuracy estimates
 #'
+#' @export
+#' @import ggplot2
 plot_raters <- function(fit) {
 
   validate_fit(fit)
