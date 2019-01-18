@@ -29,23 +29,22 @@ dawid_skene <- function(alpha = NULL,
 #' print a fit model object
 #' @export
 print.model <- function(x, print_code = FALSE) {
-  cat("\n\n")
   cat(get_name(x), "\n\n")
   params <- x$parameters
 
   cat("Prior parameters:\n\n")
 
   for (i in 1:length(params)) {
-    cat(names(params))
+    cat(paste0(names(params)[[i]], ":"))
 
     if (!is.null(params[[i]])) {
 
-      cat("\n\n")
+      cat("\n \n")
       print(params[[i]])
       cat("\n")
 
     } else {
-      cat(" default\n\nn")
+      cat(" default\n")
     }
   }
 }

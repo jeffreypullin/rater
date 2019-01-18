@@ -4,9 +4,9 @@ print.fit <- function(fit) {
 
   cat("Model:\n\n")
   print(fit$model)
-  cat("\n\n")
+  cat("\n")
 
-  max.print_default <- options("max.print")
+  max.print_default <- options("max.print")[[1]]
   options(max.print = 80)
 
   cat("Samples:\n\n")
