@@ -21,6 +21,8 @@ mcmc <- function(data, model, ...) {
 
   draws <- rstan::sampling(stanmodels[[get_file(model)]], stan_data, ...)
 
+  check_convergence(draws)
+
   fit <- list(model = model, draws = draws)
   class(fit) <- "fit"
 
