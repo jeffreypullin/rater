@@ -20,7 +20,7 @@ mcmc <- function(data, model, ...) {
   stan_data <- c(data_list, prior_list)
 
   # for defualt
-  draws <- rstan::sampling(stanmodels$get_file(model), stan_data, ...)
+  draws <- rstan::sampling(stanmodels[[get_file(model)]], stan_data, ...)
 
   draws
 
@@ -89,8 +89,8 @@ validate_priors <- function(params, K) {
   }
 
   # make more informative
-  if(dim(params$beta) != rep(K, 2)) {
-    stop("Beta must be of dimension", K "x" K, ".", call. = FALSE)
+  if (!all(dim(params$beta) == rep(K, 2))) {
+    stop("Beta must be of dimension", K, "x", K, ".", call. = FALSE)
   }
 
 }
