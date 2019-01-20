@@ -28,7 +28,6 @@ mcmc <- function(data, model, ...) {
   fit
 }
 
-# Helpers
 
 validate_data <- function(data) {
 

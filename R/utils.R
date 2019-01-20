@@ -1,6 +1,6 @@
-# Helper function
-# Could also dispatch on class - does
 
+#' Gets the long name of a model
+#' @param model object of type model
 get_name <- function(model){
   if (class(model)[[1]] == "dawid_skene") {
     "Bayesian Dawid and Skene Model"
@@ -9,8 +9,8 @@ get_name <- function(model){
   }
 }
 
-# May not be necceasary
-# could just call it the name
+#' Gets stan file name of a model
+#' @param model object of type model
 get_file <- function(model) {
   if (class(model)[[1]] == "dawid_skene") {
     "dawid_skene"
@@ -20,12 +20,14 @@ get_file <- function(model) {
 }
 
 #' Numerically stable log_sum_exp function
+#' @param x vector of real numbers
 logsumexp <- function (x) {
     y <- max(x)
     y + log(sum(exp(x - y)))
   }
 
 #' Softmax function
+#' @param x vector of real numbers
 softmax <- function (x) {
   exp(x - logsumexp(x))
 }
@@ -37,8 +39,7 @@ validate_fit <- function(fit) {
   }
 }
 
-#' That there has been no divergent transitions or poor convergence
-#'
+#' Check hat there has been no divergent transitions or poor convergence
 #' @param draws stanfit object
 check_convergence <- function(draws) {
 
