@@ -6,6 +6,9 @@
 \usage{
 softmax(x)
 }
+\arguments{
+\item{x}{vector of real numbers}
+}
 \description{
 Softmax function
 }

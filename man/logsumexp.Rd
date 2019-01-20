@@ -6,6 +6,9 @@
 \usage{
 logsumexp(x)
 }
+\arguments{
+\item{x}{vector of real numbers}
+}
 \description{
 Numerically stable log_sum_exp function
 }

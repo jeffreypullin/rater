@@ -8,7 +8,9 @@
 dawid_skene(alpha = NULL, beta = NULL)
 }
 \arguments{
-\item{beta}{}
+\item{alpha}{prior parameter for pi}
+
+\item{beta}{prior parameter for theta}
 }
 \value{
 a \code{model} object that can be passed to \code{\link{mcmc}}.

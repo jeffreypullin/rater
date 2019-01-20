@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{check_convergence}
 \alias{check_convergence}
-\title{That there has been no divergent transitions or poor convergence}
+\title{Check hat there has been no divergent transitions or poor convergence}
 \usage{
 check_convergence(draws)
 }
@@ -10,5 +10,5 @@ check_convergence(draws)
 \item{draws}{stanfit object}
 }
 \description{
-That there has been no divergent transitions or poor convergence
+Check hat there has been no divergent transitions or poor convergence
 }
