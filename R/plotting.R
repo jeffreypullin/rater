@@ -32,30 +32,16 @@ plot_prevalance <- function(fit) {
 #'
 #' @export
 #' @import ggplot2
-plot_raters <- function(fit) {
+plot_raters <- function(fit, which = NULL) {
 
-  validate_fit(fit)
+  raters <- extract_raters(fit = fit, which = which)
 
-  fit_ss <- rstan::extract(fit$draws)
-  theta_samps <- fit_ss$theta
-
-  J <- dim(theta_samps)[2]
-  K <- dim(theta_samps)[3]
-
-  raters <- list()
-  for(j in 1:J){
-    rate_mat <- matrix(0, nrow = K, ncol = K)
-    for (n in 1:K){
-      for (m in 1:K){
-        rate_mat[n,m] <- mean(theta_samps[,j,n,m])
-      }
-    }
-    raters[[j]] <- rate_mat
-  }
+  J <- length(raters)
+  K <- nrow(raters[[1]])
 
   plot_data <- data.frame(x = factor(rep(rep(1:K, each = K), J), level = 1:K),
                       y = factor(rep(rep(1:K, K), J), level = K:1),
-                      rater = rep(1:J, each = K^2),
+                      rater = rep(which, each = K^2),
                       value = unlist(lapply(raters, function(x) as.vector(x))))
 
   plot <- ggplot(plot_data, aes(x, y)) +
@@ -63,12 +49,13 @@ plot_raters <- function(fit) {
    geom_text(aes(label = round(value, 2))) +
    facet_wrap(~ rater) +
    # TODO add way to change defaults
-   scale_fill_gradient(low = "gray90", high = "orangered") +
+   scale_fill_gradient(low = "white", high = "steelblue") +
    labs(y = "True label",
         x = "Assigned label") +
    guides(fill = FALSE) +
    theme_bw() +
-   theme(panel.grid.major = element_blank(),
+   theme(strip.background = element_rect(fill = "white"),
+         panel.grid.major = element_blank(),
          panel.grid.minor = element_blank(),
          panel.border     = element_blank()) +
    NULL
@@ -96,7 +83,7 @@ plot_latent_class <- function(fit){
     geom_text(aes(label = round(prob, 2))) +
     labs(x = "Latent Class",
          y = "Item") +
-    scale_fill_gradient(low = "gray90", high = "orangered") +
+    scale_fill_gradient(low = "white", high = "steelblue") +
     guides(fill = FALSE) +
     theme_bw() +
     theme(panel.grid.major = element_blank(),
