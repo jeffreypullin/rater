@@ -39,7 +39,8 @@ plot_raters <- function(fit, which = NULL) {
   J <- length(raters)
   K <- nrow(raters[[1]])
 
-  plot_data <- data.frame(x = factor(rep(rep(1:K, each = K), J), level = 1:K),
+  plot_data <- data.frame(
+                      x = factor(rep(rep(1:K, each = K), J), level = 1:K),
                       y = factor(rep(rep(1:K, K), J), level = K:1),
                       rater = rep(which, each = K^2),
                       value = unlist(lapply(raters, function(x) as.vector(x))))
@@ -87,8 +88,8 @@ plot_latent_class <- function(fit){
     guides(fill = FALSE) +
     theme_bw() +
     theme(panel.grid.major = element_blank(),
-           panel.grid.minor = element_blank(),
-           panel.border = element_blank()) +
+          panel.grid.minor = element_blank(),
+          panel.border     = element_blank()) +
     NULL
 
   plot

@@ -71,7 +71,6 @@ extract_raters <- function(fit, which = NULL) {
 
   validate_fit(fit)
 
-
   fit_ss <- rstan::extract(fit$draws)
   theta_samps <- fit_ss$theta
 
@@ -96,7 +95,7 @@ extract_raters <- function(fit, which = NULL) {
   }
 
   # must validate after which has been converted from NULL (potentially)
-  validate_which(which)
+  validate_which(which, J)
 
   out <- raters[which]
 
@@ -104,10 +103,16 @@ extract_raters <- function(fit, which = NULL) {
 
 }
 
-validate_which <- function(which) {
+validate_which <- function(which, J) {
 
   if (!(length(which) > 0 & is.numeric(which))) {
     stop("which must be a positve length numeric vector", call. = FALSE)
   }
+
+  # TODO make more informative
+  if (length(which(which %in% 1:J)) != length(which)) {
+    stop("All numbers in `which` must be drawn from 1:", J, call. = FALSE)
+  }
+
 
 }
