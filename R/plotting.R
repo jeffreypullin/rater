@@ -7,16 +7,8 @@
 #' @import ggplot2
 plot_prevalance <- function(fit) {
 
-  validate_fit(fit)
-
-  pi_samps <- rstan::extract(fit$draws)$pi
-
-  pi_mean <- apply(pi_samps, 2, mean)
-  pi_sd   <- apply(pi_samps, 2, sd)
-
-  plot_data <- data.frame(cat = 1:ncol(pi_samps),
-                          prob = pi_mean,
-                          sd = pi_sd)
+  plot_data <- extract_prevalance(fit)
+  plot_data$cat <- plot_data$category
 
   plot <- ggplot(plot_data, aes(x = cat, y = prob)) +
     geom_bar(stat = "identity", fill = "steelblue") +
