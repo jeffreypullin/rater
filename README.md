@@ -1,4 +1,4 @@
-# rateR <img src="man/figures/rateR.png" align="right" width="120" />
+# rateR <img src="man/figures/rateR.png" align="right" width="160" />
 
 [![Build
 Status](https://travis-ci.com/Voltemand/rateR.svg?branch=master)](https://travis-ci.com/Voltemand/rateR)
