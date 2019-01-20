@@ -1,6 +1,7 @@
-# rateR
+# rateR <img src="man/figures/rateR.png" align="right" width="120" />
 
-![](man/figures/rateR.png)<!-- -->
+[![Build
+Status](https://travis-ci.com/Voltemand/rateR.svg?branch=master)](https://travis-ci.com/Voltemand/rateR)
 
 The rateR package is designed to allow the easy fitting of Bayesian
 versions of nosiy categorical rating models using
@@ -38,6 +39,3 @@ fit <- mcmc(anesthesia, dawid_skene())
 # plot the latent class
 plot(fit, "latent_class")
 ```
-
-[![Build
-Status](https://travis-ci.com/Voltemand/rateR.svg?branch=master)](https://travis-ci.com/Voltemand/rateR)
