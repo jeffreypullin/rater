@@ -2,12 +2,12 @@ The rateR package is designed to allow the easy fitting of Bayesian
 versions of nosiy categorical rating models using
 [Stan](https://mc-stan.org/).
 
-\#\#\#IMPORTANT
+### IMPORTANT
 
 This package is still in the very early stages of development interfaces
 will change *without* warning
 
-\#\#\#INSTALLATION
+### INSTALLATION
 
 ``` r
 # we need a specific version of rstantools
@@ -35,5 +35,4 @@ fit <- mcmc(anesthesia, dawid_skene())
 plot(fit, "latent_class")
 ```
 
-\[![build
-status](https://travis-ci.com/Voltemand/rateR.svg?branch=master)\]
+[build status](https://travis-ci.com/Voltemand/rateR.svg?branch=master)
