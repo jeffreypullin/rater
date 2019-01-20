@@ -8,7 +8,6 @@
 #'
 #' @return An object of type fit containing the fitted parameters
 #' @export
-
 mcmc <- function(data, model, ...) {
 
   validate_data(data)
@@ -43,8 +42,11 @@ validate_data <- function(data) {
       inds <- c(inds, i)
     }
   }
-  stop("Columns", paste(inds, collapse = ", "), "are not numeric",
+
+  if (length(inds) > 0) {
+    stop("Columns", paste(inds, collapse = ", "), "are not numeric",
     call. = FALSE)
+  }
 
 }
 
