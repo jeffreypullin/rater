@@ -42,11 +42,11 @@ validate_fit <- function(fit) {
 #' @param draws stanfit object
 check_convergence <- function(draws) {
 
-  if (sum(rstan::get_divergent_iterations(fit$draws))) {
+  if (sum(rstan::get_divergent_iterations(draws))) {
     warning("There were divergent transitions. The model fit may be invalid",
             call. = FALSE)
   }
-  rhats <- rstan::summary(fit$draws)$summary[, "Rhat"]
+  rhats <- rstan::summary(draws)$summary[, "Rhat"]
   if (sum(rhats > 1.1)) {
     warning("Some R-hat statistics were above 1.1. The model fit may be invalid",
             call. = FALSE)
