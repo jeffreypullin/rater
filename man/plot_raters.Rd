@@ -4,7 +4,7 @@
 \alias{plot_raters}
 \title{Plot the rater accuracy estimates}
 \usage{
-plot_raters(fit)
+plot_raters(fit, which = NULL)
 }
 \arguments{
 \item{fit}{rateR fit object}

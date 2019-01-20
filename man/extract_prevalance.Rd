@@ -10,7 +10,8 @@ extract_prevalance(fit)
 \item{fit}{fit object}
 }
 \value{
-data.frame of estimated mean category probaility and standard deviation
+data.frame of estimated mean category probaility and standard
+  deviation
 }
 \description{
 Extract prevalence/pi estiamtes from a fit object
