@@ -47,8 +47,15 @@ plot.fit <- function(fit, type = c("theta", "raters",
 
 #' Summary of fit
 #' @param fit
-#'
 #' @export
 summary.fit <- function(fit) {
   cat(get_name(fit$model), "with MCMC draws")
+}
+
+
+#' Check if object is of type fit
+#' @param x object
+#' @export
+is.fit <- function(x) {
+  inherits(x, "fit")
 }

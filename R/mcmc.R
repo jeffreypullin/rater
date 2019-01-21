@@ -67,10 +67,9 @@ parse_data <- function(data) {
 }
 
 parse_priors <- function(model, data_list) {
-
-  if (class(model)[[1]] == "dawid_skene") {
+  if (is.dawid_skene(model)) {
      priors <- parse_priors_ds(model, data_list)
-  } else if (class(model)[[1]] == "hier_dawid_skene"){
+  } else if (is.hier_dawid_skene(model)){
      priors <- parse_priors_hierds(model, data_list)
   } else {
     stop("Model type not supported", call. = FALSE)

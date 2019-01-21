@@ -2,10 +2,9 @@
 #' Gets the long name of a model
 #' @param model object of type model
 get_name <- function(model){
-  # Use switch?
-  if (class(model)[[1]] == "dawid_skene") {
+  if (is.dawid_skene(model)) {
     "Bayesian Dawid and Skene Model"
-  } else if (class(model)[[1]] == "hier_dawid_skene") {
+  } else if (is.hier_dawid_skene(model)) {
     "Bayesian Hierarchical Dawid and Skene Model"
   } else {
     stop("Model type not supported", call. = FALSE)
@@ -15,9 +14,9 @@ get_name <- function(model){
 #' Gets stan file name of a model
 #' @param model object of type model
 get_file <- function(model) {
-  if (class(model)[[1]] == "dawid_skene") {
+  if (is.dawid_skene(model)) {
     "dawid_skene"
-  } else if (class(model)[[1]] == "hier_dawid_skene"){
+  } else if (is.hier_dawid_skene(model)){
     "hierarchical_dawid_skene"
   } else {
     stop("Model type not supported", call. = FALSE)
@@ -59,4 +58,6 @@ check_convergence <- function(draws) {
   }
 
 }
+
+
 

@@ -28,3 +28,24 @@ print.model <- function(x, print_code = FALSE) {
 summary.model <- function(model) {
   cat(get_name(model))
 }
+
+#' Check if model is of type Dawid and skene
+#' @param model object of type model
+#' @export
+is.dawid_skene <- function(model) {
+  inherits(model, "dawid_skene")
+}
+
+#' Check if model is of type Hierarchical Dawid and skene
+#' @param model object of type model
+#' @export
+is.hier_dawid_skene <- function(model) {
+  inherits(model, "hier_dawid_skene")
+}
+
+#' Check if object is of type model
+#' @param x object
+#' @export
+is.model <- function(x) {
+  inherits(x, "model")
+}
