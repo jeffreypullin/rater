@@ -27,12 +27,12 @@ transformed parameters {
   vector[K] log_pi;
 
   for(j in 1:J) {
-    //non centered parameterization
+    // non centered parameterization
     beta[j] = zeta + omega .* beta_raw[j];
-    //fix last category to 0 (softmax non-identifiability)
+    // fix last category to 0 (softmax non-identifiability)
     beta_norm[j] = append_col(beta[j], zeros);
     for(k in 1:K) {
-      //log_softmax
+      // log_softmax
       beta_norm[j,k] = beta_norm[j,k] - log_sum_exp(beta_norm[j,k]);
     }
   }
@@ -58,7 +58,7 @@ model {
   to_vector(omega) ~ normal(0,1);
 
   for(j in 1:J) {
-    //part of the non centered parameterization
+    // part of the non centered parameterization
     to_vector(beta_raw[j]) ~ normal(0, 1);
   }
 
@@ -67,4 +67,3 @@ model {
   }
 
 }
-

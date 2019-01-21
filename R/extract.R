@@ -63,11 +63,16 @@ extract_prevalance <- function(fit) {
 #' Extract ater accuarcy/theta estimates from a fit object
 #'
 #' @param fit fit object
-#' @return list of matrices containsing proabaility confusion matrices for each
+#' @return list of matrices containing proabaility confusion matrices for each
 #'  rater
 #'
 #' @export
 extract_raters <- function(fit, which = NULL) {
+
+  if (is.hier_dawid_skene(fit$model)) {
+    stop("Rater metrics cannot be extracted from the Hierachical Dawid and Skene model.",
+         call. = FALSE)
+  }
 
   validate_fit(fit)
 
