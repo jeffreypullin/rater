@@ -26,6 +26,7 @@ mcmc <- function(data, model, ...) {
   class(fit) <- "fit"
 
   fit
+
 }
 
 
@@ -67,41 +68,72 @@ parse_data <- function(data) {
 
 parse_priors <- function(model, data_list) {
 
-  # This is *currently* only intended for defualt dawid-skene
-  # Defualt priors in the function come from the Stan Manual
+  if (class(model)[[1]] == "dawid_skene") {
+     priors <- parse_priors_ds(model, data_list)
+  } else if (class(model)[[1]] == "hier_dawid_skene"){
+     priors <- parse_priors_hierds(model, data_list)
+  } else {
+    stop("Model type not supported", call. = FALSE)
+  }
+
+  priors
+
+}
+
+parse_priors_ds <- function(model, data_list) {
   out <- model$parameters
   K <- data_list$K
 
+  # Use default specification for alpha
+  # small code duplcation in check - how to abstract
   if (is.null(out$alpha)) {
-    # Use default specification for alpha
-    out$alpha <- rep(3, K)
+    out$alpha <- default_alpha(K)
   }
 
+  # Use default specification for beta
   if (is.null(out$beta)) {
-    # Use default specification for beta
     beta_default <- matrix(1, nrow = K, ncol = K)
     diag(beta_default) <- 2.5 * K
 
     out$beta <-  beta_default
   }
 
-  validate_priors(out, K)
+  validate_alpha(out$alpha, K)
+
+  # valdiate beta parameter
+  if (!all(dim(params$beta) == rep(K, 2))) {
+    stop("Beta must be of dimension", K, "x", K, ".", call. = FALSE)
+  }
 
   out
 
 }
 
-# might need to see the model type eventually
-validate_priors <- function(params, K) {
+parse_priors_hierds <- function(model, data_list) {
+  out <- model$parameters
+  K <- data_list$K
 
-  if (length(params$alpha) != K) {
+  # Use default specification for alpha
+  if (is.null(out$alpha)) {
+    out$alpha <- default_alpha(K)
+  }
+
+  validate_alpha(out$alpha, K)
+
+  out
+
+}
+
+
+validate_alpha <- function(alpha, K) {
+
+  if (length(alpha) != K) {
     stop("Alpha must of length", K, "the number of categories in the data",
          call. = FALSE)
   }
 
-  # make more informative
-  if (!all(dim(params$beta) == rep(K, 2))) {
-    stop("Beta must be of dimension", K, "x", K, ".", call. = FALSE)
-  }
+}
 
+default_alpha <- function(K){
+  rep(3, K)
 }

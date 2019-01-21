@@ -2,8 +2,11 @@
 #' Gets the long name of a model
 #' @param model object of type model
 get_name <- function(model){
+  # Use switch?
   if (class(model)[[1]] == "dawid_skene") {
     "Bayesian Dawid and Skene Model"
+  } else if (class(model)[[1]] == "hier_dawid_skene") {
+    "Bayesian Hierarchical Dawid and Skene Model"
   } else {
     stop("Model type not supported", call. = FALSE)
   }
@@ -14,6 +17,8 @@ get_name <- function(model){
 get_file <- function(model) {
   if (class(model)[[1]] == "dawid_skene") {
     "dawid_skene"
+  } else if (class(model)[[1]] == "hier_dawid_skene"){
+    "hierarchical_dawid_skene"
   } else {
     stop("Model type not supported", call. = FALSE)
   }

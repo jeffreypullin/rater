@@ -1,11 +1,10 @@
 Package: rateR
 Title: Fit Bayesian Models of Noisy Categorial Rating 
 Version: 0.0.0.9000
-Authors@R:
-    person(given = "Jeffrey",
-           family = "Pullin",
-           role = c("aut", "cre"),
-           email = "jeffrey.pullin@gmail.com")
+Authors@R: person(given = "Jeffrey", 
+                  family = "Pullin",
+                  email = "jeffrey.pullin@gmail.com",
+                  role = c("aut", "cre"))
 Description: rateR facilitates the fitting of bayesian models categorical 
   annotation, based off the Dawid and Skene model. Full bayesian inference for 
   these models is supported through the Stan modelling language. rateR also 

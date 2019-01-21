@@ -3,14 +3,19 @@
 \name{models}
 \alias{models}
 \alias{dawid_skene}
+\alias{hier_dawid_skene}
 \title{Probablistic models of categorical data annotation}
 \usage{
 dawid_skene(alpha = NULL, beta = NULL)
+
+hier_dawid_skene(alpha = NULL)
 }
 \arguments{
 \item{alpha}{prior parameter for pi}
 
 \item{beta}{prior parameter for theta}
+
+\item{alpha}{prior parameter for pi}
 }
 \value{
 a \code{model} object that can be passed to \code{\link{mcmc}}.

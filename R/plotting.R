@@ -75,6 +75,9 @@ plot_latent_class <- function(fit){
 
   p_z <- extract_latent_class(fit)
 
+  I <- nrow(p_z)
+  K <- ncol(p_z)
+
   plot_data <- data.frame(x = factor(rep(1:K, each = I), levels = 1:K),
                           y = factor(rep(1:I, K), levels = I:1),
                           prob = as.vector(p_z))

@@ -25,3 +25,20 @@ dawid_skene <- function(alpha = NULL,
 
   obj
 }
+
+#' @rdname models
+#' @export
+#'
+#' @param alpha prior parameter for pi
+#'
+hier_dawid_skene <- function(alpha = NULL) {
+
+  # Note: this does not allow the user to change the N(0, 1) hyperpriors
+
+  obj <- list(parameters = list(alpha = alpha))
+
+  class(obj) <- c("hier_dawid_skene", "model")
+
+  obj
+}
+

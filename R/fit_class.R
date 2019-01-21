@@ -38,7 +38,7 @@ plot.fit <- function(fit, type = c("theta", "raters",
 
   } else if (type %in% c("z", "latent_class")) {
 
-    plot_latent_class(fit)
+    plot <- plot_latent_class(fit)
 
   }
 
