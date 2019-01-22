@@ -1,11 +1,11 @@
-#' The 'rateR' package.
+#' The 'rater' package.
 #'
 #' @description A DESCRIPTION OF THE PACKAGE
 #'
 #' @docType package
-#' @name rateR-package
-#' @aliases rateR
-#' @useDynLib rateR, .registration = TRUE
+#' @name rater-package
+#' @aliases rater
+#' @useDynLib rater, .registration = TRUE
 #' @import methods
 #' @import Rcpp
 #' @importFrom rstan sampling

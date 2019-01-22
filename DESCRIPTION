@@ -1,4 +1,4 @@
-Package: rateR
+Package: rater
 Title: Fit Bayesian Models of Noisy Categorial Rating 
 Version: 0.0.0.9000
 Authors@R: person(given = "Jeffrey", 

@@ -1,9 +1,9 @@
-# rateR <img src="man/figures/rateR.png" align="right" width="160" />
+# rater <img src="man/figures/rater.png" align="right" width="160" />
 
 [![Build
-Status](https://travis-ci.com/Voltemand/rateR.svg?branch=master)](https://travis-ci.com/Voltemand/rateR)
+Status](https://travis-ci.com/Voltemand/rater.svg?branch=master)](https://travis-ci.com/Voltemand/rater)
 
-The rateR package is designed to allow the easy fitting of Bayesian
+The rater package is designed to allow the easy fitting of Bayesian
 versions of nosiy categorical rating models using
 [Stan](https://mc-stan.org/).
 
@@ -20,7 +20,7 @@ devtools::install_github(“stan-dev/rstantools”, ref = "c3c59fb")
 
 # you may need to run: `remove.packages("rstantools")` and restart R if rstantools is already loaded
 
-devtools::install_github("Voltemand/rateR")
+devtools::install_github("Voltemand/rater")
 
 # There (unfortunately) will be many compiler warnings. 
 # Don't worry they are harmless but difficult to remove
@@ -29,7 +29,7 @@ devtools::install_github("Voltemand/rateR")
 ### Usage:
 
 ``` r
-library(rateR)
+library(rater)
 
 data(anesthesia) # example dataset
 

@@ -1,6 +1,6 @@
 #' Plot the popuation prevalence estimates
 #'
-#' @param fit rateR fit object
+#' @param fit rater fit object
 #' @return Plot of the population prevelance esitmates extracted in fits
 #'
 #' @export
@@ -27,7 +27,7 @@ plot_prevalance <- function(fit) {
 
 #' Plot the rater accuracy estimates
 #'
-#' @param fit rateR fit object
+#' @param fit rater fit object
 #' @return Plot of the rate accuracy estimates
 #'
 #' @export
@@ -70,7 +70,7 @@ plot_raters <- function(fit, which = NULL) {
 
 #' Plot the latent class estimates
 #'
-#' @param fit rateR fit object
+#' @param fit rater fit object
 #' @return Plot of the rate accuracy estimates
 #'
 #' @export

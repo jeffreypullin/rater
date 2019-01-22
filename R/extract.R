@@ -1,6 +1,6 @@
 #' Extract latent class estimates from a fit
 #'
-#' @param rateR fit object
+#' @param rater fit object
 #' @return Probalistic latent class measurements
 #'
 #' @export
