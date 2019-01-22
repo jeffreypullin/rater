@@ -13,7 +13,6 @@ extract_latent_class <- function(fit) {
   I <- dim(log_p_z_samps)[[2]]
   K <- dim(log_p_z_samps)[[3]]
 
-
   # TODO probably should mean and then softmax...
   log_p_z <- matrix(0, nrow = I, ncol = K)
   for(i in 1:I){

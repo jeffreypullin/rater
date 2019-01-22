@@ -36,12 +36,12 @@ plot_raters <- function(fit, which = NULL) {
 
   raters <- extract_raters(fit = fit, which = which)
 
-  if (is.null(which)) {
-    which <- 1:J # code duplication also in `extract_raters`
-  }
-
   J <- length(raters)
   K <- nrow(raters[[1]]) # or ncol
+
+  if (is.null(which)) {
+    which <- 1:J # code duplication: also in `extract_raters`
+  }
 
   plot_data <- data.frame(
                       x = factor(rep(rep(1:K, each = K), J), level = 1:K),

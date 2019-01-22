@@ -100,7 +100,7 @@ parse_priors_ds <- function(model, data_list) {
   validate_alpha(out$alpha, K)
 
   # valdiate beta parameter
-  if (!all(dim(params$beta) == rep(K, 2))) {
+  if (!all(dim(out$beta) == rep(K, 2))) {
     stop("Beta must be of dimension", K, "x", K, ".", call. = FALSE)
   }
 
