@@ -2,7 +2,7 @@
 % Please edit documentation in R/fit_class.R
 \name{extract.fit}
 \alias{extract.fit}
-\title{Extract parameter estiamte from a fit object}
+\title{Extract method for a rater fit object}
 \usage{
 \method{extract}{fit}(fit, param = c("theta", "raters", "pi",
   "prevalance", "z", "latent_class"), which = NULL)
@@ -16,5 +16,5 @@ theta or raters)}
 \item{type}{what sort of plot should be plotted}
 }
 \description{
-Extract parameter estiamte from a fit object
+Extract different paramter estimates from a fit object
 }

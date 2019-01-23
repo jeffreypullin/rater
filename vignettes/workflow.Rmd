@@ -1,0 +1,99 @@
+---
+title: "rater workflow"
+author: "Jeffrey Pullin"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{rater workflow}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  comment = "#>"
+)
+```
+
+## What is rater?
+
+The **rater** package is designed to allow easy fitting and anlaysis of Bayesian 
+models of categorical data annoration through Stan. In this vignette we demonstrate
+the basic workflow for using the **package**. 
+
+## Data
+
+In this vignette we will use the the *anesthesia* data set taken from the paper
+[Maximum Likelihood Estimation of Observer Error-Rates Using the EM Algorithm](https://www.jstor.org/stable/2346806) by A. P. Dawid and A. M. Skene, the paper which introduces the type of models used in this package. This dataset  is already in the appropriate format for use in **rater** function. For information about how to convert your data into the appropriate format see __link__
+
+## mcmc
+
+The core function of the **rater** package is the `mcmc` function which fits a model 
+given data. The mcmc function has two arguments the first is `data` which should be in 
+'long' format (add footnote) and `model` which is the model you would like to fit. 
+Models are passed as a function (why this is will be more obvious in a moment). For 
+example, to fit the basic Dawid and Skene model to the anesthesia dataset we 
+would run: 
+
+```{r}
+# load the rater package
+library(rater)
+
+# load the anesthesia dataset
+data("anesthesia")
+
+# fit the model using MCMC via Stan 
+fit <- mcmc(anesthesia, dawid_skene(), iter = 500, chains = 1)
+```
+
+You will see the normal progress output you get whenever **Stan** is sampling. Note that, 
+as all models are compiled when the package is installed, you will never have to 
+wait for model to be compiled while using the **rater** package. 
+
+Important note: in the example above we manually tell **Stan** to only run 1 chain
+with 500 iterations in order to speed up the creation of the vignette and descrese the 
+volumen of output. In general please run `mcmc` using the **Stan** sampling defaults
+which are used if you only pass `data` and `model` arguments to `mcmc` i.e.
+
+```{r, eval = FALSE}
+fit <- mcmc(anesthesia, dawid_skene())
+```
+
+## plot
+
+Having fit the Dawid and Skene model to the data we can now plot and extract key 
+parameter estimates from the model. 
+
+To plot the population prevalence estimates (in the model: $\pi$) we run:
+
+```{r, fig.width=6, fig.height=4}
+plot(fit, "prevalance") # or plot(fit, "pi")
+```
+
+To plot the probability confusion matrices of the raters (in the model: $\theta$):
+
+```{r, fig.width=6, fig.height=4}
+plot(fit, "raters") # or plot(fit, "theta")
+```
+
+And to plot the latent class estimates ($z$) we run:
+
+```{r, fig.width=6, fig.height=8}
+plot(fit, "latent_class") # or plot(fit, "z")
+```
+
+For discussion of what these parameters of the model represnet please see the vigneete __models__
+
+## extract
+
+Similairlty we can extract all of the estiamtes used to make these plots for further 
+processing with the `extract` function:
+
+```{r, eval = FALSE}
+extract(fit, "prevalance") # or extract(fit, "pi")
+
+extract(fit, "raters") # or extract(fit, "theta")
+
+extract(fit, "latent_class") # or extract(fit, "z")
+```
+

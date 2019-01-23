@@ -2,13 +2,15 @@
 % Please edit documentation in R/fit_class.R
 \name{extract}
 \alias{extract}
-\title{Testing}
+\title{Add an extract method}
 \usage{
 extract(x, ...)
 }
 \arguments{
-\item{x}{thing}
+\item{x}{an object}
+
+\item{...}{other stuff passed to extract}
 }
 \description{
-Testing
+Add an extract method
 }
