@@ -4,10 +4,12 @@
 \alias{creat_inits}
 \title{Creates inits for the stan MCMC chains}
 \usage{
-creat_inits(model)
+creat_inits(model, data_list)
 }
 \arguments{
-\item{model}{}
+\item{model}{rater model}
+
+\item{data_list}{data in list form}
 }
 \description{
 Creates inits for the stan MCMC chains

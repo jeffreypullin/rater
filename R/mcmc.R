@@ -18,7 +18,7 @@ mcmc <- function(data, model, ...) {
 
   stan_data <- c(data_list, prior_list)
 
-  inits <- creat_inits(model)
+  inits <- creat_inits(model, data_list)
 
   draws <- rstan::sampling(stanmodels[[get_file(model)]],
                            stan_data,
@@ -93,6 +93,7 @@ parse_data <- function(data) {
 #' are the correct dimension. It needs to see the model type because diffrent
 #' models require different priors. This function dispatches into two sub
 #' functions depending on which model is passed
+#'
 parse_priors <- function(model, data_list) {
   if (is.dawid_skene(model)) {
      priors <- parse_priors_ds(model, data_list)
@@ -189,13 +190,17 @@ default_alpha <- function(K) {
 
 #' Creates inits for the stan MCMC chains
 #'
-#' @param model
+#' @param model rater model
+#' @param data_list data in list form
 #'
 #' @details If the model is of type Dawid and Skene creates inits favouring
 #' good raters. This is to prevent label switching see: TODO. If the model is
 #' not Dawid and Skene then the inits are set randomly
 #'
-creat_inits <- function(model) {
+creat_inits <- function(model, data_list) {
+
+  K <- data_list$K
+  J <- data_list$J
 
   if (is.dawid_skene(model)) {
 
