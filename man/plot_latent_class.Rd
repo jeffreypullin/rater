@@ -7,7 +7,7 @@
 plot_latent_class(fit)
 }
 \arguments{
-\item{fit}{rateR fit object}
+\item{fit}{rater fit object}
 }
 \value{
 Plot of the rate accuracy estimates

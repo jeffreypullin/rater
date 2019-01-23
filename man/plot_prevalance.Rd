@@ -7,7 +7,7 @@
 plot_prevalance(fit)
 }
 \arguments{
-\item{fit}{rateR fit object}
+\item{fit}{rater fit object}
 }
 \value{
 Plot of the population prevelance esitmates extracted in fits

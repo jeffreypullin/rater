@@ -7,7 +7,7 @@
 \method{summary}{fit}(fit)
 }
 \arguments{
-\item{fit}{}
+\item{fit}{object of type rater fit}
 }
 \description{
 Summary of fit

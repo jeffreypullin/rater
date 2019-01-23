@@ -46,7 +46,7 @@ plot.fit <- function(fit, type = c("theta", "raters",
 }
 
 #' Summary of fit
-#' @param fit
+#' @param fit object of type rater fit
 #' @export
 summary.fit <- function(fit) {
   cat(get_name(fit$model), "with MCMC draws")

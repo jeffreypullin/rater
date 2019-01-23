@@ -7,7 +7,7 @@
 extract_latent_class(fit)
 }
 \arguments{
-\item{rateR}{fit object}
+\item{rater}{fit object}
 }
 \value{
 Probalistic latent class measurements

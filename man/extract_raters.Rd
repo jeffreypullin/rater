@@ -10,7 +10,7 @@ extract_raters(fit, which = NULL)
 \item{fit}{fit object}
 }
 \value{
-list of matrices containsing proabaility confusion matrices for each
+list of matrices containing proabaility confusion matrices for each
  rater
 }
 \description{

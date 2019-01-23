@@ -7,7 +7,7 @@
 plot_raters(fit, which = NULL)
 }
 \arguments{
-\item{fit}{rateR fit object}
+\item{fit}{rater fit object}
 }
 \value{
 Plot of the rate accuracy estimates
