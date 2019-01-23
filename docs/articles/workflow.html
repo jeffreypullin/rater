@@ -57,7 +57,14 @@
   </ul>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/Voltemand/Summer-Project">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -106,8 +113,8 @@
 <pre><code>#&gt; 
 #&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 1).
 #&gt; Chain 1: 
-#&gt; Chain 1: Gradient evaluation took 0.000485 seconds
-#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 4.85 seconds.
+#&gt; Chain 1: Gradient evaluation took 0.000271 seconds
+#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 2.71 seconds.
 #&gt; Chain 1: Adjust your expectations accordingly!
 #&gt; Chain 1: 
 #&gt; Chain 1: 
@@ -124,9 +131,9 @@
 #&gt; Chain 1: Iteration: 450 / 500 [ 90%]  (Sampling)
 #&gt; Chain 1: Iteration: 500 / 500 [100%]  (Sampling)
 #&gt; Chain 1: 
-#&gt; Chain 1:  Elapsed Time: 1.19984 seconds (Warm-up)
-#&gt; Chain 1:                0.826865 seconds (Sampling)
-#&gt; Chain 1:                2.0267 seconds (Total)
+#&gt; Chain 1:  Elapsed Time: 0.994141 seconds (Warm-up)
+#&gt; Chain 1:                0.770245 seconds (Sampling)
+#&gt; Chain 1:                1.76439 seconds (Total)
 #&gt; Chain 1:</code></pre>
 <p>You will see the normal progress output you get whenever <strong>Stan</strong> is sampling. Note that, as all models are compiled when the package is installed, you will never have to wait for model to be compiled while using the <strong>rater</strong> package.</p>
 <p>Important note: in the example above we manually tell <strong>Stan</strong> to only run 1 chain with 500 iterations in order to speed up the creation of the vignette and descrese the volumen of output. In general please run <code>mcmc</code> using the <strong>Stan</strong> sampling defaults which are used if you only pass <code>data</code> and <code>model</code> arguments to <code>mcmc</code> i.e.</p>

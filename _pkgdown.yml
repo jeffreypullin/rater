@@ -1,0 +1,65 @@
+navbar:
+  structure:
+    left:
+    - home
+    - intro
+    - reference
+    - articles
+    - tutorials
+    - news
+    right: github
+  components:
+    home:
+      icon: fa-home fa-lg
+      href: index.html
+    reference:
+      text: Reference
+      href: reference/index.html
+    articles:
+      text: Articles
+      menu:
+      - text: rater workflow
+        href: articles/workflow.html
+    github:
+      icon: fa-github
+      href: https://github.com/Voltemand/Summer-Project
+
+reference:
+- title: All functions
+  desc: ~
+  contents:
+  - '`check_convergence`'
+  - '`creat_inits`'
+  - '`default_alpha`'
+  - '`extract`'
+  - '`extract.fit`'
+  - '`extract_latent_class`'
+  - '`extract_prevalance`'
+  - '`extract_raters`'
+  - '`get_file`'
+  - '`get_name`'
+  - '`is.dawid_skene`'
+  - '`is.fit`'
+  - '`is.hier_dawid_skene`'
+  - '`is.model`'
+  - '`logsumexp`'
+  - '`mcmc`'
+  - '`models`'
+  - '`parse_data`'
+  - '`parse_priors`'
+  - '`parse_priors_ds`'
+  - '`parse_priors_hierds`'
+  - '`plot.fit`'
+  - '`plot_latent_class`'
+  - '`plot_prevalance`'
+  - '`plot_raters`'
+  - '`print.fit`'
+  - '`print.model`'
+  - '`rater-package`'
+  - '`softmax`'
+  - '`summary.fit`'
+  - '`summary.model`'
+  - '`validate_alpha`'
+  - '`validate_data`'
+  - '`validate_fit`'
+  - '`wide_to_long`'
