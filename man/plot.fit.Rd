@@ -5,12 +5,15 @@
 \title{Plot a fit object}
 \usage{
 \method{plot}{fit}(fit, type = c("theta", "raters", "pi", "prevalance",
-  "z", "latent_class"))
+  "z", "latent_class"), which = NULL)
 }
 \arguments{
 \item{fit}{a fit object}
 
 \item{type}{what sort of plot should be plotted}
+
+\item{which}{Which of the raters' matrices to extract (only used for type =
+theta or raters)}
 }
 \description{
 Plot a fit object
