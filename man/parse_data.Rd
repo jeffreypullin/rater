@@ -4,7 +4,7 @@
 \alias{parse_data}
 \title{Convert passed data into Stan data format}
 \usage{
-parse_data(data)
+parse_data(model, data)
 }
 \arguments{
 \item{data}{data in 'long format'}

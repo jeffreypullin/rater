@@ -9,7 +9,8 @@
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="rater workflow">
+<script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
+<meta property="og:title" content="rater workflow">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
@@ -79,7 +80,7 @@
       <h1>rater workflow</h1>
                         <h4 class="author">Jeffrey Pullin</h4>
             
-            <h4 class="date">2019-01-24</h4>
+            <h4 class="date">2019-01-25</h4>
       
       
       <div class="hidden name"><code>workflow.Rmd</code></div>
@@ -113,8 +114,8 @@
 <pre><code>#&gt; 
 #&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 1).
 #&gt; Chain 1: 
-#&gt; Chain 1: Gradient evaluation took 0.00026 seconds
-#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 2.6 seconds.
+#&gt; Chain 1: Gradient evaluation took 0.000408 seconds
+#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 4.08 seconds.
 #&gt; Chain 1: Adjust your expectations accordingly!
 #&gt; Chain 1: 
 #&gt; Chain 1: 
@@ -131,9 +132,9 @@
 #&gt; Chain 1: Iteration: 450 / 500 [ 90%]  (Sampling)
 #&gt; Chain 1: Iteration: 500 / 500 [100%]  (Sampling)
 #&gt; Chain 1: 
-#&gt; Chain 1:  Elapsed Time: 1.33472 seconds (Warm-up)
-#&gt; Chain 1:                1.20084 seconds (Sampling)
-#&gt; Chain 1:                2.53557 seconds (Total)
+#&gt; Chain 1:  Elapsed Time: 1.1788 seconds (Warm-up)
+#&gt; Chain 1:                0.902533 seconds (Sampling)
+#&gt; Chain 1:                2.08133 seconds (Total)
 #&gt; Chain 1:</code></pre>
 <p>You will see the normal progress output you get whenever <strong>Stan</strong> is sampling. Note that, as all models are compiled when the package is installed, you will never have to wait for model to be compiled while using the <strong>rater</strong> package.</p>
 <p>Important note: in the example above we manually tell <strong>Stan</strong> to only run 1 chain with 500 iterations in order to speed up the creation of the vignette and descrese the volumen of output. In general please run <code>mcmc</code> using the <strong>Stan</strong> sampling defaults which are used if you only pass <code>data</code> and <code>model</code> arguments to <code>mcmc</code> i.e.</p>

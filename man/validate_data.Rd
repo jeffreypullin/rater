@@ -4,7 +4,7 @@
 \alias{validate_data}
 \title{Check that the passed data is in the appropriate format}
 \usage{
-validate_data(data)
+validate_data(model, data)
 }
 \arguments{
 \item{data}{Data passed to \code{mcmc} hopefully in 'long' format}

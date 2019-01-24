@@ -30,6 +30,8 @@
 
 
 
+  <link href="../extra.css" rel="stylesheet">
+  
 <meta property="og:title" content="Probablistic models of categorical data annotation — models" />
 
 <meta property="og:description" content="Functions to set up models and change their prior
@@ -124,7 +126,9 @@
 
     <pre class="usage"><span class='fu'>dawid_skene</span>(<span class='kw'>alpha</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>beta</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-<span class='fu'>hier_dawid_skene</span>(<span class='kw'>alpha</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+<span class='fu'>hier_dawid_skene</span>(<span class='kw'>alpha</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='fu'>multinomial</span>(<span class='kw'>alpha</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>beta</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -140,6 +144,15 @@
     <tr>
       <th>alpha</th>
       <td><p>prior parameter for pi</p></td>
+    </tr>
+    <tr>
+      <th>alpha</th>
+      <td><p>prior parameter for pi</p></td>
+    </tr>
+    <tr>
+      <th>beta</th>
+      <td><p>prior parameter for theta (theta of different dimension to
+dawid and skene)</p></td>
     </tr>
     </table>
     
