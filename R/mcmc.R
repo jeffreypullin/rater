@@ -221,7 +221,7 @@ creat_inits <- function(model, data_list) {
 
     out <- function(n) list(theta = theta_init, pi = pi_init)
 
-  } else if is.multinomial(model){
+  } else if (is.multinomial(model)){
 
     theta_init <- array(0.2 / (K - 1), c(K, K))
 
