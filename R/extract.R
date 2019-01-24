@@ -57,6 +57,41 @@ extract_prevalance <- function(fit) {
 }
 
 
+extract_raters <- function(fit, which = NULL) {
+
+  validate_fit(fit)
+
+  m <- fit$model
+
+  if (is.hier_dawid_skene(m)) {
+
+    stop("Rater metrics cannot be extracted from the Hierachical Dawid and Skene model.",
+         call. = FALSE)
+
+  } else if (is.multinomial(m)) {
+
+    if (!is.null(which)) {
+      cat("Warning:\n")
+      cat("`which` parameter will be ignored as the model is of type multinomial\n")
+    }
+
+    raters <- extract_raters_multi(fit)
+
+  } else if (is.dawid_skene(m)) {
+
+    raters <- extract_raters_ds(fit, which = which)
+
+  } else {
+
+    stop("Model type not supported", call. = FALSE)
+
+  }
+
+  raters
+
+}
+
+
 #' Extract rater accuarcy estimates
 #'
 #' Extract ater accuarcy/theta estimates from a fit object
@@ -66,14 +101,7 @@ extract_prevalance <- function(fit) {
 #'  rater
 #'
 #' @export
-extract_raters <- function(fit, which = NULL) {
-
-  if (is.hier_dawid_skene(fit$model)) {
-    stop("Rater metrics cannot be extracted from the Hierachical Dawid and Skene model.",
-         call. = FALSE)
-  }
-
-  validate_fit(fit)
+extract_raters_ds <- function(fit, which = NULL) {
 
   fit_ss <- rstan::extract(fit$draws)
   theta_samps <- fit_ss$theta
@@ -106,6 +134,26 @@ extract_raters <- function(fit, which = NULL) {
   out
 
 }
+
+#' Extract rater accuarcy estimates
+#'
+#' Extract ater accuarcy/theta estimates from a fit object
+#'
+#' @param fit fit object
+#' @return list of matrices containing proabaility confusion matrices for each
+#'  rater
+#'
+#' @export
+extract_raters_multi <- function(fit) {
+
+  theta_samps <- rstan::extract(fit$draws)$theta
+
+  out <- colMeans(theta_samps)
+
+  out
+
+}
+
 
 validate_which <- function(which, J) {
 

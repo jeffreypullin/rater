@@ -102,7 +102,7 @@ extract.fit <- function(fit,
 
   } else if (param %in% c("pi", "prevalance")) {
 
-    out <- extact_prevalance(fit)
+    out <- extract_prevalance(fit)
 
   } else if (param %in% c("z", "latent_class")) {
 

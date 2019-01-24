@@ -43,6 +43,10 @@ is.hier_dawid_skene <- function(model) {
   inherits(model, "hier_dawid_skene")
 }
 
+is.multinomial <- function(model) {
+  inherits(model, "multinomial")
+}
+
 #' Check if object is of type model
 #' @param x object
 #' @export

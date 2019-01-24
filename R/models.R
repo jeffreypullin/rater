@@ -42,3 +42,22 @@ hier_dawid_skene <- function(alpha = NULL) {
   obj
 }
 
+#' @rdname models
+#' @export
+#'
+#' @param alpha prior parameter for pi
+#' @param beta prior parameter for theta (theta of different dimension to
+#'   dawid and skene)
+#'
+multinomial <- function(alpha = NULL,
+                        beta  = NULL) {
+
+  obj <- list(parameters = list(alpha = alpha,
+                                beta  = beta ))
+
+  class(obj) <- c("multinomial", "model")
+
+  obj
+}
+
+

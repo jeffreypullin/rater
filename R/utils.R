@@ -6,6 +6,8 @@ get_name <- function(model){
     "Bayesian Dawid and Skene Model"
   } else if (is.hier_dawid_skene(model)) {
     "Bayesian Hierarchical Dawid and Skene Model"
+  } else if (is.multinomial(model)) {
+    "Bayesian Multinomial (Annotator pooled) Model"
   } else {
     stop("Model type not supported", call. = FALSE)
   }
@@ -18,6 +20,8 @@ get_file <- function(model) {
     "dawid_skene"
   } else if (is.hier_dawid_skene(model)){
     "hierarchical_dawid_skene"
+  } else if (is.multinomial(model)){
+    "multinomial"
   } else {
     stop("Model type not supported", call. = FALSE)
   }

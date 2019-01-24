@@ -10,9 +10,9 @@
 #' @export
 mcmc <- function(data, model, ...) {
 
-  validate_data(data)
+  validate_data(model, data)
 
-  data_list <- parse_data(data)
+  data_list <- parse_data(model, data)
 
   prior_list <- parse_priors(model, data_list)
 
@@ -34,38 +34,11 @@ mcmc <- function(data, model, ...) {
 
 }
 
-#' Check that the passed data is in the appropriate format
-#'
-#' Checks whether the passed data is in the long format. That is: three columns
-#' item index, annotator index, annotation. This function checks that the data
-#' has three columns and that they are all numeric.
-#'
-#' @param data Data passed to \code{mcmc} hopefully in 'long' format
-validate_data <- function(data) {
-
-  if (ncol(data) != 3) {
-    stop("Data must be in 'long' format", call. = FALSE)
-  }
-
-  inds <- numeric(0)
-  for (i in 1:3){
-    if (!is.numeric(data[, i])) {
-      inds <- c(inds, i)
-    }
-  }
-
-  if (length(inds) > 0) {
-    stop("Columns", paste(inds, collapse = ", "), "are not numeric",
-    call. = FALSE)
-  }
-
-}
-
 #' Convert passed data into Stan data format
 #'
 #' @param data data in 'long format'
 #' @return Data in format required by Stan
-parse_data <- function(data) {
+parse_data_raters <- function(data) {
 
   ii <- data[, 1] # item index for each annotation
   jj <- data[, 2] # rater index for each annotation
@@ -78,6 +51,32 @@ parse_data <- function(data) {
   out <- list(ii = ii, jj = jj, y = y, I = I, J = J, K = K, N = N)
 
   out
+
+}
+
+parse_data_noraters <- function(data) {
+
+  ii <- data[, 1]  # item index for each annotation
+  y  <- data[, 2]  # annotation
+  I  <- max(ii)    # number of items
+  K  <- max(y)     # number of categories
+  N  <- nrow(data) # total number of annotations
+
+  out <- list(ii = ii, y = y, I = I, K = K, N = N)
+
+  out
+
+}
+
+parse_data <- function(model, data) {
+
+  if (is.multinomial(model)) {
+    data_list <- parse_data_noraters(data)
+  } else {
+    data_list <- parse_data_raters(data)
+  }
+
+  data_list
 
 }
 
@@ -95,7 +94,7 @@ parse_data <- function(data) {
 #' functions depending on which model is passed
 #'
 parse_priors <- function(model, data_list) {
-  if (is.dawid_skene(model)) {
+  if (is.dawid_skene(model) || is.multinomial(model)) {
      priors <- parse_priors_ds(model, data_list)
   } else if (is.hier_dawid_skene(model)){
      priors <- parse_priors_hierds(model, data_list)
@@ -224,5 +223,61 @@ creat_inits <- function(model, data_list) {
   }
 
   out
+
+}
+
+
+#' Check that the passed data is in the appropriate format
+#'
+#' Checks whether the passed data is in the long format. That is: three columns
+#' item index, annotator index, annotation. This function checks that the data
+#' has three columns and that they are all numeric.
+#'
+#' @param data Data passed to \code{mcmc} hopefully in 'long' format
+validate_data <- function(model, data) {
+
+  defualt_msg <- "Data must be in long format!"
+
+  if (is.multinomial(model)) {
+
+      if(!(ncol(data) == 2)) {
+
+        multinom_msgs <- c("For the multinomial model data must be in the following format:\n",
+                           "Column 1: Item index\n",
+                           "Column 2: Annotation (rating given)\n")
+
+        stop(paste(multinom_msgs, sep = ""), call. = FALSE)
+      }
+
+  } else {
+
+    if(!(ncol(data) == 3)) {
+
+        other_msgs <- c("For the partially pooled or unpooled models data ",
+                        "must be in the following format:\n",
+                        "Column 1: Item index\n",
+                        "Column 2: Annotator (rater)\n",
+                        "Column 2: Annotation (rating given)\n")
+
+        stop(other_msgs, call. = FALSE)
+      }
+
+  }
+
+  if (!(ncol(data)  %in% c(2, 3))) {
+    stop("Data must be in 'long' format", call. = FALSE)
+  }
+
+  inds <- numeric(0)
+  for (i in 1:ncol(data)){
+    if (!is.numeric(data[, i])) {
+      inds <- c(inds, i)
+    }
+  }
+
+  if (length(inds) > 0) {
+    stop("Columns", paste(inds, collapse = ", "), "are not numeric",
+    call. = FALSE)
+  }
 
 }

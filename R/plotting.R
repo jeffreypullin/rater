@@ -36,18 +36,28 @@ plot_raters <- function(fit, which = NULL) {
 
   raters <- extract_raters(fit = fit, which = which)
 
-  J <- length(raters)
-  K <- nrow(raters[[1]]) # or ncol
+  if (is.list(raters)) {
+    # list of matrices - theta 3D
+    K <- nrow(raters[[1]])
+    J <- length(raters)
+  } else {
+    # one matrix - theta 2D
+    K <- nrow(raters)
+    J <- 1
+  }
 
-  if (is.null(which)) {
+   if (is.null(which)) {
     which <- 1:J # code duplication: also in `extract_raters`
   }
 
   plot_data <- data.frame(
-                      x = factor(rep(rep(1:K, each = K), J), level = 1:K),
-                      y = factor(rep(rep(1:K, K), J), level = K:1),
-                      rater = rep(which, each = K^2),
-                      value = unlist(lapply(raters, function(x) as.vector(x))))
+                  x = factor(rep(rep(1:K, each = K), J), level = 1:K),
+                  y = factor(rep(rep(1:K, K), J), level = K:1),
+                  rater = rep(which, each = K^2),
+                  value = unlist(lapply(raters, function(x) as.vector(x))))
+
+  # clean up the rownames
+  rownames(plot_data) <- NULL
 
   plot <- ggplot(plot_data, aes(x, y)) +
    geom_tile(aes(fill = value), col = "black") +
