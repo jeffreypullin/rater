@@ -34,7 +34,7 @@ mcmc <- function(data, model, ...) {
 
 }
 
-#' Convert passed data into Stan data format
+#' Convert passed data into Stan data format for a model wit raters
 #'
 #' @param data data in 'long format'
 #' @return Data in format required by Stan
@@ -54,6 +54,10 @@ parse_data_raters <- function(data) {
 
 }
 
+#' Convert passed data into Stan data format for a model without raters
+#'
+#' @param data data in 'long format'
+#' @return Data in format required by Stan
 parse_data_noraters <- function(data) {
 
   ii <- data[, 1]  # item index for each annotation
@@ -68,6 +72,10 @@ parse_data_noraters <- function(data) {
 
 }
 
+#' Convert passed data into Stan data format
+#'
+#' @param data data in 'long format'
+#' @return Data in format required by Stan
 parse_data <- function(model, data) {
 
   if (is.multinomial(model)) {
@@ -92,7 +100,6 @@ parse_data <- function(model, data) {
 #' are the correct dimension. It needs to see the model type because diffrent
 #' models require different priors. This function dispatches into two sub
 #' functions depending on which model is passed
-#'
 parse_priors <- function(model, data_list) {
   if (is.dawid_skene(model) || is.multinomial(model)) {
      priors <- parse_priors_ds(model, data_list)
@@ -195,11 +202,12 @@ default_alpha <- function(K) {
 #' @details If the model is of type Dawid and Skene creates inits favouring
 #' good raters. This is to prevent label switching see: TODO. If the model is
 #' not Dawid and Skene then the inits are set randomly
-#'
 creat_inits <- function(model, data_list) {
 
   K <- data_list$K
   J <- data_list$J
+
+  pi_init <- rep(1/K, K)
 
   if (is.dawid_skene(model)) {
 
@@ -211,7 +219,15 @@ creat_inits <- function(model, data_list) {
       }
     }
 
-    pi_init <- rep(1/K, K)
+    out <- function(n) list(theta = theta_init, pi = pi_init)
+
+  } else if is.multinomial(model){
+
+    theta_init <- array(0.2 / (K - 1), c(K, K))
+
+    for (k in 1:K){
+      theta_init[k,k] <- 0.8
+    }
 
     out <- function(n) list(theta = theta_init, pi = pi_init)
 
@@ -225,7 +241,6 @@ creat_inits <- function(model, data_list) {
   out
 
 }
-
 
 #' Check that the passed data is in the appropriate format
 #'
