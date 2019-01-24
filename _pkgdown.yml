@@ -1,3 +1,7 @@
+template:
+  params:
+    bootswatch: flatly
+
 navbar:
   structure:
     left:
@@ -21,8 +25,8 @@ navbar:
       - text: rater workflow
         href: articles/workflow.html
     github:
-      icon: fa-github
-      href: https://github.com/Voltemand/Summer-Project
+      icon: fa-lg fa-github
+      href: https://github.com/Voltemand/rater
 
 reference:
 - title: All functions
@@ -63,3 +67,5 @@ reference:
   - '`validate_data`'
   - '`validate_fit`'
   - '`wide_to_long`'
+
+
