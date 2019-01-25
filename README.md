@@ -18,7 +18,7 @@ will change *without* warning
 
 ``` r
 # we need a specific version of rstantools
-devtools::install_github(“stan-dev/rstantools”, ref = "c3c59fb")
+devtools::install_github("stan-dev/rstantools", ref = "c3c59fb")
 
 # you may need to run: `remove.packages("rstantools")` and restart R if rstantools is already loaded
 
