@@ -6,7 +6,7 @@ Status](https://travis-ci.com/Voltemand/rater.svg?branch=master)](https://travis
 status](https://codecov.io/gh/Voltemand/rateR/branch/master/graph/badge.svg)](https://codecov.io/github/Voltemand/rateR?branch=master)
 
 The rater package is designed to allow the easy fitting of Bayesian
-versions of nosiy categorical rating models using
+versions of noisy categorical rating models using
 [Stan](https://mc-stan.org/).
 
 ### IMPORTANT
