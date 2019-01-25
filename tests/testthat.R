@@ -1,4 +1,4 @@
 library(testthat)
-library(rateR)
+library(rater)
 
-test_check("rateR")
+test_check("rater")
