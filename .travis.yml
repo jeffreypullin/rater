@@ -1,5 +1,8 @@
 language: r
 
+r_packages:
+ - covr
+
 addons:
   apt:
     sources:
