@@ -1,5 +1,5 @@
 ---
-title: "workflow"
+title: "Workflow"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{rater workflow}

@@ -56,7 +56,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="articles/workflow.html">rater workflow</a>
+      <a href="articles/data_format.html">Data Format</a>
+    </li>
+    <li>
+      <a href="articles/workflow.html">Workflow</a>
     </li>
   </ul>
 </li>
@@ -98,7 +101,7 @@
 <h3 class="hasAnchor">
 <a href="#installation" class="anchor"></a>INSTALLATION</h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># we need a specific version of rstantools</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>("stan<span class="op">-</span>dev<span class="op">/</span>rstantools", <span class="dt">ref =</span> <span class="st">"c3c59fb"</span>)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"stan-dev/rstantools"</span>, <span class="dt">ref =</span> <span class="st">"c3c59fb"</span>)</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co"># you may need to run: `remove.packages("rstantools")` and restart R if rstantools is already loaded</span></a>
 <a class="sourceLine" id="cb1-5" data-line-number="5"></a>
@@ -148,6 +151,7 @@
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://travis-ci.com/Voltemand/rater"><img src="https://travis-ci.com/Voltemand/rater.svg?branch=master" alt="Build Status"></a></li>
+<li><a href="https://codecov.io/github/Voltemand/rateR?branch=master"><img src="https://codecov.io/gh/Voltemand/rateR/branch/master/graph/badge.svg" alt="Coverage status"></a></li>
 </ul>
 </div>
 </div>
