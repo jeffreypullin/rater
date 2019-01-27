@@ -51,8 +51,8 @@ plot_raters <- function(fit, which = NULL) {
   }
 
   plot_data <- data.frame(
-                  x = factor(rep(rep(1:K, each = K), J), level = 1:K),
-                  y = factor(rep(rep(1:K, K), J), level = K:1),
+                  x = factor(rep(rep(1:K, each = K), J), levels = 1:K),
+                  y = factor(rep(rep(1:K, K), J), levels = K:1),
                   rater = rep(which, each = K^2),
                   value = unlist(lapply(raters, function(x) as.vector(x))))
 

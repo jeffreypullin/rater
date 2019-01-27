@@ -52,6 +52,7 @@ extract_prevalance <- function(fit) {
                     prob = pi_mean,
                     sd = pi_sd)
 
+
   out
 
 }
