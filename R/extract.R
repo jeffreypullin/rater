@@ -38,6 +38,8 @@ extract_latent_class <- function(fit) {
 #' @return data.frame of estimated mean category probaility and standard
 #'   deviation
 #'
+#' @importFrom stats sd
+#'
 #' @export
 extract_prevalance <- function(fit) {
 
@@ -51,7 +53,6 @@ extract_prevalance <- function(fit) {
   out <- data.frame(category = 1:ncol(pi_samps),
                     prob = pi_mean,
                     sd = pi_sd)
-
 
   out
 

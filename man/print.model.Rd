@@ -4,7 +4,7 @@
 \alias{print.model}
 \title{print a fit model object}
 \usage{
-\method{print}{model}(x, print_code = FALSE)
+\method{print}{model}(x, ...)
 }
 \description{
 print a fit model object

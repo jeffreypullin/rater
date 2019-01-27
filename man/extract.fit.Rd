@@ -4,16 +4,15 @@
 \alias{extract.fit}
 \title{Extract method for a rater fit object}
 \usage{
-\method{extract}{fit}(fit, param = c("theta", "raters", "pi",
-  "prevalance", "z", "latent_class"), which = NULL)
+\method{extract}{fit}(fit, ...)
 }
 \arguments{
 \item{fit}{a fit object}
 
+\item{type}{what sort of plot should be plotted}
+
 \item{which}{Which of the raters' matrices to extract (only used for type =
 theta or raters)}
-
-\item{type}{what sort of plot should be plotted}
 }
 \description{
 Extract different paramter estimates from a fit object

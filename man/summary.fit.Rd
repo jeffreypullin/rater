@@ -4,7 +4,7 @@
 \alias{summary.fit}
 \title{Summary of fit}
 \usage{
-\method{summary}{fit}(fit)
+\method{summary}{fit}(fit, ...)
 }
 \arguments{
 \item{fit}{object of type rater fit}

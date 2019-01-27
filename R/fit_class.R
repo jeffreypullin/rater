@@ -1,6 +1,7 @@
 #' print a fit object
 #' @export
-print.fit <- function(fit, ...) {
+print.fit <- function(x, ...) {
+  fit <- x
 
   cat("Model:\n\n")
   print(fit$model)
@@ -25,7 +26,9 @@ print.fit <- function(fit, ...) {
 #' theta or raters)
 #'
 #' @export
-plot.fit <- function(fit, ...) {
+plot.fit <- function(x, ...) {
+
+  fit <- x
   dots <- list(...)
 
   which <- dots$which
@@ -53,7 +56,8 @@ plot.fit <- function(fit, ...) {
 #' Summary of fit
 #' @param fit object of type rater fit
 #' @export
-summary.fit <- function(fit, ...) {
+summary.fit <- function(x, ...) {
+  fit <- x
   cat(get_name(fit$model), "with MCMC draws")
 }
 
@@ -83,7 +87,9 @@ extract <- function (x, ...) {
 #' theta or raters)
 #'
 #' @export
-extract.fit <- function(fit, ...) {
+extract.fit <- function(x, ...) {
+
+  fit <- x
   dots <- list(...)
 
   which <- dots$which

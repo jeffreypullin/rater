@@ -10,10 +10,10 @@ plot_prevalance <- function(fit) {
   plot_data <- extract_prevalance(fit)
   plot_data$cat <- plot_data$category
 
-  plot <- ggplot(plot_data, aes(x = cat, y = prob)) +
+  plot <- ggplot(plot_data, aes(x = cat, y = "prob")) +
     geom_bar(stat = "identity", fill = "steelblue") +
-    geom_text(aes(label = round(prob, 2)), vjust = -6) +
-    geom_errorbar(aes(ymin = prob - sd, ymax = prob + sd),
+    geom_text(aes(label = round("prob", 2)), vjust = -6) +
+    geom_errorbar(aes(ymin = "prob" - "sd", ymax = "prob" + "sd"),
                       width = 0.2,
                       position = position_dodge(0.9)) +
     coord_cartesian(ylim = c(0, 1)) +
@@ -50,18 +50,21 @@ plot_raters <- function(fit, which = NULL) {
     which <- 1:J # code duplication: also in `extract_raters`
   }
 
+  value <- unlist(lapply(raters, function(x) as.vector(x)))
+
   plot_data <- data.frame(
                   x = factor(rep(rep(1:K, each = K), J), levels = 1:K),
                   y = factor(rep(rep(1:K, K), J), levels = K:1),
                   rater = rep(which, each = K^2),
-                  value = unlist(lapply(raters, function(x) as.vector(x))))
+                  value = value,
+                  round_value = round(value, 2))
 
   # clean up the rownames
   rownames(plot_data) <- NULL
 
-  plot <- ggplot(plot_data, aes(x, y)) +
-   geom_tile(aes(fill = value), col = "black") +
-   geom_text(aes(label = round(value, 2))) +
+  plot <- ggplot(plot_data, aes_string(x = "x", y = "y")) +
+   geom_tile(aes_string(fill = "value"), col = "black") +
+   geom_text(aes_string(label = "round_value")) +
    facet_wrap(~ rater) +
    # TODO add way to change defaults
    scale_fill_gradient(low = "white", high = "steelblue") +
@@ -94,11 +97,12 @@ plot_latent_class <- function(fit){
 
   plot_data <- data.frame(x = factor(rep(1:K, each = I), levels = 1:K),
                           y = factor(rep(1:I, K), levels = I:1),
-                          prob = as.vector(p_z))
+                          prob = as.vector(p_z),
+                          round_prob = round(as.vector(p_z), 2))
 
-  plot <- ggplot(plot_data, aes(x, y)) +
-    geom_tile(aes(fill = prob), colour = "black") +
-    geom_text(aes(label = round(prob, 2))) +
+  plot <- ggplot(plot_data, aes_string(x = "x", y = "y")) +
+    geom_tile(aes_string(fill = "prob"), colour = "black") +
+    geom_text(aes_string(label = "round_prob")) +
     labs(x = "Latent Class",
          y = "Item") +
     scale_fill_gradient(low = "white", high = "steelblue") +

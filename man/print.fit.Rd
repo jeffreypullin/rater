@@ -4,7 +4,7 @@
 \alias{print.fit}
 \title{print a fit object}
 \usage{
-\method{print}{fit}(fit)
+\method{print}{fit}(fit, ...)
 }
 \description{
 print a fit object

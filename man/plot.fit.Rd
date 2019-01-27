@@ -4,8 +4,7 @@
 \alias{plot.fit}
 \title{Plot a fit object}
 \usage{
-\method{plot}{fit}(fit, type = c("theta", "raters", "pi", "prevalance",
-  "z", "latent_class"), which = NULL)
+\method{plot}{fit}(fit, ...)
 }
 \arguments{
 \item{fit}{a fit object}
