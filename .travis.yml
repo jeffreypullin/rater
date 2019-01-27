@@ -28,8 +28,6 @@ install:
 
 script:
   - R -e "rstan::stan_version()"
-  - R CMD build .
-  - R CMD check *tar.gz --as-cran
 
 after_success:
     - Rscript -e "install.packages('covr')"
