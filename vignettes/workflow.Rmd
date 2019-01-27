@@ -1,7 +1,5 @@
 ---
-title: "rater workflow"
-author: "Jeffrey Pullin"
-date: "`r Sys.Date()`"
+title: "workflow"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{rater workflow}
