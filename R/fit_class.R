@@ -1,6 +1,6 @@
 #' print a fit object
 #' @export
-print.fit <- function(fit) {
+print.fit <- function(fit, ...) {
 
   cat("Model:\n\n")
   print(fit$model)
@@ -25,13 +25,13 @@ print.fit <- function(fit) {
 #' theta or raters)
 #'
 #' @export
-plot.fit <- function(fit,
-                     type = c("theta", "raters",
-                              "pi", "prevalance",
-                              "z", "latent_class"),
-                     which = NULL) {
+plot.fit <- function(fit, ...) {
+  dots <- list(...)
 
-  type <- match.arg(type)
+  which <- dots$which
+  type <- match.arg(dots$type, c("theta", "raters",
+                                 "pi", "prevalance",
+                                 "z", "latent_class"))
 
   if (type %in% c("theta", "raters")) {
 
@@ -53,7 +53,7 @@ plot.fit <- function(fit,
 #' Summary of fit
 #' @param fit object of type rater fit
 #' @export
-summary.fit <- function(fit) {
+summary.fit <- function(fit, ...) {
   cat(get_name(fit$model), "with MCMC draws")
 }
 
@@ -83,18 +83,18 @@ extract <- function (x, ...) {
 #' theta or raters)
 #'
 #' @export
-extract.fit <- function(fit,
-                        param = c("theta", "raters",
-                                 "pi", "prevalance",
-                                 "z", "latent_class"),
-                        which = NULL) {
+extract.fit <- function(fit, ...) {
+  dots <- list(...)
 
-  if (missing(param)) {
-    stop("The parameter to be extracted must be specified (through param = )",
-         call. = FALSE)
-  }
+  which <- dots$which
+  param <- match.arg(dots$param, c("theta", "raters",
+                                   "pi", "prevalance",
+                                   "z", "latent_class"))
 
-  param <- match.arg(param)
+  #if (missing(param)) {
+  #  stop("The parameter to be extracted must be specified (through param = )",
+  #       call. = FALSE)
+  #}
 
   if (param %in% c("theta", "raters")) {
 

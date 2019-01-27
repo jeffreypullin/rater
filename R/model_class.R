@@ -1,6 +1,6 @@
 #' print a fit model object
 #' @export
-print.model <- function(x, print_code = FALSE) {
+print.model <- function(x, ...) {
   cat(get_name(x), "\n\n")
   params <- x$parameters
 
@@ -25,7 +25,7 @@ print.model <- function(x, print_code = FALSE) {
 #' @param model
 #'
 #' @export
-summary.model <- function(model) {
+summary.model <- function(model, ...) {
   cat(get_name(model))
 }
 
