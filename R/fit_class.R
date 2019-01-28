@@ -1,4 +1,8 @@
 #' print a fit object
+#'
+#' @param x fit object to be printed
+#' @param ... other args passed to the function
+#'
 #' @export
 print.fit <- function(x, ...) {
   fit <- x
@@ -20,10 +24,13 @@ print.fit <- function(x, ...) {
 
 #' Plot a fit object
 #'
-#' @param fit a fit object
-#' @param type what sort of plot should be plotted
-#' @param which Which of the raters' matrices to extract (only used for type =
+#' @param x fit object
+#' @param ... other arguments to be passed
 #' theta or raters)
+#'
+#' @details ... must contain the param argument which tell the function
+#' what to extract from the fit object. It may also contain the which argument
+#' which controls which raters confusion matrices will be plotted.
 #'
 #' @export
 plot.fit <- function(x, ...) {
@@ -54,7 +61,10 @@ plot.fit <- function(x, ...) {
 }
 
 #' Summary of fit
-#' @param fit object of type rater fit
+#'
+#' @param object object of type rater fit
+#' @param ... other args passed to function
+#'
 #' @export
 summary.fit <- function(object, ...) {
   fit <- object
@@ -81,10 +91,13 @@ extract <- function (x, ...) {
 #'
 #' Extract different paramter estimates from a fit object
 #'
-#' @param fit a fit object
-#' @param type what sort of plot should be plotted
-#' @param which Which of the raters' matrices to extract (only used for type =
+#' @param x fit object
+#' @param ... other arguments to be passed
 #' theta or raters)
+#'
+#' @details ... must contain the param argument which tell the function
+#' what to extract from the fit object. It may also contain the which argument
+#' which controls which raters confusion matrices will be plotted.
 #'
 #' @export
 extract.fit <- function(x, ...) {
@@ -96,11 +109,6 @@ extract.fit <- function(x, ...) {
   param <- match.arg(dots$param, c("theta", "raters",
                                    "pi", "prevalance",
                                    "z", "latent_class"))
-
-  #if (missing(param)) {
-  #  stop("The parameter to be extracted must be specified (through param = )",
-  #       call. = FALSE)
-  #}
 
   if (param %in% c("theta", "raters")) {
 

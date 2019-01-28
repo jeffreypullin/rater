@@ -1,4 +1,8 @@
 #' print a fit model object
+#'
+#' @param x fit object to be printed
+#' @param ... other args passed to the function
+#'
 #' @export
 print.model <- function(x, ...) {
 
@@ -23,7 +27,9 @@ print.model <- function(x, ...) {
 }
 
 #' Summary of model
-#' @param model
+#'
+#' @param object model object
+#' @param ... other args passed to the function
 #'
 #' @export
 summary.model <- function(object, ...) {

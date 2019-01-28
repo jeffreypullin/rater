@@ -7,13 +7,16 @@
 \method{extract}{fit}(x, ...)
 }
 \arguments{
-\item{fit}{a fit object}
+\item{x}{fit object}
 
-\item{type}{what sort of plot should be plotted}
-
-\item{which}{Which of the raters' matrices to extract (only used for type =
+\item{...}{other arguments to be passed
 theta or raters)}
 }
 \description{
 Extract different paramter estimates from a fit object
+}
+\details{
+... must contain the param argument which tell the function
+what to extract from the fit object. It may also contain the which argument
+which controls which raters confusion matrices will be plotted.
 }

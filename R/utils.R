@@ -41,6 +41,7 @@ softmax <- function (x) {
 }
 
 #' Check that a passed object is actually of type fit
+#' @param fit fit object
 validate_fit <- function(fit) {
   if (all(class(fit) != "fit")) {
     stop("Cannot plot a non-fit object", call. = FALSE)

@@ -28,6 +28,8 @@ plot_prevalance <- function(fit) {
 #' Plot the rater accuracy estimates
 #'
 #' @param fit rater fit object
+#' @param which which raters to plot
+#'
 #' @return Plot of the rate accuracy estimates
 #'
 #' @export

@@ -4,10 +4,10 @@
 \alias{summary.model}
 \title{Summary of model}
 \usage{
-\method{summary}{model}(x, ...)
+\method{summary}{model}(object, ...)
 }
 \arguments{
-\item{model}{}
+\item{object}{model object}
 }
 \description{
 Summary of model

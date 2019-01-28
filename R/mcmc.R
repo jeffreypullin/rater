@@ -3,8 +3,7 @@
 #' @param data Data for the model in long format as a three column dataframe of
 #'   ii, jj, yy
 #' @param model Model to fit to data of class model
-#' @param control List of extra parameters, iter, adapt_delta, etc. to be
-#' passed to the Stan fitting interface
+#' @param ... extra parameters to be passed to the Stan fitting interface
 #'
 #' @return An object of type fit containing the fitted parameters
 #' @export
@@ -74,7 +73,10 @@ parse_data_noraters <- function(data) {
 
 #' Convert passed data into Stan data format
 #'
+#'
+#' @param model model object
 #' @param data data in 'long format'
+#'
 #' @return Data in format required by Stan
 parse_data <- function(model, data) {
 
@@ -248,7 +250,9 @@ creat_inits <- function(model, data_list) {
 #' item index, annotator index, annotation. This function checks that the data
 #' has three columns and that they are all numeric.
 #'
+#' @param model model object
 #' @param data Data passed to \code{mcmc} hopefully in 'long' format
+#'
 validate_data <- function(model, data) {
 
   defualt_msg <- "Data must be in long format!"

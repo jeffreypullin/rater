@@ -1,6 +1,6 @@
 #' Extract latent class estimates from a fit
 #'
-#' @param rater fit object
+#' @param fit fit object
 #' @return Probalistic latent class measurements
 #'
 #' @export
@@ -99,6 +99,7 @@ extract_raters <- function(fit, which = NULL) {
 #' Extract ater accuarcy/theta estimates from a fit object
 #'
 #' @param fit fit object
+#' @param which which raters to extract
 #' @return list of matrices containing proabaility confusion matrices for each
 #'  rater
 #'

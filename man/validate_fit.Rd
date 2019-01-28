@@ -6,6 +6,9 @@
 \usage{
 validate_fit(fit)
 }
+\arguments{
+\item{fit}{fit object}
+}
 \description{
 Check that a passed object is actually of type fit
 }

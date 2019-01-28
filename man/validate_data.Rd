@@ -7,6 +7,8 @@
 validate_data(model, data)
 }
 \arguments{
+\item{model}{model object}
+
 \item{data}{Data passed to \code{mcmc} hopefully in 'long' format}
 }
 \description{

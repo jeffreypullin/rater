@@ -6,7 +6,6 @@
 #'
 #' @return a \code{model} object that can be passed to \code{\link{mcmc}}.
 #'
-
 NULL
 
 #' @rdname models
@@ -16,7 +15,7 @@ NULL
 #' @param beta prior parameter for theta
 #'
 dawid_skene <- function(alpha = NULL,
-                        beta = NULL) {
+                        beta  = NULL) {
 
   obj <- list(parameters = list(alpha = alpha,
                                 beta  = beta))
@@ -28,8 +27,6 @@ dawid_skene <- function(alpha = NULL,
 
 #' @rdname models
 #' @export
-#'
-#' @param alpha prior parameter for pi
 #'
 hier_dawid_skene <- function(alpha = NULL) {
 
@@ -45,9 +42,7 @@ hier_dawid_skene <- function(alpha = NULL) {
 #' @rdname models
 #' @export
 #'
-#' @param alpha prior parameter for pi
-#' @param beta prior parameter for theta (theta of different dimension to
-#'   dawid and skene)
+#' @details theta is of different dimension to dawid and skene model
 #'
 multinomial <- function(alpha = NULL,
                         beta  = NULL) {

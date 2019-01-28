@@ -2,4 +2,3 @@
 *.o
 *.so
 inst/doc
-build_tools.R
