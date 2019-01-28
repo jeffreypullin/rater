@@ -4,7 +4,7 @@
 \alias{summary.model}
 \title{Summary of model}
 \usage{
-\method{summary}{model}(model, ...)
+\method{summary}{model}(x, ...)
 }
 \arguments{
 \item{model}{}

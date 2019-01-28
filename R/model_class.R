@@ -26,8 +26,8 @@ print.model <- function(x, ...) {
 #' @param model
 #'
 #' @export
-summary.model <- function(x, ...) {
-  model <- x
+summary.model <- function(object, ...) {
+  model <- object
   cat(get_name(model))
 }
 

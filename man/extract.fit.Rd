@@ -4,7 +4,7 @@
 \alias{extract.fit}
 \title{Extract method for a rater fit object}
 \usage{
-\method{extract}{fit}(fit, ...)
+\method{extract}{fit}(x, ...)
 }
 \arguments{
 \item{fit}{a fit object}

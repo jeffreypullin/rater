@@ -56,8 +56,8 @@ plot.fit <- function(x, ...) {
 #' Summary of fit
 #' @param fit object of type rater fit
 #' @export
-summary.fit <- function(x, ...) {
-  fit <- x
+summary.fit <- function(object, ...) {
+  fit <- object
   cat(get_name(fit$model), "with MCMC draws")
 }
 

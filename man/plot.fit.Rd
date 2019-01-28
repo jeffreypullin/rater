@@ -4,7 +4,7 @@
 \alias{plot.fit}
 \title{Plot a fit object}
 \usage{
-\method{plot}{fit}(fit, ...)
+\method{plot}{fit}(x, ...)
 }
 \arguments{
 \item{fit}{a fit object}
