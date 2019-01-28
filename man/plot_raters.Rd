@@ -8,6 +8,8 @@ plot_raters(fit, which = NULL)
 }
 \arguments{
 \item{fit}{rater fit object}
+
+\item{which}{which raters to plot}
 }
 \value{
 Plot of the rate accuracy estimates

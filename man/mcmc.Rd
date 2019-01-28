@@ -12,8 +12,7 @@ ii, jj, yy}
 
 \item{model}{Model to fit to data of class model}
 
-\item{control}{List of extra parameters, iter, adapt_delta, etc. to be
-passed to the Stan fitting interface}
+\item{...}{extra parameters to be passed to the Stan fitting interface}
 }
 \value{
 An object of type fit containing the fitted parameters

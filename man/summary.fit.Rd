@@ -7,7 +7,9 @@
 \method{summary}{fit}(object, ...)
 }
 \arguments{
-\item{fit}{object of type rater fit}
+\item{object}{object of type rater fit}
+
+\item{...}{other args passed to function}
 }
 \description{
 Summary of fit

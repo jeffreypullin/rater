@@ -6,6 +6,11 @@
 \usage{
 \method{print}{model}(x, ...)
 }
+\arguments{
+\item{x}{fit object to be printed}
+
+\item{...}{other args passed to the function}
+}
 \description{
 print a fit model object
 }

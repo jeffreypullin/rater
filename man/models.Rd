@@ -17,13 +17,6 @@ multinomial(alpha = NULL, beta = NULL)
 \item{alpha}{prior parameter for pi}
 
 \item{beta}{prior parameter for theta}
-
-\item{alpha}{prior parameter for pi}
-
-\item{alpha}{prior parameter for pi}
-
-\item{beta}{prior parameter for theta (theta of different dimension to
-dawid and skene)}
 }
 \value{
 a \code{model} object that can be passed to \code{\link{mcmc}}.
@@ -31,4 +24,7 @@ a \code{model} object that can be passed to \code{\link{mcmc}}.
 \description{
 Functions to set up models and change their prior
   parameters for use in \code{\link{mcmc}()}.
+}
+\details{
+theta is of different dimension to dawid and skene model
 }

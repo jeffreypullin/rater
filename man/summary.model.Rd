@@ -8,6 +8,8 @@
 }
 \arguments{
 \item{object}{model object}
+
+\item{...}{other args passed to the function}
 }
 \description{
 Summary of model

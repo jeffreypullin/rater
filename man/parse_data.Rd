@@ -7,6 +7,8 @@
 parse_data(model, data)
 }
 \arguments{
+\item{model}{model object}
+
 \item{data}{data in 'long format'}
 }
 \value{

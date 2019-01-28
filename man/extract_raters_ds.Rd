@@ -8,6 +8,8 @@ extract_raters_ds(fit, which = NULL)
 }
 \arguments{
 \item{fit}{fit object}
+
+\item{which}{which raters to extract}
 }
 \value{
 list of matrices containing proabaility confusion matrices for each
