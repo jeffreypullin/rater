@@ -22,7 +22,7 @@ the basic workflow for using the **package**.
 ## Data
 
 In this vignette we will use the the *anesthesia* data set taken from the paper
-[Maximum Likelihood Estimation of Observer Error-Rates Using the EM Algorithm](https://www.jstor.org/stable/2346806) by A. P. Dawid and A. M. Skene, the paper which introduces the type of models used in this package. This dataset  is already in the appropriate format for use in **rater** function. For information about how to convert your data into the appropriate format see __link__
+*Maximum Likelihood Estimation of Observer Error-Rates Using the EM Algorithm* by A. P. Dawid and A. M. Skene, the paper which introduces the type of models used in this package. This dataset  is already in the appropriate format for use in **rater** function. For information about how to convert your data into the appropriate format see __link__
 
 ## mcmc
 
