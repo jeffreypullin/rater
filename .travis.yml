@@ -19,7 +19,6 @@ before_install:
 
 r_packages:
   - covr
-  - rstan
 
 after_success:
   - Rscript -e "covr::codecov('/home/travis/build/Voltemand/rater')"
