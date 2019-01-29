@@ -21,8 +21,9 @@ r_packages:
   - covr
   - rstan
 
-script:
-  - R -e "rstan::stan_version()"
-
 after_success:
   - Rscript -e "covr::codecov('/home/travis/build/Voltemand/rater')"
+
+email:
+  on_success: change
+  on_failure: change
