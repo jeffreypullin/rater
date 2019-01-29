@@ -10,11 +10,13 @@ plot_prevalance <- function(fit) {
   plot_data <- extract_prevalance(fit)
   plot_data$cat <- plot_data$category
   plot_data$round_prob <- round(plot_data$prob, 2)
+  plot_data$ymin <- plot_data$prob - plot_data$sd
+  plot_data$ymax <- plot_data$prob + plot_data$sd
 
-  plot <- ggplot(plot_data, aes(x = cat, y = "prob")) +
+  plot <- ggplot(plot_data, aes_string(x = "cat", y = "prob")) +
     geom_bar(stat = "identity", fill = "steelblue") +
     geom_text(aes_string(label = "round_prob"), vjust = -6) +
-    geom_errorbar(aes(ymin = "prob" - "sd", ymax = "prob" + "sd"),
+    geom_errorbar(aes_string(ymin = "ymin", ymax = "ymax"),
                       width = 0.2,
                       position = position_dodge(0.9)) +
     coord_cartesian(ylim = c(0, 1)) +
