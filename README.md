@@ -31,6 +31,8 @@ plot(fit, type = "raters")
 instructions to install **rstan** can be found
 [here](https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started)
 
+To install the **rater** package run:
+
 ``` r
 devtools::install_github("Voltemand/rater")
 ```

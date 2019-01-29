@@ -34,6 +34,8 @@ plot(fit, type = "raters")
 **rater** requires the **rstan** package to fit models. Detialed instructions to
 install **rstan** can be found [here](https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started)
 
+To install the **rater** package run:
+
 ```{r, installation_demo, eval = FALSE}
 devtools::install_github("Voltemand/rater")
 ```
@@ -47,6 +49,8 @@ install time of few minutes. Please be patient - this complimation means that
 **no** complimation is required when using the package
 - During the compilation many warnings may be displayed in the terminal these 
 are harmless but impossible to suppress. 
+
+
 
 
 
