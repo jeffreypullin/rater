@@ -115,8 +115,8 @@
 <pre><code>#&gt; 
 #&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 1).
 #&gt; Chain 1: 
-#&gt; Chain 1: Gradient evaluation took 0.000732 seconds
-#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 7.32 seconds.
+#&gt; Chain 1: Gradient evaluation took 0.000631 seconds
+#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 6.31 seconds.
 #&gt; Chain 1: Adjust your expectations accordingly!
 #&gt; Chain 1: 
 #&gt; Chain 1: 
@@ -133,9 +133,9 @@
 #&gt; Chain 1: Iteration: 450 / 500 [ 90%]  (Sampling)
 #&gt; Chain 1: Iteration: 500 / 500 [100%]  (Sampling)
 #&gt; Chain 1: 
-#&gt; Chain 1:  Elapsed Time: 1.02887 seconds (Warm-up)
-#&gt; Chain 1:                0.815278 seconds (Sampling)
-#&gt; Chain 1:                1.84415 seconds (Total)
+#&gt; Chain 1:  Elapsed Time: 0.980953 seconds (Warm-up)
+#&gt; Chain 1:                0.7799 seconds (Sampling)
+#&gt; Chain 1:                1.76085 seconds (Total)
 #&gt; Chain 1:</code></pre>
 <p>You will see the normal progress output you get whenever <strong>Stan</strong> is sampling. Note that, as all models are compiled when the package is installed, you will never have to wait for model to be compiled while using the <strong>rater</strong> package.</p>
 <p>Important note: in the example above we manually tell <strong>Stan</strong> to only run 1 chain with 500 iterations in order to speed up the creation of the vignette and descrese the volumen of output. In general please run <code>mcmc</code> using the <strong>Stan</strong> sampling defaults which are used if you only pass <code>data</code> and <code>model</code> arguments to <code>mcmc</code> i.e.</p>
@@ -146,13 +146,13 @@
 <a href="#plot" class="anchor"></a>plot</h2>
 <p>Having fit the Dawid and Skene model to the data we can now plot and extract key parameter estimates from the model.</p>
 <p>To plot the population prevalence estimates (in the model: <span class="math inline">\(\pi\)</span>) we run:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">plot</span>(fit, <span class="st">"prevalance"</span>) <span class="co"># or plot(fit, "pi")</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">plot</span>(fit, <span class="dt">type =</span> <span class="st">"prevalance"</span>) <span class="co"># or plot(fit, "pi")</span></a></code></pre></div>
 <p><img src="workflow_files/figure-html/unnamed-chunk-3-1.png" width="576"></p>
 <p>To plot the probability confusion matrices of the raters (in the model: <span class="math inline">\(\theta\)</span>):</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">plot</span>(fit, <span class="st">"raters"</span>) <span class="co"># or plot(fit, "theta")</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">plot</span>(fit, <span class="dt">type =</span> <span class="st">"raters"</span>) <span class="co"># or plot(fit, "theta")</span></a></code></pre></div>
 <p><img src="workflow_files/figure-html/unnamed-chunk-4-1.png" width="576"></p>
 <p>And to plot the latent class estimates (<span class="math inline">\(z\)</span>) we run:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">plot</span>(fit, <span class="st">"latent_class"</span>) <span class="co"># or plot(fit, "z")</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">plot</span>(fit, <span class="dt">type =</span> <span class="st">"latent_class"</span>) <span class="co"># or plot(fit, "z")</span></a></code></pre></div>
 <p><img src="workflow_files/figure-html/unnamed-chunk-5-1.png" width="576"></p>
 <p>For discussion of what these parameters of the model represnet please see the vigneete <strong>models</strong></p>
 </div>
