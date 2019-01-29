@@ -37,4 +37,4 @@ Suggests:
     covr
 VignetteBuilder: knitr
 SystemRequirements: GNU make
-Remotes: stan-dev/rstantools/mlysy-rstantools_patch
+Remotes: stan-dev/rstantools@c3c59fb
