@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rater</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.0</span>
       </span>
     </div>
 
@@ -126,26 +126,27 @@
     </div>
 
     <pre class="usage"><span class='co'># S3 method for fit</span>
-<span class='fu'><a href='extract.html'>extract</a></span>(<span class='no'>fit</span>, <span class='kw'>param</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"theta"</span>, <span class='st'>"raters"</span>, <span class='st'>"pi"</span>,
-  <span class='st'>"prevalance"</span>, <span class='st'>"z"</span>, <span class='st'>"latent_class"</span>), <span class='kw'>which</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+<span class='fu'><a href='extract.html'>extract</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>fit</th>
-      <td><p>a fit object</p></td>
+      <th>x</th>
+      <td><p>fit object</p></td>
     </tr>
     <tr>
-      <th>which</th>
-      <td><p>Which of the raters' matrices to extract (only used for type =
+      <th>...</th>
+      <td><p>other arguments to be passed
 theta or raters)</p></td>
     </tr>
-    <tr>
-      <th>type</th>
-      <td><p>what sort of plot should be plotted</p></td>
-    </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>... must contain the param argument which tell the function
+what to extract from the fit object. It may also contain the which argument
+which controls which raters confusion matrices will be plotted.</p>
     
 
   </div>
@@ -153,7 +154,9 @@ theta or raters)</p></td>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#details">Details</a></li>
+          </ul>
 
   </div>
 </div>

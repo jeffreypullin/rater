@@ -30,7 +30,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rater</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.0</span>
       </span>
     </div>
 
@@ -98,7 +98,7 @@
 <div id="data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#data" class="anchor"></a>Data</h2>
-<p>In this vignette we will use the the <em>anesthesia</em> data set taken from the paper <a href="https://www.jstor.org/stable/2346806">Maximum Likelihood Estimation of Observer Error-Rates Using the EM Algorithm</a> by A. P. Dawid and A. M. Skene, the paper which introduces the type of models used in this package. This dataset is already in the appropriate format for use in <strong>rater</strong> function. For information about how to convert your data into the appropriate format see <strong>link</strong></p>
+<p>In this vignette we will use the the <em>anesthesia</em> data set taken from the paper <em>Maximum Likelihood Estimation of Observer Error-Rates Using the EM Algorithm</em> by A. P. Dawid and A. M. Skene, the paper which introduces the type of models used in this package. This dataset is already in the appropriate format for use in <strong>rater</strong> function. For information about how to convert your data into the appropriate format see <strong>link</strong></p>
 </div>
 <div id="mcmc" class="section level2">
 <h2 class="hasAnchor">
@@ -115,8 +115,8 @@
 <pre><code>#&gt; 
 #&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 1).
 #&gt; Chain 1: 
-#&gt; Chain 1: Gradient evaluation took 0.000267 seconds
-#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 2.67 seconds.
+#&gt; Chain 1: Gradient evaluation took 0.000732 seconds
+#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 7.32 seconds.
 #&gt; Chain 1: Adjust your expectations accordingly!
 #&gt; Chain 1: 
 #&gt; Chain 1: 
@@ -133,9 +133,9 @@
 #&gt; Chain 1: Iteration: 450 / 500 [ 90%]  (Sampling)
 #&gt; Chain 1: Iteration: 500 / 500 [100%]  (Sampling)
 #&gt; Chain 1: 
-#&gt; Chain 1:  Elapsed Time: 0.977819 seconds (Warm-up)
-#&gt; Chain 1:                0.791691 seconds (Sampling)
-#&gt; Chain 1:                1.76951 seconds (Total)
+#&gt; Chain 1:  Elapsed Time: 1.02887 seconds (Warm-up)
+#&gt; Chain 1:                0.815278 seconds (Sampling)
+#&gt; Chain 1:                1.84415 seconds (Total)
 #&gt; Chain 1:</code></pre>
 <p>You will see the normal progress output you get whenever <strong>Stan</strong> is sampling. Note that, as all models are compiled when the package is installed, you will never have to wait for model to be compiled while using the <strong>rater</strong> package.</p>
 <p>Important note: in the example above we manually tell <strong>Stan</strong> to only run 1 chain with 500 iterations in order to speed up the creation of the vignette and descrese the volumen of output. In general please run <code>mcmc</code> using the <strong>Stan</strong> sampling defaults which are used if you only pass <code>data</code> and <code>model</code> arguments to <code>mcmc</code> i.e.</p>
