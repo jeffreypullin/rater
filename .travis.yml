@@ -19,9 +19,7 @@ before_install:
 
 r_packages:
   - covr
-
-install:
-  - R -e "install.packages('rstan')"
+  - rstan
 
 script:
   - R -e "rstan::stan_version()"
