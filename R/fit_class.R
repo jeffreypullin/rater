@@ -38,6 +38,10 @@ plot.fit <- function(x, ...) {
   fit <- x
   dots <- list(...)
 
+  if (length(dots) == 0) {
+    stop("The type of plot must be specified", call. = FALSE)
+  }
+
   which <- dots$which
   type <- match.arg(dots$type, c("theta", "raters",
                                  "pi", "prevalance",
@@ -104,6 +108,10 @@ extract.fit <- function(x, ...) {
 
   fit <- x
   dots <- list(...)
+
+  if (length(dots) == 0) {
+    stop("The param to extract must be specified", call. = FALSE)
+  }
 
   which <- dots$which
   param <- match.arg(dots$param, c("theta", "raters",

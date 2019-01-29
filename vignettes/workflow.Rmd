@@ -65,19 +65,19 @@ parameter estimates from the model.
 To plot the population prevalence estimates (in the model: $\pi$) we run:
 
 ```{r, fig.width=6, fig.height=4}
-plot(fit, "prevalance") # or plot(fit, "pi")
+plot(fit, type = "prevalance") # or plot(fit, "pi")
 ```
 
 To plot the probability confusion matrices of the raters (in the model: $\theta$):
 
 ```{r, fig.width=6, fig.height=4}
-plot(fit, "raters") # or plot(fit, "theta")
+plot(fit, type = "raters") # or plot(fit, "theta")
 ```
 
 And to plot the latent class estimates ($z$) we run:
 
 ```{r, fig.width=6, fig.height=8}
-plot(fit, "latent_class") # or plot(fit, "z")
+plot(fit, type = "latent_class") # or plot(fit, "z")
 ```
 
 For discussion of what these parameters of the model represnet please see the vigneete __models__
