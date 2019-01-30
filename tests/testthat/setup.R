@@ -8,8 +8,10 @@ ds_fit <- mcmc(anesthesia, dawid_skene())
 multi_fit <- mcmc(pooled_anesthesia, multinomial())
 hds_fit <- mcmc(anesthesia, hier_dawid_skene())
 
+ds_model <- dawid_skene()
+multi_model <- multinomial()
+hds_model <- hier_dawid_skene()
+
 J <- 5
 I <- 45
 K <- 4
-
-# TODO add models

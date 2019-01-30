@@ -4,6 +4,7 @@
 #' @param ... other args passed to the function
 #'
 #' @export
+# nocov start
 print.fit <- function(x, ...) {
   fit <- x
 
@@ -21,6 +22,7 @@ print.fit <- function(x, ...) {
   options(max.print = max.print_default)
 
 }
+# nocov end
 
 #' Plot a fit object
 #'

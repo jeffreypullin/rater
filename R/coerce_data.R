@@ -6,8 +6,6 @@
 #' @return Data in long format
 #'
 #' @export
-
-# TODO describe formats better
 wide_to_long <- function(data) {
 
   # check if 2-D
