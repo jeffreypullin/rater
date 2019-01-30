@@ -73,8 +73,8 @@ extract_raters <- function(fit, which = NULL) {
   } else if (is.multinomial(m)) {
 
     if (!is.null(which)) {
-      cat("Warning:\n")
-      cat("`which` parameter will be ignored as the model is of type multinomial\n")
+      warning("`which` arguement will be ignored as the model is of type multinomial",
+              call. = FALSE)
     }
 
     raters <- extract_raters_multi(fit)
@@ -161,7 +161,7 @@ extract_raters_multi <- function(fit) {
 validate_which <- function(which, J) {
 
   if (!(length(which) > 0 & is.numeric(which))) {
-    stop("which must be a positve length numeric vector", call. = FALSE)
+    stop("which must be a positive length numeric vector", call. = FALSE)
   }
 
   # TODO make more informative

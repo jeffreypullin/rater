@@ -31,11 +31,7 @@ test_that("test get_file", {
 
 test_that("test validate_fit", {
 
-  data("anesthesia")
-  # TODO work out how to sample only 1 chain
-  fit <- mcmc(anesthesia, dawid_skene(), chains = 1, iter = 200)
-
-  expect_error(validate_fit(fit), NA)
+  expect_error(validate_fit(ds_fit), NA)
   expect_error(validate_fit(2), "Cannot plot a non-fit object")
 
 })
