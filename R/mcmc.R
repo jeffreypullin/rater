@@ -143,7 +143,7 @@ parse_priors_ds <- function(model, data_list) {
 
   # valdiate beta parameter
   if (!all(dim(out$beta) == rep(K, 2))) {
-    stop("Beta must be of dimension", K, "x", K, ".", call. = FALSE)
+    stop("Beta must be of dimension ", K, " x ", K, call. = FALSE)
   }
 
   out
@@ -181,7 +181,7 @@ parse_priors_hierds <- function(model, data_list) {
 validate_alpha <- function(alpha, K) {
 
   if (length(alpha) != K) {
-    stop("Alpha must of length", K, "the number of categories in the data",
+    stop("Alpha must of length ", K, ", the number of categories in the data",
          call. = FALSE)
   }
 
@@ -195,6 +195,7 @@ default_alpha <- function(K) {
   rep(3, K)
 }
 
+# TODO fix typo
 
 #' Creates inits for the stan MCMC chains
 #'
@@ -257,13 +258,17 @@ validate_data <- function(model, data) {
 
   defualt_msg <- "Data must be in long format!"
 
+  if (!(ncol(data)  %in% c(2, 3))) {
+    stop("Data must be in 'long' format", call. = FALSE)
+  }
+
   if (is.multinomial(model)) {
 
       if(!(ncol(data) == 2)) {
 
         multinom_msgs <- c("For the multinomial model data must be in the following format:\n",
                            "Column 1: Item index\n",
-                           "Column 2: Annotation (rating given)\n")
+                           "Column 2: Annotation - rating given\n")
 
         stop(paste(multinom_msgs, sep = ""), call. = FALSE)
       }
@@ -275,16 +280,12 @@ validate_data <- function(model, data) {
         other_msgs <- c("For the partially pooled or unpooled models data ",
                         "must be in the following format:\n",
                         "Column 1: Item index\n",
-                        "Column 2: Annotator (rater)\n",
-                        "Column 2: Annotation (rating given)\n")
+                        "Column 2: Annotator - rater\n",
+                        "Column 2: Annotation - rating given\n")
 
         stop(other_msgs, call. = FALSE)
       }
 
-  }
-
-  if (!(ncol(data)  %in% c(2, 3))) {
-    stop("Data must be in 'long' format", call. = FALSE)
   }
 
   inds <- numeric(0)
@@ -295,7 +296,7 @@ validate_data <- function(model, data) {
   }
 
   if (length(inds) > 0) {
-    stop("Columns", paste(inds, collapse = ", "), "are not numeric",
+    stop("Columns ", paste(inds, collapse = ", "), " are not numeric",
     call. = FALSE)
   }
 
