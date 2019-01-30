@@ -40,3 +40,24 @@ test_that("plot.fit dispatches correctly", {
 
 })
 
+test_that("plot.extract errors properly", {
+  expect_error(extract(ds_fit), "The param to extract must be specified")
+})
+
+
+test_that("extract.fit dispatches correctly", {
+
+  raters_param <- extract_raters(ds_fit)
+  expect_equal(extract(ds_fit, param = "raters"), raters_param)
+  expect_equal(extract(ds_fit, param = "theta"), raters_param)
+
+  latent_class_param <- extract_latent_class(ds_fit)
+  expect_equal(extract(ds_fit, param = "latent_class"), latent_class_param)
+  expect_equal(extract(ds_fit, param = "z"), latent_class_param)
+
+  prevalance_param <- extract_prevalance(ds_fit)
+  expect_equal(extract(ds_fit, param = "prevalance"), prevalance_param)
+  expect_equal(extract(ds_fit, param = "pi"), prevalance_param)
+
+})
+
