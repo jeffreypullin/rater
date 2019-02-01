@@ -2,7 +2,7 @@
 % Please edit documentation in R/extract.R
 \name{extract_raters_ds}
 \alias{extract_raters_ds}
-\title{Extract rater accuarcy estimates}
+\title{Extract rater accuarcy estimates for the Dawid Skene models}
 \usage{
 extract_raters_ds(fit, which = NULL)
 }
@@ -16,5 +16,5 @@ list of matrices containing proabaility confusion matrices for each
  rater
 }
 \description{
-Extract ater accuarcy/theta estimates from a fit object
+Extract rater accuarcy/theta estimates from a Dawid Skene fit object
 }

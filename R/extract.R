@@ -58,7 +58,15 @@ extract_prevalance <- function(fit) {
 
 }
 
-
+#' Extract rater accuarcy estimates
+#'
+#' Extract ater accuarcy/theta estimates from a fit object
+#'
+#' @param fit fit object
+#' @return list of matrices containing proabaility confusion matrices for each
+#'  rater
+#'
+#' @export
 extract_raters <- function(fit, which = NULL) {
 
   validate_fit(fit)
@@ -94,16 +102,15 @@ extract_raters <- function(fit, which = NULL) {
 }
 
 
-#' Extract rater accuarcy estimates
+#' Extract rater accuarcy estimates for the Dawid Skene models
 #'
-#' Extract ater accuarcy/theta estimates from a fit object
+#' Extract rater accuarcy/theta estimates from a Dawid Skene fit object
 #'
 #' @param fit fit object
 #' @param which which raters to extract
 #' @return list of matrices containing proabaility confusion matrices for each
 #'  rater
 #'
-#' @export
 extract_raters_ds <- function(fit, which = NULL) {
 
   fit_ss <- rstan::extract(fit$draws)
@@ -138,15 +145,14 @@ extract_raters_ds <- function(fit, which = NULL) {
 
 }
 
-#' Extract rater accuarcy estimates
+#' Extract rater accuarcy estimates from a multinomial model
 #'
-#' Extract ater accuarcy/theta estimates from a fit object
+#' Extract rater accuarcy/theta estimates from a multinomial fit object
 #'
 #' @param fit fit object
 #' @return list of matrices containing proabaility confusion matrices for each
 #'  rater
 #'
-#' @export
 extract_raters_multi <- function(fit) {
 
   theta_samps <- rstan::extract(fit$draws)$theta
