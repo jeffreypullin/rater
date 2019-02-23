@@ -23,7 +23,6 @@ simulate_model <- function(model, parameters, data_list, ...) {
       "multinomial" = simulation_multi(model, parameters, data_list, ...))
 
   out
-
 }
 
 #' Internal funtion to simulate the dawid and skene model
