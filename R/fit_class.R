@@ -16,9 +16,10 @@ fit <- function(model, draws, data) {
     stop("draws must be of type stanfit", call. = FALSE)
   }
 
-  # in mcmc validate data is therefore called twice - not really
+  # in mcmc so validate data is therefore called twice - not really
   # sure if this is a good idea
   validate_data(model, data)
+  # also data list is called twice
   data_list <- parse_data(model, data)
 
   # we just remeber the dimensions of the data - not the whole lot
