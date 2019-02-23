@@ -4,12 +4,12 @@
 \alias{simulate_ds}
 \title{Internal funtion to simulate the dawid and skene model}
 \usage{
-simulate_ds(object, ...)
+simulate_ds(model, parameters, data_list, ...)
 }
 \arguments{
-\item{object}{a model object}
-
 \item{...}{other stuff}
+
+\item{object}{a model object}
 }
 \value{
 simulated data
