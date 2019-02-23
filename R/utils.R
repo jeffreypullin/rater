@@ -64,5 +64,7 @@ check_convergence <- function(draws) {
 
 }
 
-
-
+is.stanfit <- function(x) {
+  # this is S4 syntax...
+  is(x, "stanfit")
+}

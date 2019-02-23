@@ -26,8 +26,7 @@ mcmc <- function(data, model, ...) {
 
   check_convergence(draws)
 
-  fit <- list(model = model, draws = draws)
-  class(fit) <- "fit"
+  fit <- fit(model = model, draws = draws, data_list = data_list)
 
   fit
 

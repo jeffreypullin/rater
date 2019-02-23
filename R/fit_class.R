@@ -1,3 +1,33 @@
+#' make a rater fit object
+#'
+#' @param model a rater model
+#' @param draws a stanfit object
+#' @param data the data used to fit the model
+#'
+#' @return a rater fit object
+#'
+fit <- function(model, draws, data) {
+
+  if (!is.model(model)) {
+    stop("model must be of class (rater) model", call. = FALSE)
+  }
+
+  if (!is.stanfit(draws)) {
+    stop("draws must be of type stanfit", call. = FALSE)
+  }
+
+  # in mcmc validate data is therefore called twice - not really
+  # sure if this is a good idea
+  validate_data(model, data)
+  data_list <- parse_data(model, data)
+
+  # we just remeber the dimensions of the data - not the whole lot
+  out <- list(model = model, draws = draws, data_list = data_list)
+  class(out) <- "fit"
+
+  out
+}
+
 #' print a fit object
 #'
 #' @param x fit object to be printed
