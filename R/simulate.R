@@ -55,7 +55,6 @@ simulate_ds <- function(model, parameters, data_list, ...) {
 
   z <- sample(1:K, I, replace = TRUE, prob = pi)
   data <- matrix(0, nrow = I, ncol = J)
-
   for(j in 1:J){
     for(i in 1:I){
       data[i, j] <- sample(1:K, 1, prob = theta[j, z[i], ])
@@ -76,16 +75,4 @@ simulate_multi <- function(object, nsim = 1, seed = NULL, ...) {
   stop("not currently implemented")
 }
 
-# helper to covert a list of matrices into a 3D array
-as_array <- function(list) {
-  len <- length(list)
-  # we assume the matrices are square
-  size <- vapply(list, nrow, FUN.VALUE = numeric(1))[[1]]
 
-  out <- array(0, dim = c(len, size, size))
-  for (i in 1:len) {
-    out[i, , ] <- list[[i]]
-  }
-
-  out
-}
