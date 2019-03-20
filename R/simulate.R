@@ -15,13 +15,11 @@
 #' @examples
 #'
 simulate_model <- function(model, parameters, data_list, ...) {
-
   model_type <- class(model)[[1]]
   out <- switch(model_type,
       "dawid_skene" = simulate_ds(model, parameters, data_list, ...),
       "hier_dawid_skene" = simulate_hierds(model, parameters, data_list, ...),
       "multinomial" = simulation_multi(model, parameters, data_list, ...))
-
   out
 }
 
@@ -61,9 +59,9 @@ simulate_ds <- function(model, parameters, data_list, ...) {
   }
 
   # would be more efficient to simulate long data but I don't think it matters
-  out <- wide_to_long(data)
+  data <- wide_to_long(data)
 
-  out
+  out <- list(y = data, z = z)
 }
 
 simulate_hierds <- function(object, nsim = 1, seed = NULL, ...) {
