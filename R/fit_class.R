@@ -75,6 +75,10 @@ plot.fit <- function(x, ...) {
     stop("The type of plot must be specified", call. = FALSE)
   }
 
+  if (is.null(names(dots))) {
+    stop("Please specify type of plot with type = ", call. = FALSE)
+  }
+
   which <- dots$which
   type <- match.arg(dots$type, c("theta", "raters",
                                  "pi", "prevalance",
