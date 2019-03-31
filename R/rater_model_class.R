@@ -1,7 +1,7 @@
-#' print a fit model object
+#' print a rater_model object
 #'
-#' @param x fit object to be printed
-#' @param ... other args passed to the function
+#' @param x a rater_model object
+#' @param ... other args
 #'
 #' @export
 print.rater_model <- function(x, ...) {
@@ -20,10 +20,10 @@ print.rater_model <- function(x, ...) {
   }
 }
 
-#' Summary of model
+#' summarise a rater_model
 #'
-#' @param object model object
-#' @param ... other args passed to the function
+#' @param object a rater_model object
+#' @param ... other args
 #'
 #' @export
 summary.rater_model <- function(object, ...) {
