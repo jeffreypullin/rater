@@ -17,7 +17,7 @@ NULL
 dawid_skene <- function(alpha = NULL, beta = NULL) {
   parameters <- list(alpha = alpha, beta = beta)
   validate_parameters(parameters)
-  m <- list(parameters = list(alpha = alpha),
+  m <- list(parameters = parameters,
             name = "Bayesian Dawid and Skene Model",
             file = "dawid_skene",
             K = length(alpha))
@@ -32,7 +32,7 @@ hier_dawid_skene <- function(alpha = NULL) {
   # Note: this does not allow the user to change the N(0, 1) hyperpriors
   parameters <- list(alpha = alpha)
   validate_parameters(parameters)
-  m <- list(parameters = list(alpha = alpha),
+  m <- list(parameters = parameters,
             name = "Bayesian Hierarchical Dawid and Skene Model",
             file = "hierarchical_dawid_skene",
             K = length(alpha))
@@ -46,7 +46,7 @@ hier_dawid_skene <- function(alpha = NULL) {
 multinomial <- function(alpha = NULL, beta = NULL) {
   parameters <- list(alpha = alpha, beta = beta)
   validate_parameters(parameters)
-  m <- list(parameters = list(alpha = alpha),
+  m <- list(parameters = parameters,
             name = "Bayesian Multinomial (Annotator pooled) Model",
             file = "multinomial",
             K = length(alpha))
