@@ -14,6 +14,10 @@ get_file <- function(m) {
   m$file
 }
 
+get_parameters <- function(m) {
+  m$parameters
+}
+
 #' Numerically stable log_sum_exp function
 #' @param x vector of real numbers
 logsumexp <- function (x) {
