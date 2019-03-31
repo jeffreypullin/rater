@@ -1,30 +1,17 @@
-
 #' Gets the long name of a model
-#' @param model object of type model
-get_name <- function(model){
-  if (is.dawid_skene(model)) {
-    "Bayesian Dawid and Skene Model"
-  } else if (is.hier_dawid_skene(model)) {
-    "Bayesian Hierarchical Dawid and Skene Model"
-  } else if (is.multinomial(model)) {
-    "Bayesian Multinomial (Annotator pooled) Model"
-  } else {
-    stop("Model type not supported", call. = FALSE)
-  }
+#'
+#' @param m object of type rater_model
+#'
+get_name <- function(m) {
+  m$name
 }
 
 #' Gets stan file name of a model
-#' @param model object of type model
-get_file <- function(model) {
-  if (is.dawid_skene(model)) {
-    "dawid_skene"
-  } else if (is.hier_dawid_skene(model)){
-    "hierarchical_dawid_skene"
-  } else if (is.multinomial(model)){
-    "multinomial"
-  } else {
-    stop("Model type not supported", call. = FALSE)
-  }
+#'
+#' @param m object of type rater_model
+#'
+get_file <- function(m) {
+  m$file
 }
 
 #' Numerically stable log_sum_exp function

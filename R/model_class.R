@@ -4,7 +4,7 @@
 #' @param ... other args passed to the function
 #'
 #' @export
-print.model <- function(x, ...) {
+print.rater_model <- function(x, ...) {
 
   cat(get_name(x), "\n\n")
   params <- x$parameters
@@ -32,32 +32,22 @@ print.model <- function(x, ...) {
 #' @param ... other args passed to the function
 #'
 #' @export
-summary.model <- function(object, ...) {
-  model <- object
-  cat(get_name(model))
+summary.rater_model <- function(object, ...) {
+  cat(get_name(object))
 }
 
-#' Check if model is of type Dawid and skene
-#' @param model object of type model
-#' @export
 is.dawid_skene <- function(model) {
   inherits(model, "dawid_skene")
 }
 
-#' Check if model is of type Hierarchical Dawid and skene
-#' @param model object of type model
-#' @export
-is.hier_dawid_skene <- function(model) {
-  inherits(model, "hier_dawid_skene")
+is.hier_dawid_skene <- function(m) {
+  inherits(m, "hier_dawid_skene")
 }
 
-is.multinomial <- function(model) {
-  inherits(model, "multinomial")
+is.multinomial <- function(m) {
+  inherits(m, "multinomial")
 }
 
-#' Check if object is of type model
-#' @param x object
-#' @export
-is.model <- function(x) {
-  inherits(x, "model")
+is.model <- function(m) {
+  inherits(m, "rater_model")
 }
