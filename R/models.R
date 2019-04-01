@@ -19,8 +19,7 @@ dawid_skene <- function(alpha = NULL, beta = NULL) {
   validate_parameters(parameters)
   m <- list(parameters = parameters,
             name = "Bayesian Dawid and Skene Model",
-            file = "dawid_skene",
-            K = length(alpha))
+            file = "dawid_skene")
   class(m) <- c("dawid_skene", "rater_model")
   m
 }
@@ -34,8 +33,7 @@ hier_dawid_skene <- function(alpha = NULL) {
   validate_parameters(parameters)
   m <- list(parameters = parameters,
             name = "Bayesian Hierarchical Dawid and Skene Model",
-            file = "hierarchical_dawid_skene",
-            K = length(alpha))
+            file = "hierarchical_dawid_skene")
   class(m) <- c("hier_dawid_skene", "rater_model")
   m
 }
@@ -48,8 +46,7 @@ multinomial <- function(alpha = NULL, beta = NULL) {
   validate_parameters(parameters)
   m <- list(parameters = parameters,
             name = "Bayesian Multinomial (Annotator pooled) Model",
-            file = "multinomial",
-            K = length(alpha))
+            file = "multinomial")
   class(m) <- c("multinomial", "rater_model")
   m
 }
