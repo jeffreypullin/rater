@@ -18,6 +18,14 @@ get_parameters <- function(m) {
   m$parameters
 }
 
+get_data <- function(d) {
+  d$data
+}
+
+get_stan_data <- function(d) {
+  d$stan_data
+}
+
 #' Numerically stable log_sum_exp function
 #' @param x vector of real numbers
 logsumexp <- function (x) {
