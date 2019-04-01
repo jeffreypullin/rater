@@ -2,7 +2,7 @@
 # we could write validators for these - in terms of the validity of their stan_data
 # can we just have one validator?
 
-# wrapper around new pattern?
+# should/can we use the wrapper around new_ pattern?
 
 
 wide_data <- function(data) {
@@ -75,7 +75,9 @@ long_to_stan <- function(data) {
 # Make this generic
 # validate_stan_data
 
-validate_long_data <-
+# these validators arw aimed at the consistency of the stan_data
+# TODO (BIG)
+#validate_long_data <-
 
 
 
