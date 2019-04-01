@@ -1,23 +1,3 @@
-#' Gets the long name of a model
-#'
-#' @param m object of type rater_model
-#'
-get_name <- function(m) {
-  m$name
-}
-
-#' Gets stan file name of a model
-#'
-#' @param m object of type rater_model
-#'
-get_file <- function(m) {
-  m$file
-}
-
-get_parameters <- function(m) {
-  m$parameters
-}
-
 get_data <- function(d) {
   d$data
 }

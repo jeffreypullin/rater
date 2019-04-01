@@ -6,13 +6,13 @@
 #' @export
 print.rater_model <- function(x, ...) {
   cat(get_name(x), "\n\n")
-  params <- get_parameters(x)
+  pars <- get_parameters(x)
   cat("Prior parameters:\n\n")
-  for (i in 1:length(params)) {
-    cat(paste0(names(params)[[i]], ":"))
-    if (!is.null(params[[i]])) {
+  for (i in 1:length(pars)) {
+    cat(paste0(names(pars)[[i]], ":"))
+    if (!is.null(pars[[i]])) {
       cat("\n \n")
-      print(params[[i]])
+      print(pars[[i]])
       cat("\n")
     } else {
       cat(" default\n")
@@ -44,4 +44,28 @@ is.multinomial <- function(m) {
 
 is.rater_model <- function(m) {
   inherits(m, "rater_model")
+}
+
+#' Gets the long name of a model
+#'
+#' @param m object of type rater_model
+#'
+get_name <- function(m) {
+  m$name
+}
+
+#' Gets stan file name of a model
+#'
+#' @param m object of type rater_model
+#'
+get_file <- function(m) {
+  m$file
+}
+
+get_K <- function(m) {
+  m$K
+}
+
+get_parameters <- function(m) {
+  m$parameters
 }
