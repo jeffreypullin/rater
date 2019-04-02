@@ -212,7 +212,7 @@ extract_raters_hds_mcmc <- function() {
 
 
 validate_which <- function(which, J) {
-  if (!(length(which) > 0) & is.numeric(which)) {
+  if (!(length(which) > 0) || !is.numeric(which)) {
     stop("which must be a positive length numeric vector", call. = FALSE)
   }
   # TODO make more informative
