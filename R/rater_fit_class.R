@@ -87,7 +87,7 @@ plot.rater_fit <- function(x, ...) {
 #'
 #' @export
 summary.mcmc_fit <- function(object, ...) {
-  cat(get_name(get_model(object), "with MCMC draws"))
+  cat(get_name(get_model(object)), "with MCMC draws")
 }
 
 #' Check if object is of type fit

@@ -58,8 +58,8 @@ wide_to_stan <- function(data) {
 
 multinomial_to_stan <- function(data) {
   list(N = nrow(data),
-       K = max(data[, 1]),
-       I = max(data[, 2]),
+       K = max(data[, 2]),
+       I = max(data[, 1]),
        ii = data[, 1],
        y = data[, 2])
 }

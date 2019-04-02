@@ -1,4 +1,4 @@
-# is beautify/annotation?
+# is beautify/annotation a possibiliy?
 
 print.wide_data <- function(x, ...) {
   cat("`wide` rater data\n")
@@ -22,3 +22,4 @@ summary.rater_data <- function(object, ...) {
 is.rater_data <- function(x) {
   inherits(x, "rater_data")
 }
+
