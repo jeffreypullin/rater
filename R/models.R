@@ -64,7 +64,6 @@ multinomial <- function(alpha = NULL, beta = NULL) {
 validate_parameters <- function(pars) {
   beta <- pars$beta
   alpha <- pars$alpha
-
   if (!is.null(alpha) & class(alpha) != "numeric") {
       stop("alpha must be a numeric vector", call. = FALSE)
   }
