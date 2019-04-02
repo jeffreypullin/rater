@@ -6,26 +6,19 @@
 #' @export
 #' @import ggplot2
 plot_prevalance <- function(fit) {
+  pi <- extract_pi(fit)
+  plot_data <- data.frame(cat = as.factor(1:length(pi)),
+                          pi = pi,
+                          round_pi = round(pi, 2))
 
-  plot_data <- extract_prevalance(fit)
-  plot_data$cat <- plot_data$category
-  plot_data$round_prob <- round(plot_data$prob, 2)
-  plot_data$ymin <- plot_data$prob - plot_data$sd
-  plot_data$ymax <- plot_data$prob + plot_data$sd
-
-  plot <- ggplot(plot_data, aes_string(x = "cat", y = "prob")) +
+  plot <- ggplot(plot_data, aes_string(x = "cat", y = "pi")) +
     geom_bar(stat = "identity", fill = "steelblue") +
-    geom_text(aes_string(label = "round_prob"), vjust = -6) +
-    geom_errorbar(aes_string(ymin = "ymin", ymax = "ymax"),
-                      width = 0.2,
-                      position = position_dodge(0.9)) +
+    geom_text(aes_string(label = "round_pi"), vjust = -3) +
     coord_cartesian(ylim = c(0, 1)) +
     labs(x = "Category",
          y = "Pop. prevelance prob.") +
     theme_bw()
-
   plot
-
 }
 
 #' Plot the rater accuracy estimates
@@ -38,24 +31,20 @@ plot_prevalance <- function(fit) {
 #' @export
 #' @import ggplot2
 plot_raters <- function(fit, which = NULL) {
+  theta <- extract_theta(fit, which = which)
 
-  raters <- extract_raters(fit = fit, which = which)
+  # theta will always have dim[[2]] and it will always be == K
+  K <- dim(theta)[[2]]
 
-  if (is.list(raters)) {
-    # list of matrices - theta 3D
-    K <- nrow(raters[[1]])
-    J <- length(raters)
+  # would be great if we could treat in arrays and matrices the 'same'
+  if (length(dim(theta)) > 2) {
+    J <- dim(theta)[[1]]
+    value <- unlist(lapply(1:J, function(x) as.vector(theta[x, , ])))
   } else {
-    # one matrix - theta 2D
-    K <- nrow(raters)
     J <- 1
+    value <- as.vector(theta)
   }
-
-   if (is.null(which)) {
-    which <- 1:J # code duplication: also in `extract_raters`
-  }
-
-  value <- unlist(lapply(raters, function(x) as.vector(x)))
+  which <- if (is.null(which)) 1:J else which
 
   plot_data <- data.frame(
                   x = factor(rep(rep(1:K, each = K), J), levels = 1:K),
@@ -63,8 +52,6 @@ plot_raters <- function(fit, which = NULL) {
                   rater = rep(which, each = K^2),
                   value = value,
                   round_value = round(value, 2))
-
-  # clean up the rownames
   rownames(plot_data) <- NULL
 
   plot <- ggplot(plot_data, aes_string(x = "x", y = "y")) +
@@ -95,7 +82,7 @@ plot_raters <- function(fit, which = NULL) {
 #' @import ggplot2
 plot_latent_class <- function(fit){
 
-  p_z <- extract_latent_class(fit)
+  p_z <- extract_z(fit)
 
   I <- nrow(p_z)
   K <- ncol(p_z)
@@ -119,5 +106,4 @@ plot_latent_class <- function(fit){
     NULL
 
   plot
-
 }
