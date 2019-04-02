@@ -1,4 +1,4 @@
-#' make a rater fit object
+#' make a mcmc rater fit object
 #'
 #' @param model a rater model
 #' @param draws a stanfit object
@@ -6,9 +6,9 @@
 #'
 #' @return a rater fit object
 #'
-new_rater_fit <- function(model, draws, data) {
+new_mcmc_fit <- function(model, draws, data) {
   new <- list(model = model, draws = draws, data = data)
-  class(new) <- "fit"
+  class(new) <- c("mcmc_fit", "rater_fit")
   new
 }
 
@@ -19,22 +19,18 @@ new_rater_fit <- function(model, draws, data) {
 #'
 #' @export
 # nocov start
-print.fit <- function(x, ...) {
-  fit <- x
-
+print.mcmc_fit <- function(x, ...) {
   cat("Model:\n\n")
-  print(fit$model)
+  print(get_model(x))
   cat("\n")
 
+  # stop print/show.stanfit from going crazy...
   max.print_default <- options("max.print")[[1]]
   options(max.print = 80)
-
   cat("Samples:\n\n")
-  print(fit$draws)
+  print(get_draws(x)
   cat("\n")
-
   options(max.print = max.print_default)
-
 }
 # nocov end
 
@@ -49,7 +45,7 @@ print.fit <- function(x, ...) {
 #' which controls which raters confusion matrices will be plotted.
 #'
 #' @export
-plot.fit <- function(x, ...) {
+plot.rater_fit <- function(x, ...) {
 
   fit <- x
   dots <- list(...)
@@ -90,16 +86,19 @@ plot.fit <- function(x, ...) {
 #' @param ... other args passed to function
 #'
 #' @export
-summary.fit <- function(object, ...) {
-  fit <- object
-  cat(get_name(fit$model), "with MCMC draws")
+summary.mcmc_fit <- function(object, ...) {
+  cat(get_name(get_model(object), "with MCMC draws")
 }
 
 #' Check if object is of type fit
 #' @param x object
 #' @export
-is.fit <- function(x) {
-  inherits(x, "fit")
+is.mcmc_fit <- function(x) {
+  inherits(x, "mcmc_fit")
+}
+
+is.rater_fit <- function(x) {
+  inherits(x, "rater_fit")
 }
 
 
@@ -155,3 +154,33 @@ extract.fit <- function(x, ...) {
   out
 }
 
+# hey - we can set our own signature!
+extract_theta <- function (x, which = NULL) {
+   UseMethod("extract_theta", x)
+}
+
+# use some judicoious ifs and helpers ...
+# need to dispatch this on the type of the model - somehow...
+# something like - class == c("dawid_skene", "mcmc_fit" , "rater_fit")
+
+
+extract_pi <- function(x, ...) {
+  UseMethod("extract_pi", x)
+}
+
+extract_z <- function(x, ...) {
+  UseMethod("extract_z", x)
+}
+
+# need to make judicoius use of next method
+
+
+get_model <- function(f) {
+  f$model
+}
+
+get_draws <- function(f) {
+  f$draws
+}
+
+# bit of a hack reusing get_data - should it be generic?
