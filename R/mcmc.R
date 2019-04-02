@@ -41,7 +41,7 @@ mcmc <- function(data, model, ...) {
   check_K(stan_data_list, model)
 
   # create the full passed info for stan and the inits
-  stan_data <- c(stan_data_list, parse_priors(model))
+  stan_data <- c(stan_data_list, parse_priors(model, stan_data_list$K))
   inits <- creat_inits(model, stan_data_list)
 
   # sample the model
@@ -74,7 +74,7 @@ parse_priors <- function(model, K) {
 check_K <- function(stan_data, model) {
   # stan_data$K must be > 0
   # NB: this doesnot/cannot tell the user which of the pars is inconsistent
-  if (stan_data$K != model$K) {
+  if (!is.null(model$K) && (stan_data$K != model$K)) {
     stop("The number of categories is inconsistent between data and the prior",
          "parameters", call. = FALSE)
   }
