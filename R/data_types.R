@@ -52,7 +52,8 @@ wide_to_stan <- function(data) {
   ii <- rep(1:I, each = I)[mask]
   jj <- rep(1:J, J)[mask]
   y <- as.vector(data)[mask]
-  list(I = I, J = J, K = K, ii = ii, jj = jj, y = y)
+  N <- length(y)
+  list(N = N, I = I, J = J, K = K, ii = ii, jj = jj, y = y)
 }
 
 multinomial_to_stan <- function(data) {
@@ -64,7 +65,8 @@ multinomial_to_stan <- function(data) {
 }
 
 long_to_stan <- function(data) {
-  list(I = max(data[, 1]),
+  list(N = nrow(data),
+       I = max(data[, 1]),
        J = max(data[, 2]),
        K = max(data[, 3]),
        ii = data[, 1],
