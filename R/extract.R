@@ -63,7 +63,7 @@ extract_theta_ds_mcmc <- function(fit, which, ...) {
   theta[which, , ]
 }
 
-extract_raters_m_mcmc <- function(fit, which, ...) {
+extract_theta_m_mcmc <- function(fit, which, ...) {
   if (!is.null(which)) {
     warning("`which` arguement will be ignored (multinomial model)", call. = FALSE)
   }
@@ -71,7 +71,7 @@ extract_raters_m_mcmc <- function(fit, which, ...) {
   colMeans(theta_samps)
 }
 
-extract_raters_hds_mcmc <- function() {
+extract_theta_hds_mcmc <- function() {
   stop("Rater metrics cannot be extracted from the Hierachical Dawid and Skene model.",
        call. = FALSE)
 }
