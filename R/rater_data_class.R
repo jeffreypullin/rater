@@ -18,3 +18,7 @@ print.multinomial_data <- function(x, ...) {
 summary.rater_data <- function(object, ...) {
   cat("rater data")
 }
+
+is.rater_data <- function(x) {
+  inherits(x, "rater_data")
+}
