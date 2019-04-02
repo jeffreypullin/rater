@@ -33,6 +33,8 @@
 # }
 
 mcmc <- function(data, model, ...) {
+  validate_input(data, model)
+
   stan_data_list <- get_stan_data(data)
 
   # check the priors and data are consistent
@@ -47,6 +49,12 @@ mcmc <- function(data, model, ...) {
                            stan_data, init = inits, ...)
 
   new_mcmc_fit(model = model, draws = draws, data = data)
+}
+
+validate_input <- function(data, model) {
+  if (!is.rater_data(data)) {
+    stop("data must be a rater data type", call. = FALSE)
+  }
 }
 
 # K...
