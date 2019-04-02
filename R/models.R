@@ -71,7 +71,7 @@ validate_parameters <- function(pars) {
   if (!is.null(beta) & (class(beta) != "matrix" || length(unique(beta)) != 1)) {
       stop("Beta must be a square numeric matrix", call. = FALSE)
   }
-  if (!is.null(unlist(pars)) & (length(alpha) != unique(dim(beta)))) {
+  if (!is.null(unlist(pars)) && (length(alpha) != unique(dim(beta)))) {
       stop("Alpha and beta must have the same dimensions", call. = FALSE)
   }
 }
@@ -81,7 +81,7 @@ compute_K <- function(pars) {
   if (is.null(unlist(pars))) {
     # no K values specified
     # not null to allow comaprsion to numerics in mcmc
-    0
+    NULL
   } else {
     ks <- c(length(pars$alpha), unique(dim(pars$beta)))
     # Note:
