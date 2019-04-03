@@ -3,7 +3,7 @@
 #' @param fit fit object
 #' @return Probalistic latent class measurements
 #'
-#' @s3method
+#' @export
 #'
 extract_z.mcmc_fit <- function(fit, ...) {
   log_p_z_samps <- rstan::extract(fit$draws)$log_p_z
@@ -19,7 +19,7 @@ extract_z.mcmc_fit <- function(fit, ...) {
 #'
 #' @param fit fit object
 #'
-#' @s3method
+#' @export
 #'
 extract_pi.mcmc_fit <- function(fit, ...) {
   apply(rstan::extract(fit$draws)$pi, 2, mean)
@@ -34,7 +34,7 @@ extract_pi.mcmc_fit <- function(fit, ...) {
 #' @return list of matrices containing proabaility confusion matrices for each
 #'  rater
 #'
-#' @s3method
+#' @export
 #'
 extract_theta.mcmc_fit <- function(fit, which = NULL, ...) {
   switch(fit$model$file,

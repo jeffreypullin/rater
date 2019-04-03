@@ -25,6 +25,3 @@ a \code{model} object that can be passed to \code{\link{mcmc}}.
 Functions to set up models and change their prior
   parameters for use in \code{\link{mcmc}()}.
 }
-\details{
-theta is of different dimension to dawid and skene model
-}

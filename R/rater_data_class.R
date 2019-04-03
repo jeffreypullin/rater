@@ -1,44 +1,44 @@
 # An S3 class for the data types used in this package
 
-#' @s3method
+#' @export
 print.wide_data <- function(x, ...) {
   cat("`wide` rater data\n")
   print(get_data(x))
 }
 
-#' @s3method
+#' @export
 print.long_data <- function(x, ...) {
   cat("`long` rater data\n")
   print(get_data(x))
 }
 
-#' @s3method
+#' @export
 print.multinomial_data <- function(x, ...) {
   cat("`multinomial` rater data\n")
   print(get_data(x))
 }
 
-#' @s3method
+#' @export
 summary.rater_data <- function(object, ...) {
   cat("rater data")
 }
 
-#' @s3method
+#' @export
 `[.rater_data` <- function(x, i, j, drop = TRUE) {
   x$data[i, j, drop = drop]
 }
 
-#' @s3method
+#' @export
 `[[.rater_data` <- function(x, i, j, drop = TRUE) {
   stop("Please use `[` to subset rater_data", call. = FALSE)
 }
 
-#' @s3method
+#' @export
 dim.rater_data <- function(x) {
   dim(get_data(x))
 }
 
-#' @s3method
+#' @export
 as.matrix.rater_data <- function(x, ...) {
   get_data(x)
 }

@@ -4,18 +4,16 @@
 \alias{creat_inits}
 \title{Creates inits for the stan MCMC chains}
 \usage{
-creat_inits(model, data_list)
+creat_inits(model, stan_data)
 }
 \arguments{
 \item{model}{rater model}
 
 \item{data_list}{data in list form}
 }
+\value{
+intits in the format required by stan
+}
 \description{
 Creates inits for the stan MCMC chains
-}
-\details{
-If the model is of type Dawid and Skene creates inits favouring
-good raters. This is to prevent label switching see: TODO. If the model is
-not Dawid and Skene then the inits are set randomly
 }
