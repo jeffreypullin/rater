@@ -5,21 +5,16 @@ test_that("test dawid_skene constructor", {
   model <- dawid_skene()
 
   # class construction
-  expect_equal(is.model(model), TRUE)
+  expect_equal(is.rater_model(model), TRUE)
   expect_equal(is.dawid_skene(model), TRUE)
 
   # overall and internal shape
-  expect_equal(length(model), 1)
-  expect_equal(length(model$parameters), 2)
+  expect_equal(length(model), 4)
+  expect_equal(length(get_parameters(model)), 2)
 
   # defualt parameter values
-  expect_equal(model$parameters$alpha, NULL)
-  expect_equal(model$parameters$beta, NULL)
-
-  # parameter assignment
-  model <- dawid_skene(alpha = 2, beta = 4)
-  expect_equal(model$parameters$alpha, 2)
-  expect_equal(model$parameters$beta, 4)
+  expect_equal(get_parameters(model)$alpha, NULL)
+  expect_equal(get_parameters(model)$beta, NULL)
 
 })
 
@@ -28,20 +23,15 @@ test_that("test hier_dawid_skene constructor", {
   model <- hier_dawid_skene()
 
   # class construction
-  expect_equal(is.model(model), TRUE)
+  expect_equal(is.rater_model(model), TRUE)
   expect_equal(is.hier_dawid_skene(model), TRUE)
 
   # overall and internal shape
-  expect_equal(length(model), 1)
-  expect_equal(length(model$parameters), 1)
+  expect_equal(length(model), 4)
+  expect_equal(length(get_parameters(model)), 1)
 
   # defualt parameter values
-  expect_equal(model$parameters$alpha, NULL)
-
-  # parameter assignment
-  model <- dawid_skene(alpha = 2)
-  expect_equal(model$parameters$alpha, 2)
-
+  expect_equal(get_parameters(model)$alpha, NULL)
 })
 
 test_that("test multinomial constructor", {
@@ -49,21 +39,23 @@ test_that("test multinomial constructor", {
   model <- multinomial()
 
   # class construction
-  expect_equal(is.model(model), TRUE)
+  expect_equal(is.rater_model(model), TRUE)
   expect_equal(is.multinomial(model), TRUE)
 
   # overall and internal shape
-  expect_equal(length(model), 1)
-  expect_equal(length(model$parameters), 2)
+  expect_equal(length(model), 4)
+  expect_equal(length(get_parameters(model)), 2)
 
   # defualt parameter values
-  expect_equal(model$parameters$alpha, NULL)
-  expect_equal(model$parameters$beta, NULL)
+  expect_equal(get_parameters(model)$alpha, NULL)
+  expect_equal(get_parameters(model)$beta, NULL)
 
-  # parameter assignment
-  model <- dawid_skene(alpha = 2, beta = 4)
-  expect_equal(model$parameters$alpha, 2)
-  expect_equal(model$parameters$beta, 4)
+})
 
+test_that("model functions error correctly", {
+  expect_error(dawid_skene(beta = 4), "beta must be a square numeric matrix")
+  expect_error(dawid_skene(alpha = "cat"), "alpha must be a numeric vector")
+  expect_error(dawid_skene(alpha = 1:3, beta = matrix(1:4, nrow = 2)),
+               "alpha and beta must have the same dimensions")
 })
 

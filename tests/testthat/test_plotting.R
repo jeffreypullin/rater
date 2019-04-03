@@ -3,7 +3,7 @@ context("plotting")
 test_that("plot_prevalance output has correct type", {
 
   ds_plot <- plot_prevalance(ds_fit)
-  expect_equal(get_geoms(ds_plot), c("GeomBar", "GeomText", "GeomErrorbar"))
+  expect_equal(get_geoms(ds_plot), c("GeomBar", "GeomText"))
 
 })
 

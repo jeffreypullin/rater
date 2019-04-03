@@ -7,11 +7,11 @@ test_that("extract_raters error appropriatly", {
     "Rater metrics cannot be extracted from the Hierachical Dawid and Skene model."
   )
 
-  # continually throws false positives...
-  skip(expect_warning(
+  skip("issues with ( in conditions")
+  expect_warning(
     extract_theta(multi_fit, which = 5),
    "`which` arguement will be ignored (multinomial model)"
-  ))
+  )
 
 })
 

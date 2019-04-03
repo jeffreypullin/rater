@@ -22,17 +22,16 @@ test_that("summary works for models", {
 
 })
 
+# shoudl these be split into seperate tests
 test_that("is.* functions work for models", {
 
-  # model
-
+  # rater_model
   test_model <- 2
-  expect_equal(is.model(test_model), FALSE)
-  class(test_model) <- "model"
-  expect_equal(is.model(test_model), TRUE)
+  expect_equal(is.rater_model(test_model), FALSE)
+  class(test_model) <- "rater_model"
+  expect_equal(is.rater_model(test_model), TRUE)
 
   # model types
-
   test_ds <- 2
   expect_equal(is.dawid_skene(test_ds), FALSE)
   class(test_ds) <- "dawid_skene"

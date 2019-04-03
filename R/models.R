@@ -64,14 +64,16 @@ multinomial <- function(alpha = NULL, beta = NULL) {
 validate_parameters <- function(pars) {
   beta <- pars$beta
   alpha <- pars$alpha
-  if (!is.null(alpha) & class(alpha) != "numeric") {
+  # noone should be using 1:n syntax for prior for al
+  if (!is.null(alpha) && !is.numeric(alpha)) {
       stop("alpha must be a numeric vector", call. = FALSE)
   }
-  if (!is.null(beta) & (class(beta) != "matrix" || length(unique(beta)) != 1)) {
-      stop("Beta must be a square numeric matrix", call. = FALSE)
+  if (!is.null(beta) && !is.matrix(beta)) {
+      stop("beta must be a square numeric matrix", call. = FALSE)
   }
-  if (!is.null(unlist(pars)) && (length(alpha) != unique(dim(beta)))) {
-      stop("Alpha and beta must have the same dimensions", call. = FALSE)
+  # need to test both are not NULL!!!
+  if (!is.null(alpha) && !is.null(beta) && (length(alpha) != unique(dim(beta)))) {
+      stop("alpha and beta must have the same dimensions", call. = FALSE)
   }
 }
 

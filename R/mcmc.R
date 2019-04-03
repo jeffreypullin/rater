@@ -9,7 +9,6 @@
 #' @export
 mcmc <- function(data, model, ...) {
   validate_input(data, model)
-
   stan_data_list <- get_stan_data(data)
 
   # check the priors and data are consistent
@@ -25,7 +24,6 @@ mcmc <- function(data, model, ...) {
 
   new_mcmc_fit(model = model, draws = draws, data = data)
 }
-
 
 #' Helper to check if passed data and model are valid and consistent
 #'
