@@ -1,34 +1,54 @@
+#' @name data_types
+#'
+#' @title Data types compatible with the models of categorical annotation
+#' @description Functions to coerce/parse various types of input data
+#'   for use in \code{\link{mcmc}()}.
+#'
+#' @return a \code{rater_data} object that can be passed to \code{\link{mcmc}}.
+#'
+NULL
 
-# we could write validators for these - in terms of the validity of their stan_data
-# can we just have one validator?
+# User friendly/visible functions
 
-# should/can we use the wrapper around new_ pattern?
-
-# User friendly functions
-
+#' @rdname data_types
+#' @export
+#'
+#' @param data a numeric matrix
+#'
 wide_data <- function(data) {
   if (!is.numeric(data) || class(data) != "matrix") {
-    stop("Data must be a numeric matrix")
+    stop("Data must be a numeric matrix", call. = FALSE)
   }
   new_wide_data(data)
 }
 
+#' @rdname data_types
+#' @export
+#'
+#' @param data a numeric matrix with three columns
+#'
 long_data <- function(data) {
   if (!is.numeric(data) || !(length(dim(data)) == 2) || ncol(data) != 3) {
-    stop("Data must be a numeric matrix with three columns")
+    stop("Data must be a numeric matrix with three columns", call. = FALSE)
   }
   new_long_data(data)
 }
 
+#' @rdname data_types
+#' @export
+#'
+#' @param data a numeric matrix with two columns
+#'
 multinomial_data <- function(data) {
   if (!is.numeric(data) || length(dim(data)) != 2 || ncol(data) != 2) {
-    stop("Data must be a numeric matrix with two columns")
+    stop("Data must be a numeric matrix with two columns", call. = FALSE)
   }
   new_multinomial_data(data)
 }
 
-# Constructors
-
+#' Internal helper to creat a wide_data object
+#' @param data a numeric matrix
+#'
 new_wide_data <- function(data) {
   I <- nrow(data)
   J <- ncol(data)
@@ -44,6 +64,9 @@ new_wide_data <- function(data) {
   d
 }
 
+#' Internal helper to creat a wide_data object
+#' @param data a numeric matrix with three columns
+#'
 new_long_data <- function(data) {
   stan_data <- list(N = nrow(data),
                     I = max(data[, 1]),
@@ -57,6 +80,9 @@ new_long_data <- function(data) {
   d
 }
 
+#' Internal helper to creat a wide_data object
+#' @param data a numeric matrix with two columns
+#'
 new_multinomial_data <- function(data) {
   stan_data <- list(N = nrow(data),
                     K = max(data[, 2]),
@@ -68,14 +94,9 @@ new_multinomial_data <- function(data) {
   d
 }
 
+# we could write validators for these - in terms of the validity of their stan_data?
 
-
-
-# TODO
-# table_data <- function(coding, N) {
-#   # can't remmber the approapriate function
-#   cat("in production")
-# }
+# TODO Implment table data function
 
 
 
