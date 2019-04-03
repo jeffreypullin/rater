@@ -79,9 +79,8 @@ validate_parameters <- function(pars) {
 
 # takes the list of parameters - alpha/beta
 compute_K <- function(pars) {
+   # no K values specified
   if (is.null(unlist(pars))) {
-    # no K values specified
-    # not null to allow comaprsion to numerics in mcmc
     NULL
   } else {
     ks <- c(length(pars$alpha), unique(dim(pars$beta)))

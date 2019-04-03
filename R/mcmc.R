@@ -68,6 +68,7 @@ parse_priors <- function(model, K) {
 #'
 check_K <- function(stan_data, model) {
   # NB: this doesnot/cannot tell the user which of the pars is inconsistent
+  # but we can return a vector (with NULLs and parse cleverly)
   if (!is.null(model$K) && (stan_data$K != model$K)) {
     stop("The number of categories is inconsistent between data and the prior",
          "parameters", call. = FALSE)
