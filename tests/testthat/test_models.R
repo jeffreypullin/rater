@@ -59,3 +59,16 @@ test_that("model functions error correctly", {
                "alpha and beta must have the same dimensions")
 })
 
+test_that("compute K works", {
+  m <- dawid_skene(alpha = 1)
+  expect_equal(get_K(m), 1)
+
+  m <- dawid_skene(alpha = rep(1, 100))
+  expect_equal(get_K(m), 100)
+
+  m <- dawid_skene(beta = matrix(1:4, nrow = 2))
+  expect_equal(get_K(m), 2)
+
+  m <- dawid_skene(beta = matrix(1:16, nrow = 4))
+  expect_equal(get_K(m), 4)
+})
