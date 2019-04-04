@@ -45,39 +45,23 @@ print.mcmc_fit <- function(x, ...) {
 #' which controls which raters confusion matrices will be plotted.
 #'
 #' @export
-plot.rater_fit <- function(x, ...) {
-
-  fit <- x
+plot.rater_fit <- function(x, type = "theta", ...) {
   dots <- list(...)
-
-  if (length(dots) == 0) {
-    stop("The type of plot must be specified", call. = FALSE)
-  }
-
-  if (is.null(names(dots))) {
-    stop("Please specify type of plot with type = ", call. = FALSE)
-  }
-
   which <- dots$which
-  type <- match.arg(dots$type, c("theta", "raters",
-                                 "pi", "prevalance",
-                                 "z", "latent_class"))
 
-  if (type %in% c("theta", "raters")) {
+  # see utils.R for names
+  type <- match.arg(type, plot_names)
 
-    plot <- plot_raters(fit, which = which)
-
-  } else if (type %in% c("pi", "prevalance")) {
-
-    plot <- plot_prevalance(fit)
-
-  } else if (type %in% c("z", "latent_class")) {
-
-    plot <- plot_latent_class(fit)
-
-  }
-
-  plot
+  switch(type,
+    "theta" = plot_theta(x, which = which),
+    "rater" = plot_theta(x, which = which),
+    "z" = plot_z(x),
+    "latent_class" = plot_z(x)
+    # luckily p will fall through correctly
+    "pi" = plot_pi(x),
+    "prevelance" = plot_pi(x)
+    stop("Invalid type argument", call. = FALSE)
+  )
 }
 
 #' Summary of fit
