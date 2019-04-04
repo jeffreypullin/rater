@@ -2,7 +2,7 @@
 % Please edit documentation in R/rater_fit_class.R
 \name{print.mcmc_fit}
 \alias{print.mcmc_fit}
-\title{print a fit object}
+\title{Print a mcmc_fit object}
 \usage{
 \method{print}{mcmc_fit}(x, ...)
 }
@@ -12,5 +12,5 @@
 \item{...}{other args passed to the function}
 }
 \description{
-print a fit object
+Print a mcmc_fit object
 }

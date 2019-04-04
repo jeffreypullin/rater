@@ -29,4 +29,7 @@ if new params is specifed data will be generated from the model
 }
 \examples{
 
+
+
+
 }

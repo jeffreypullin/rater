@@ -2,9 +2,9 @@
 % Please edit documentation in R/rater_fit_class.R
 \name{plot.rater_fit}
 \alias{plot.rater_fit}
-\title{Plot a fit object}
+\title{Plot a rater_fit object}
 \usage{
-\method{plot}{rater_fit}(x, ...)
+\method{plot}{rater_fit}(x, type = "theta", ...)
 }
 \arguments{
 \item{x}{fit object}
@@ -13,7 +13,7 @@
 theta or raters)}
 }
 \description{
-Plot a fit object
+Plot a rater_fit object
 }
 \details{
 ... must contain the param argument which tell the function

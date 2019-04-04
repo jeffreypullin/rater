@@ -2,7 +2,7 @@
 % Please edit documentation in R/rater_fit_class.R
 \name{new_mcmc_fit}
 \alias{new_mcmc_fit}
-\title{make a mcmc rater fit object}
+\title{Make a mcmc_rater fit object}
 \usage{
 new_mcmc_fit(model, draws, data)
 }
@@ -17,5 +17,5 @@ new_mcmc_fit(model, draws, data)
 a rater fit object
 }
 \description{
-make a mcmc rater fit object
+Make a mcmc_rater fit object
 }
