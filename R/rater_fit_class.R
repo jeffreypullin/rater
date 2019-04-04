@@ -1,4 +1,4 @@
-#' make a mcmc rater fit object
+#' Make a mcmc_rater fit object
 #'
 #' @param model a rater model
 #' @param draws a stanfit object
@@ -12,12 +12,13 @@ new_mcmc_fit <- function(model, draws, data) {
   new
 }
 
-#' print a fit object
+#' Print a mcmc_fit object
 #'
 #' @param x fit object to be printed
 #' @param ... other args passed to the function
 #'
 #' @export
+#'
 # nocov start
 print.mcmc_fit <- function(x, ...) {
   cat("Model:\n\n")
@@ -34,7 +35,7 @@ print.mcmc_fit <- function(x, ...) {
 }
 # nocov end
 
-#' Plot a fit object
+#' Plot a rater_fit object
 #'
 #' @param x fit object
 #' @param ... other arguments to be passed
@@ -45,6 +46,7 @@ print.mcmc_fit <- function(x, ...) {
 #' which controls which raters confusion matrices will be plotted.
 #'
 #' @export
+#'
 plot.rater_fit <- function(x, type = "theta", ...) {
   dots <- list(...)
   which <- dots$which
@@ -56,10 +58,10 @@ plot.rater_fit <- function(x, type = "theta", ...) {
     "theta" = plot_theta(x, which = which),
     "rater" = plot_theta(x, which = which),
     "z" = plot_z(x),
-    "latent_class" = plot_z(x)
+    "latent_class" = plot_z(x),
     # luckily p will fall through correctly
     "pi" = plot_pi(x),
-    "prevelance" = plot_pi(x)
+    "prevelance" = plot_pi(x),
     stop("Invalid type argument", call. = FALSE)
   )
 }
@@ -70,13 +72,14 @@ plot.rater_fit <- function(x, type = "theta", ...) {
 #' @param ... other args passed to function
 #'
 #' @export
+#'
 summary.mcmc_fit <- function(object, ...) {
   cat(get_name(get_model(object)), "with MCMC draws")
 }
 
 #' Check if object is of type fit
 #' @param x object
-#' @export
+#'
 is.mcmc_fit <- function(x) {
   inherits(x, "mcmc_fit")
 }
@@ -85,77 +88,53 @@ is.rater_fit <- function(x) {
   inherits(x, "rater_fit")
 }
 
-
-#' Add an extract method
+#' Generic to extract theta from a fit
+#'
 #' @param x an object
-#' @param ... other stuff passed to extract
-#' @export
-extract <- function (x, ...) {
-   UseMethod("extract", x)
-}
-
-#' Extract method for a rater fit object
-#'
-#' Extract different paramter estimates from a fit object
-#'
-#' @param x fit object
-#' @param ... other arguments to be passed
-#' theta or raters)
-#'
-#' @details ... must contain the param argument which tell the function
-#' what to extract from the fit object. It may also contain the which argument
-#' which controls which raters confusion matrices will be plotted.
+#' @param which which rater to select
 #'
 #' @export
-extract.fit <- function(x, ...) {
-
-  fit <- x
-  dots <- list(...)
-
-  if (length(dots) == 0) {
-    stop("The param to extract must be specified", call. = FALSE)
-  }
-
-  which <- dots$which
-  param <- match.arg(dots$param, c("theta", "raters",
-                                   "pi", "prevalance",
-                                   "z", "latent_class"))
-
-  if (param %in% c("theta", "raters")) {
-
-    out <- extract_raters(fit, which = which)
-
-  } else if (param %in% c("pi", "prevalance")) {
-
-    out <- extract_prevalance(fit)
-
-  } else if (param %in% c("z", "latent_class")) {
-
-    out <- extract_latent_class(fit)
-
-  }
-
-  out
-}
-
-# hey - we can set our own signature!
+#'
 extract_theta <- function (x, which = NULL) {
    UseMethod("extract_theta", x)
 }
 
-# use some judicoious ifs and helpers ...
-# need to dispatch this on the type of the model - somehow...
-# something like - class == c("dawid_skene", "mcmc_fit" , "rater_fit"
-
+#' Generic to extract pi from a fit
+#'
+#' @param x an object
+#' @param ... extra stuff
+#'
+#' @export
+#'
 extract_pi <- function(fit, ...) {
   UseMethod("extract_pi", fit)
 }
 
+#' Generic to extract z (latent class) from a fit
+#'
+#' @param x an object
+#' @param ... extra stuff
+#'
+#' @export
+#'
 extract_z <- function(fit, ...) {
   UseMethod("extract_z", fit)
 }
 
-# need to make judicoius use of next method
+#' Alias for extract_pi
+#' @export
+#'
+extract_prevalence <- extract_pi
+
+#' Alias for extract_z
+#' @export
+#'
+extract_latent_class <- extract_z
+
+#' Alias for extract_theta
+#' @export
+#'
+extract_raters <- extract_theta
 
 
 get_model <- function(f) {
