@@ -5,7 +5,8 @@ Authors@R: c(person("Jeffrey", "Pullin",
              role = c("aut", "cre"),
              email = "jeffrey.pullin@gmail.com"),
              person("Damjan", "Vukcevic",
-             role = c("aut"))
+             role = c("aut"),
+             comment = c(ORCID = "0000-0001-7780-9586"))
              )
 Description: Fit full bayesian models categorical annotation, based off the 
   Dawid and Skene model. Full bayesian inference for these models is supported 
