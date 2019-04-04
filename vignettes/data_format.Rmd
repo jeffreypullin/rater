@@ -15,16 +15,16 @@ knitr::opts_chunk$set(
 ```
 
 The **rater** package implements models of annotation which are flexible enough
-to allow each incomplete designs. That is every rater may rate each object any number 
-of times, including 0. This is a great advantage as it allows all types of real world
-data to be used with the package however it does lead to some difficulty in representing 
-the data a simple structure. 
+to allow incomplete designs. That is, every rater may rate each object any number
+of times, including zero. This is a great advantage as it allows all types of real world
+data to be used with the package. However, it does mean that the data structure
+used by the package needs to be able accommodate this complexity.
 
-The format which the **rater** package uses is the *long* or database style format.
-In this format all the data is compressed into a series of columns with each row 
-representing one instance of annotation or rating. 
+The **rater** package uses a *long* (database-style) format for the data.  It
+takes as input a table with three columns, with each row representing a single
+rating for a single item given by a single rater.
 
-To illustrate this lets look at the `anesthesia` dataset included in the package. 
+To illustrate this, let's look at the `anesthesia` dataset included in the package.
 
 ```{r}
 library(rater)
@@ -39,26 +39,32 @@ Here we see there are three columns. These are:
 
 1. `ii`, item index - which item is being rated
 2. `jj`, rater (annotator) index - which rater is doing the rating
-3. `y`, what rating was given
+3. `y`, rating - the rating for the item given by the rater
 
-The last row of the above data should be read as: 'when the fourth rater rated
-the first item they rated it as one'
+The last row of the example data above should be read as: 'the fourth rater
+gave a rating of 1 for the first item'
 
-This data format can easily include missing combinations of rater/item - we simply
-don't include a row and can also include repeated measurements - the first three
-rows of the above show rater 1 rating item 1 3 times. 
+This data format can easily include missing rater-item combinations (by simply
+not including rows for any such combinations) as well as multiple such
+combinations (by having multiple rows with the same values for rater and item).
+The first three rows of the example above show rater 1 rating item 1 three
+times.
+
 
 ## Multinomial model
 
-The only complication to this is the input to the multinomial model. Because this 
-model completely pools across raters (i.e. ignores the effect of raters) there is 
-need to tell the model which rater rated each item. Data input to the model should 
-have 2 columns 
+There is one exception to the above structure.
+
+The multinomial model, one of the models implemented in this package, is
+simpler than the other models in that it does not distinguish between different
+raters (it pools the data across raters). Therefore, there is need to specify
+which rater rated each item. The input data for this model only needs to have
+2 columns:
 
 1. Item index 
 2. Rating
 
-i.e should look like:
+For example, it should look similar to this:
 
 ```{r}
 s_anesthesia_multi <- s_anesthesia[, c(1, 3)]
@@ -66,6 +72,7 @@ s_anesthesia_multi <- s_anesthesia[, c(1, 3)]
 knitr::kable(s_anesthesia_multi)
 ```
 
-As data of this form could be stored in many formats it is hard to automate 
-the conversion of data to the format described here. It is therefore the package 
-users' reponsibility to ensure correctly formatted data is passed into the models.
+As data of this form could be stored in many formats, at this stage we have not
+automated the conversion of arbitrary data to the format described here.  It is
+the user's responsibility to ensure correctly formatted data is passed to the
+models.

@@ -15,21 +15,26 @@ knitr::opts_chunk$set(
 
 ## What is rater?
 
-The **rater** package is designed to allow easy fitting and anlaysis of Bayesian 
-models of categorical data annoration through Stan. In this vignette we demonstrate
-the basic workflow for using the **package**. 
+The **rater** package is designed to allow easy fitting and analysis of
+Bayesian models of categorical data annotation using
+[Stan](http://mc-stan.org/). Here we demonstrate the basic workflow for using
+the package.
 
 ## Data
 
-In this vignette we will use the the *anesthesia* data set taken from the paper
-*Maximum Likelihood Estimation of Observer Error-Rates Using the EM Algorithm* by A. P. Dawid and A. M. Skene, the paper which introduces the type of models used in this package. This dataset  is already in the appropriate format for use in **rater** function. For information about how to convert your data into the appropriate format see __link__
+We will use the *anesthesia* data set taken from the paper *Maximum Likelihood
+Estimation of Observer Error-Rates Using the EM Algorithm* by A. P. Dawid and
+A. M. Skene, the paper which introduced the type of models used in this
+package. This dataset is already in the appropriate format for use by the
+**rater()** function. For information about how to convert your data into the
+appropriate format see __link__.
 
-## mcmc
+## mcmc()
 
-The core function of the **rater** package is the `mcmc` function which fits a model 
-given data. The mcmc function has two arguments the first is `data` which should be in 
-'long' format (add footnote) and `model` which is the model you would like to fit. 
-Models are passed as a function (why this is will be more obvious in a moment). For 
+The core function of the **rater** package is the `mcmc()` function which fits a model 
+given data. This function has two arguments: `data`, which should be in 
+'long' format (add footnote); and `model`, which specifies the model you would like to fit. 
+Models are passed as a function (the reason for this will be more obvious in a moment). For 
 example, to fit the basic Dawid and Skene model to the anesthesia dataset we 
 would run: 
 
@@ -44,47 +49,49 @@ data("anesthesia")
 fit <- mcmc(anesthesia, dawid_skene(), iter = 500, chains = 1)
 ```
 
-You will see the normal progress output you get whenever **Stan** is sampling. Note that, 
-as all models are compiled when the package is installed, you will never have to 
-wait for model to be compiled while using the **rater** package. 
+You will see the normal progress output you get whenever **Stan** is sampling.
+Note that all models are compiled when the package is installed, rather than at
+runtime, meaning that you will not need to wait for a model to be compiled when
+running analyses using the **rater** package.
 
-Important note: in the example above we manually tell **Stan** to only run 1 chain
-with 500 iterations in order to speed up the creation of the vignette and descrese the 
-volumen of output. In general please run `mcmc` using the **Stan** sampling defaults
-which are used if you only pass `data` and `model` arguments to `mcmc` i.e.
+Important note: in the example above we specified **Stan** to only run 1 chain
+with 500 iterations in order to speed up the creation of this vignette and
+reduce the volume of output. In general, we recommend running `mcmc()` using
+the **Stan** sampling defaults, which will be used if you only specify the
+`data` and `model` arguments in `mcmc()`.  For example:
 
 ```{r, eval = FALSE}
 fit <- mcmc(anesthesia, dawid_skene())
 ```
 
-## plot
+## plot()
 
 Having fit the Dawid and Skene model to the data we can now plot and extract key 
 parameter estimates from the model. 
 
-To plot the population prevalence estimates (in the model: $\pi$) we run:
+To plot the population prevalence estimates (the parameter $\pi$ in the model) we run:
 
 ```{r, fig.width=6, fig.height=4}
 plot(fit, type = "prevalance") # or plot(fit, "pi")
 ```
 
-To plot the probability confusion matrices of the raters (in the model: $\theta$):
+To plot the probability confusion matrices of the raters (the parameter $\theta$ in the model) we run:
 
 ```{r, fig.width=6, fig.height=4}
 plot(fit, type = "raters") # or plot(fit, "theta")
 ```
 
-And to plot the latent class estimates ($z$) we run:
+To plot the latent class estimates (the parameter $z$ in the model) we run:
 
 ```{r, fig.width=6, fig.height=8}
 plot(fit, type = "latent_class") # or plot(fit, "z")
 ```
 
-For discussion of what these parameters of the model represnet please see the vigneete __models__
+For a discussion of what these parameters in the model represent, please see the vignette __models__.
 
-## extract
+## extract()
 
-Similairlty we can extract all of the estiamtes used to make these plots for further 
+Similarly, we can extract all of the estimates used to make these plots for further 
 processing with the `extract` function:
 
 ```{r, eval = FALSE}
