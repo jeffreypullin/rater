@@ -136,7 +136,6 @@ extract_latent_class <- extract_z
 #'
 extract_raters <- extract_theta
 
-
 get_model <- function(f) {
   f$model
 }

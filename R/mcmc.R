@@ -7,6 +7,7 @@
 #'
 #' @return An object of type fit containing the fitted parameters
 #' @export
+#'
 mcmc <- function(data, model, ...) {
   validate_input(data, model)
   stan_data_list <- get_stan_data(data)
@@ -34,7 +35,6 @@ validate_input <- function(data, model) {
   if (!is.rater_data(data)) {
     stop("data must be a rater data type", call. = FALSE)
   }
-
   if (!is.rater_model(model)) {
     stop("model must be a rater model", call. = FALSE)
   }

@@ -14,6 +14,11 @@
 #'
 #' @examples
 #'
+#'
+#'
+#'
+# this should be a generic
+
 simulate_model <- function(model, parameters, data_list, ...) {
   model_type <- class(model)[[1]]
   out <- switch(model_type,
