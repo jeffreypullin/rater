@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Extract rater accuracy estimates for the Dawid Skene models — extract_raters_ds • rater</title>
+<title>Simulate from a rater model — simulate_model • rater</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Extract rater accuracy estimates for the Dawid Skene models — extract_raters_ds" />
+<meta property="og:title" content="Simulate from a rater model — simulate_model" />
 
-<meta property="og:description" content="Extract rater accuracy/theta estimates from a Dawid Skene fit object" />
+<meta property="og:description" content="Simulate from a rater model" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -114,38 +114,57 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Extract rater accuracy estimates for the Dawid Skene models</h1>
-    <small class="dont-index">Source: <a href='https://github.com/Voltemand/rater/blob/master/R/extract.R'><code>R/extract.R</code></a></small>
-    <div class="hidden name"><code>extract_raters_ds.Rd</code></div>
+    <h1>Simulate from a rater model</h1>
+    <small class="dont-index">Source: <a href='https://github.com/Voltemand/rater/blob/master/R/simulate.R'><code>R/simulate.R</code></a></small>
+    <div class="hidden name"><code>simulate_model.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Extract rater accuracy/theta estimates from a Dawid Skene fit object</p>
+    <p>Simulate from a rater model</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>extract_raters_ds</span>(<span class='no'>fit</span>, <span class='kw'>which</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>simulate_model</span>(<span class='no'>model</span>, <span class='no'>parameters</span>, <span class='no'>data_list</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>fit</th>
-      <td><p>fit object</p></td>
+      <th>...</th>
+      <td></td>
     </tr>
     <tr>
-      <th>which</th>
-      <td><p>which raters to extract</p></td>
+      <th>object</th>
+      <td><p>a rater model object</p></td>
+    </tr>
+    <tr>
+      <th>nsim</th>
+      <td><p>the number of simulation to perform</p></td>
+    </tr>
+    <tr>
+      <th>seed</th>
+      <td><p>the seed for the simulation</p></td>
+    </tr>
+    <tr>
+      <th>new_params</th>
+      <td><p>new parameters for the model</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>list of matrices containing probability confusion matrices for each
- rater</p>
+    <p>simulation</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>if new params is specifed data will be generated from the model
+  specifed by a model is new_params parameters</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -153,7 +172,11 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-          </ul>
+
+      <li><a href="#details">Details</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

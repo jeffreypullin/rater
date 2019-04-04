@@ -2,7 +2,7 @@
 % Please edit documentation in R/extract.R
 \name{extract_raters}
 \alias{extract_raters}
-\title{Extract rater accuarcy estimates}
+\title{Extract rater accuracy estimates}
 \usage{
 extract_raters(fit, which = NULL)
 }
@@ -10,9 +10,9 @@ extract_raters(fit, which = NULL)
 \item{fit}{fit object}
 }
 \value{
-list of matrices containing proabaility confusion matrices for each
+list of matrices containing probability confusion matrices for each
  rater
 }
 \description{
-Extract ater accuarcy/theta estimates from a fit object
+Extract rater accuracy/theta estimates from a fit object
 }

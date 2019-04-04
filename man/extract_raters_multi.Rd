@@ -10,7 +10,7 @@ extract_raters_multi(fit)
 \item{fit}{fit object}
 }
 \value{
-list of matrices containing proabaility confusion matrices for each
+list of matrices containing probability confusion matrices for each
  rater
 }
 \description{
