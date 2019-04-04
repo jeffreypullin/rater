@@ -5,7 +5,7 @@
 #'
 #' @export
 #' @import ggplot2
-plot_prevalance <- function(fit) {
+plot_pi <- function(fit) {
   pi <- extract_pi(fit)
   plot_data <- data.frame(cat = as.factor(1:length(pi)),
                           pi = pi,
@@ -30,7 +30,7 @@ plot_prevalance <- function(fit) {
 #'
 #' @export
 #' @import ggplot2
-plot_raters <- function(fit, which = NULL) {
+plot_theta <- function(fit, which = NULL) {
   theta <- extract_theta(fit, which = which)
 
   # theta will always have dim[[2]] and it will always be == K
@@ -80,7 +80,7 @@ plot_raters <- function(fit, which = NULL) {
 #'
 #' @export
 #' @import ggplot2
-plot_latent_class <- function(fit){
+plot_z <- function(fit){
 
   p_z <- extract_z(fit)
 
