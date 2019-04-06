@@ -104,13 +104,13 @@ new_multinomial_data <- function(data) {
 #' @param data a numeric matrix
 #'
 new_table_data <- function(data) {
-  ns <- data[, ncol(data)]
+  tally <- data[, ncol(data)]
   key <- data[, 1:(ncol(data) - 1)]
   stan_data <- list(N = nrow(data),
                     K = max(key),
                     J = ncol(key),
                     key = key,
-                    ns = ns)
+                    tally = ns)
   d <- list(data = data, stan_data = stan_data)
   class(d) <- c("table_data", "rater_data")
   d
