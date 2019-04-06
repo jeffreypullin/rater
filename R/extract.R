@@ -1,6 +1,8 @@
 #' Extract latent class estimates from a fit
 #'
 #' @param fit fit object
+#' @param ... extra args
+#'
 #' @return Probalistic latent class measurements
 #'
 #' @export
@@ -18,6 +20,7 @@ extract_z.mcmc_fit <- function(fit, ...) {
 #' Extract prevalence/pi estiamtes from a fit object
 #'
 #' @param fit fit object
+#' @param ... extra args
 #'
 #' @export
 #'
@@ -31,6 +34,8 @@ extract_pi.mcmc_fit <- function(fit, ...) {
 #'
 #' @param fit fit object
 #' @param which which raters to extract
+#' @param ... extra args
+#'
 #' @return list of matrices containing probability confusion matrices for each
 #'  rater
 #'

@@ -2,10 +2,17 @@
 % Please edit documentation in R/rater_fit_class.R
 \name{extract_raters}
 \alias{extract_raters}
-\title{Alias for extract_theta}
+\title{Function to extract raters from a fit}
 \usage{
-extract_raters(x, which = NULL)
+extract_raters(fit, which = NULL, ...)
+}
+\arguments{
+\item{which}{which rater to select}
+
+\item{...}{extra args}
+
+\item{x}{an object}
 }
 \description{
-Alias for extract_theta
+Function to extract raters from a fit
 }

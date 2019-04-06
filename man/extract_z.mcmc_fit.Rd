@@ -8,6 +8,8 @@
 }
 \arguments{
 \item{fit}{fit object}
+
+\item{...}{extra args}
 }
 \value{
 Probalistic latent class measurements

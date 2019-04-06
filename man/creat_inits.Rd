@@ -9,7 +9,7 @@ creat_inits(model, stan_data)
 \arguments{
 \item{model}{rater model}
 
-\item{data_list}{data in list form}
+\item{stan_data}{data in list form}
 }
 \value{
 intits in the format required by stan

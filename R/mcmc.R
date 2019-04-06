@@ -61,8 +61,8 @@ parse_priors <- function(model, K) {
 
 #' Helper to check if the prior parameters and data have consistent dimensions
 #'
-#' @param model the rater_model
-#' @param K the number of categories
+#' @param stan_data data in stan format
+#' @param model the passed model
 #'
 #' @return the fully reliased prior parameters
 #'
@@ -78,7 +78,7 @@ check_K <- function(stan_data, model) {
 #' Creates inits for the stan MCMC chains
 #'
 #' @param model rater model
-#' @param data_list data in list form
+#' @param stan_data data in list form
 #'
 #' @return intits in the format required by stan
 #'

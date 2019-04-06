@@ -25,8 +25,6 @@ wide_data <- function(data) {
 #' @rdname data_types
 #' @export
 #'
-#' @param data a numeric matrix with three columns
-#'
 long_data <- function(data) {
   if (!is.numeric(data) || !(length(dim(data)) == 2) || ncol(data) != 3) {
     stop("Data must be a numeric matrix with three columns", call. = FALSE)
@@ -36,8 +34,6 @@ long_data <- function(data) {
 
 #' @rdname data_types
 #' @export
-#'
-#' @param data a numeric matrix with two columns
 #'
 multinomial_data <- function(data) {
   if (!is.numeric(data) || length(dim(data)) != 2 || ncol(data) != 2) {

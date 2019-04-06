@@ -38,8 +38,8 @@ print.mcmc_fit <- function(x, ...) {
 #' Plot a rater_fit object
 #'
 #' @param x fit object
-#' @param ... other arguments to be passed
-#' theta or raters)
+#' @param type the type of plot
+#' @param ... other args
 #'
 #' @details ... must contain the param argument which tell the function
 #' what to extract from the fit object. It may also contain the which argument
@@ -90,18 +90,19 @@ is.rater_fit <- function(x) {
 
 #' Generic to extract theta from a fit
 #'
-#' @param x an object
+#' @param fit an object
 #' @param which which rater to select
+#' @param ... extra args
 #'
 #' @export
 #'
-extract_theta <- function (x, which = NULL) {
-   UseMethod("extract_theta", x)
+extract_theta <- function (fit, which = NULL, ...) {
+   UseMethod("extract_theta", fit)
 }
 
 #' Generic to extract pi from a fit
 #'
-#' @param x an object
+#' @param fit an object
 #' @param ... extra stuff
 #'
 #' @export
@@ -112,7 +113,7 @@ extract_pi <- function(fit, ...) {
 
 #' Generic to extract z (latent class) from a fit
 #'
-#' @param x an object
+#' @param fit an object
 #' @param ... extra stuff
 #'
 #' @export
@@ -121,17 +122,30 @@ extract_z <- function(fit, ...) {
   UseMethod("extract_z", fit)
 }
 
-#' Alias for extract_pi
+#' Function to extract prevalence from a fit
+#'
+#' @param fit an object
+#' @param ... extra stuff
+#'
 #' @export
 #'
 extract_prevalence <- extract_pi
 
-#' Alias for extract_z
+#' Generic to extract (latent class) from a fit
+#'
+#' @param fit an object
+#' @param ... extra stuff
+#'
 #' @export
 #'
 extract_latent_class <- extract_z
 
-#' Alias for extract_theta
+#' Function to extract raters from a fit
+#'
+#' @param fit an object
+#' @param which which rater to select
+#' @param ... extra args
+#'
 #' @export
 #'
 extract_raters <- extract_theta

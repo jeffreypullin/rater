@@ -8,6 +8,8 @@
 }
 \arguments{
 \item{fit}{fit object}
+
+\item{...}{extra args}
 }
 \description{
 Extract prevalence/pi estiamtes from a fit object

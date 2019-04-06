@@ -59,7 +59,7 @@ multinomial <- function(alpha = NULL, beta = NULL) {
 #' Checks the parameter are of the appropritate type/form and that they are
 #' self consistent
 #'
-#' @param parameters a (named) list of parmeters
+#' @param pars a (named) list of parmeters
 #'
 validate_parameters <- function(pars) {
   beta <- pars$beta

@@ -10,6 +10,8 @@
 \item{fit}{fit object}
 
 \item{which}{which raters to extract}
+
+\item{...}{extra args}
 }
 \value{
 list of matrices containing probability confusion matrices for each

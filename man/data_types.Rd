@@ -15,10 +15,6 @@ multinomial_data(data)
 }
 \arguments{
 \item{data}{a numeric matrix}
-
-\item{data}{a numeric matrix with three columns}
-
-\item{data}{a numeric matrix with two columns}
 }
 \value{
 a \code{rater_data} object that can be passed to \code{\link{mcmc}}.

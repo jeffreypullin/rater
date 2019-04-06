@@ -7,9 +7,9 @@
 extract_z(fit, ...)
 }
 \arguments{
-\item{...}{extra stuff}
+\item{fit}{an object}
 
-\item{x}{an object}
+\item{...}{extra stuff}
 }
 \description{
 Generic to extract z (latent class) from a fit

@@ -7,9 +7,9 @@
 check_K(stan_data, model)
 }
 \arguments{
-\item{model}{the rater_model}
+\item{stan_data}{data in stan format}
 
-\item{K}{the number of categories}
+\item{model}{the passed model}
 }
 \value{
 the fully reliased prior parameters

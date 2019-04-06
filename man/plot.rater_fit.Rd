@@ -9,8 +9,9 @@
 \arguments{
 \item{x}{fit object}
 
-\item{...}{other arguments to be passed
-theta or raters)}
+\item{type}{the type of plot}
+
+\item{...}{other args}
 }
 \description{
 Plot a rater_fit object

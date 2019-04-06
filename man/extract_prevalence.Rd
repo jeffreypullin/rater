@@ -2,10 +2,15 @@
 % Please edit documentation in R/rater_fit_class.R
 \name{extract_prevalence}
 \alias{extract_prevalence}
-\title{Alias for extract_pi}
+\title{Function to extract prevalence from a fit}
 \usage{
 extract_prevalence(fit, ...)
 }
+\arguments{
+\item{fit}{an object}
+
+\item{...}{extra stuff}
+}
 \description{
-Alias for extract_pi
+Function to extract prevalence from a fit
 }

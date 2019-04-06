@@ -22,9 +22,10 @@ test_that("is.mcmc_fit works", {
   expect_equal(is.rater_fit(test_fit), TRUE)
 })
 
-test_that("plot.fit errors properly", {
-  expect_error(plot(ds_fit), "The type of plot must be specified")
-})
+# We now have a default option for this
+# test_that("plot.fit errors properly", {
+#   expect_error(plot(ds_fit), "The type of plot must be specified")
+# })
 
 # still unsure about best API here
 

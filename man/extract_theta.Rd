@@ -4,12 +4,14 @@
 \alias{extract_theta}
 \title{Generic to extract theta from a fit}
 \usage{
-extract_theta(x, which = NULL)
+extract_theta(fit, which = NULL, ...)
 }
 \arguments{
-\item{x}{an object}
+\item{fit}{an object}
 
 \item{which}{which rater to select}
+
+\item{...}{extra args}
 }
 \description{
 Generic to extract theta from a fit

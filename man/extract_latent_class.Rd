@@ -2,10 +2,15 @@
 % Please edit documentation in R/rater_fit_class.R
 \name{extract_latent_class}
 \alias{extract_latent_class}
-\title{Alias for extract_z}
+\title{Generic to extract (latent class) from a fit}
 \usage{
 extract_latent_class(fit, ...)
 }
+\arguments{
+\item{fit}{an object}
+
+\item{...}{extra stuff}
+}
 \description{
-Alias for extract_z
+Generic to extract (latent class) from a fit
 }
