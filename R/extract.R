@@ -44,7 +44,7 @@ extract_pi.mcmc_fit <- function(fit, ...) {
 extract_theta.mcmc_fit <- function(fit, which = NULL, ...) {
   switch(fit$model$file,
     "multinomial" = extract_theta_m_mcmc(fit, which, ...),
-    "hierarchical_dawid_skene" = extract_theta_hds_mcmc(),
+    "hierarchical_dawid_skene" = extract_theta_hds(),
     "dawid_skene" = extract_theta_ds_mcmc(fit, which, ...),
     stop("Model type not supported", call. = FALSE))
 }
@@ -67,10 +67,86 @@ extract_theta_m_mcmc <- function(fit, which, ...) {
   colMeans(theta_samps)
 }
 
-extract_theta_hds_mcmc <- function() {
+extract_theta_hds <- function() {
   stop("Rater metrics cannot be extracted from the Hierachical Dawid and Skene model.",
        call. = FALSE)
 }
+
+# Methods for optim_fit
+
+#' Extract latent class estimates from a optim fit
+#'
+#' @param fit fit object
+#' @param ... extra args
+#'
+#' @return Probalistic latent class measurements
+#'
+#' @export
+#'
+extract_z.optim_fit <- function(fit, ...) {
+  par <- fit$estimates$par
+  stan_data <- fit$data$stan_data
+  log_p_z_values <- par[grep("log_p_z", names(par))]
+  log_p_z <- matrix(log_p_z_values, nrow = stan_data$I, ncol = stan_data$K)
+  p_z <- t(apply(log_p_z, 1, softmax))
+  p_z
+}
+
+#' Extract prevalance information from optim fit object
+#'
+#' Extract prevalence/pi estiamtes from a fit object
+#'
+#' @param fit fit object
+#' @param ... extra args
+#'
+#' @export
+#'
+extract_pi.optim_fit <- function(fit, ...) {
+ par <- fit$estimates$par
+ out <- par[grep("pi", names(par))]
+ names(out) <- NULL
+ out
+}
+
+#' Extract theta parameter for the optim_fit class
+#'
+#' @param fit fit object
+#' @param which which raters to extract
+#' @param ... extra args
+#'
+#' @return array of rater error distibutions
+#'
+#' @export
+#'
+extract_theta.optim_fit <- function(fit, which = NULL, ...) {
+  switch(fit$model$file,
+    "multinomial" = extract_theta_m_optim(fit, which, ...),
+    "hierarchical_dawid_skene" = extract_theta_hds(),
+    "dawid_skene" = extract_theta_ds_optim(fit, which, ...),
+    stop("Model type not supported", call. = FALSE))
+}
+
+extract_theta_ds_optim <- function(fit, which, ...) {
+  par <- fit$estimates$par
+  theta_values <- par[grep("\\btheta\\b", names(par))]
+  K <- fit$data$stan_data$K
+  J <- fit$data$stan_data$J
+  which <- if (is.null(which)) 1:J else which
+  theta <- array(theta_values, dim = c(J, K, K))
+  theta[which, , ]
+}
+
+extract_theta_m_optim <- function(fit, which, ...) {
+  if (!is.null(which)) {
+    warning("`which` arguement will be ignored (multinomial model)", call. = FALSE)
+  }
+  par <- fit$estimates$par
+  theta_values <- par[grep("\\btheta\\b", names(par))]
+  K <- fit$data$stan_data$K
+  matrix(theta_values, nrow = K, ncol = K)
+}
+
+# helper
 
 validate_which <- function(which, J) {
   if (!(length(which) > 0) || !is.numeric(which)) {

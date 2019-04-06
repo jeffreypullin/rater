@@ -10,6 +10,10 @@ ds_fit <- mcmc(long_data(anesthesia), dawid_skene(), iter = 200, chains = 1)
 multi_fit <- mcmc(multinomial_data(pooled_anesthesia), multinomial(), iter = 200, chains = 1)
 hds_fit <- mcmc(long_data(anesthesia), hier_dawid_skene(), iter = 200, chains = 1)
 
+ds_fit_optim <- optim(long_data(anesthesia), dawid_skene())
+multi_fit_optim <- optim(multinomial_data(pooled_anesthesia), multinomial())
+hds_fit_optim <- optim(long_data(anesthesia), hier_dawid_skene())
+
 ds_model <- dawid_skene()
 multi_model <- multinomial()
 hds_model <- hier_dawid_skene()

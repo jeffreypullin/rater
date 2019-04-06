@@ -12,6 +12,20 @@ new_mcmc_fit <- function(model, draws, data) {
   new
 }
 
+#' Make a optim_rater fit object
+#'
+#' @param model a rater model
+#' @param esimates a stan optimisation object
+#' @param data the data used to fit the model
+#'
+#' @return a rater fit object
+#'
+new_optim_fit <- function(model, estimates, data) {
+  new <- list(model = model, estimates = estimates, data = data)
+  class(new) <- c("optim_fit", "rater_fit")
+  new
+}
+
 #' Print a mcmc_fit object
 #'
 #' @param x fit object to be printed
@@ -32,6 +46,36 @@ print.mcmc_fit <- function(x, ...) {
   print(get_draws(x))
   cat("\n")
   options(max.print = max.print_default)
+}
+# nocov end
+
+#' Print a optim_fit object
+#'
+#' @param x fit object to be printed
+#' @param ... other args passed to the function
+#'
+#' @export
+#'
+# nocov start
+print.optim_fit <- function(x, ...) {
+  cat("Fit method: Optimisation\n\n")
+
+  cat("Model:\n\n")
+  print(get_model(x))
+  cat("\n")
+
+  cat("Estimates:\n")
+
+  max.print_default <- options("max.print")[[1]]
+  options(max.print = 10)
+  est_data <- data.frame(get_estimates(x)$par)
+  colnames(est_data) <- NULL
+  print(est_data)
+  cat("\n")
+  options(max.print = max.print_default)
+
+  cat(paste0("Log probability: ", round(x$estimates$value, 4), "\n"))
+  cat(paste0("Fit converged: ", as.logical(x$estimates$return_code - 1), "\n"))
 }
 # nocov end
 
@@ -66,7 +110,7 @@ plot.rater_fit <- function(x, type = "theta", ...) {
   )
 }
 
-#' Summary of fit
+#' Summary of mcmc fit
 #'
 #' @param object object of type rater fit
 #' @param ... other args passed to function
@@ -77,11 +121,26 @@ summary.mcmc_fit <- function(object, ...) {
   cat(get_name(get_model(object)), "with MCMC draws")
 }
 
+#' Summary of optim fit
+#'
+#' @param object object of type rater fit
+#' @param ... other args passed to function
+#'
+#' @export
+#'
+summary.optim_fit <- function(object, ...) {
+  cat(get_name(get_model(object)), "with MAP estimates")
+}
+
 #' Check if object is of type fit
 #' @param x object
 #'
 is.mcmc_fit <- function(x) {
   inherits(x, "mcmc_fit")
+}
+
+is.optim_fit <- function(x) {
+  inherits(x, "optim_fit")
 }
 
 is.rater_fit <- function(x) {
@@ -157,5 +216,10 @@ get_model <- function(f) {
 get_draws <- function(f) {
   f$draws
 }
+
+get_estimates <- function(f) {
+  f$estimates
+}
+
 
 # bit of a hack reusing get_data - should it be generic?
