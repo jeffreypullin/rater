@@ -1,17 +1,20 @@
 Package: rater
-Title: Fit Bayesian Models of Noisy Categorial Rating 
+Title: Fit Bayesian Models of Noisy Categorial Ratings
 Version: 0.1.0
 Authors@R: c(person("Jeffrey", "Pullin",
              role = c("aut", "cre"),
              email = "jeffrey.pullin@gmail.com"),
              person("Damjan", "Vukcevic",
-             role = c("ctb"))
+             role = c("aut"),
+             comment = c(ORCID = "0000-0001-7780-9586"))
              )
-Description: Fit full bayesian models categorical annotation, based off the 
-  Dawid and Skene model. Full bayesian inference for these models is supported 
+Description: Fit full Bayesian models of categorical annotation, based on the 
+  Dawid and Skene model. Full Bayesian inference for these models is supported 
   through the Stan modelling language. rater also allows the user to extract 
   and plot key parameters of these models.
 License: GPL-2
+URL: https://voltemand.github.io/rater/, https://github.com/Voltemand/rater
+BugReports: https://github.com/Voltemand/rater/issues
 Encoding: UTF-8
 LazyData: true
 Biarch: true

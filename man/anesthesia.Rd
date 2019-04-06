@@ -3,7 +3,7 @@
 \docType{data}
 \name{anesthesia}
 \alias{anesthesia}
-\title{Anesthetist ratings for paitent suitability for surgery}
+\title{Anesthetist ratings for patient suitability for surgery}
 \format{A data frame with 315 rows and 3 variables:
 \describe{
   \item{ii}{item index, which item is being rated}
@@ -14,7 +14,7 @@
 anesthesia
 }
 \description{
-A dataset containing anesthetist ratings of paitent readiness for surgery for
+A dataset containing anesthetist ratings of patient readiness for surgery for
 5 anesthetists on 45 patients with 4 categories in 'long' format. Each row
 represents one unique rating or annotation
 }

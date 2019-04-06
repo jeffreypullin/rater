@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Extract rater accuracy estimates for the Dawid Skene models — extract_raters_ds • rater</title>
+<title>make a rater fit object — fit • rater</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Extract rater accuracy estimates for the Dawid Skene models — extract_raters_ds" />
+<meta property="og:title" content="make a rater fit object — fit" />
 
-<meta property="og:description" content="Extract rater accuracy/theta estimates from a Dawid Skene fit object" />
+<meta property="og:description" content="make a rater fit object" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -114,36 +114,39 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Extract rater accuracy estimates for the Dawid Skene models</h1>
-    <small class="dont-index">Source: <a href='https://github.com/Voltemand/rater/blob/master/R/extract.R'><code>R/extract.R</code></a></small>
-    <div class="hidden name"><code>extract_raters_ds.Rd</code></div>
+    <h1>make a rater fit object</h1>
+    <small class="dont-index">Source: <a href='https://github.com/Voltemand/rater/blob/master/R/fit_class.R'><code>R/fit_class.R</code></a></small>
+    <div class="hidden name"><code>fit.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Extract rater accuracy/theta estimates from a Dawid Skene fit object</p>
+    <p>make a rater fit object</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>extract_raters_ds</span>(<span class='no'>fit</span>, <span class='kw'>which</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>fit</span>(<span class='no'>model</span>, <span class='no'>draws</span>, <span class='no'>data</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>fit</th>
-      <td><p>fit object</p></td>
+      <th>model</th>
+      <td><p>a rater model</p></td>
     </tr>
     <tr>
-      <th>which</th>
-      <td><p>which raters to extract</p></td>
+      <th>draws</th>
+      <td><p>a stanfit object</p></td>
+    </tr>
+    <tr>
+      <th>data</th>
+      <td><p>the data used to fit the model</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>list of matrices containing probability confusion matrices for each
- rater</p>
+    <p>a rater fit object</p>
     
 
   </div>

@@ -25,13 +25,13 @@ extract_pi.mcmc_fit <- function(fit, ...) {
   apply(rstan::extract(fit$draws)$pi, 2, mean)
 }
 
-#' Extract rater accuarcy estimates for the Dawid Skene models
+#' Extract rater accuracy estimates for the Dawid Skene models
 #'
-#' Extract rater accuarcy/theta estimates from a Dawid Skene fit object
+#' Extract rater accuracy/theta estimates from a Dawid Skene fit object
 #'
 #' @param fit fit object
 #' @param which which raters to extract
-#' @return list of matrices containing proabaility confusion matrices for each
+#' @return list of matrices containing probability confusion matrices for each
 #'  rater
 #'
 #' @export

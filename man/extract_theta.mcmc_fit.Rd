@@ -2,7 +2,7 @@
 % Please edit documentation in R/extract.R
 \name{extract_theta.mcmc_fit}
 \alias{extract_theta.mcmc_fit}
-\title{Extract rater accuarcy estimates for the Dawid Skene models}
+\title{Extract rater accuracy estimates for the Dawid Skene models}
 \usage{
 \method{extract_theta}{mcmc_fit}(fit, which = NULL, ...)
 }
@@ -12,9 +12,9 @@
 \item{which}{which raters to extract}
 }
 \value{
-list of matrices containing proabaility confusion matrices for each
+list of matrices containing probability confusion matrices for each
  rater
 }
 \description{
-Extract rater accuarcy/theta estimates from a Dawid Skene fit object
+Extract rater accuracy/theta estimates from a Dawid Skene fit object
 }

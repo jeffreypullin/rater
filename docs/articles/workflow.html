@@ -83,7 +83,7 @@
       <h1>Workflow</h1>
             
       
-      
+      <small class="dont-index">Source: <a href="https://github.com/Voltemand/rater/blob/master/vignettes/workflow.Rmd"><code>vignettes/workflow.Rmd</code></a></small>
       <div class="hidden name"><code>workflow.Rmd</code></div>
 
     </div>
@@ -93,30 +93,30 @@
 <div id="what-is-rater" class="section level2">
 <h2 class="hasAnchor">
 <a href="#what-is-rater" class="anchor"></a>What is rater?</h2>
-<p>The <strong>rater</strong> package is designed to allow easy fitting and anlaysis of Bayesian models of categorical data annoration through Stan. In this vignette we demonstrate the basic workflow for using the <strong>package</strong>.</p>
+<p>The <strong>rater</strong> package is designed to allow easy fitting and analysis of Bayesian models of categorical data annotation using <a href="http://mc-stan.org/">Stan</a>. Here we demonstrate the basic workflow for using the package.</p>
 </div>
 <div id="data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#data" class="anchor"></a>Data</h2>
-<p>In this vignette we will use the the <em>anesthesia</em> data set taken from the paper <em>Maximum Likelihood Estimation of Observer Error-Rates Using the EM Algorithm</em> by A. P. Dawid and A. M. Skene, the paper which introduces the type of models used in this package. This dataset is already in the appropriate format for use in <strong>rater</strong> function. For information about how to convert your data into the appropriate format see <strong>link</strong></p>
+<p>We will use the <em>anesthesia</em> data set taken from the paper <em>Maximum Likelihood Estimation of Observer Error-Rates Using the EM Algorithm</em> by A. P. Dawid and A. M. Skene, the paper which introduced the type of models used in this package. This dataset is already in the appropriate format for use by the <strong>rater()</strong> function. For information about how to convert your data into the appropriate format see <strong>link</strong>.</p>
 </div>
 <div id="mcmc" class="section level2">
 <h2 class="hasAnchor">
-<a href="#mcmc" class="anchor"></a>mcmc</h2>
-<p>The core function of the <strong>rater</strong> package is the <code>mcmc</code> function which fits a model given data. The mcmc function has two arguments the first is <code>data</code> which should be in ‘long’ format (add footnote) and <code>model</code> which is the model you would like to fit. Models are passed as a function (why this is will be more obvious in a moment). For example, to fit the basic Dawid and Skene model to the anesthesia dataset we would run:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># load the rater package</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">library</span>(rater)</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co"># load the anesthesia dataset</span></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="kw">data</span>(<span class="st">"anesthesia"</span>)</a>
-<a class="sourceLine" id="cb1-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="co"># fit the model using MCMC via Stan </span></a>
-<a class="sourceLine" id="cb1-8" data-line-number="8">fit &lt;-<span class="st"> </span><span class="kw"><a href="../reference/mcmc.html">mcmc</a></span>(anesthesia, <span class="kw"><a href="../reference/models.html">dawid_skene</a></span>(), <span class="dt">iter =</span> <span class="dv">500</span>, <span class="dt">chains =</span> <span class="dv">1</span>)</a></code></pre></div>
+<a href="#mcmc" class="anchor"></a>mcmc()</h2>
+<p>The core function of the <strong>rater</strong> package is the <code><a href="../reference/mcmc.html">mcmc()</a></code> function which fits a model given data. This function has two arguments: <code>data</code>, which should be in ‘long’ format (add footnote); and <code>model</code>, which specifies the model you would like to fit. Models are passed as a function (the reason for this will be more obvious in a moment). For example, to fit the basic Dawid and Skene model to the anesthesia dataset we would run:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load the rater package</span>
+<span class="kw">library</span>(rater)
+
+<span class="co"># load the anesthesia dataset</span>
+<span class="kw">data</span>(<span class="st">"anesthesia"</span>)
+
+<span class="co"># fit the model using MCMC via Stan </span>
+fit &lt;-<span class="st"> </span><span class="kw"><a href="../reference/mcmc.html">mcmc</a></span>(anesthesia, <span class="kw"><a href="../reference/models.html">dawid_skene</a></span>(), <span class="dt">iter =</span> <span class="dv">500</span>, <span class="dt">chains =</span> <span class="dv">1</span>)</code></pre>
 <pre><code>#&gt; 
 #&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 1).
 #&gt; Chain 1: 
-#&gt; Chain 1: Gradient evaluation took 0.000476 seconds
-#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 4.76 seconds.
+#&gt; Chain 1: Gradient evaluation took 0.000258 seconds
+#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 2.58 seconds.
 #&gt; Chain 1: Adjust your expectations accordingly!
 #&gt; Chain 1: 
 #&gt; Chain 1: 
@@ -133,38 +133,38 @@
 #&gt; Chain 1: Iteration: 450 / 500 [ 90%]  (Sampling)
 #&gt; Chain 1: Iteration: 500 / 500 [100%]  (Sampling)
 #&gt; Chain 1: 
-#&gt; Chain 1:  Elapsed Time: 1.04906 seconds (Warm-up)
-#&gt; Chain 1:                0.834227 seconds (Sampling)
-#&gt; Chain 1:                1.88329 seconds (Total)
+#&gt; Chain 1:  Elapsed Time: 1.02038 seconds (Warm-up)
+#&gt; Chain 1:                0.76736 seconds (Sampling)
+#&gt; Chain 1:                1.78774 seconds (Total)
 #&gt; Chain 1:</code></pre>
-<p>You will see the normal progress output you get whenever <strong>Stan</strong> is sampling. Note that, as all models are compiled when the package is installed, you will never have to wait for model to be compiled while using the <strong>rater</strong> package.</p>
-<p>Important note: in the example above we manually tell <strong>Stan</strong> to only run 1 chain with 500 iterations in order to speed up the creation of the vignette and descrese the volumen of output. In general please run <code>mcmc</code> using the <strong>Stan</strong> sampling defaults which are used if you only pass <code>data</code> and <code>model</code> arguments to <code>mcmc</code> i.e.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">fit &lt;-<span class="st"> </span><span class="kw"><a href="../reference/mcmc.html">mcmc</a></span>(anesthesia, <span class="kw"><a href="../reference/models.html">dawid_skene</a></span>())</a></code></pre></div>
+<p>You will see the normal progress output you get whenever <strong>Stan</strong> is sampling. Note that all models are compiled when the package is installed, rather than at runtime, meaning that you will not need to wait for a model to be compiled when running analyses using the <strong>rater</strong> package.</p>
+<p>Important note: in the example above we specified <strong>Stan</strong> to only run 1 chain with 500 iterations in order to speed up the creation of this vignette and reduce the volume of output. In general, we recommend running <code><a href="../reference/mcmc.html">mcmc()</a></code> using the <strong>Stan</strong> sampling defaults, which will be used if you only specify the <code>data</code> and <code>model</code> arguments in <code><a href="../reference/mcmc.html">mcmc()</a></code>. For example:</p>
+<pre class="sourceCode r"><code class="sourceCode r">fit &lt;-<span class="st"> </span><span class="kw"><a href="../reference/mcmc.html">mcmc</a></span>(anesthesia, <span class="kw"><a href="../reference/models.html">dawid_skene</a></span>())</code></pre>
 </div>
 <div id="plot" class="section level2">
 <h2 class="hasAnchor">
-<a href="#plot" class="anchor"></a>plot</h2>
+<a href="#plot" class="anchor"></a>plot()</h2>
 <p>Having fit the Dawid and Skene model to the data we can now plot and extract key parameter estimates from the model.</p>
-<p>To plot the population prevalence estimates (in the model: <span class="math inline">\(\pi\)</span>) we run:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">plot</span>(fit, <span class="dt">type =</span> <span class="st">"prevalance"</span>) <span class="co"># or plot(fit, "pi")</span></a></code></pre></div>
+<p>To plot the population prevalence estimates (the parameter <span class="math">\(\pi\)</span> in the model) we run:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(fit, <span class="dt">type =</span> <span class="st">"prevalance"</span>) <span class="co"># or plot(fit, "pi")</span></code></pre>
 <p><img src="workflow_files/figure-html/unnamed-chunk-3-1.png" width="576"></p>
-<p>To plot the probability confusion matrices of the raters (in the model: <span class="math inline">\(\theta\)</span>):</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">plot</span>(fit, <span class="dt">type =</span> <span class="st">"raters"</span>) <span class="co"># or plot(fit, "theta")</span></a></code></pre></div>
+<p>To plot the probability confusion matrices of the raters (the parameter <span class="math">\(\theta\)</span> in the model) we run:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(fit, <span class="dt">type =</span> <span class="st">"raters"</span>) <span class="co"># or plot(fit, "theta")</span></code></pre>
 <p><img src="workflow_files/figure-html/unnamed-chunk-4-1.png" width="576"></p>
-<p>And to plot the latent class estimates (<span class="math inline">\(z\)</span>) we run:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">plot</span>(fit, <span class="dt">type =</span> <span class="st">"latent_class"</span>) <span class="co"># or plot(fit, "z")</span></a></code></pre></div>
+<p>To plot the latent class estimates (the parameter <span class="math">\(z\)</span> in the model) we run:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(fit, <span class="dt">type =</span> <span class="st">"latent_class"</span>) <span class="co"># or plot(fit, "z")</span></code></pre>
 <p><img src="workflow_files/figure-html/unnamed-chunk-5-1.png" width="576"></p>
-<p>For discussion of what these parameters of the model represnet please see the vigneete <strong>models</strong></p>
+<p>For a discussion of what these parameters in the model represent, please see the vignette <strong>models</strong>.</p>
 </div>
 <div id="extract" class="section level2">
 <h2 class="hasAnchor">
-<a href="#extract" class="anchor"></a>extract</h2>
-<p>Similairlty we can extract all of the estiamtes used to make these plots for further processing with the <code>extract</code> function:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="../reference/extract.html">extract</a></span>(fit, <span class="st">"prevalance"</span>) <span class="co"># or extract(fit, "pi")</span></a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="kw"><a href="../reference/extract.html">extract</a></span>(fit, <span class="st">"raters"</span>) <span class="co"># or extract(fit, "theta")</span></a>
-<a class="sourceLine" id="cb7-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="kw"><a href="../reference/extract.html">extract</a></span>(fit, <span class="st">"latent_class"</span>) <span class="co"># or extract(fit, "z")</span></a></code></pre></div>
+<a href="#extract" class="anchor"></a>extract()</h2>
+<p>Similarly, we can extract all of the estimates used to make these plots for further processing with the <code>extract</code> function:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/extract.html">extract</a></span>(fit, <span class="st">"prevalance"</span>) <span class="co"># or extract(fit, "pi")</span>
+
+<span class="kw"><a href="../reference/extract.html">extract</a></span>(fit, <span class="st">"raters"</span>) <span class="co"># or extract(fit, "theta")</span>
+
+<span class="kw"><a href="../reference/extract.html">extract</a></span>(fit, <span class="st">"latent_class"</span>) <span class="co"># or extract(fit, "z")</span></code></pre>
 </div>
   </div>
 
@@ -175,9 +175,9 @@
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#what-is-rater">What is rater?</a></li>
       <li><a href="#data">Data</a></li>
-      <li><a href="#mcmc">mcmc</a></li>
-      <li><a href="#plot">plot</a></li>
-      <li><a href="#extract">extract</a></li>
+      <li><a href="#mcmc">mcmc()</a></li>
+      <li><a href="#plot">plot()</a></li>
+      <li><a href="#extract">extract()</a></li>
       </ul>
 </div>
       </div>
@@ -186,7 +186,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Jeffrey Pullin.</p>
+  <p>Developed by Jeffrey Pullin, Damjan Vukcevic.</p>
 </div>
 
 <div class="pkgdown">

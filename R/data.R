@@ -1,6 +1,6 @@
-#' Anesthetist ratings for paitent suitability for surgery
+#' Anesthetist ratings for patient suitability for surgery
 #'
-#' A dataset containing anesthetist ratings of paitent readiness for surgery for
+#' A dataset containing anesthetist ratings of patient readiness for surgery for
 #' 5 anesthetists on 45 patients with 4 categories in 'long' format. Each row
 #' represents one unique rating or annotation
 #'
