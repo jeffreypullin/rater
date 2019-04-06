@@ -7,11 +7,11 @@
 extract_raters(fit, which = NULL, ...)
 }
 \arguments{
+\item{fit}{an object}
+
 \item{which}{which rater to select}
 
 \item{...}{extra args}
-
-\item{x}{an object}
 }
 \description{
 Function to extract raters from a fit
