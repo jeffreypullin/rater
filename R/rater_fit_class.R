@@ -110,7 +110,7 @@ plot.rater_fit <- function(x, type = "theta", ...) {
   )
 }
 
-#' Summary of fit
+#' Summary of mcmc fit
 #'
 #' @param object object of type rater fit
 #' @param ... other args passed to function
@@ -121,11 +121,26 @@ summary.mcmc_fit <- function(object, ...) {
   cat(get_name(get_model(object)), "with MCMC draws")
 }
 
+#' Summary of optim fit
+#'
+#' @param object object of type rater fit
+#' @param ... other args passed to function
+#'
+#' @export
+#'
+summary.optim_fit <- function(object, ...) {
+  cat(get_name(get_model(object)), "with MAP estimates")
+}
+
 #' Check if object is of type fit
 #' @param x object
 #'
 is.mcmc_fit <- function(x) {
   inherits(x, "mcmc_fit")
+}
+
+is.optim_fit <- function(x) {
+  inherits(x, "optim_fit")
 }
 
 is.rater_fit <- function(x) {
