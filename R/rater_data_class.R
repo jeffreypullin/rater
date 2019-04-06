@@ -19,6 +19,12 @@ print.multinomial_data <- function(x, ...) {
 }
 
 #' @export
+print.table_data <- function(x, ...) {
+  cat("`table` rater data\n")
+  print(get_data(x))
+}
+
+#' @export
 summary.rater_data <- function(object, ...) {
   cat("rater data")
 }
