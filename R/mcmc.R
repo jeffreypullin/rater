@@ -19,9 +19,11 @@ mcmc <- function(data, model, ...) {
   stan_data <- c(stan_data_list, parse_priors(model, stan_data_list$K))
   inits <- creat_inits(model, stan_data_list)
 
+  # this could be made more complex if automatic switching is used
+  file <- get_stan_file(data, model)
+
   # sample the model
-  draws <- rstan::sampling(stanmodels[[get_file(model)]],
-                           stan_data, init = inits, ...)
+  draws <- rstan::sampling(stanmodels[[file]], stan_data, init = inits, ...)
 
   new_mcmc_fit(model = model, draws = draws, data = data)
 }
@@ -47,25 +49,13 @@ optim <- function(data, model, ...) {
   stan_data <- c(stan_data_list, parse_priors(model, stan_data_list$K))
   inits <- creat_inits(model, stan_data_list)
 
+  # this could be made more complex if automatic switching is used
+  file <- get_stan_file(data, model)
+
   # sample the model
-  estimates <- rstan::optimizing(stanmodels[[get_file(model)]],
-                             stan_data, init = inits, ...)
+  estimates <- rstan::optimizing(stanmodels[[file]], stan_data, init = inits, ...)
 
   new_optim_fit(model = model, estimates = estimates, data = data)
-}
-
-#' Helper to check if passed data and model are valid and consistent
-#'
-#' @param data rater_data
-#' @param model rater_model
-#'
-validate_input <- function(data, model) {
-  if (!is.rater_data(data)) {
-    stop("data must be a rater data type", call. = FALSE)
-  }
-  if (!is.rater_model(model)) {
-    stop("model must be a rater model", call. = FALSE)
-  }
 }
 
 #' Converts default prior parameter specification to full priors
@@ -102,6 +92,45 @@ check_K <- function(stan_data, model) {
          "parameters", call. = FALSE)
   }
 }
+
+#' Helper get the correct stan file to run for model/data combination
+#'
+#' @param data a rater_data object
+#' @param model a rater_model object
+#'
+#' @return the name (no .stan) of the stan file that should be run
+#'
+get_stan_file <- function(data, model) {
+  # we assume here that only legal inputs are considered
+  if (is.table_data(data)) {
+    file <- "table_data"
+  } else {
+    file <- get_file(model)
+  }
+  file
+}
+
+#' Helper to check if passed data and model are valid and consistent
+#'
+#' @param data rater_data
+#' @param model rater_model
+#'
+validate_input <- function(data, model) {
+  if (!is.rater_data(data)) {
+    stop("data must be a rater data type", call. = FALSE)
+  }
+  if (!is.rater_model(model)) {
+    stop("model must be a rater model", call. = FALSE)
+  }
+  # the repeated naming is not so great here
+  if (is.multinomial_data(data) & !is.multinomial(model)) {
+    stop("multinomial data can only be uses with the Multinomial model", call. = FALSE)
+  }
+  if (is.table_data(data) & !is.dawid_skene(model)) {
+    stop("table data can only be uses with the Dawid and Skene model", call. = FALSE)
+  }
+}
+
 
 #' Creates inits for the stan MCMC chains
 #'

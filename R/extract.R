@@ -12,6 +12,7 @@ extract_z.mcmc_fit <- function(fit, ...) {
   log_p_z <- apply(log_p_z_samps, c(2, 3), mean)
   # not 100% sure why the transpose is needed here...
   p_z <- t(apply(log_p_z, 1, softmax))
+  p_z  <- if (is.table_data(fit$data)) enlarge_z(p_z, fit) else p_z
   p_z
 }
 
@@ -89,6 +90,8 @@ extract_z.optim_fit <- function(fit, ...) {
   log_p_z_values <- par[grep("log_p_z", names(par))]
   log_p_z <- matrix(log_p_z_values, nrow = stan_data$I, ncol = stan_data$K)
   p_z <- t(apply(log_p_z, 1, softmax))
+  # name?
+  p_z  <- if (is.table_data(fit$data)) enlarge_z(p_z, fit) else p_z
   p_z
 }
 
@@ -146,7 +149,7 @@ extract_theta_m_optim <- function(fit, which, ...) {
   matrix(theta_values, nrow = K, ncol = K)
 }
 
-# helper
+# helpers
 
 validate_which <- function(which, J) {
   if (!(length(which) > 0) || !is.numeric(which)) {
@@ -156,4 +159,10 @@ validate_which <- function(which, J) {
   if (length(which(which %in% 1:J)) != length(which)) {
     stop("All numbers in `which` must be drawn from 1:", J, call. = FALSE)
   }
+}
+
+enlarge_z <- function(p_z, fit) {
+  # this will only be run if the data is in table data form
+  stopifnot(is.table_data(fit$data))
+  p_z[rep(1:nrow(p_z), fit$data$stan_data$tally), ]
 }
