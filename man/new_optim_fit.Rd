@@ -9,9 +9,9 @@ new_optim_fit(model, estimates, data)
 \arguments{
 \item{model}{a rater model}
 
-\item{data}{the data used to fit the model}
+\item{estimates}{a stan optimisation object}
 
-\item{esimates}{a stan optimisation object}
+\item{data}{the data used to fit the model}
 }
 \value{
 a rater fit object

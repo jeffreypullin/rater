@@ -15,7 +15,7 @@ new_mcmc_fit <- function(model, draws, data) {
 #' Make a optim_rater fit object
 #'
 #' @param model a rater model
-#' @param esimates a stan optimisation object
+#' @param estimates a stan optimisation object
 #' @param data the data used to fit the model
 #'
 #' @return a rater fit object
