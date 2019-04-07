@@ -65,4 +65,8 @@ is.table_data <- function(x) {
   inherits(x, "table_data")
 }
 
+is.multinomial_data <- function(x) {
+  inherits(x, "multinomial_data")
+}
+
 

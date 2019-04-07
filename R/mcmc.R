@@ -58,20 +58,6 @@ optim <- function(data, model, ...) {
   new_optim_fit(model = model, estimates = estimates, data = data)
 }
 
-#' Helper to check if passed data and model are valid and consistent
-#'
-#' @param data rater_data
-#' @param model rater_model
-#'
-validate_input <- function(data, model) {
-  if (!is.rater_data(data)) {
-    stop("data must be a rater data type", call. = FALSE)
-  }
-  if (!is.rater_model(model)) {
-    stop("model must be a rater model", call. = FALSE)
-  }
-}
-
 #' Converts default prior parameter specification to full priors
 #'
 #' @param model the rater_model
@@ -123,6 +109,28 @@ get_stan_file <- function(data, model) {
   }
   file
 }
+
+#' Helper to check if passed data and model are valid and consistent
+#'
+#' @param data rater_data
+#' @param model rater_model
+#'
+validate_input <- function(data, model) {
+  if (!is.rater_data(data)) {
+    stop("data must be a rater data type", call. = FALSE)
+  }
+  if (!is.rater_model(model)) {
+    stop("model must be a rater model", call. = FALSE)
+  }
+  # the repeated naming is not so great here
+  if (is.multinomial_data(data) & !is.multinomial(model)) {
+    stop("multinomial data can only be uses with the Multinomial model", call. = FALSE)
+  }
+  if (is.table_data(data) & !is.dawid_skene(model)) {
+    stop("table data can only be uses with the Dawid and Skene model", call. = FALSE)
+  }
+}
+
 
 #' Creates inits for the stan MCMC chains
 #'
