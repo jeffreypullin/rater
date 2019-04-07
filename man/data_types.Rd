@@ -5,6 +5,7 @@
 \alias{wide_data}
 \alias{long_data}
 \alias{multinomial_data}
+\alias{table_data}
 \title{Data types compatible with the models of categorical annotation}
 \usage{
 wide_data(data)
@@ -12,6 +13,8 @@ wide_data(data)
 long_data(data)
 
 multinomial_data(data)
+
+table_data(data)
 }
 \arguments{
 \item{data}{a numeric matrix}
