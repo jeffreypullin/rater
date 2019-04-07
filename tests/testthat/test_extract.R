@@ -45,6 +45,10 @@ test_that("extract_pi output has correct form", {
   out <- extract_pi(ds_fit_optim)
   expect_equal(length(out), K)
   expect_equal(sum(out), 1)
+  # table
+  out <- extract_pi(ds_fit_table)
+  expect_equal(length(out), K_caries)
+  expect_equal(sum(out), 1)
 })
 
 test_that("extract_z output has correct form", {
@@ -56,6 +60,10 @@ test_that("extract_z output has correct form", {
   out <- extract_z(ds_fit_optim)
   expect_equal(dim(out), c(I, K))
   expect_equal(rowSums(out), rep(1, I))
+  # table
+  out <- extract_z(ds_fit_table)
+  expect_equal(dim(out), c(I_caries, K_caries))
+  expect_equal(rowSums(out), rep(1, I_caries))
 })
 
 
@@ -104,6 +112,20 @@ test_that("extract_theta (optim) output has correct form", {
   # is probability
   expect_equal(rowSums(multi_out), rep(1, K))
   expect_equal(sum(multi_out > 0), K * K)
+
+})
+
+test_that("extract_theta (table) output has correct form", {
+
+  ds_out <- extract_theta(ds_fit_table)
+
+  # dawid skene
+
+  # form
+  expect_equal(is.array(ds_out), TRUE)
+
+  # is probability
+  apply(ds_out, 1, function(x) expect_equal(rowSums(x), rep(1, K_caries)))
 
 })
 
