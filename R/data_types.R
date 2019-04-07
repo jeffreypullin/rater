@@ -110,7 +110,7 @@ new_table_data <- function(data) {
                     K = max(key),
                     J = ncol(key),
                     key = key,
-                    tally = ns)
+                    tally = tally)
   d <- list(data = data, stan_data = stan_data)
   class(d) <- c("table_data", "rater_data")
   d
