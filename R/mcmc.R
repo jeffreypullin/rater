@@ -19,9 +19,11 @@ mcmc <- function(data, model, ...) {
   stan_data <- c(stan_data_list, parse_priors(model, stan_data_list$K))
   inits <- creat_inits(model, stan_data_list)
 
+  # this could be made more complex if automatic switching is used
+  file <- get_stan_file(data, model)
+
   # sample the model
-  draws <- rstan::sampling(stanmodels[[get_file(model)]],
-                           stan_data, init = inits, ...)
+  draws <- rstan::sampling(stanmodels[[file]], stan_data, init = inits, ...)
 
   new_mcmc_fit(model = model, draws = draws, data = data)
 }
@@ -47,9 +49,11 @@ optim <- function(data, model, ...) {
   stan_data <- c(stan_data_list, parse_priors(model, stan_data_list$K))
   inits <- creat_inits(model, stan_data_list)
 
+  # this could be made more complex if automatic switching is used
+  file <- get_stan_file(data, model)
+
   # sample the model
-  estimates <- rstan::optimizing(stanmodels[[get_file(model)]],
-                             stan_data, init = inits, ...)
+  estimates <- rstan::optimizing(stanmodels[[file]], stan_data, init = inits, ...)
 
   new_optim_fit(model = model, estimates = estimates, data = data)
 }
@@ -101,6 +105,23 @@ check_K <- function(stan_data, model) {
     stop("The number of categories is inconsistent between data and the prior",
          "parameters", call. = FALSE)
   }
+}
+
+#' Helper get the correct stan file to run for model/data combination
+#'
+#' @param data a rater_data object
+#' @param model a rater_model object
+#'
+#' @return the name (no .stan) of the stan file that should be run
+#'
+get_stan_file <- function(data, model) {
+  # we assume here that only legal inputs are considered
+  if (is.table_data(data)) {
+    file <- "table_data"
+  } else {
+    file <- get_file(model)
+  }
+  file
 }
 
 #' Creates inits for the stan MCMC chains
