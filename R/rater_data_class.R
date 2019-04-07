@@ -61,4 +61,8 @@ get_stan_data <- function(d) {
   d$stan_data
 }
 
+is.table_data <- function(x) {
+  inherits(x, "table_data")
+}
+
 
