@@ -60,8 +60,8 @@ new_wide_data <- function(data) {
   J <- ncol(data)
   K <- max(data)
   mask <- !is.na(data)
-  ii <- rep(1:I, each = J)[mask]
-  jj <- rep(1:J, I)[mask]
+  ii <- rep(1:I, J)[mask]
+  jj <- rep(1:J, each = I)[mask]
   y <- as.vector(data)[mask]
   N <- length(y)
   stan_data <- list(N = N, I = I, J = J, K = K, ii = ii, jj = jj, y = y)
