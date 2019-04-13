@@ -8,7 +8,7 @@
 #' @return An object of type fit containing the fitted parameters
 #' @export
 #'
-mcmc <- function(data, model, ...) {
+mcmc <- function(data, model, inits = NULL, ...) {
   validate_input(data, model)
   stan_data_list <- get_stan_data(data)
 
@@ -17,7 +17,8 @@ mcmc <- function(data, model, ...) {
 
   # create the full passed info for stan and the inits
   stan_data <- c(stan_data_list, parse_priors(model, stan_data_list$K))
-  inits <- creat_inits(model, stan_data_list)
+
+  if is.null(inits) inits <- creat_inits(model, stan_data_list) else inits
 
   # this could be made more complex if automatic switching is used
   file <- get_stan_file(data, model)
@@ -38,7 +39,7 @@ mcmc <- function(data, model, ...) {
 #' @return An object of type fit containing the fitted parameters
 #' @export
 #'
-optim <- function(data, model, ...) {
+optim <- function(data, model, inits = NULL, ...) {
   validate_input(data, model)
   stan_data_list <- get_stan_data(data)
 
@@ -47,7 +48,8 @@ optim <- function(data, model, ...) {
 
   # create the full passed info for stan and the inits
   stan_data <- c(stan_data_list, parse_priors(model, stan_data_list$K))
-  inits <- creat_inits(model, stan_data_list)
+
+  if is.null(inits) inits <- creat_inits(model, stan_data_list) else inits
 
   # this could be made more complex if automatic switching is used
   file <- get_stan_file(data, model)
