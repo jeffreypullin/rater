@@ -18,7 +18,7 @@ mcmc <- function(data, model, inits = NULL, ...) {
   # create the full passed info for stan and the inits
   stan_data <- c(stan_data_list, parse_priors(model, stan_data_list$K))
 
-  if is.null(inits) inits <- creat_inits(model, stan_data_list) else inits
+  if (is.null(inits)) inits <- creat_inits(model, stan_data_list) else inits
 
   # this could be made more complex if automatic switching is used
   file <- get_stan_file(data, model)
@@ -49,7 +49,7 @@ optim <- function(data, model, inits = NULL, ...) {
   # create the full passed info for stan and the inits
   stan_data <- c(stan_data_list, parse_priors(model, stan_data_list$K))
 
-  if is.null(inits) inits <- creat_inits(model, stan_data_list) else inits
+  if (is.null(inits)) inits <- creat_inits(model, stan_data_list) else inits
 
   # this could be made more complex if automatic switching is used
   file <- get_stan_file(data, model)
