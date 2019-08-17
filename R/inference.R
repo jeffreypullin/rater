@@ -101,10 +101,6 @@ validate_input <- function(data, model) {
   if (!is.rater_model(model)) {
     stop("model must be a rater model", call. = FALSE)
   }
-  # the repeated naming is not so great here
-  if (is.multinomial_data(data) & !is.multinomial(model)) {
-    stop("multinomial data can only be uses with the Multinomial model", call. = FALSE)
-  }
   if (is.table_data(data) & !is.dawid_skene(model)) {
     stop("table data can only be uses with the Dawid and Skene model", call. = FALSE)
   }
@@ -120,24 +116,9 @@ validate_input <- function(data, model) {
 creat_inits <- function(model, stan_data) {
   # better to have another short unique id...
   switch(get_file(model),
-    "multinomial" = multinomial_inits(stan_data$K, stan_data$J),
     "dawid_skene" = dawid_skene_inits(stan_data$K, stan_data$J),
     "hierarchical_dawid_skene" = "random",
     stop("Unsupported model type", call. = FALSE))
-}
-
-#' Creates inits for the multinomial model
-#'
-#' @param K number of categories
-#' @param J number of raters
-#'
-#' @return inits in the format required by stan
-#'
-multinomial_inits <- function(K, J) {
-  pi_init <- rep(1/K, K)
-  theta_init <- array(0.2 / (K - 1), c(K, K))
-  diag(theta_init) <- 0.8
-  function(n) list(theta = theta_init, pi = pi_init)
 }
 
 #' Creates inits for the dawid and skene model

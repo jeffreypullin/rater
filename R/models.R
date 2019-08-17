@@ -40,20 +40,6 @@ hier_dawid_skene <- function(alpha = NULL) {
   m
 }
 
-#' @rdname models
-#' @export
-#'
-multinomial <- function(alpha = NULL, beta = NULL) {
-  parameters <- list(alpha = alpha, beta = beta)
-  validate_parameters(parameters)
-  m <- list(parameters = parameters,
-            name = "Bayesian Multinomial (Annotator pooled) Model",
-            file = "multinomial",
-            K = compute_K(parameters))
-  class(m) <- c("multinomial", "rater_model")
-  m
-}
-
 #' Validate passed parameters
 #'
 #' Checks the parameter are of the appropritate type/form and that they are

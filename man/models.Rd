@@ -4,14 +4,11 @@
 \alias{models}
 \alias{dawid_skene}
 \alias{hier_dawid_skene}
-\alias{multinomial}
 \title{Probablistic models of categorical data annotation}
 \usage{
 dawid_skene(alpha = NULL, beta = NULL)
 
 hier_dawid_skene(alpha = NULL)
-
-multinomial(alpha = NULL, beta = NULL)
 }
 \arguments{
 \item{alpha}{prior parameter for pi}

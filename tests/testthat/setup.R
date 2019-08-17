@@ -7,22 +7,16 @@ pooled_anesthesia <- anesthesia[, c(1, 3)]
 ds_fit <- rater(long_data(anesthesia), dawid_skene(),
                 iter = 200, chains = 1)
 
-multi_fit <- rater(multinomial_data(pooled_anesthesia), multinomial(),
-                   iter = 200, chains = 1)
-
 hds_fit <- rater(long_data(anesthesia), hier_dawid_skene(),
                  iter = 200, chains = 1)
 
 ds_fit_optim <- rater(long_data(anesthesia), dawid_skene(), method = "optim")
-multi_fit_optim <- rater(multinomial_data(pooled_anesthesia), multinomial(),
-                         method = "optim")
 hds_fit_optim <- rater(long_data(anesthesia), hier_dawid_skene(),
                        method = "optim")
 
 ds_fit_table <- rater(table_data(caries), dawid_skene(), iter = 200, chains = 1)
 
 ds_model <- dawid_skene()
-multi_model <- multinomial()
 hds_model <- hier_dawid_skene()
 
 J <- 5

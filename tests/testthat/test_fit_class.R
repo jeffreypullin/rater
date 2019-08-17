@@ -3,10 +3,6 @@ context("fit_class")
 test_that("summary works for fit", {
 
   expect_output(summary(ds_fit), "Bayesian Dawid and Skene Model with MCMC draws")
-
-  # Problems with the () - actual value has \(
-  #expect_output(summary(multi_model), "Bayesian Multinomial (Annotator pooled) Model")
-
   expect_output(summary(hds_fit), "Bayesian Hierarchical Dawid and Skene Model with MCMC draws")
 
 })
@@ -21,11 +17,6 @@ test_that("is.mcmc_fit works", {
   expect_equal(is.mcmc_fit(test_fit), TRUE)
   expect_equal(is.rater_fit(test_fit), TRUE)
 })
-
-# We now have a default option for this
-# test_that("plot.fit errors properly", {
-#   expect_error(plot(ds_fit), "The type of plot must be specified")
-# })
 
 # still unsure about best API here
 

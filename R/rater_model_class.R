@@ -38,10 +38,6 @@ is.hier_dawid_skene <- function(m) {
   inherits(m, "hier_dawid_skene")
 }
 
-is.multinomial <- function(m) {
-  inherits(m, "multinomial")
-}
-
 is.rater_model <- function(m) {
   inherits(m, "rater_model")
 }
