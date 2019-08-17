@@ -6,6 +6,9 @@
 #' @param ... extra parameters to be passed to the Stan fitting interface
 #'
 #' @return An object of type fit containing the fitted parameters
+#'
+#' @importFrom rstan sampling optimizing
+#'
 #' @export
 #'
 rater <- function(data, model, method = "mcmc", inits = NULL, ...) {

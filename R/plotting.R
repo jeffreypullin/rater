@@ -4,7 +4,7 @@
 #' @return Plot of the population prevelance esitmates extracted in fits
 #'
 #' @export
-#' @import ggplot2
+#' @importFrom ggplot2 ggplot aes geom_bar geom_text
 plot_pi <- function(fit) {
   pi <- extract_pi(fit)
   plot_data <- data.frame(cat = as.factor(1:length(pi)),
