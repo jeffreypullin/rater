@@ -1,4 +1,4 @@
-#' Fit noisy catergrical rating models using HMC via Stan
+#' Fit noisy catergrical rating models using Stan
 #'
 #' @param data Data for the model in long format as a three column dataframe of
 #'   ii, jj, yy
@@ -8,7 +8,8 @@
 #' @return An object of type fit containing the fitted parameters
 #' @export
 #'
-mcmc <- function(data, model, inits = NULL, ...) {
+rater <- function(data, model, method = "mcmc", inits = NULL, ...) {
+  method <- match.arg(method, choices = c("mcmc", "optim"))
   validate_input(data, model)
   stan_data_list <- get_stan_data(data)
 
@@ -18,46 +19,22 @@ mcmc <- function(data, model, inits = NULL, ...) {
   # create the full passed info for stan and the inits
   stan_data <- c(stan_data_list, parse_priors(model, stan_data_list$K))
 
-  if (is.null(inits)) inits <- creat_inits(model, stan_data_list) else inits
+  if (is.null(inits)) {
+    inits <- creat_inits(model, stan_data_list)
+  }
 
-  # this could be made more complex if automatic switching is used
+  # TODO: this could be made more complex if automatic switching is used
   file <- get_stan_file(data, model)
 
-  # sample the model
-  draws <- rstan::sampling(stanmodels[[file]], stan_data, init = inits, ...)
+  if (method == "mcmc") {
+    draws <- rstan::sampling(stanmodels[[file]], stan_data, init = inits, ...)
+    out <- new_mcmc_fit(model = model, draws = draws, data = data)
+  } else if (method == "optim") {
+    estimates <- rstan::optimizing(stanmodels[[file]], stan_data, init = inits, ...)
+    out <- new_optim_fit(model = model, estimates = estimates, data = data)
+  }
 
-  new_mcmc_fit(model = model, draws = draws, data = data)
-}
-
-#' Fit noisy catergrical rating models using HMC via Stan
-#'
-#' @param data Data for the model in long format as a three column dataframe of
-#'   ii, jj, yy
-#' @param model Model to fit to data of class model
-#' @param ... extra parameters to be passed to the Stan fitting interface
-#'
-#' @return An object of type fit containing the fitted parameters
-#' @export
-#'
-optim <- function(data, model, inits = NULL, ...) {
-  validate_input(data, model)
-  stan_data_list <- get_stan_data(data)
-
-  # check the priors and data are consistent
-  check_K(stan_data_list, model)
-
-  # create the full passed info for stan and the inits
-  stan_data <- c(stan_data_list, parse_priors(model, stan_data_list$K))
-
-  if (is.null(inits)) inits <- creat_inits(model, stan_data_list) else inits
-
-  # this could be made more complex if automatic switching is used
-  file <- get_stan_file(data, model)
-
-  # sample the model
-  estimates <- rstan::optimizing(stanmodels[[file]], stan_data, init = inits, ...)
-
-  new_optim_fit(model = model, estimates = estimates, data = data)
+  out
 }
 
 #' Converts default prior parameter specification to full priors
@@ -87,7 +64,7 @@ parse_priors <- function(model, K) {
 #' @return the fully reliased prior parameters
 #'
 check_K <- function(stan_data, model) {
-  # NB: this doesnot/cannot tell the user which of the pars is inconsistent
+  # NB: this does not/cannot tell the user which of the pars is inconsistent
   # but we can return a vector (with NULLs and parse cleverly)
   if (!is.null(model$K) && (stan_data$K != model$K)) {
     stop("The number of categories is inconsistent between data and the prior",
@@ -132,7 +109,6 @@ validate_input <- function(data, model) {
     stop("table data can only be uses with the Dawid and Skene model", call. = FALSE)
   }
 }
-
 
 #' Creates inits for the stan MCMC chains
 #'
