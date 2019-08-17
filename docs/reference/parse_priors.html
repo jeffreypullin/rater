@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Converts the passed priors into the appropriate format for Stan — parse_priors • rater</title>
+<title>Converts default prior parameter specification to full priors — parse_priors • rater</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -32,10 +32,9 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Converts the passed priors into the appropriate format for Stan — parse_priors" />
+<meta property="og:title" content="Converts default prior parameter specification to full priors — parse_priors" />
 
-<meta property="og:description" content="In paticular this function creates default priors if no priors are passed
-and checks if passed priors are of the correct dimension." />
+<meta property="og:description" content="Converts default prior parameter specification to full priors" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -87,9 +86,6 @@ and checks if passed priors are of the correct dimension." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/data_format.html">Data Format</a>
-    </li>
-    <li>
       <a href="../articles/workflow.html">Workflow</a>
     </li>
   </ul>
@@ -115,39 +111,35 @@ and checks if passed priors are of the correct dimension." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Converts the passed priors into the appropriate format for Stan</h1>
-    <small class="dont-index">Source: <a href='https://github.com/Voltemand/rater/blob/master/R/mcmc.R'><code>R/mcmc.R</code></a></small>
+    <h1>Converts default prior parameter specification to full priors</h1>
+    <small class="dont-index">Source: <a href='https://github.com/Voltemand/rater/blob/master/R/inference.R'><code>R/inference.R</code></a></small>
     <div class="hidden name"><code>parse_priors.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>In paticular this function creates default priors if no priors are passed
-and checks if passed priors are of the correct dimension.</p>
+    <p>Converts default prior parameter specification to full priors</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>parse_priors</span>(<span class='no'>model</span>, <span class='no'>data_list</span>)</pre>
+    <pre class="usage"><span class='fu'>parse_priors</span>(<span class='no'>model</span>, <span class='no'>K</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>model</th>
-      <td><p>the model passed to mcmc</p></td>
+      <td><p>the rater_model</p></td>
     </tr>
     <tr>
-      <th>data_list</th>
-      <td><p>data already parsed into list format</p></td>
+      <th>K</th>
+      <td><p>the number of categories</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>This function needs to see the passed data to check that the priors
-are the correct dimension. It needs to see the model type because diffrent
-models require different priors. This function dispatches into two sub
-functions depending on which model is passed</p>
+    <p>the fully reliased prior parameters</p>
     
 
   </div>
@@ -156,7 +148,7 @@ functions depending on which model is passed</p>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#details">Details</a></li>
+      <li><a href="#value">Value</a></li>
           </ul>
 
   </div>

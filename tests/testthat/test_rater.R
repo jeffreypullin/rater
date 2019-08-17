@@ -1,8 +1,8 @@
-context("mcmc")
+context("rater")
 
-# This function needs more tests
+# This function needs more tests!
 
-test_that("mcmc returns correctly", {
+test_that("rater returns objects of the correct type", {
 
   expect_equal(is.rater_fit(ds_fit), TRUE)
   expect_equal(is.mcmc_fit(ds_fit), TRUE)
@@ -37,12 +37,10 @@ test_that("parse priors are correct", {
 
   # default priors
   hds_priors <- parse_priors(hier_dawid_skene(), K)
-
   expect_equal(hds_priors$alpha, default_alpha)
 
   # non-default priors
   hds_priors <- parse_priors(hier_dawid_skene(alpha = test_alpha), K)
-
   expect_equal(hds_priors$alpha, test_alpha)
 
 })

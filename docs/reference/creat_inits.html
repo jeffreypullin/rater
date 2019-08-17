@@ -86,9 +86,6 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/data_format.html">Data Format</a>
-    </li>
-    <li>
       <a href="../articles/workflow.html">Workflow</a>
     </li>
   </ul>
@@ -115,7 +112,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Creates inits for the stan MCMC chains</h1>
-    <small class="dont-index">Source: <a href='https://github.com/Voltemand/rater/blob/master/R/mcmc.R'><code>R/mcmc.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/Voltemand/rater/blob/master/R/inference.R'><code>R/inference.R</code></a></small>
     <div class="hidden name"><code>creat_inits.Rd</code></div>
     </div>
 
@@ -125,7 +122,7 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>creat_inits</span>(<span class='no'>model</span>, <span class='no'>data_list</span>)</pre>
+    <pre class="usage"><span class='fu'>creat_inits</span>(<span class='no'>model</span>, <span class='no'>stan_data</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -135,16 +132,14 @@
       <td><p>rater model</p></td>
     </tr>
     <tr>
-      <th>data_list</th>
+      <th>stan_data</th>
       <td><p>data in list form</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>If the model is of type Dawid and Skene creates inits favouring
-good raters. This is to prevent label switching see: TODO. If the model is
-not Dawid and Skene then the inits are set randomly</p>
+    <p>intits in the format required by stan</p>
     
 
   </div>
@@ -153,7 +148,7 @@ not Dawid and Skene then the inits are set randomly</p>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#details">Details</a></li>
+      <li><a href="#value">Value</a></li>
           </ul>
 
   </div>

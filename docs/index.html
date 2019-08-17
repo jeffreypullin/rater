@@ -56,9 +56,6 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="articles/data_format.html">Data Format</a>
-    </li>
-    <li>
       <a href="articles/workflow.html">Workflow</a>
     </li>
   </ul>
@@ -95,12 +92,12 @@
 <div id="usage" class="section level3">
 <h3 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage:</h3>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(rater)
-<span class="kw">data</span>(anesthesia)
-
-fit &lt;-<span class="st"> </span><span class="kw"><a href="reference/mcmc.html">mcmc</a></span>(anesthesia, <span class="kw"><a href="reference/models.html">dawid_skene</a></span>()) <span class="co"># sampling output suppressed</span>
-
-<span class="kw">plot</span>(fit, <span class="dt">type =</span> <span class="st">"raters"</span>)</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(rater)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">data</span>(anesthesia)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">fit &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/rater/topics/rater-package">rater</a></span>(<span class="kw"><a href="reference/data_types.html">long_data</a></span>(anesthesia), <span class="kw"><a href="reference/models.html">dawid_skene</a></span>()) <span class="co"># sampling output suppressed</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="kw">plot</span>(fit, <span class="dt">type =</span> <span class="st">"raters"</span>)</a></code></pre></div>
 <p><img src="reference/figures/README-syntax_demo-1.png" width="700"></p>
 </div>
 <div id="installation" class="section level3">
@@ -108,7 +105,7 @@ fit &lt;-<span class="st"> </span><span class="kw"><a href="reference/mcmc.html"
 <a href="#installation" class="anchor"></a>Installation</h3>
 <p><strong>rater</strong> requires the <strong>rstan</strong> package to fit models. Detailed instructions to install <strong>rstan</strong> can be found <a href="https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started">here</a></p>
 <p>To install the <strong>rater</strong> package run:</p>
-<pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">install_github</span>(<span class="st">"Voltemand/rater"</span>)</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"jeffreypullin/rater"</span>)</a></code></pre></div>
 <div id="installation-notes" class="section level4">
 <h4 class="hasAnchor">
 <a href="#installation-notes" class="anchor"></a>Installation notes:</h4>
@@ -149,8 +146,8 @@ fit &lt;-<span class="st"> </span><span class="kw"><a href="reference/mcmc.html"
       <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://travis-ci.com/Voltemand/rater"><img src="https://travis-ci.com/Voltemand/rater.svg?branch=master" alt="Build Status"></a></li>
-<li><a href="https://codecov.io/github/Voltemand/rateR?branch=master"><img src="https://codecov.io/gh/Voltemand/rateR/branch/master/graph/badge.svg" alt="Coverage status"></a></li>
+<li><a href="https://travis-ci.com/jeffreypullin/rater"><img src="https://travis-ci.com/jeffreypullin/rater.svg?branch=master" alt="Build Status"></a></li>
+<li><a href="https://codecov.io/github/jeffreypullin/rater?branch=master"><img src="https://codecov.io/gh/jeffreypullin/rater/branch/master/graph/badge.svg" alt="Coverage status"></a></li>
 </ul>
 </div>
 </div>
