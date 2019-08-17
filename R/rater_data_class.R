@@ -18,6 +18,7 @@ print.table_data <- function(x, ...) {
   print(get_data(x))
 }
 
+#' @method summary rater_data
 #' @export
 summary.rater_data <- function(object, ...) {
   cat("rater data")
