@@ -20,11 +20,11 @@ key parameters.
 
 ### Usage:
 
-```{r, syntax_demo, warning=FALSE, results="hide", }
+```{r, syntax_demo, message = FALSE, warning=FALSE, results="hide", }
 library(rater)
 data(anesthesia)
 
-fit <- mcmc(anesthesia, dawid_skene()) # sampling output suppressed
+fit <- rater(long_data(anesthesia), dawid_skene()) # sampling output suppressed
 
 plot(fit, type = "raters")
 ```
@@ -37,7 +37,7 @@ install **rstan** can be found [here](https://github.com/stan-dev/rstan/wiki/RSt
 To install the **rater** package run:
 
 ```{r, installation_demo, eval = FALSE}
-devtools::install_github("Voltemand/rater")
+devtools::install_github("jeffreypullin/rater")
 ```
 
 #### Installation notes:
@@ -49,8 +49,3 @@ install time of few minutes. Please be patient - this compilation means that
 **no** compilation is required when using the package
 - During the compilation many warnings may be displayed in the terminal these 
 are harmless but impossible to suppress.
-
-
-
-
-
