@@ -17,9 +17,9 @@ table_data(data)
 \item{data}{a numeric matrix}
 }
 \value{
-a \code{rater_data} object that can be passed to \code{\link{mcmc}}.
+a \code{rater_data} object that can be passed to \code{\link{rater}}.
 }
 \description{
 Functions to coerce/parse various types of input data
-  for use in \code{\link{mcmc}()}.
+  for use in \code{\link{rater}()}.
 }

@@ -2,9 +2,9 @@
 #'
 #' @title Data types compatible with the models of categorical annotation
 #' @description Functions to coerce/parse various types of input data
-#'   for use in \code{\link{mcmc}()}.
+#'   for use in \code{\link{rater}()}.
 #'
-#' @return a \code{rater_data} object that can be passed to \code{\link{mcmc}}.
+#' @return a \code{rater_data} object that can be passed to \code{\link{rater}}.
 #'
 NULL
 

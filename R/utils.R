@@ -13,6 +13,7 @@ softmax <- function (x) {
 
 #' Check hat there has been no divergent transitions or poor convergence
 #' @param draws stanfit object
+#' @importFrom rstan summary
 check_convergence <- function(draws) {
   # divergent transitions are displayed automatically be stan
   rhats <- rstan::summary(draws)$summary[, "Rhat"]
