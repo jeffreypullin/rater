@@ -100,7 +100,7 @@ plot.rater_fit <- function(x, type = "theta", ...) {
 
   switch(type,
     "theta" = plot_theta(x, which = which),
-    "rater" = plot_theta(x, which = which),
+    "raters" = plot_theta(x, which = which),
     "z" = plot_z(x),
     "latent_class" = plot_z(x),
     # luckily p will fall through correctly

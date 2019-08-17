@@ -50,26 +50,30 @@ The core function of the **rater** package is the `mcmc()` function which fits a
 to given data. This function has two arguments: `data`, data annotated as being in 
 an appropriate format and `model`, which specifies the model you would like to fit. 
 
-Currently the we support Multinomial, Dawid and Skene and Hierachical Dawid and Skene models
-in the package. Models are specifed as a function with the name of the model you woudl 
+Currently we support Multinomial, Dawid and Skene and Hierachical Dawid and Skene models
+in the package. Models are specifed as a function with the name of the model you woudld 
 like to fit. 
 
 ```{r}
 # fit the model using MCMC via Stan 
-fit <- mcmc(anesthesia, dawid_skene(), iter = 500, chains = 1)
+fit <- rater(anesthesia, dawid_skene(), iter = 500, chains = 1)
 ```
 
 You will see the normal progress output you get whenever **Stan** is sampling.
-Note that all models are compiled when the package is installed, rather than at
-runtime, meaning that you will not need to wait for a model to be compiled when
-running analyses using the **rater** package. [^1]
+Note that all models are compiled when the package is installed, rather than at runtime, meaning that you will not need to wait for a model to be compiled when
+running analyses.[^1]
+
+You can also compute MAP esitmates by specifiying `method = "optim"`in the `rater` function.
+```{r}
+fit <- rater(anesthesia, dawid_skene(), method = "optim")
+```
 
 If you would like to change the prior parameters of the models you can do this 
 by passing appropriate paraemters to the model function. For example to fit the 
 dawid and skene model with prior parameter $\alpha$ `= c(4, 4, 4, 4)` you would run:
 
 ```{r, eval = FALSE}
-fit <- mcmc(anesthesia, dawid_skene(alpha = c(4, 4, 4, 4)))
+fit <- rater(anesthesia, dawid_skene(alpha = c(4, 4, 4, 4)))
 ```
 
 ## plot()
@@ -117,5 +121,5 @@ the **Stan** sampling defaults, which will be used if you only specify the
 `data` and `model` arguments in `mcmc()` i.e.
 
 ```{r, eval = FALSE}
-fit <- mcmc(anesthesia, dawid_skene())
+fit <- rater(anesthesia, dawid_skene())
 ```
