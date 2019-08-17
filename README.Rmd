@@ -9,8 +9,8 @@ set.seed(1)
 
 # rater <img src="man/figures/rater.png" align="right" width="160" />
 
-[![Build Status](https://travis-ci.com/Voltemand/rater.svg?branch=master)](https://travis-ci.com/Voltemand/rater)
-[![Coverage status](https://codecov.io/gh/Voltemand/rateR/branch/master/graph/badge.svg)](https://codecov.io/github/Voltemand/rateR?branch=master)
+[![Build Status](https://travis-ci.com/jeffreypullin/rater.svg?branch=master)](https://travis-ci.com/jeffreypullin/rater)
+[![Coverage status](https://codecov.io/gh/jeffreypullin/rater/branch/master/graph/badge.svg)](https://codecov.io/github/jeffreypullin/rater?branch=master)
 
 **rater** provides tools for working with Bayesian models of categorical data 
 annotation. The package provides a simple interface to fit a selection of these 
