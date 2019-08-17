@@ -16,9 +16,9 @@ hier_dawid_skene(alpha = NULL)
 \item{beta}{prior parameter for theta}
 }
 \value{
-a \code{model} object that can be passed to \code{\link{mcmc}}.
+a \code{model} object that can be passed to \code{\link{rater}}.
 }
 \description{
 Functions to set up models and change their prior
-  parameters for use in \code{\link{mcmc}()}.
+  parameters for use in \code{\link{rater}()}.
 }

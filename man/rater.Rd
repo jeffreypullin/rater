@@ -12,6 +12,10 @@ ii, jj, yy}
 
 \item{model}{Model to fit to data of class model}
 
+\item{method}{method the method used to fit the model}
+
+\item{inits}{the initialization points of the fitting algorithm}
+
 \item{...}{extra parameters to be passed to the Stan fitting interface}
 }
 \value{
