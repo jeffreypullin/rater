@@ -83,9 +83,6 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/data_format.html">Data Format</a>
-    </li>
-    <li>
       <a href="../articles/workflow.html">Workflow</a>
     </li>
   </ul>
@@ -144,39 +141,15 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="default_alpha.html">default_alpha()</a></code> </p>
-        </td>
-        <td><p>Creates an alpha according to the default prior specification</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="extract.html">extract()</a></code> </p>
-        </td>
-        <td><p>Add an extract method</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="extract.fit.html">extract(<i>&lt;fit&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Extract method for a rater fit object</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="extract_latent_class.html">extract_latent_class()</a></code> </p>
         </td>
-        <td><p>Extract latent class estimates from a fit</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="extract_prevalance.html">extract_prevalance()</a></code> </p>
-        </td>
-        <td><p>Extract prevalance information</p></td>
+        <td><p>Generic to extract (latent class) from a fit</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="extract_raters.html">extract_raters()</a></code> </p>
         </td>
-        <td><p>Extract rater accuracy estimates</p></td>
+        <td><p>Function to extract raters from a fit</p></td>
       </tr><tr>
         
         <td>
@@ -192,105 +165,21 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="is.dawid_skene.html">is.dawid_skene()</a></code> </p>
-        </td>
-        <td><p>Check if model is of type Dawid and skene</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="is.fit.html">is.fit()</a></code> </p>
-        </td>
-        <td><p>Check if object is of type fit</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="is.hier_dawid_skene.html">is.hier_dawid_skene()</a></code> </p>
-        </td>
-        <td><p>Check if model is of type Hierarchical Dawid and skene</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="is.model.html">is.model()</a></code> </p>
-        </td>
-        <td><p>Check if object is of type model</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="logsumexp.html">logsumexp()</a></code> </p>
         </td>
         <td><p>Numerically stable log_sum_exp function</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="mcmc.html">mcmc()</a></code> </p>
-        </td>
-        <td><p>Fit noisy catergrical rating models using HMC via Stan</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="models.html">dawid_skene()</a></code> <code><a href="models.html">hier_dawid_skene()</a></code> <code><a href="models.html">multinomial()</a></code> </p>
+          <p><code><a href="models.html">dawid_skene()</a></code> <code><a href="models.html">hier_dawid_skene()</a></code> </p>
         </td>
         <td><p>Probablistic models of categorical data annotation</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="parse_data.html">parse_data()</a></code> </p>
-        </td>
-        <td><p>Convert passed data into Stan data format</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="parse_priors.html">parse_priors()</a></code> </p>
         </td>
-        <td><p>Converts the passed priors into the appropriate format for Stan</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="parse_priors_ds.html">parse_priors_ds()</a></code> </p>
-        </td>
-        <td><p>Converts the passed priors for the Dawid and Skene model</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="parse_priors_hierds.html">parse_priors_hierds()</a></code> </p>
-        </td>
-        <td><p>Converts the passed priors for the Hierachical Dawid and Skene model</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot.fit.html">plot(<i>&lt;fit&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Plot a fit object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot_latent_class.html">plot_latent_class()</a></code> </p>
-        </td>
-        <td><p>Plot the latent class estimates</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot_prevalance.html">plot_prevalance()</a></code> </p>
-        </td>
-        <td><p>Plot the popuation prevalence estimates</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot_raters.html">plot_raters()</a></code> </p>
-        </td>
-        <td><p>Plot the rater accuracy estimates</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="print.fit.html">print(<i>&lt;fit&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>print a fit object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="print.model.html">print(<i>&lt;model&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>print a fit model object</p></td>
+        <td><p>Converts default prior parameter specification to full priors</p></td>
       </tr><tr>
         
         <td>
@@ -303,42 +192,6 @@
           <p><code><a href="softmax.html">softmax()</a></code> </p>
         </td>
         <td><p>Softmax function</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="summary.fit.html">summary(<i>&lt;fit&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Summary of fit</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="summary.model.html">summary(<i>&lt;model&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Summary of model</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="validate_alpha.html">validate_alpha()</a></code> </p>
-        </td>
-        <td><p>Checks that a possible prior on alpha is valid</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="validate_data.html">validate_data()</a></code> </p>
-        </td>
-        <td><p>Check that the passed data is in the appropriate format</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="validate_fit.html">validate_fit()</a></code> </p>
-        </td>
-        <td><p>Check that a passed object is actually of type fit</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="wide_to_long.html">wide_to_long()</a></code> </p>
-        </td>
-        <td><p>Coerce from wide to long format</p></td>
       </tr>
     </tbody>
     </table>

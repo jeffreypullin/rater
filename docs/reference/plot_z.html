@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Numerically stable log_sum_exp function — logsumexp • rater</title>
+<title>Plot the latent class estimates — plot_z • rater</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Numerically stable log_sum_exp function — logsumexp" />
+<meta property="og:title" content="Plot the latent class estimates — plot_z" />
 
-<meta property="og:description" content="Numerically stable log_sum_exp function" />
+<meta property="og:description" content="Plot the latent class estimates" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -111,27 +111,31 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Numerically stable log_sum_exp function</h1>
-    <small class="dont-index">Source: <a href='https://github.com/Voltemand/rater/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
-    <div class="hidden name"><code>logsumexp.Rd</code></div>
+    <h1>Plot the latent class estimates</h1>
+    <small class="dont-index">Source: <a href='https://github.com/Voltemand/rater/blob/master/R/plotting.R'><code>R/plotting.R</code></a></small>
+    <div class="hidden name"><code>plot_z.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Numerically stable log_sum_exp function</p>
+    <p>Plot the latent class estimates</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>logsumexp</span>(<span class='no'>x</span>)</pre>
+    <pre class="usage"><span class='fu'>plot_z</span>(<span class='no'>fit</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>vector of real numbers</p></td>
+      <th>fit</th>
+      <td><p>rater fit object</p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Plot of the rate accuracy estimates</p>
     
 
   </div>
@@ -139,7 +143,9 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#value">Value</a></li>
+          </ul>
 
   </div>
 </div>

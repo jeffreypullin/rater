@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Numerically stable log_sum_exp function — logsumexp • rater</title>
+<title>Caries ratings of whether caries are 'sound' or not (c...) — caries • rater</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -32,9 +32,11 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Numerically stable log_sum_exp function — logsumexp" />
+<meta property="og:title" content="Caries ratings of whether caries are 'sound' or not (c...) — caries" />
 
-<meta property="og:description" content="Numerically stable log_sum_exp function" />
+<meta property="og:description" content="A dataset containing anesthetist ratings of patient readiness for surgery for
+5 anesthetists on 45 patients with 4 categories in 'long' format. Each row
+represents one unique rating or annotation" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -111,35 +113,37 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Numerically stable log_sum_exp function</h1>
-    <small class="dont-index">Source: <a href='https://github.com/Voltemand/rater/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
-    <div class="hidden name"><code>logsumexp.Rd</code></div>
+    <h1>Caries ratings of whether caries are 'sound' or not (c...)</h1>
+    <small class="dont-index">Source: <a href='https://github.com/Voltemand/rater/blob/master/R/data.R'><code>R/data.R</code></a></small>
+    <div class="hidden name"><code>caries.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Numerically stable log_sum_exp function</p>
+    <p>A dataset containing anesthetist ratings of patient readiness for surgery for
+5 anesthetists on 45 patients with 4 categories in 'long' format. Each row
+represents one unique rating or annotation</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>logsumexp</span>(<span class='no'>x</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>x</th>
-      <td><p>vector of real numbers</p></td>
-    </tr>
-    </table>
+    <pre class="usage"><span class='no'>caries</span></pre>
+        
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+
+    <p>A matrix</p><dl class='dl-horizontal'>
+  <dt>ii</dt><dd><p>item index, which item is being rated</p></dd>
+  <dt>jj</dt><dd><p>rater index, which rater is doing the rater</p></dd>
+  <dt>y</dt><dd><p>what rating was given</p></dd>
+</dl>
     
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#format">Format</a></li>
+          </ul>
 
   </div>
 </div>

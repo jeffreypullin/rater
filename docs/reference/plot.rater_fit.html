@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Numerically stable log_sum_exp function — logsumexp • rater</title>
+<title>Plot a rater_fit object — plot.rater_fit • rater</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Numerically stable log_sum_exp function — logsumexp" />
+<meta property="og:title" content="Plot a rater_fit object — plot.rater_fit" />
 
-<meta property="og:description" content="Numerically stable log_sum_exp function" />
+<meta property="og:description" content="Plot a rater_fit object" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -111,27 +111,42 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Numerically stable log_sum_exp function</h1>
-    <small class="dont-index">Source: <a href='https://github.com/Voltemand/rater/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
-    <div class="hidden name"><code>logsumexp.Rd</code></div>
+    <h1>Plot a rater_fit object</h1>
+    <small class="dont-index">Source: <a href='https://github.com/Voltemand/rater/blob/master/R/rater_fit_class.R'><code>R/rater_fit_class.R</code></a></small>
+    <div class="hidden name"><code>plot.rater_fit.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Numerically stable log_sum_exp function</p>
+    <p>Plot a rater_fit object</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>logsumexp</span>(<span class='no'>x</span>)</pre>
+    <pre class="usage"><span class='co'># S3 method for rater_fit</span>
+<span class='fu'>plot</span>(<span class='no'>x</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"theta"</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>vector of real numbers</p></td>
+      <td><p>fit object</p></td>
+    </tr>
+    <tr>
+      <th>type</th>
+      <td><p>the type of plot</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>other args</p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>... must contain the param argument which tell the function
+what to extract from the fit object. It may also contain the which argument
+which controls which raters confusion matrices will be plotted.</p>
     
 
   </div>
@@ -139,7 +154,9 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#details">Details</a></li>
+          </ul>
 
   </div>
 </div>

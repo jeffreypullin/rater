@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Numerically stable log_sum_exp function — logsumexp • rater</title>
+<title>Fit noisy catergrical rating models using Stan — rater • rater</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Numerically stable log_sum_exp function — logsumexp" />
+<meta property="og:title" content="Fit noisy catergrical rating models using Stan — rater" />
 
-<meta property="og:description" content="Numerically stable log_sum_exp function" />
+<meta property="og:description" content="Fit noisy catergrical rating models using Stan" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -111,27 +111,40 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Numerically stable log_sum_exp function</h1>
-    <small class="dont-index">Source: <a href='https://github.com/Voltemand/rater/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
-    <div class="hidden name"><code>logsumexp.Rd</code></div>
+    <h1>Fit noisy catergrical rating models using Stan</h1>
+    <small class="dont-index">Source: <a href='https://github.com/Voltemand/rater/blob/master/R/inference.R'><code>R/inference.R</code></a></small>
+    <div class="hidden name"><code>rater.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Numerically stable log_sum_exp function</p>
+    <p>Fit noisy catergrical rating models using Stan</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>logsumexp</span>(<span class='no'>x</span>)</pre>
+    <pre class="usage"><span class='fu'>rater</span>(<span class='no'>data</span>, <span class='no'>model</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"mcmc"</span>, <span class='kw'>inits</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>vector of real numbers</p></td>
+      <th>data</th>
+      <td><p>Data for the model in long format as a three column dataframe of
+ii, jj, yy</p></td>
+    </tr>
+    <tr>
+      <th>model</th>
+      <td><p>Model to fit to data of class model</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>extra parameters to be passed to the Stan fitting interface</p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>An object of type fit containing the fitted parameters</p>
     
 
   </div>
@@ -139,7 +152,9 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#value">Value</a></li>
+          </ul>
 
   </div>
 </div>
