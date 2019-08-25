@@ -24,8 +24,9 @@ print.rater_model <- function(x, ...) {
 #'
 #' @param object a rater_model object
 #' @param ... other args
-#'
+#' @method summary rater_model
 #' @export
+#'
 summary.rater_model <- function(object, ...) {
   cat(get_name(object))
 }

@@ -3,9 +3,14 @@
 #' @param data Data for the model in long format as a three column dataframe of
 #'   ii, jj, yy
 #' @param model Model to fit to data of class model
+#' @param method method the method used to fit the model
+#' @param inits the initialization points of the fitting algorithm
 #' @param ... extra parameters to be passed to the Stan fitting interface
 #'
 #' @return An object of type fit containing the fitted parameters
+#'
+#' @importFrom rstan sampling optimizing
+#'
 #' @export
 #'
 rater <- function(data, model, method = "mcmc", inits = NULL, ...) {
