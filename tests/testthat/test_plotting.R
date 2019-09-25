@@ -21,3 +21,9 @@ test_that("plot_latent_class output has correct type", {
   expect_equal(get_geoms(ds_plot), c("GeomTile", "GeomText"))
 
 })
+
+test_that("plot_z can plot matrices", {
+
+  expect_silent(plot_z(matrix(0, nrow = 2, ncol = 2)))
+
+})
