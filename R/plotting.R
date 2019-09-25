@@ -81,27 +81,43 @@ plot_theta <- function(fit, which = NULL) {
   plot
 }
 
-#' Plot the latent class estimates
+#' Generic to plot z (latent class)
 #'
-#' @param fit rater fit object
-#' @return Plot of the rate accuracy estimates
+#' @param x an object
+#' @param ... extra stuff
+#'
+#' @details This method can either be used to plot matrices or rater_fit
+#'   objects
 #'
 #' @export
+#'
+plot_z <- function(x, ...) {
+  UseMethod("plot_z", x)
+}
+
+#' Plot the latent class estimates of a matrix
+#'
+#' @param x numeric matrix object
+#' @return Plot of the rate accuracy estimates
+#'
 #' @importFrom ggplot2 ggplot aes geom_tile geom_text labs theme_bw theme
 #'     scale_fill_gradient guides element_blank
 #' @importFrom rlang .data
 #'
-plot_z <- function(fit){
+plot_z.matrix <- function(x, ...) {
 
-  p_z <- extract_z(fit)
+  # We could validate more stringently here if requrired
+  if (!is.numeric(x)) {
+    stop("Can only plot numeric matrices.", call. = FALSE)
+  }
 
-  I <- nrow(p_z)
-  K <- ncol(p_z)
+  I <- nrow(x)
+  K <- ncol(x)
 
   plot_data <- data.frame(x = factor(rep(1:K, each = I), levels = 1:K),
                           y = factor(rep(1:I, K), levels = I:1),
-                          prob = as.vector(p_z),
-                          round_prob = round(as.vector(p_z), 2))
+                          prob = as.vector(x),
+                          round_prob = round(as.vector(x), 2))
 
   plot <- ggplot2::ggplot(plot_data, ggplot2::aes(x = .data$x, y = .data$y)) +
     ggplot2::geom_tile(ggplot2::aes(fill = .data$prob), colour = "black") +
@@ -117,4 +133,17 @@ plot_z <- function(fit){
     NULL
 
   plot
+
+}
+
+#' Plot the latent class estimates of a rater_fit object
+#'
+#' @param x rater fit object
+#' @return Plot of the rate accuracy estimates
+#'
+plot_z.rater_fit <- function(x, ...){
+
+  p_z <- extract_z(x)
+
+  plot_z.matrix(p_z)
 }
