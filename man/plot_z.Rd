@@ -2,16 +2,19 @@
 % Please edit documentation in R/plotting.R
 \name{plot_z}
 \alias{plot_z}
-\title{Plot the latent class estimates}
+\title{Generic to plot z (latent class)}
 \usage{
-plot_z(fit)
+plot_z(x, ...)
 }
 \arguments{
-\item{fit}{rater fit object}
-}
-\value{
-Plot of the rate accuracy estimates
+\item{x}{an object}
+
+\item{...}{extra stuff}
 }
 \description{
-Plot the latent class estimates
+Generic to plot z (latent class)
+}
+\details{
+This method can either be used to plot matrices or rater_fit
+  objects
 }
