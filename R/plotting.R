@@ -104,6 +104,8 @@ plot_z <- function(x, ...) {
 #'     scale_fill_gradient guides element_blank
 #' @importFrom rlang .data
 #'
+#' @export
+#'
 plot_z.matrix <- function(x, ...) {
 
   # We could validate more stringently here if requrired
@@ -140,6 +142,8 @@ plot_z.matrix <- function(x, ...) {
 #'
 #' @param x rater fit object
 #' @return Plot of the rate accuracy estimates
+#'
+#' @export
 #'
 plot_z.rater_fit <- function(x, ...){
 
