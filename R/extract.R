@@ -44,7 +44,6 @@ extract_pi.mcmc_fit <- function(fit, ...) {
 #'
 extract_theta.mcmc_fit <- function(fit, which = NULL, ...) {
   switch(fit$model$file,
-    "multinomial" = extract_theta_m_mcmc(fit, which, ...),
     "hierarchical_dawid_skene" = extract_theta_hds(),
     "dawid_skene" = extract_theta_ds_mcmc(fit, which, ...),
     stop("Model type not supported", call. = FALSE))
@@ -58,14 +57,6 @@ extract_theta_ds_mcmc <- function(fit, which, ...) {
   validate_which(which, J)
   theta <- apply(theta_samps, c(2,3,4), mean)
   theta[which, , ]
-}
-
-extract_theta_m_mcmc <- function(fit, which, ...) {
-  if (!is.null(which)) {
-    warning("`which` arguement will be ignored (multinomial model)", call. = FALSE)
-  }
-  theta_samps <- rstan::extract(fit$draws)$theta
-  colMeans(theta_samps)
 }
 
 extract_theta_hds <- function() {
@@ -123,7 +114,6 @@ extract_pi.optim_fit <- function(fit, ...) {
 #'
 extract_theta.optim_fit <- function(fit, which = NULL, ...) {
   switch(fit$model$file,
-    "multinomial" = extract_theta_m_optim(fit, which, ...),
     "hierarchical_dawid_skene" = extract_theta_hds(),
     "dawid_skene" = extract_theta_ds_optim(fit, which, ...),
     stop("Model type not supported", call. = FALSE))
@@ -137,16 +127,6 @@ extract_theta_ds_optim <- function(fit, which, ...) {
   which <- if (is.null(which)) 1:J else which
   theta <- array(theta_values, dim = c(J, K, K))
   theta[which, , ]
-}
-
-extract_theta_m_optim <- function(fit, which, ...) {
-  if (!is.null(which)) {
-    warning("`which` arguement will be ignored (multinomial model)", call. = FALSE)
-  }
-  par <- fit$estimates$par
-  theta_values <- par[grep("\\btheta\\b", names(par))]
-  K <- fit$data$stan_data$K
-  matrix(theta_values, nrow = K, ncol = K)
 }
 
 # helpers

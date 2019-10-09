@@ -4,20 +4,25 @@
 #' @return Plot of the population prevelance esitmates extracted in fits
 #'
 #' @export
-#' @import ggplot2
+#' @importFrom ggplot2 ggplot aes geom_bar geom_text coord_cartesian labs
+#'     theme_bw
+#' @importFrom rlang .data
+#'
 plot_pi <- function(fit) {
   pi <- extract_pi(fit)
   plot_data <- data.frame(cat = as.factor(1:length(pi)),
                           pi = pi,
                           round_pi = round(pi, 2))
 
-  plot <- ggplot(plot_data, aes_string(x = "cat", y = "pi")) +
-    geom_bar(stat = "identity", fill = "steelblue") +
-    geom_text(aes_string(label = "round_pi"), vjust = -3) +
-    coord_cartesian(ylim = c(0, 1)) +
-    labs(x = "Category",
-         y = "Pop. prevelance prob.") +
-    theme_bw()
+  plot <- ggplot2::ggplot(plot_data, ggplot2::aes(x = .data$cat, y = .data$pi)) +
+    ggplot2::geom_bar(stat = "identity", fill = "steelblue") +
+    ggplot2::geom_text(ggplot2::aes(label = .data$round_pi), vjust = -3) +
+    ggplot2::coord_cartesian(ylim = c(0, 1)) +
+    ggplot2::labs(x = "Category",
+                  y = "Pop. prevelance prob.") +
+    ggplot2::theme_bw() +
+    NULL
+
   plot
 }
 
@@ -29,7 +34,10 @@ plot_pi <- function(fit) {
 #' @return Plot of the rate accuracy estimates
 #'
 #' @export
-#' @import ggplot2
+#' @importFrom ggplot2 ggplot aes geom_tile geom_text facet_wrap labs guides
+#'      scale_fill_gradient theme_bw theme element_rect element_blank
+#' @importFrom rlang .data
+#'
 plot_theta <- function(fit, which = NULL) {
   theta <- extract_theta(fit, which = which)
 
@@ -54,56 +62,92 @@ plot_theta <- function(fit, which = NULL) {
                   round_value = round(value, 2))
   rownames(plot_data) <- NULL
 
-  plot <- ggplot(plot_data, aes_string(x = "x", y = "y")) +
-   geom_tile(aes_string(fill = "value"), col = "black") +
-   geom_text(aes_string(label = "round_value")) +
-   facet_wrap(~ rater) +
+  plot <- ggplot2::ggplot(plot_data, ggplot2::aes(x = .data$x, y = .data$y)) +
+   ggplot2::geom_tile(ggplot2::aes(fill = .data$value), col = "black") +
+   ggplot2::geom_text(ggplot2::aes(label = .data$round_value)) +
+   ggplot2::facet_wrap(~ rater) +
    # TODO add way to change defaults
-   scale_fill_gradient(low = "white", high = "steelblue") +
-   labs(y = "True label",
-        x = "Assigned label") +
-   guides(fill = FALSE) +
-   theme_bw() +
-   theme(strip.background = element_rect(fill = "white"),
-         panel.grid.major = element_blank(),
-         panel.grid.minor = element_blank(),
-         panel.border     = element_blank()) +
+   ggplot2::scale_fill_gradient(low = "white", high = "steelblue") +
+   ggplot2::labs(y = "True label",
+                 x = "Assigned label") +
+   ggplot2::guides(fill = FALSE) +
+   ggplot2::theme_bw() +
+   ggplot2::theme(strip.background = ggplot2::element_rect(fill = "white"),
+                  panel.grid.major = ggplot2::element_blank(),
+                  panel.grid.minor = ggplot2::element_blank(),
+                  panel.border     = ggplot2::element_blank()) +
    NULL
 
   plot
 }
 
-#' Plot the latent class estimates
+#' Generic to plot z (latent class)
 #'
-#' @param fit rater fit object
-#' @return Plot of the rate accuracy estimates
+#' @param x an object
+#' @param ... extra stuff
+#'
+#' @details This method can either be used to plot matrices or rater_fit
+#'   objects
 #'
 #' @export
-#' @import ggplot2
-plot_z <- function(fit){
+#'
+plot_z <- function(x, ...) {
+  UseMethod("plot_z", x)
+}
 
-  p_z <- extract_z(fit)
+#' Plot the latent class estimates of a matrix
+#'
+#' @param x numeric matrix object
+#' @return Plot of the rate accuracy estimates
+#'
+#' @importFrom ggplot2 ggplot aes geom_tile geom_text labs theme_bw theme
+#'     scale_fill_gradient guides element_blank
+#' @importFrom rlang .data
+#'
+#' @export
+#'
+plot_z.matrix <- function(x, ...) {
 
-  I <- nrow(p_z)
-  K <- ncol(p_z)
+  # We could validate more stringently here if requrired
+  if (!is.numeric(x)) {
+    stop("Can only plot numeric matrices.", call. = FALSE)
+  }
+
+  I <- nrow(x)
+  K <- ncol(x)
 
   plot_data <- data.frame(x = factor(rep(1:K, each = I), levels = 1:K),
                           y = factor(rep(1:I, K), levels = I:1),
-                          prob = as.vector(p_z),
-                          round_prob = round(as.vector(p_z), 2))
+                          prob = as.vector(x),
+                          round_prob = round(as.vector(x), 2))
 
-  plot <- ggplot(plot_data, aes_string(x = "x", y = "y")) +
-    geom_tile(aes_string(fill = "prob"), colour = "black") +
-    geom_text(aes_string(label = "round_prob")) +
-    labs(x = "Latent Class",
-         y = "Item") +
-    scale_fill_gradient(low = "white", high = "steelblue") +
-    guides(fill = FALSE) +
-    theme_bw() +
-    theme(panel.grid.major = element_blank(),
-          panel.grid.minor = element_blank(),
-          panel.border     = element_blank()) +
+  plot <- ggplot2::ggplot(plot_data, ggplot2::aes(x = .data$x, y = .data$y)) +
+    ggplot2::geom_tile(ggplot2::aes(fill = .data$prob), colour = "black") +
+    ggplot2::geom_text(ggplot2::aes(label = .data$round_prob)) +
+    ggplot2::labs(x = "Latent Class",
+                  y = "Item") +
+    ggplot2::scale_fill_gradient(low = "white", high = "steelblue") +
+    ggplot2::guides(fill = FALSE) +
+    ggplot2::theme_bw() +
+    ggplot2::theme(panel.grid.major = ggplot2::element_blank(),
+                   panel.grid.minor = ggplot2::element_blank(),
+                   panel.border     = ggplot2::element_blank()) +
     NULL
 
   plot
+
+}
+
+#' Plot the latent class estimates of a rater_fit object
+#'
+#' @param x rater fit object
+#' @return Plot of the rate accuracy estimates
+#'
+#' @export
+#'
+plot_z.rater_fit <- function(x, ...){
+
+  p_z <- extract_z(x)
+
+  plot_z.matrix(p_z)
 }

@@ -1,6 +1,6 @@
 Package: rater
 Title: Fit Bayesian Models of Noisy Categorial Ratings
-Version: 0.1.0
+Version: 0.1.900
 Authors@R: c(person("Jeffrey", "Pullin",
              role = c("aut", "cre"),
              email = "jeffrey.pullin@gmail.com"),
@@ -22,17 +22,18 @@ Depends:
     R (>= 3.4.0)
 Imports:
     methods,
-    Rcpp,
-    rstan,
-    rstantools,
-    ggplot2
+    Rcpp (>= 0.12.0),
+    rstan (>= 2.18.1),
+    rstantools (>= 1.5.1.9000),
+    ggplot2 (>= 2.2.1),
+    rlang (> 0.2.0)
 LinkingTo:
-    BH,
-    Rcpp,
-    RcppEigen,
-    rstan,
-    StanHeaders
-RoxygenNote: 6.1.0
+    BH (>= 1.66.0),
+    Rcpp (>= 0.12.0),
+    RcppEigen (>= 0.3.3.3.0),
+    rstan (>= 2.18.1),
+    StanHeaders (>= 2.18.0)
+RoxygenNote: 6.1.1
 Suggests: 
     testthat,
     knitr,

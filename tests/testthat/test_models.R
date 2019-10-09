@@ -34,24 +34,6 @@ test_that("test hier_dawid_skene constructor", {
   expect_equal(get_parameters(model)$alpha, NULL)
 })
 
-test_that("test multinomial constructor", {
-
-  model <- multinomial()
-
-  # class construction
-  expect_equal(is.rater_model(model), TRUE)
-  expect_equal(is.multinomial(model), TRUE)
-
-  # overall and internal shape
-  expect_equal(length(model), 4)
-  expect_equal(length(get_parameters(model)), 2)
-
-  # defualt parameter values
-  expect_equal(get_parameters(model)$alpha, NULL)
-  expect_equal(get_parameters(model)$beta, NULL)
-
-})
-
 test_that("model functions error correctly", {
   expect_error(dawid_skene(beta = 4), "beta must be a square numeric matrix")
   expect_error(dawid_skene(alpha = "cat"), "alpha must be a numeric vector")

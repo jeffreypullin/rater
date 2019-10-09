@@ -4,7 +4,6 @@
 \alias{data_types}
 \alias{wide_data}
 \alias{long_data}
-\alias{multinomial_data}
 \alias{table_data}
 \title{Data types compatible with the models of categorical annotation}
 \usage{
@@ -12,17 +11,15 @@ wide_data(data)
 
 long_data(data)
 
-multinomial_data(data)
-
 table_data(data)
 }
 \arguments{
 \item{data}{a numeric matrix}
 }
 \value{
-a \code{rater_data} object that can be passed to \code{\link{mcmc}}.
+a \code{rater_data} object that can be passed to \code{\link{rater}}.
 }
 \description{
 Functions to coerce/parse various types of input data
-  for use in \code{\link{mcmc}()}.
+  for use in \code{\link{rater}()}.
 }

@@ -4,14 +4,11 @@
 \alias{models}
 \alias{dawid_skene}
 \alias{hier_dawid_skene}
-\alias{multinomial}
 \title{Probablistic models of categorical data annotation}
 \usage{
 dawid_skene(alpha = NULL, beta = NULL)
 
 hier_dawid_skene(alpha = NULL)
-
-multinomial(alpha = NULL, beta = NULL)
 }
 \arguments{
 \item{alpha}{prior parameter for pi}
@@ -19,9 +16,9 @@ multinomial(alpha = NULL, beta = NULL)
 \item{beta}{prior parameter for theta}
 }
 \value{
-a \code{model} object that can be passed to \code{\link{mcmc}}.
+a \code{model} object that can be passed to \code{\link{rater}}.
 }
 \description{
 Functions to set up models and change their prior
-  parameters for use in \code{\link{mcmc}()}.
+  parameters for use in \code{\link{rater}()}.
 }

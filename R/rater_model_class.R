@@ -24,8 +24,9 @@ print.rater_model <- function(x, ...) {
 #'
 #' @param object a rater_model object
 #' @param ... other args
-#'
+#' @method summary rater_model
 #' @export
+#'
 summary.rater_model <- function(object, ...) {
   cat(get_name(object))
 }
@@ -36,10 +37,6 @@ is.dawid_skene <- function(model) {
 
 is.hier_dawid_skene <- function(m) {
   inherits(m, "hier_dawid_skene")
-}
-
-is.multinomial <- function(m) {
-  inherits(m, "multinomial")
 }
 
 is.rater_model <- function(m) {

@@ -13,17 +13,12 @@ print.long_data <- function(x, ...) {
 }
 
 #' @export
-print.multinomial_data <- function(x, ...) {
-  cat("`multinomial` rater data\n")
-  print(get_data(x))
-}
-
-#' @export
 print.table_data <- function(x, ...) {
   cat("`table` rater data\n")
   print(get_data(x))
 }
 
+#' @method summary rater_data
 #' @export
 summary.rater_data <- function(object, ...) {
   cat("rater data")
@@ -63,10 +58,6 @@ get_stan_data <- function(d) {
 
 is.table_data <- function(x) {
   inherits(x, "table_data")
-}
-
-is.multinomial_data <- function(x) {
-  inherits(x, "multinomial_data")
 }
 
 

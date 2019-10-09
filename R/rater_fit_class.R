@@ -100,7 +100,7 @@ plot.rater_fit <- function(x, type = "theta", ...) {
 
   switch(type,
     "theta" = plot_theta(x, which = which),
-    "rater" = plot_theta(x, which = which),
+    "raters" = plot_theta(x, which = which),
     "z" = plot_z(x),
     "latent_class" = plot_z(x),
     # luckily p will fall through correctly
@@ -115,8 +115,8 @@ plot.rater_fit <- function(x, type = "theta", ...) {
 #' @param object object of type rater fit
 #' @param ... other args passed to function
 #'
+#' @method summary mcmc_fit
 #' @export
-#'
 summary.mcmc_fit <- function(object, ...) {
   cat(get_name(get_model(object)), "with MCMC draws")
 }
@@ -126,8 +126,8 @@ summary.mcmc_fit <- function(object, ...) {
 #' @param object object of type rater fit
 #' @param ... other args passed to function
 #'
+#' @method summary optim_fit
 #' @export
-#'
 summary.optim_fit <- function(object, ...) {
   cat(get_name(get_model(object)), "with MAP estimates")
 }

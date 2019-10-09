@@ -6,13 +6,6 @@ test_that("extract_raters error appropriatly", {
     extract_theta(hds_fit),
     "Rater metrics cannot be extracted from the Hierachical Dawid and Skene model."
   )
-
-  skip("issues with ( in conditions")
-  expect_warning(
-    extract_theta(multi_fit, which = 5),
-   "`which` arguement will be ignored (multinomial model)"
-  )
-
 })
 
 test_that("validate_which error appropriatly", {
@@ -33,8 +26,6 @@ test_that("validate_which error appropriatly", {
   )
 
 })
-
-# Note: we could write a helper to check mcmc/optim maybe
 
 test_that("extract_pi output has correct form", {
   # mcmc
@@ -70,48 +61,18 @@ test_that("extract_z output has correct form", {
 test_that("extract_theta (mcmc) output has correct form", {
 
   ds_out <- extract_theta(ds_fit)
-  multi_out <- extract_theta(multi_fit)
-
-  # dawid skene
-
-  # form
+  # Does it have the right form?
   expect_equal(is.array(ds_out), TRUE)
-
-  # is probability
+  # Is it a probability?
   apply(ds_out, 1, function(x) expect_equal(rowSums(x), rep(1, K)))
-
-  # multinomial
-
-  # form
-  expect_equal(is.matrix(multi_out), TRUE)
-
-  # is probability
-  expect_equal(rowSums(multi_out), rep(1, K))
-  expect_equal(sum(multi_out > 0), K * K)
 
 })
 
 test_that("extract_theta (optim) output has correct form", {
 
   ds_out <- extract_theta(ds_fit_optim)
-  multi_out <- extract_theta(multi_fit_optim)
-
-  # dawid skene
-
-  # form
   expect_equal(is.array(ds_out), TRUE)
-
-  # is probability
   apply(ds_out, 1, function(x) expect_equal(rowSums(x), rep(1, K)))
-
-  # multinomial
-
-  # form
-  expect_equal(is.matrix(multi_out), TRUE)
-
-  # is probability
-  expect_equal(rowSums(multi_out), rep(1, K))
-  expect_equal(sum(multi_out > 0), K * K)
 
 })
 

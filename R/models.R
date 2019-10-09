@@ -2,9 +2,9 @@
 #'
 #' @title Probablistic models of categorical data annotation
 #' @description Functions to set up models and change their prior
-#'   parameters for use in \code{\link{mcmc}()}.
+#'   parameters for use in \code{\link{rater}()}.
 #'
-#' @return a \code{model} object that can be passed to \code{\link{mcmc}}.
+#' @return a \code{model} object that can be passed to \code{\link{rater}}.
 #'
 NULL
 
@@ -37,20 +37,6 @@ hier_dawid_skene <- function(alpha = NULL) {
             file = "hierarchical_dawid_skene",
             K = compute_K(parameters))
   class(m) <- c("hier_dawid_skene", "rater_model")
-  m
-}
-
-#' @rdname models
-#' @export
-#'
-multinomial <- function(alpha = NULL, beta = NULL) {
-  parameters <- list(alpha = alpha, beta = beta)
-  validate_parameters(parameters)
-  m <- list(parameters = parameters,
-            name = "Bayesian Multinomial (Annotator pooled) Model",
-            file = "multinomial",
-            K = compute_K(parameters))
-  class(m) <- c("multinomial", "rater_model")
   m
 }
 
