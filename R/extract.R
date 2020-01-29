@@ -9,9 +9,8 @@
 #'
 extract_z.mcmc_fit <- function(fit, ...) {
   log_p_z_samps <- rstan::extract(fit$draws)$log_p_z
-  log_p_z <- apply(log_p_z_samps, c(2, 3), mean)
-  # not 100% sure why the transpose is needed here...
-  p_z <- t(apply(log_p_z, 1, softmax))
+  p_z_samps <- aperm(apply(log_p_z_samps, c(1, 2), softmax), c(2, 3, 1))
+  p_z <- apply(p_z_samps, c(2, 3), mean)
   p_z  <- if (is.table_data(fit$data)) enlarge_z(p_z, fit) else p_z
   p_z
 }
