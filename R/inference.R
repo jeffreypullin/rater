@@ -88,6 +88,8 @@ get_stan_file <- function(data, model) {
   # we assume here that only legal inputs are considered
   if (is.table_data(data)) {
     file <- "table_data"
+  } else if (is.homo_dawid_skene(model)) {
+    file <- "dawid_skene"
   } else {
     file <- get_file(model)
   }
@@ -109,6 +111,9 @@ validate_input <- function(data, model) {
   if (is.table_data(data) & !is.dawid_skene(model)) {
     stop("table data can only be uses with the Dawid and Skene model", call. = FALSE)
   }
+  if (is.homo_dawid_skene(model) & (get_stan_data(data)$J != 1)) {
+    stop("The homogenous dawid and skene model must be fit with 1 rater", call. = FALSE)
+  }
 }
 
 #' Creates inits for the stan MCMC chains
@@ -123,6 +128,7 @@ creat_inits <- function(model, stan_data) {
   switch(get_file(model),
     "dawid_skene" = dawid_skene_inits(stan_data$K, stan_data$J),
     "hierarchical_dawid_skene" = "random",
+    "homogenous_dawid_skene" = dawid_skene_inits(stan_data$K, 1),
     stop("Unsupported model type", call. = FALSE))
 }
 
@@ -136,7 +142,7 @@ creat_inits <- function(model, stan_data) {
 dawid_skene_inits <- function(K, J) {
   pi_init <- rep(1/K, K)
   theta_init <- array(0.2 / (K - 1), c(J, K, K))
-  for (j in 1:J) {
+  for (j in seq_len(J)) {
       diag(theta_init[j, ,]) <- 0.8
   }
   function(n) list(theta = theta_init, pi = pi_init)
