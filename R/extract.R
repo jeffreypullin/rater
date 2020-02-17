@@ -43,7 +43,6 @@ extract_pi.mcmc_fit <- function(fit, ...) {
 #'
 extract_theta.mcmc_fit <- function(fit, which = NULL, ...) {
   switch(fit$model$file,
-    "homogenous_dawid_skene" = extract_theta_ds_mcmc(fit, which, ...),
     "hierarchical_dawid_skene" = extract_theta_hds(),
     "dawid_skene" = extract_theta_ds_mcmc(fit, which, ...),
     stop("Model type not supported", call. = FALSE))

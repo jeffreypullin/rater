@@ -40,21 +40,6 @@ hier_dawid_skene <- function(alpha = NULL) {
   m
 }
 
-#' @rdname models
-#' @export
-#'
-homo_dawid_skene <- function(alpha = NULL, beta = NULL) {
-  parameters <- list(alpha = alpha, beta = NULL)
-  validate_parameters(parameters)
-  m <- list(parameters = parameters,
-            name = "Homogenous Dawid and Skene Model",
-            # This 'file' doen't actually exist.
-            file = "homogenous_dawid_skene",
-            K = compute_K(parameters))
-  class(m) <- c("homo_dawid_skene", "rater_model")
-  m
-}
-
 #' Validate passed parameters
 #'
 #' Checks the parameter are of the appropritate type/form and that they are

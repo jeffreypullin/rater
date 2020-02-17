@@ -39,10 +39,6 @@ is.hier_dawid_skene <- function(m) {
   inherits(m, "hier_dawid_skene")
 }
 
-is.homo_dawid_skene <- function(m) {
-  inherits(m, "homo_dawid_skene")
-}
-
 is.rater_model <- function(m) {
   inherits(m, "rater_model")
 }
