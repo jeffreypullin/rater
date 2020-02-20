@@ -45,7 +45,20 @@ extract_theta.mcmc_fit <- function(fit, which = NULL, ...) {
   switch(fit$model$file,
     "hierarchical_dawid_skene" = extract_theta_hds(),
     "dawid_skene" = extract_theta_ds_mcmc(fit, which, ...),
+    "class_conditional_dawid_skene" = extract_theta_ccds_mcmc(fit, which, ...),
     stop("Model type not supported", call. = FALSE))
+}
+
+extract_theta_ccds_mcmc <- function(fit, which, ...) {
+  cc_theta_samps <- rstan::extract(fit$draws)$theta
+  J <- dim(cc_theta_samps)[[2]]
+
+  which <- if (is.null(which)) 1:J else which
+  validate_which(which, J)
+
+  cc_theta <- apply(cc_theta_samps, c(2, 3), mean)
+  theta <- unspool_cc_theta(cc_theta)
+  theta[which, , ]
 }
 
 extract_theta_ds_mcmc <- function(fit, which, ...) {
@@ -115,6 +128,7 @@ extract_theta.optim_fit <- function(fit, which = NULL, ...) {
   switch(fit$model$file,
     "hierarchical_dawid_skene" = extract_theta_hds(),
     "dawid_skene" = extract_theta_ds_optim(fit, which, ...),
+    "class_conditional_dawid_skene" = extract_theta_ccds_optim(fit, which, ...),
     stop("Model type not supported", call. = FALSE))
 }
 
@@ -125,6 +139,17 @@ extract_theta_ds_optim <- function(fit, which, ...) {
   J <- fit$data$stan_data$J
   which <- if (is.null(which)) 1:J else which
   theta <- array(theta_values, dim = c(J, K, K))
+  theta[which, , ]
+}
+
+extract_theta_ccds_optim <- function(fit, which, ...) {
+  par <- fit$estimates$par
+  cc_theta_values <- par[grep("\\btheta\\b", names(par))]
+  K <- fit$data$stan_data$K
+  J <- fit$data$stan_data$J
+  which <- if (is.null(which)) 1:J else which
+  cc_theta <- matrix(cc_theta_values, nrow = J, ncol = K)
+  theta <- unspool_cc_theta(cc_theta)
   theta[which, , ]
 }
 
@@ -144,4 +169,17 @@ enlarge_z <- function(p_z, fit) {
   # this will only be run if the data is in table data form
   stopifnot(is.table_data(fit$data))
   p_z[rep(1:nrow(p_z), fit$data$stan_data$tally), ]
+}
+
+unspool_cc_theta <- function(cc_theta) {
+  J <- nrow(cc_theta)
+  K <- ncol(cc_theta)
+  theta_out <- array(0, dim = c(J, K, K))
+  for (j in 1:J) {
+    for (k in 1:K) {
+      theta_out[j, k, ] <- (1 - cc_theta[j, k]) / (K - 1)
+      theta_out[j, k, k] <- cc_theta[j, k]
+    }
+  }
+  theta_out
 }
