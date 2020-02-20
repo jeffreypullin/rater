@@ -40,6 +40,22 @@ hier_dawid_skene <- function(alpha = NULL) {
   m
 }
 
+#' @rdname models
+#' @export
+#'
+class_conditional_dawid_skene <- function(alpha = NULL,
+                                          beta_1 = NULL,
+                                          beta_2 = NULL) {
+  parameters <- list(alpha = alpha, beta_1 = NULL, beta_2 = NULL)
+  validate_parameters(parameters)
+  m <- list(parameters = parameters,
+            name = "Bayesian Class conditional Dawid and Skene Model",
+            file = "class_conditional_dawid_skene",
+            K = compute_K(parameters))
+  class(m) <- c("class_conditional_dawid_skene", "rater_model")
+  m
+}
+
 #' Validate passed parameters
 #'
 #' Checks the parameter are of the appropritate type/form and that they are
