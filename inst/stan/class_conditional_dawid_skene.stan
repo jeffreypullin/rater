@@ -14,7 +14,7 @@ data {
 
 parameters {
   simplex[K] pi;
-  vector<lower=0, upper=1>[J] theta[K];
+  matrix<lower=0, upper=1>[J, K] theta;
 }
 
 transformed parameters {

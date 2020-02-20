@@ -50,6 +50,15 @@ rater <- function(data, model, method = "mcmc", inits = NULL, ...) {
 #' @return the fully reliased prior parameters
 #'
 parse_priors <- function(model, K) {
+  switch(get_file(model),
+    "dawid_skene" = ds_parse_priors(model, K),
+    "class_conditional_dawid_skene" = class_conditional_ds_parse_priors(model, K),
+    "hierarchical_dawid_skene" = hier_ds_parse_priors(model, K),
+    stop("Unsupported model type", call. = FALSE))
+}
+
+ds_parse_priors <- function(model, K) {
+  # These are the priors from the stan manual.
   pars <- get_parameters(model)
   if (is.null(pars$alpha)) {
     pars$alpha <- rep(3, K)
@@ -59,6 +68,78 @@ parse_priors <- function(model, K) {
     diag(pars$beta) <- 2.5 * K
   }
   pars
+}
+
+hier_ds_parse_priors <- function(model, K) {
+  pars <- get_parameters(model)
+  if (is.null(pars$alpha)) {
+    pars$alpha <- rep(3, K)
+  }
+  pars
+}
+
+class_conditional_ds_parse_priors <- function(model, K) {
+  pars <- get_parameters(model)
+  if (is.null(pars$alpha)) {
+    pars$alpha <- rep(3, K)
+  }
+  # These priors are selected so that:
+  # mode(prior) = 0.7
+  # alpha + beta - 2  = 5 (mode denom, usual beta distribution parameters)
+  if (is.null(pars$beta_1)) {
+    pars$beta_1 <- rep(4.5, K)
+  }
+  if (is.null(pars$beta_2)) {
+    pars$beta_2 <- rep(2.5, K)
+  }
+  pars
+}
+
+#' Creates inits for the stan MCMC chains
+#'
+#' @param model rater model
+#' @param stan_data data in list form
+#'
+#' @return intits in the format required by stan
+#'
+creat_inits <- function(model, stan_data) {
+  # better to have another short unique id...
+  K <- stan_data$K
+  J <- stan_data$J
+  switch(get_file(model),
+    "dawid_skene" = dawid_skene_inits(K, J),
+    "class_conditional_dawid_skene" = class_conditional_dawid_skene_inits(K, J),
+    "hierarchical_dawid_skene" = "random",
+    stop("Unsupported model type", call. = FALSE))
+}
+
+#' Creates inits for the dawid and skene model
+#'
+#' @param K number of categories
+#' @param J number of raters
+#'
+#' @return inits in the format required by stan
+#'
+dawid_skene_inits <- function(K, J) {
+  pi_init <- rep(1/K, K)
+  theta_init <- array(0.2 / (K - 1), c(J, K, K))
+  for (j in 1:J) {
+      diag(theta_init[j, ,]) <- 0.8
+  }
+  function(n) list(theta = theta_init, pi = pi_init)
+}
+
+#' Creates inits for the class conditional dawid and skene model
+#'
+#' @param K number of categories
+#' @param J number of raters
+#'
+#' @return inits in the format required by stan
+#'
+class_conditional_dawid_skene_inits <- function(K, J) {
+  pi_init <- rep(1/K, K)
+  theta_init <- matrix(0.8, J, K)
+  function(n) list(theta = theta_init, pi = pi_init)
 }
 
 #' Helper to check if the prior parameters and data have consistent dimensions
@@ -109,35 +190,4 @@ validate_input <- function(data, model) {
   if (is.table_data(data) & !is.dawid_skene(model)) {
     stop("table data can only be uses with the Dawid and Skene model", call. = FALSE)
   }
-}
-
-#' Creates inits for the stan MCMC chains
-#'
-#' @param model rater model
-#' @param stan_data data in list form
-#'
-#' @return intits in the format required by stan
-#'
-creat_inits <- function(model, stan_data) {
-  # better to have another short unique id...
-  switch(get_file(model),
-    "dawid_skene" = dawid_skene_inits(stan_data$K, stan_data$J),
-    "hierarchical_dawid_skene" = "random",
-    stop("Unsupported model type", call. = FALSE))
-}
-
-#' Creates inits for the dawid and skene model
-#'
-#' @param K number of categories
-#' @param J number of raters
-#'
-#' @return inits in the format required by stan
-#'
-dawid_skene_inits <- function(K, J) {
-  pi_init <- rep(1/K, K)
-  theta_init <- array(0.2 / (K - 1), c(J, K, K))
-  for (j in 1:J) {
-      diag(theta_init[j, ,]) <- 0.8
-  }
-  function(n) list(theta = theta_init, pi = pi_init)
 }

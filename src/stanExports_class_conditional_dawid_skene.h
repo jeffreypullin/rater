@@ -239,22 +239,19 @@ public:
         pos__ = 0U;
         validate_non_negative_index("theta", "J", J);
         validate_non_negative_index("theta", "K", K);
-        context__.validate_dims("parameter initialization", "theta", "vector_d", context__.to_vec(K,J));
-        std::vector<Eigen::Matrix<double, Eigen::Dynamic, 1> > theta(K, Eigen::Matrix<double, Eigen::Dynamic, 1>(J));
+        context__.validate_dims("parameter initialization", "theta", "matrix_d", context__.to_vec(J,K));
+        Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic> theta(J, K);
+        size_t theta_j_2_max__ = K;
         size_t theta_j_1_max__ = J;
-        size_t theta_k_0_max__ = K;
-        for (size_t j_1__ = 0; j_1__ < theta_j_1_max__; ++j_1__) {
-            for (size_t k_0__ = 0; k_0__ < theta_k_0_max__; ++k_0__) {
-                theta[k_0__](j_1__) = vals_r__[pos__++];
+        for (size_t j_2__ = 0; j_2__ < theta_j_2_max__; ++j_2__) {
+            for (size_t j_1__ = 0; j_1__ < theta_j_1_max__; ++j_1__) {
+                theta(j_1__, j_2__) = vals_r__[pos__++];
             }
         }
-        size_t theta_i_0_max__ = K;
-        for (size_t i_0__ = 0; i_0__ < theta_i_0_max__; ++i_0__) {
-            try {
-                writer__.vector_lub_unconstrain(0, 1, theta[i_0__]);
-            } catch (const std::exception& e) {
-                stan::lang::rethrow_located(std::runtime_error(std::string("Error transforming variable theta: ") + e.what()), current_statement_begin__, prog_reader__());
-            }
+        try {
+            writer__.matrix_lub_unconstrain(0, 1, theta);
+        } catch (const std::exception& e) {
+            stan::lang::rethrow_located(std::runtime_error(std::string("Error transforming variable theta: ") + e.what()), current_statement_begin__, prog_reader__());
         }
         params_r__ = writer__.data_r();
         params_i__ = writer__.data_i();
@@ -289,15 +286,12 @@ public:
             else
                 pi = in__.simplex_constrain(K);
             current_statement_begin__ = 17;
-            std::vector<Eigen::Matrix<local_scalar_t__, Eigen::Dynamic, 1> > theta;
-            size_t theta_d_0_max__ = K;
-            theta.reserve(theta_d_0_max__);
-            for (size_t d_0__ = 0; d_0__ < theta_d_0_max__; ++d_0__) {
-                if (jacobian__)
-                    theta.push_back(in__.vector_lub_constrain(0, 1, J, lp__));
-                else
-                    theta.push_back(in__.vector_lub_constrain(0, 1, J));
-            }
+            Eigen::Matrix<local_scalar_t__, Eigen::Dynamic, Eigen::Dynamic> theta;
+            (void) theta;  // dummy to suppress unused var warning
+            if (jacobian__)
+                theta = in__.matrix_lub_constrain(0, 1, J, K, lp__);
+            else
+                theta = in__.matrix_lub_constrain(0, 1, J, K);
             // transformed parameters
             current_statement_begin__ = 21;
             validate_non_negative_index("log_p_z", "K", K);
@@ -323,13 +317,13 @@ public:
                         current_statement_begin__ = 30;
                         stan::model::assign(log_p_z, 
                                     stan::model::cons_list(stan::model::index_uni(get_base1(ii, n, "ii", 1)), stan::model::cons_list(stan::model::index_uni(k), stan::model::nil_index_list())), 
-                                    (get_base1(get_base1(log_p_z, get_base1(ii, n, "ii", 1), "log_p_z", 1), k, "log_p_z", 2) + stan::math::log(get_base1(get_base1(theta, get_base1(jj, n, "jj", 1), "theta", 1), k, "theta", 2))), 
+                                    (get_base1(get_base1(log_p_z, get_base1(ii, n, "ii", 1), "log_p_z", 1), k, "log_p_z", 2) + stan::math::log(get_base1(theta, get_base1(jj, n, "jj", 1), k, "theta", 1))), 
                                     "assigning variable log_p_z");
                     } else {
                         current_statement_begin__ = 32;
                         stan::model::assign(log_p_z, 
                                     stan::model::cons_list(stan::model::index_uni(get_base1(ii, n, "ii", 1)), stan::model::cons_list(stan::model::index_uni(k), stan::model::nil_index_list())), 
-                                    ((get_base1(get_base1(log_p_z, get_base1(ii, n, "ii", 1), "log_p_z", 1), k, "log_p_z", 2) + log1m(get_base1(get_base1(theta, get_base1(jj, n, "jj", 1), "theta", 1), k, "theta", 2))) - stan::math::log((K - 1))), 
+                                    ((get_base1(get_base1(log_p_z, get_base1(ii, n, "ii", 1), "log_p_z", 1), k, "log_p_z", 2) + log1m(get_base1(theta, get_base1(jj, n, "jj", 1), k, "theta", 1))) - stan::math::log((K - 1))), 
                                     "assigning variable log_p_z");
                     }
                 }
@@ -357,7 +351,7 @@ public:
                 current_statement_begin__ = 44;
                 for (int k = 1; k <= K; ++k) {
                     current_statement_begin__ = 45;
-                    lp_accum__.add(beta_log<propto__>(get_base1(get_base1(theta, j, "theta", 1), k, "theta", 2), get_base1(beta_1, k, "beta_1", 1), get_base1(beta_2, k, "beta_2", 1)));
+                    lp_accum__.add(beta_log<propto__>(get_base1(theta, j, k, "theta", 1), get_base1(beta_1, k, "beta_1", 1), get_base1(beta_2, k, "beta_2", 1)));
                 }
             }
             current_statement_begin__ = 49;
@@ -396,8 +390,8 @@ public:
         dims__.push_back(K);
         dimss__.push_back(dims__);
         dims__.resize(0);
-        dims__.push_back(K);
         dims__.push_back(J);
+        dims__.push_back(K);
         dimss__.push_back(dims__);
         dims__.resize(0);
         dims__.push_back(I);
@@ -423,17 +417,12 @@ public:
         for (size_t j_1__ = 0; j_1__ < pi_j_1_max__; ++j_1__) {
             vars__.push_back(pi(j_1__));
         }
-        std::vector<Eigen::Matrix<double, Eigen::Dynamic, 1> > theta;
-        size_t theta_d_0_max__ = K;
-        theta.reserve(theta_d_0_max__);
-        for (size_t d_0__ = 0; d_0__ < theta_d_0_max__; ++d_0__) {
-            theta.push_back(in__.vector_lub_constrain(0, 1, J));
-        }
+        Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic> theta = in__.matrix_lub_constrain(0, 1, J, K);
+        size_t theta_j_2_max__ = K;
         size_t theta_j_1_max__ = J;
-        size_t theta_k_0_max__ = K;
-        for (size_t j_1__ = 0; j_1__ < theta_j_1_max__; ++j_1__) {
-            for (size_t k_0__ = 0; k_0__ < theta_k_0_max__; ++k_0__) {
-                vars__.push_back(theta[k_0__](j_1__));
+        for (size_t j_2__ = 0; j_2__ < theta_j_2_max__; ++j_2__) {
+            for (size_t j_1__ = 0; j_1__ < theta_j_1_max__; ++j_1__) {
+                vars__.push_back(theta(j_1__, j_2__));
             }
         }
         double lp__ = 0.0;
@@ -468,13 +457,13 @@ public:
                         current_statement_begin__ = 30;
                         stan::model::assign(log_p_z, 
                                     stan::model::cons_list(stan::model::index_uni(get_base1(ii, n, "ii", 1)), stan::model::cons_list(stan::model::index_uni(k), stan::model::nil_index_list())), 
-                                    (get_base1(get_base1(log_p_z, get_base1(ii, n, "ii", 1), "log_p_z", 1), k, "log_p_z", 2) + stan::math::log(get_base1(get_base1(theta, get_base1(jj, n, "jj", 1), "theta", 1), k, "theta", 2))), 
+                                    (get_base1(get_base1(log_p_z, get_base1(ii, n, "ii", 1), "log_p_z", 1), k, "log_p_z", 2) + stan::math::log(get_base1(theta, get_base1(jj, n, "jj", 1), k, "theta", 1))), 
                                     "assigning variable log_p_z");
                     } else {
                         current_statement_begin__ = 32;
                         stan::model::assign(log_p_z, 
                                     stan::model::cons_list(stan::model::index_uni(get_base1(ii, n, "ii", 1)), stan::model::cons_list(stan::model::index_uni(k), stan::model::nil_index_list())), 
-                                    ((get_base1(get_base1(log_p_z, get_base1(ii, n, "ii", 1), "log_p_z", 1), k, "log_p_z", 2) + log1m(get_base1(get_base1(theta, get_base1(jj, n, "jj", 1), "theta", 1), k, "theta", 2))) - stan::math::log((K - 1))), 
+                                    ((get_base1(get_base1(log_p_z, get_base1(ii, n, "ii", 1), "log_p_z", 1), k, "log_p_z", 2) + log1m(get_base1(theta, get_base1(jj, n, "jj", 1), k, "theta", 1))) - stan::math::log((K - 1))), 
                                     "assigning variable log_p_z");
                     }
                 }
@@ -530,12 +519,12 @@ public:
             param_name_stream__ << "pi" << '.' << j_1__ + 1;
             param_names__.push_back(param_name_stream__.str());
         }
+        size_t theta_j_2_max__ = K;
         size_t theta_j_1_max__ = J;
-        size_t theta_k_0_max__ = K;
-        for (size_t j_1__ = 0; j_1__ < theta_j_1_max__; ++j_1__) {
-            for (size_t k_0__ = 0; k_0__ < theta_k_0_max__; ++k_0__) {
+        for (size_t j_2__ = 0; j_2__ < theta_j_2_max__; ++j_2__) {
+            for (size_t j_1__ = 0; j_1__ < theta_j_1_max__; ++j_1__) {
                 param_name_stream__.str(std::string());
-                param_name_stream__ << "theta" << '.' << k_0__ + 1 << '.' << j_1__ + 1;
+                param_name_stream__ << "theta" << '.' << j_1__ + 1 << '.' << j_2__ + 1;
                 param_names__.push_back(param_name_stream__.str());
             }
         }
@@ -563,12 +552,12 @@ public:
             param_name_stream__ << "pi" << '.' << j_1__ + 1;
             param_names__.push_back(param_name_stream__.str());
         }
+        size_t theta_j_2_max__ = K;
         size_t theta_j_1_max__ = J;
-        size_t theta_k_0_max__ = K;
-        for (size_t j_1__ = 0; j_1__ < theta_j_1_max__; ++j_1__) {
-            for (size_t k_0__ = 0; k_0__ < theta_k_0_max__; ++k_0__) {
+        for (size_t j_2__ = 0; j_2__ < theta_j_2_max__; ++j_2__) {
+            for (size_t j_1__ = 0; j_1__ < theta_j_1_max__; ++j_1__) {
                 param_name_stream__.str(std::string());
-                param_name_stream__ << "theta" << '.' << k_0__ + 1 << '.' << j_1__ + 1;
+                param_name_stream__ << "theta" << '.' << j_1__ + 1 << '.' << j_2__ + 1;
                 param_names__.push_back(param_name_stream__.str());
             }
         }
