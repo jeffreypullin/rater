@@ -138,7 +138,7 @@ dawid_skene_inits <- function(K, J) {
 #'
 class_conditional_dawid_skene_inits <- function(K, J) {
   pi_init <- rep(1/K, K)
-  theta_init <- matrix(0.8, J, K)
+  theta_init <- matrix(0.8, nrow = J, ncol = K)
   function(n) list(theta = theta_init, pi = pi_init)
 }
 
