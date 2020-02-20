@@ -46,7 +46,7 @@ hier_dawid_skene <- function(alpha = NULL) {
 class_conditional_dawid_skene <- function(alpha = NULL,
                                           beta_1 = NULL,
                                           beta_2 = NULL) {
-  parameters <- list(alpha = alpha, beta_1 = NULL, beta_2 = NULL)
+  parameters <- list(alpha = alpha, beta_1 = beta_1, beta_2 = beta_2)
   validate_parameters(parameters)
   m <- list(parameters = parameters,
             name = "Bayesian Class conditional Dawid and Skene Model",
