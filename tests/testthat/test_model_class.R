@@ -18,7 +18,7 @@ test_that("summary works for models", {
 
 })
 
-# This is a bit of a noting test...
+# This is a bit of a nothing test...
 test_that("is.* functions work for models", {
 
   # rater_model
@@ -37,5 +37,15 @@ test_that("is.* functions work for models", {
   expect_equal(is.hier_dawid_skene(test_hds), FALSE)
   class(test_hds) <- "hier_dawid_skene"
   expect_equal(is.hier_dawid_skene(test_hds), TRUE)
+
+  test_hds <- 2
+  expect_equal(is.hier_dawid_skene(test_hds), FALSE)
+  class(test_hds) <- "hier_dawid_skene"
+  expect_equal(is.hier_dawid_skene(test_hds), TRUE)
+
+  test_ccds <- 2
+  expect_false(is.class_conditional_dawid_skene(test_ccds))
+  class(test_ccds) <- "class_conditional_dawid_skene"
+  expect_true(is.class_conditional_dawid_skene(test_ccds))
 
 })
