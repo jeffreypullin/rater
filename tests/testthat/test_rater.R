@@ -30,6 +30,8 @@ test_that("parse priors are correct", {
   # test non-default priors
   test_alpha <- rep(9, K)
   test_beta <- matrix(17, nrow = K, ncol = K)
+  test_beta_1 <- rep(1, K)
+  test_beta_2 <- rep(98, K)
   ds_priors <- parse_priors(dawid_skene(alpha = test_alpha, beta = test_beta), K)
 
   expect_equal(ds_priors$alpha, test_alpha)
@@ -43,4 +45,16 @@ test_that("parse priors are correct", {
   hds_priors <- parse_priors(hier_dawid_skene(alpha = test_alpha), K)
   expect_equal(hds_priors$alpha, test_alpha)
 
+  # Class conditional model
+  ccds_priors <- parse_priors(
+    class_conditional_dawid_skene(
+      alpha = test_alpha,
+      beta_1 = test_beta_1,
+      beta_2 = test_beta_2),
+    K
+  )
+
+  expect_equal(ccds_priors$alpha, test_alpha)
+  expect_equal(ccds_priors$beta_1, test_beta_1)
+  expect_equal(ccds_priors$beta_2, test_beta_2)
 })

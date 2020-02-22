@@ -10,7 +10,6 @@ test_that("softmax works", {
   expect_equal(softmax(c(1, 1)), c(1/2, 1/2))
 })
 
-
 test_that("check_convergence works", {
   # don't have an example of a failing model
   expect_error(check_convergence(ds_fit), NA)

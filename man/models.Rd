@@ -4,11 +4,14 @@
 \alias{models}
 \alias{dawid_skene}
 \alias{hier_dawid_skene}
+\alias{class_conditional_dawid_skene}
 \title{Probablistic models of categorical data annotation}
 \usage{
 dawid_skene(alpha = NULL, beta = NULL)
 
 hier_dawid_skene(alpha = NULL)
+
+class_conditional_dawid_skene(alpha = NULL, beta_1 = NULL, beta_2 = NULL)
 }
 \arguments{
 \item{alpha}{prior parameter for pi}

@@ -43,6 +43,10 @@ is.rater_model <- function(m) {
   inherits(m, "rater_model")
 }
 
+is.class_conditional_dawid_skene <- function(m) {
+  inherits(m, "class_conditional_dawid_skene")
+}
+
 #' Gets the long name of a model
 #'
 #' @param m object of type rater_model

@@ -62,10 +62,16 @@ test_that("extract_theta (mcmc) output has correct form", {
 
   ds_out <- extract_theta(ds_fit)
   # Does it have the right form?
-  expect_equal(is.array(ds_out), TRUE)
+  expect_true(is.array(ds_out))
   # Is it a probability?
   apply(ds_out, 1, function(x) expect_equal(rowSums(x), rep(1, K)))
 
+  ccds_out <- extract_theta(ccds_fit)
+  expect_true(is.array(ccds_out))
+  expect_equal(dim(ccds_out), c(J, K, K))
+  # Test that all the off diagonal elements are equal
+  expect_equal(var(ccds_out[1, 1, -1]), 0)
+  apply(ccds_out, 1, function(x) expect_equal(rowSums(x), rep(1, K)))
 })
 
 test_that("extract_theta (optim) output has correct form", {
@@ -73,6 +79,12 @@ test_that("extract_theta (optim) output has correct form", {
   ds_out <- extract_theta(ds_fit_optim)
   expect_equal(is.array(ds_out), TRUE)
   apply(ds_out, 1, function(x) expect_equal(rowSums(x), rep(1, K)))
+
+  ccds_out <- extract_theta(ccds_fit)
+  expect_true(is.array(ccds_out))
+  expect_equal(dim(ccds_out), c(J, K, K))
+  expect_equal(var(ccds_out[1, 1, -1]), 0)
+  apply(ccds_out, 1, function(x) expect_equal(rowSums(x), rep(1, K)))
 
 })
 
