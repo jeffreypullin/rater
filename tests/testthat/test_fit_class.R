@@ -28,8 +28,8 @@ test_that("plot.fit dispatches correctly", {
   latent_class_plot <- plot_z(ds_fit)
   expect_equal(plot(ds_fit, type = "z"), latent_class_plot)
 
-  prevalance_plot <- plot_pi(ds_fit)
-  expect_equal(plot(ds_fit, type = "pi"), prevalance_plot)
+  prevalence_plot <- plot_pi(ds_fit)
+  expect_equal(plot(ds_fit, type = "pi"), prevalence_plot)
 
 })
 
