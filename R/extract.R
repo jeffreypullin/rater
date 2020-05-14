@@ -15,7 +15,7 @@ extract_z.mcmc_fit <- function(fit, ...) {
   p_z
 }
 
-#' Extract prevalance information
+#' Extract prevalence information
 #'
 #' Extract prevalence/pi estiamtes from a fit object
 #'
@@ -98,7 +98,7 @@ extract_z.optim_fit <- function(fit, ...) {
   p_z
 }
 
-#' Extract prevalance information from optim fit object
+#' Extract prevalence information from optim fit object
 #'
 #' Extract prevalence/pi estiamtes from a fit object
 #'
