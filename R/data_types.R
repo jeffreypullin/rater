@@ -16,7 +16,7 @@ NULL
 #' @param data a numeric matrix
 #'
 wide_data <- function(data) {
-  if (!is.numeric(data) || class(data) != "matrix") {
+  if (!is.numeric(data) || !inherits(data, "matrix")) {
     stop("Data must be a numeric matrix", call. = FALSE)
   }
   new_wide_data(data)
@@ -36,7 +36,7 @@ long_data <- function(data) {
 #' @export
 #'
 table_data <- function(data) {
-  if (!is.numeric(data) || class(data) != "matrix") {
+  if (!is.numeric(data) || !inherits(data, "matrix")) {
     stop("Data must be a numeric matrix", call. = FALSE)
   }
   new_table_data(data)
