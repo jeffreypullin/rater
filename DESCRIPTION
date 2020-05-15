@@ -13,8 +13,8 @@ Description: Fit full Bayesian models of categorical annotation, based on the
   through the Stan modelling language. rater also allows the user to extract 
   and plot key parameters of these models.
 License: GPL-2
-URL: https://voltemand.github.io/rater/, https://github.com/Voltemand/rater
-BugReports: https://github.com/Voltemand/rater/issues
+URL: https://jeffreypullin.github.io/rater/, https://github.com/jeffreypullin/rater
+BugReports: https://github.com/jeffreypullin/rater/issues
 Encoding: UTF-8
 LazyData: true
 Biarch: true
