@@ -2,7 +2,7 @@
 % Please edit documentation in R/extract.R
 \name{extract_pi.optim_fit}
 \alias{extract_pi.optim_fit}
-\title{Extract prevalance information from optim fit object}
+\title{Extract prevalence information from optim fit object}
 \usage{
 \method{extract_pi}{optim_fit}(fit, ...)
 }
