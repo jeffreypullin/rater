@@ -81,13 +81,14 @@ print.optim_fit <- function(x, ...) {
 
 #' Plot a rater_fit object
 #'
-#' @param x fit object
-#' @param type the type of plot
-#' @param ... other args
+#' @param x A rater_fit object
+#' @param pars Which parameters to plot. Can use both mathematical or
+#'   natural names.
+#' @param ... Other arguments. This should contain the which argument for
+#'   theta plots.
 #'
-#' @details ... must contain the param argument which tell the function
-#' what to extract from the fit object. It may also contain the which argument
-#' which controls which raters confusion matrices will be plotted.
+#' @result If one parameter is requested a ggplot2 plot. If multiple parameters
+#'   are requested a list of ggplot2 plots.
 #'
 #' @export
 #'
