@@ -1,5 +1,21 @@
 context("extract")
 
+test_that("posterior_draws works", {
+
+  # We get a list if length(pars) > 1
+  expect_type(posterior_draws(ds_fit, pars = c("pi", "theta")), "list")
+
+  # And an array if length(pars) == 1
+  expect_type(posterior_draws(ds_fit, pars = c("pi")), "double")
+
+  # We error if the user requests draws from z
+  expect_error(posterior_draws(ds_fit, pars = c("z")))
+
+  # Or if they pass an invalid pararmaeter
+  expect_error(posterior_draws(ds_fit, pars = c("nonsense")))
+})
+
+
 test_that("extract_raters error appropriatly", {
 
   expect_error(

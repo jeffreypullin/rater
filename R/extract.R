@@ -1,3 +1,40 @@
+#' Extract posterior draws from a rater_fit object
+#'
+#' @param fit A rater_fit object
+#' @param pars A specification of which parameters to return draws from
+#' @param ... Extra arguments
+#'
+#' @return If multiple draws are requested then a list of arrays, otherwise
+#'  a single array.
+#'
+#' @importFrom rstan extract
+#' @export
+#'
+posterior_draws <- function(fit, pars = c("pi", "theta"), ...) {
+  if (inherits(fit, "optim_fit")) {
+    stop("Cannot return draws from an optimisaton fit", call. = FALSE)
+  }
+
+  draws <- list()
+  for (i in seq_along(pars)) {
+    par <- match.arg(pars[[i]], c("pi", "theta", "z"))
+    draws[[i]] <- switch(par,
+      "pi"    = rstan::extract(fit$draws)$pi,
+      "theta" = rstan::extract(fit$draws)$theta,
+      "z"     = stop("Cannot return draws for marginalised discrete parameter",
+                 call. = FALSE),
+      stop("Invalid pars argument", call. = FALSE)
+    )
+  }
+
+  if (length(draws) == 1L) {
+    out <- draws[[1]]
+  } else {
+    out <- draws
+  }
+  out
+}
+
 #' Extract latent class estimates from a fit
 #'
 #' @param fit fit object
@@ -8,6 +45,7 @@
 #' @export
 #'
 extract_z.mcmc_fit <- function(fit, ...) {
+  # We can't use posterior_draws here because these are not technically draws.
   log_p_z_samps <- rstan::extract(fit$draws)$log_p_z
   p_z_samps <- aperm(apply(log_p_z_samps, c(1, 2), softmax), c(2, 3, 1))
   p_z <- apply(p_z_samps, c(2, 3), mean)
@@ -25,7 +63,8 @@ extract_z.mcmc_fit <- function(fit, ...) {
 #' @export
 #'
 extract_pi.mcmc_fit <- function(fit, ...) {
-  apply(rstan::extract(fit$draws)$pi, 2, mean)
+  pi_draws <- posterior_draws(fit, pars = "pi")
+  apply(pi_draws, 2, mean)
 }
 
 #' Extract rater accuracy estimates for the Dawid Skene models
@@ -50,7 +89,7 @@ extract_theta.mcmc_fit <- function(fit, which = NULL, ...) {
 }
 
 extract_theta_ccds_mcmc <- function(fit, which, ...) {
-  cc_theta_samps <- rstan::extract(fit$draws)$theta
+  cc_theta_samps <- posterior_draws(fit, pars = "theta")
   J <- dim(cc_theta_samps)[[2]]
 
   which <- if (is.null(which)) 1:J else which
@@ -62,7 +101,7 @@ extract_theta_ccds_mcmc <- function(fit, which, ...) {
 }
 
 extract_theta_ds_mcmc <- function(fit, which, ...) {
-  theta_samps <- rstan::extract(fit$draws)$theta
+  theta_samps <- posterior_draws(fit, pars = "theta")
   # I wonder if there is a better way to deal with the J issue...
   J <- dim(theta_samps)[[2]]
   which <- if (is.null(which)) 1:J else which
