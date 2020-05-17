@@ -4,12 +4,14 @@
 \name{anesthesia}
 \alias{anesthesia}
 \title{Anesthetist ratings for patient suitability for surgery}
-\format{A matrix with 315 rows and 3 columns:
+\format{
+A matrix with 315 rows and 3 columns:
 \describe{
   \item{ii}{item index, which item is being rated}
   \item{jj}{rater index, which rater is doing the rater}
   \item{y}{what rating was given}
-}}
+}
+}
 \usage{
 anesthesia
 }

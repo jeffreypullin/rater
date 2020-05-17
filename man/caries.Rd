@@ -4,12 +4,14 @@
 \name{caries}
 \alias{caries}
 \title{Caries ratings of whether caries are 'sound' or not (c...)}
-\format{A matrix
+\format{
+A matrix
 \describe{
   \item{ii}{item index, which item is being rated}
   \item{jj}{rater index, which rater is doing the rater}
   \item{y}{what rating was given}
-}}
+}
+}
 \usage{
 caries
 }

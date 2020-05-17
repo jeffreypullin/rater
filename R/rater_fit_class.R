@@ -81,33 +81,46 @@ print.optim_fit <- function(x, ...) {
 
 #' Plot a rater_fit object
 #'
-#' @param x fit object
-#' @param type the type of plot
-#' @param ... other args
+#' @param x A rater_fit object
+#' @param pars Which parameters to plot. Can use both mathematical or
+#'   natural names.
+#' @param ... Other arguments. This should contain the which argument for
+#'   theta plots.
 #'
-#' @details ... must contain the param argument which tell the function
-#' what to extract from the fit object. It may also contain the which argument
-#' which controls which raters confusion matrices will be plotted.
+#' @return If one parameter is requested a ggplot2 plot. If multiple parameters
+#'   are requested a list of ggplot2 plots.
 #'
 #' @export
 #'
-plot.rater_fit <- function(x, type = "theta", ...) {
+plot.rater_fit <- function(x, pars = c("pi", "theta", "z"), ...) {
   dots <- list(...)
   which <- dots$which
 
-  # see utils.R for names
-  type <- match.arg(type, plot_names)
+  plot_names <- c("theta", "raters", "pi",
+                  "prevalence", "z", "latent_class")
 
-  switch(type,
-    "theta" = plot_theta(x, which = which),
-    "raters" = plot_theta(x, which = which),
-    "z" = plot_z(x),
-    "latent_class" = plot_z(x),
-    # luckily p will fall through correctly
-    "pi" = plot_pi(x),
-    "prevelance" = plot_pi(x),
-    stop("Invalid type argument", call. = FALSE)
-  )
+  plots <- list()
+  for (i in seq_along(pars)) {
+    par <- match.arg(pars[[i]], plot_names)
+    plots[[i]] <- switch(par,
+      "theta" = plot_theta(x, which = which),
+      "raters" = plot_theta(x, which = which),
+      "z" = plot_z(x),
+      "latent_class" = plot_z(x),
+      # Luckily "p" will fall through correctly.
+      "pi" = plot_pi(x),
+      "prevelance" = plot_pi(x),
+      stop("Invalid pars argument", call. = FALSE)
+    )
+  }
+
+  # Ensure that we return a bare plot if we are only returning one plot.
+  if (length(plots) == 1L) {
+    out <- plots[[1]]
+  } else {
+    out <- plots
+  }
+  out
 }
 
 #' Summary of mcmc fit

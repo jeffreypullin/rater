@@ -4,20 +4,21 @@
 \alias{plot.rater_fit}
 \title{Plot a rater_fit object}
 \usage{
-\method{plot}{rater_fit}(x, type = "theta", ...)
+\method{plot}{rater_fit}(x, pars = c("pi", "theta", "z"), ...)
 }
 \arguments{
-\item{x}{fit object}
+\item{x}{A rater_fit object}
 
-\item{type}{the type of plot}
+\item{pars}{Which parameters to plot. Can use both mathematical or
+natural names.}
 
-\item{...}{other args}
+\item{...}{Other arguments. This should contain the which argument for
+theta plots.}
+}
+\value{
+If one parameter is requested a ggplot2 plot. If multiple parameters
+  are requested a list of ggplot2 plots.
 }
 \description{
 Plot a rater_fit object
-}
-\details{
-... must contain the param argument which tell the function
-what to extract from the fit object. It may also contain the which argument
-which controls which raters confusion matrices will be plotted.
 }

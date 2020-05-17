@@ -2,7 +2,7 @@
 % Please edit documentation in R/extract.R
 \name{extract_pi.mcmc_fit}
 \alias{extract_pi.mcmc_fit}
-\title{Extract prevalance information}
+\title{Extract prevalence information}
 \usage{
 \method{extract_pi}{mcmc_fit}(fit, ...)
 }
