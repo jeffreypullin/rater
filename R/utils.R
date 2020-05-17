@@ -22,5 +22,3 @@ check_convergence <- function(draws) {
             call. = FALSE)
   }
 }
-
-plot_names <- c("theta", "raters", "pi", "prevalence", "z", "latent_class")
