@@ -3,7 +3,8 @@ Title: Fit Bayesian Models of Noisy Categorial Ratings
 Version: 0.1.900
 Authors@R: c(person("Jeffrey", "Pullin",
              role = c("aut", "cre"),
-             email = "jeffrey.pullin@gmail.com"),
+             email = "jeffrey.pullin@gmail.com"
+             comment = c(ORCID = "0000-0003-3651-5471")),
              person("Damjan", "Vukcevic",
              role = c("aut"),
              comment = c(ORCID = "0000-0001-7780-9586"))
