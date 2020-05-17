@@ -87,7 +87,7 @@ print.optim_fit <- function(x, ...) {
 #' @param ... Other arguments. This should contain the which argument for
 #'   theta plots.
 #'
-#' @result If one parameter is requested a ggplot2 plot. If multiple parameters
+#' @return If one parameter is requested a ggplot2 plot. If multiple parameters
 #'   are requested a list of ggplot2 plots.
 #'
 #' @export
