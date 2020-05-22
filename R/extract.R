@@ -35,6 +35,75 @@ posterior_draws <- function(fit, pars = c("pi", "theta"), ...) {
   out
 }
 
+#' Extract posterior intervals for parameters of the model
+#'
+#' @param object A rater mcmc_fit object
+#' @param prob A probability
+#' @param pars The parameters to calculate the intervals for
+#'
+#' @importFrom rstantools posterior_interval
+#'
+#' @export
+posterior_interval.mcmc_fit <- function(object,
+                                        prob = 0.9,
+                                        pars = c("pi", "theta"),
+                                        ...) {
+  K <- fit$data$stan_data$K
+  J <- fit$data$stan_data$J
+
+  intervals <- list()
+  for (i in 1:length(pars)) {
+    par <- match.arg(pars[[i]], c("pi", "theta"))
+
+    if (par == "pi") {
+      pi_draws <- posterior_draws(fit, pars = "pi")
+      colnames(pi_draws) <- sprintf("pi[%s]", 1:K)
+      pi_interval <- rstantools::posterior_interval(pi_draws, prob, ...)
+      intervals[[i]] <- pi_interval
+
+    } else if (par == "theta") {
+      theta_draws_raw <- posterior_draws(fit, pars = "theta")
+      n_draws <- dim(theta_draws_raw)[[1]]
+
+      theta_draws_mat <- matrix(0, nrow = n_draws, ncol = J * K * K)
+      col_names <- character(J * K * K)
+      combs <- expand.grid(1:J, 1:K, 1:K)
+      for (n in 1:nrow(combs)) {
+        j <- combs[n, 1]
+        k <- combs[n, 2]
+        k_prime <- combs[n, 3]
+        theta_draws_mat[, n] <- theta_draws_raw[, j, k, k_prime]
+        col_names[[n]] <- sprintf("theta[%s, %s, %s]", j, k, k_prime)
+      }
+      colnames(theta_draws_mat) <- col_names
+      intervals[[i]] <- rstantools::posterior_interval(theta_draws_mat,
+                                                       prob, ...)
+    } else if (par == "pi") {
+      stop("Cannot calculate quantiles for pi.", call. = FALSE)
+    }
+  }
+
+  do.call(rbind, intervals)
+}
+
+#' Extract posterior intervals for parameters of the model
+#'
+#' @param object
+#' @param prob
+#'
+#' @importFrom rstantools posterior_interval
+#'
+#' @export
+#'
+posterior_interval.optim_fit <- function(object,
+                                         prob = 0.9,
+                                         pars = c("pi", "theta"),
+                                         ...) {
+  stop("Can't calculate posterior intervals for a model fit with",
+       "optimisation.",
+       call. = FALSE)
+}
+
 #' Extract latent class estimates from a fit
 #'
 #' @param fit fit object
