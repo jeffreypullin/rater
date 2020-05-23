@@ -16,12 +16,11 @@ test_that("posterior_draws works", {
 })
 
 
-test_that("extract_raters error appropriatly", {
+test_that("point estimate for theta errors appropriatly", {
 
-  expect_error(
-    extract_theta(hds_fit),
-    "Rater metrics cannot be extracted from the Hierachical Dawid and Skene model."
-  )
+  # We used to test the error message here but it was too fiddly.
+  expect_error(point_estimate(hds_fit, pars = "theta"))
+
 })
 
 test_that("validate_which error appropriatly", {
@@ -43,46 +42,46 @@ test_that("validate_which error appropriatly", {
 
 })
 
-test_that("extract_pi output has correct form", {
+test_that("point estimate output for pi has correct form", {
   # mcmc
-  out <- extract_pi(ds_fit)
+  out <- point_estimate(ds_fit, pars = "pi")[[1]]
   expect_equal(length(out), K)
   expect_equal(sum(out), 1)
   # optim
-  out <- extract_pi(ds_fit_optim)
+  out <- point_estimate(ds_fit_optim, pars = "pi")[[1]]
   expect_equal(length(out), K)
   expect_equal(sum(out), 1)
   # table
-  out <- extract_pi(ds_fit_table)
+  out <- point_estimate(ds_fit_table, pars = "pi")[[1]]
   expect_equal(length(out), K_caries)
   expect_equal(sum(out), 1)
 })
 
-test_that("extract_z output has correct form", {
+test_that("point estimate output for z has the correct form", {
   # mcmc
-  out <- extract_z(ds_fit)
+  out <- point_estimate(ds_fit, pars = "z")[[1]]
   expect_equal(dim(out), c(I, K))
   expect_equal(rowSums(out), rep(1, I))
   # optim
-  out <- extract_z(ds_fit_optim)
+  out <- point_estimate(ds_fit_optim, pars = "z")[[1]]
   expect_equal(dim(out), c(I, K))
   expect_equal(rowSums(out), rep(1, I))
   # table
-  out <- extract_z(ds_fit_table)
+  out <- point_estimate(ds_fit_table, pars = "z")[[1]]
   expect_equal(dim(out), c(I_caries, K_caries))
   expect_equal(rowSums(out), rep(1, I_caries))
 })
 
 
-test_that("extract_theta (mcmc) output has correct form", {
+test_that("point estimate (mcmc) output for theta has correct form", {
 
-  ds_out <- extract_theta(ds_fit)
+  ds_out <- point_estimate(ds_fit, pars = "theta")[[1]]
   # Does it have the right form?
   expect_true(is.array(ds_out))
   # Is it a probability?
   apply(ds_out, 1, function(x) expect_equal(rowSums(x), rep(1, K)))
 
-  ccds_out <- extract_theta(ccds_fit)
+  ccds_out <- point_estimate(ccds_fit, pars = "theta")[[1]]
   expect_true(is.array(ccds_out))
   expect_equal(dim(ccds_out), c(J, K, K))
   # Test that all the off diagonal elements are equal
@@ -90,13 +89,13 @@ test_that("extract_theta (mcmc) output has correct form", {
   apply(ccds_out, 1, function(x) expect_equal(rowSums(x), rep(1, K)))
 })
 
-test_that("extract_theta (optim) output has correct form", {
+test_that("point esimate (optim) output for theta has correct form", {
 
-  ds_out <- extract_theta(ds_fit_optim)
+  ds_out <- point_estimate(ds_fit_optim, pars = "theta")[[1]]
   expect_equal(is.array(ds_out), TRUE)
   apply(ds_out, 1, function(x) expect_equal(rowSums(x), rep(1, K)))
 
-  ccds_out <- extract_theta(ccds_fit)
+  ccds_out <- point_estimate(ccds_fit, pars = "theta")[[1]]
   expect_true(is.array(ccds_out))
   expect_equal(dim(ccds_out), c(J, K, K))
   expect_equal(var(ccds_out[1, 1, -1]), 0)
@@ -106,7 +105,7 @@ test_that("extract_theta (optim) output has correct form", {
 
 test_that("extract_theta (table) output has correct form", {
 
-  ds_out <- extract_theta(ds_fit_table)
+  ds_out <- point_estimate(ds_fit_table, pars = "theta")[[1]]
 
   # dawid skene
 
@@ -119,6 +118,7 @@ test_that("extract_theta (table) output has correct form", {
 })
 
 test_that("extract_ function are equivalent", {
+  skip("TODO: Decide on plain language interface")
   expect_equal(extract_theta(ds_fit), extract_raters(ds_fit))
   expect_equal(extract_z(ds_fit), extract_latent_class(ds_fit))
   expect_equal(extract_pi(ds_fit), extract_prevalence(ds_fit))

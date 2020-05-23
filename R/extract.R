@@ -212,7 +212,7 @@ theta_point_estimate <- function(fit, which = NULL, ...) {
 
 theta_point_estimate.mcmc_fit <- function(fit, which = NULL, ...) {
   switch(fit$model$file,
-    "hierarchical_dawid_skene" = theta_point_estimate_theta_hds(),
+    "hierarchical_dawid_skene" = theta_point_estimate_hds(),
     "dawid_skene" = theta_point_estimate_ds_mcmc(fit, which, ...),
     "class_conditional_dawid_skene" =
       theta_point_estimate_ccds_mcmc(fit, which, ...),
@@ -280,7 +280,7 @@ theta_point_estimate_ccds_optim <- function(fit, which, ...) {
   theta[which, , ]
 }
 
-theta_point_esimate_hds <- function() {
+theta_point_estimate_hds <- function() {
   stop("Rater metrics cannot be extracted from the Hierachical Dawid and
        Skene model.", call. = FALSE)
 }
