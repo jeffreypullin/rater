@@ -104,6 +104,58 @@ posterior_interval.optim_fit <- function(object,
        call. = FALSE)
 }
 
+#' Extract point estimates of parameters from a fit object
+#'
+#' @param fit A rater_fit object
+#' @param pars A character vector of parmeter names to select
+#' @param format TODO
+#'
+#' @details If the passed fit object was fit using MCMC then the posterior
+#'   means are used. If it was fit through optimisation the MAP esimates
+#'   are returned.
+#'
+#' @return TODO
+#'
+point_estimate <- function(fit,
+                           pars = c("pi", "theta", "z"),
+                           ...) {
+  out <- list()
+  for (i in seq_along(pars)) {
+    par <- pars[[i]]
+    out[[i]] <- switch(par,
+      "pi" = pi_point_estimate(fit, ...),
+      "theta" = theta_point_estimate(fit, ...),
+      "z" = z_point_estimate(fit, ...),
+      stop("Unknown parameter passed", call. = FALSE)
+    )
+  }
+  out
+}
+
+#' Extract a point esimate of the pi parameter from an MCMC fit
+#'
+#' @param fit A rater_fit object
+#'
+#' @return A vector of length K containing the posterior mean of pi
+#'
+#' @export
+#'
+pi_point_estimate <- function(fit, ...) {
+  UseMethod("pi_point_estimate")
+}
+
+pi_point_estimate.mcmc_fit <- function(fit, ...) {
+  pi_draws <- posterior_draws(fit, pars = "pi")
+  apply(pi_draws, 2, mean)
+}
+
+pi_point_estimate.optim_fit <- function(fit, ...) {
+  par <- fit$estimates$par
+  out <- par[grep("pi", names(par))]
+  names(out) <- NULL
+  out
+}
+
 #' Extract latent class estimates from a fit
 #'
 #' @param fit fit object
@@ -113,27 +165,31 @@ posterior_interval.optim_fit <- function(object,
 #'
 #' @export
 #'
-extract_z.mcmc_fit <- function(fit, ...) {
+z_point_estimate <- function(fit, ...) {
+  UseMethod("z_point_esimate")
+}
+
+z_point_estimate.mcmc_fit <- function(fit, ...) {
   # We can't use posterior_draws here because these are not technically draws.
   log_p_z_samps <- rstan::extract(fit$draws)$log_p_z
   p_z_samps <- aperm(apply(log_p_z_samps, c(1, 2), softmax), c(2, 3, 1))
   p_z <- apply(p_z_samps, c(2, 3), mean)
-  p_z  <- if (is.table_data(fit$data)) enlarge_z(p_z, fit) else p_z
+  if (is.table_data(fit$data)) {
+    p_z <- enlarge_z(p_z, fit)
+  }
   p_z
 }
 
-#' Extract prevalence information
-#'
-#' Extract prevalence/pi estiamtes from a fit object
-#'
-#' @param fit fit object
-#' @param ... extra args
-#'
-#' @export
-#'
-extract_pi.mcmc_fit <- function(fit, ...) {
-  pi_draws <- posterior_draws(fit, pars = "pi")
-  apply(pi_draws, 2, mean)
+z_point_estimate.optim_fit <- function(fit, ...) {
+  par <- fit$estimates$par
+  stan_data <- fit$data$stan_data
+  log_p_z_values <- par[grep("log_p_z", names(par))]
+  log_p_z <- matrix(log_p_z_values, nrow = stan_data$I, ncol = stan_data$K)
+  p_z <- t(apply(log_p_z, 1, softmax))
+  if (is.table_data(fit$data)) {
+    enlarge_z(p_z, fit)
+  }
+  p_z
 }
 
 #' Extract rater accuracy estimates for the Dawid Skene models
@@ -149,19 +205,39 @@ extract_pi.mcmc_fit <- function(fit, ...) {
 #'
 #' @export
 #'
-extract_theta.mcmc_fit <- function(fit, which = NULL, ...) {
+theta_point_estimate <- function(fit, which = NULL, ...) {
+  UseMethod("theta_point_estimate")
+}
+
+theta_point_estimate.mcmc_fit <- function(fit, which = NULL, ...) {
   switch(fit$model$file,
-    "hierarchical_dawid_skene" = extract_theta_hds(),
-    "dawid_skene" = extract_theta_ds_mcmc(fit, which, ...),
-    "class_conditional_dawid_skene" = extract_theta_ccds_mcmc(fit, which, ...),
+    "hierarchical_dawid_skene" = theta_point_estimate_theta_hds(),
+    "dawid_skene" = theta_point_estimate_ds_mcmc(fit, which, ...),
+    "class_conditional_dawid_skene" =
+      theta_point_estimate_ccds_mcmc(fit, which, ...),
     stop("Model type not supported", call. = FALSE))
 }
 
-extract_theta_ccds_mcmc <- function(fit, which, ...) {
-  cc_theta_samps <- posterior_draws(fit, pars = "theta")
-  J <- dim(cc_theta_samps)[[2]]
+theta_point_estimate_ds_mcmc <- function(fit, which, ...) {
+  theta_samps <- posterior_draws(fit, pars = "theta")
 
-  which <- if (is.null(which)) 1:J else which
+  J <- dim(theta_samps)[[2]]
+  if (is.null(which)) {
+    which <- 1:J
+  }
+  validate_which(which, J)
+
+  theta <- apply(theta_samps, c(2, 3, 4), mean)
+  theta[which, , ]
+}
+
+theta_point_estimate_ccds_mcmc <- function(fit, which, ...) {
+  cc_theta_samps <- posterior_draws(fit, pars = "theta")
+
+  J <- dim(cc_theta_samps)[[2]]
+  if (is.null(which)) {
+    which <- 1:J
+  }
   validate_which(which, J)
 
   cc_theta <- apply(cc_theta_samps, c(2, 3), mean)
@@ -169,112 +245,58 @@ extract_theta_ccds_mcmc <- function(fit, which, ...) {
   theta[which, , ]
 }
 
-extract_theta_ds_mcmc <- function(fit, which, ...) {
-  theta_samps <- posterior_draws(fit, pars = "theta")
-  # I wonder if there is a better way to deal with the J issue...
-  J <- dim(theta_samps)[[2]]
-  which <- if (is.null(which)) 1:J else which
-  validate_which(which, J)
-  theta <- apply(theta_samps, c(2,3,4), mean)
-  theta[which, , ]
-}
-
-extract_theta_hds <- function() {
-  stop("Rater metrics cannot be extracted from the Hierachical Dawid and Skene model.",
-       call. = FALSE)
-}
-
-# Methods for optim_fit
-
-#' Extract latent class estimates from a optim fit
-#'
-#' @param fit fit object
-#' @param ... extra args
-#'
-#' @return Probalistic latent class measurements
-#'
-#' @export
-#'
-extract_z.optim_fit <- function(fit, ...) {
-  par <- fit$estimates$par
-  stan_data <- fit$data$stan_data
-  log_p_z_values <- par[grep("log_p_z", names(par))]
-  log_p_z <- matrix(log_p_z_values, nrow = stan_data$I, ncol = stan_data$K)
-  p_z <- t(apply(log_p_z, 1, softmax))
-  # name?
-  p_z  <- if (is.table_data(fit$data)) enlarge_z(p_z, fit) else p_z
-  p_z
-}
-
-#' Extract prevalence information from optim fit object
-#'
-#' Extract prevalence/pi estiamtes from a fit object
-#'
-#' @param fit fit object
-#' @param ... extra args
-#'
-#' @export
-#'
-extract_pi.optim_fit <- function(fit, ...) {
- par <- fit$estimates$par
- out <- par[grep("pi", names(par))]
- names(out) <- NULL
- out
-}
-
-#' Extract theta parameter for the optim_fit class
-#'
-#' @param fit fit object
-#' @param which which raters to extract
-#' @param ... extra args
-#'
-#' @return array of rater error distibutions
-#'
-#' @export
-#'
-extract_theta.optim_fit <- function(fit, which = NULL, ...) {
+theta_point_estimate.optim_fit <- function(fit, which = NULL, ...) {
   switch(fit$model$file,
-    "hierarchical_dawid_skene" = extract_theta_hds(),
-    "dawid_skene" = extract_theta_ds_optim(fit, which, ...),
-    "class_conditional_dawid_skene" = extract_theta_ccds_optim(fit, which, ...),
+    "hierarchical_dawid_skene" = theta_point_estimate_hds(),
+    "dawid_skene" = theta_point_estimate_ds_optim(fit, which, ...),
+    "class_conditional_dawid_skene" =
+      theta_point_estimate_ccds_optim(fit, which, ...),
     stop("Model type not supported", call. = FALSE))
 }
 
-extract_theta_ds_optim <- function(fit, which, ...) {
+theta_point_estimate_ds_optim <- function(fit, which, ...) {
   par <- fit$estimates$par
   theta_values <- par[grep("\\btheta\\b", names(par))]
   K <- fit$data$stan_data$K
   J <- fit$data$stan_data$J
-  which <- if (is.null(which)) 1:J else which
+  if (is.null(which)) {
+    which <- 1:J
+  }
   theta <- array(theta_values, dim = c(J, K, K))
   theta[which, , ]
 }
 
-extract_theta_ccds_optim <- function(fit, which, ...) {
+theta_point_estimate_ccds_optim <- function(fit, which, ...) {
   par <- fit$estimates$par
   cc_theta_values <- par[grep("\\btheta\\b", names(par))]
   K <- fit$data$stan_data$K
   J <- fit$data$stan_data$J
-  which <- if (is.null(which)) 1:J else which
+  if (is.null(which)) {
+    which <- 1:J
+  }
   cc_theta <- matrix(cc_theta_values, nrow = J, ncol = K)
   theta <- unspool_cc_theta(cc_theta)
   theta[which, , ]
 }
 
-# helpers
+theta_point_esimate_hds <- function() {
+  stop("Rater metrics cannot be extracted from the Hierachical Dawid and
+       Skene model.", call. = FALSE)
+}
+
+# Helper functions
 
 validate_which <- function(which, J) {
   if (!(length(which) > 0) || !is.numeric(which)) {
     stop("which must be a positive length numeric vector", call. = FALSE)
   }
-  # TODO make more informative
+  # TODO Make this error more informative.
   if (length(which(which %in% 1:J)) != length(which)) {
     stop("All numbers in `which` must be drawn from 1:", J, call. = FALSE)
   }
 }
 
 enlarge_z <- function(p_z, fit) {
-  # this will only be run if the data is in table data form
   stopifnot(is.table_data(fit$data))
   p_z[rep(1:nrow(p_z), fit$data$stan_data$tally), ]
 }
