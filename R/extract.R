@@ -129,6 +129,7 @@ point_estimate <- function(fit,
       stop("Unknown parameter passed", call. = FALSE)
     )
   }
+
   out
 }
 
@@ -166,7 +167,7 @@ pi_point_estimate.optim_fit <- function(fit, ...) {
 #' @export
 #'
 z_point_estimate <- function(fit, ...) {
-  UseMethod("z_point_esimate")
+  UseMethod("z_point_estimate")
 }
 
 z_point_estimate.mcmc_fit <- function(fit, ...) {
