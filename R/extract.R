@@ -88,8 +88,8 @@ posterior_interval.mcmc_fit <- function(object,
 
 #' Extract posterior intervals for parameters of the model
 #'
-#' @param object
-#' @param prob
+#' @param object TODO
+#' @param prob TODO
 #'
 #' @importFrom rstantools posterior_interval
 #'

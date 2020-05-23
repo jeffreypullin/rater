@@ -7,7 +7,11 @@
 \method{posterior_interval}{mcmc_fit}(object, prob = 0.9, pars = c("pi", "theta"), ...)
 }
 \arguments{
-\item{pars}{}
+\item{object}{A rater mcmc_fit object}
+
+\item{prob}{A probability}
+
+\item{pars}{The parameters to calculate the intervals for}
 }
 \description{
 Extract posterior intervals for parameters of the model
