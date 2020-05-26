@@ -48,6 +48,8 @@ posterior_interval.mcmc_fit <- function(object,
                                         prob = 0.9,
                                         pars = c("pi", "theta"),
                                         ...) {
+
+  fit <- object
   K <- fit$data$stan_data$K
   J <- fit$data$stan_data$J
 
@@ -99,8 +101,8 @@ posterior_interval.optim_fit <- function(object,
                                          prob = 0.9,
                                          pars = c("pi", "theta"),
                                          ...) {
-  stop("Can't calculate posterior intervals for a model fit with",
-       "optimisation.",
+  stop("Can't calculate posterior intervals for a model fit using",
+       " optimisation.",
        call. = FALSE)
 }
 
