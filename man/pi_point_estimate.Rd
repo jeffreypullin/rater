@@ -2,9 +2,15 @@
 % Please edit documentation in R/extract.R
 \name{pi_point_estimate}
 \alias{pi_point_estimate}
+\alias{pi_point_estimate.mcmc_fit}
+\alias{pi_point_estimate.optim_fit}
 \title{Extract a point esimate of the pi parameter from an MCMC fit}
 \usage{
 pi_point_estimate(fit, ...)
+
+\method{pi_point_estimate}{mcmc_fit}(fit, ...)
+
+\method{pi_point_estimate}{optim_fit}(fit, ...)
 }
 \arguments{
 \item{fit}{A rater_fit object}

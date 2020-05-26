@@ -2,9 +2,15 @@
 % Please edit documentation in R/extract.R
 \name{z_point_estimate}
 \alias{z_point_estimate}
+\alias{z_point_estimate.mcmc_fit}
+\alias{z_point_estimate.optim_fit}
 \title{Extract latent class estimates from a fit}
 \usage{
 z_point_estimate(fit, ...)
+
+\method{z_point_estimate}{mcmc_fit}(fit, ...)
+
+\method{z_point_estimate}{optim_fit}(fit, ...)
 }
 \arguments{
 \item{fit}{fit object}

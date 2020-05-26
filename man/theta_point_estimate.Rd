@@ -2,9 +2,15 @@
 % Please edit documentation in R/extract.R
 \name{theta_point_estimate}
 \alias{theta_point_estimate}
+\alias{theta_point_estimate.mcmc_fit}
+\alias{theta_point_estimate.optim_fit}
 \title{Extract rater accuracy estimates for the Dawid Skene models}
 \usage{
 theta_point_estimate(fit, which = NULL, ...)
+
+\method{theta_point_estimate}{mcmc_fit}(fit, which = NULL, ...)
+
+\method{theta_point_estimate}{optim_fit}(fit, which = NULL, ...)
 }
 \arguments{
 \item{fit}{fit object}

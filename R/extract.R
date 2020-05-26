@@ -144,11 +144,15 @@ pi_point_estimate <- function(fit, ...) {
   UseMethod("pi_point_estimate")
 }
 
+#' @rdname pi_point_estimate
+#' @export
 pi_point_estimate.mcmc_fit <- function(fit, ...) {
   pi_draws <- posterior_draws(fit, pars = "pi")
   apply(pi_draws, 2, mean)
 }
 
+#' @rdname pi_point_estimate
+#' @export
 pi_point_estimate.optim_fit <- function(fit, ...) {
   par <- fit$estimates$par
   out <- par[grep("pi", names(par))]
@@ -169,6 +173,8 @@ z_point_estimate <- function(fit, ...) {
   UseMethod("z_point_estimate")
 }
 
+#' @rdname z_point_estimate
+#' @export
 z_point_estimate.mcmc_fit <- function(fit, ...) {
   # We can't use posterior_draws here because these are not technically draws.
   log_p_z_samps <- rstan::extract(fit$draws)$log_p_z
@@ -180,6 +186,8 @@ z_point_estimate.mcmc_fit <- function(fit, ...) {
   p_z
 }
 
+#' @rdname z_point_estimate
+#' @export
 z_point_estimate.optim_fit <- function(fit, ...) {
   par <- fit$estimates$par
   stan_data <- fit$data$stan_data
@@ -209,6 +217,8 @@ theta_point_estimate <- function(fit, which = NULL, ...) {
   UseMethod("theta_point_estimate")
 }
 
+#' @rdname theta_point_estimate
+#' @export
 theta_point_estimate.mcmc_fit <- function(fit, which = NULL, ...) {
   switch(fit$model$file,
     "hierarchical_dawid_skene" = theta_point_estimate_hds(),
@@ -245,6 +255,8 @@ theta_point_estimate_ccds_mcmc <- function(fit, which, ...) {
   theta[which, , ]
 }
 
+#' @rdname theta_point_estimate
+#' @export
 theta_point_estimate.optim_fit <- function(fit, which = NULL, ...) {
   switch(fit$model$file,
     "hierarchical_dawid_skene" = theta_point_estimate_hds(),
