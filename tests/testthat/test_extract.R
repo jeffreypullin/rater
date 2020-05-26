@@ -15,6 +15,13 @@ test_that("posterior_draws works", {
   expect_error(posterior_draws(ds_fit, pars = c("nonsense")))
 })
 
+test_that("point estiamte output is named", {
+  all_pars <- point_estimate(ds_fit)
+  expect_named(all_pars, c("pi", "theta", "z"))
+  just_pi <- point_estimate(ds_fit, pars = "pi")
+  expect_named(just_pi, "pi")
+})
+
 
 test_that("point estimate for theta errors appropriatly", {
 

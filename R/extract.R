@@ -120,12 +120,11 @@ point_estimate <- function(fit,
                            pars = c("pi", "theta", "z"),
                            ...) {
   out <- list()
-  for (i in seq_along(pars)) {
-    par <- pars[[i]]
-    out[[i]] <- switch(par,
-      "pi" = pi_point_estimate(fit, ...),
-      "theta" = theta_point_estimate(fit, ...),
-      "z" = z_point_estimate(fit, ...),
+  for (par in pars) {
+    out <- switch(par,
+      "pi" = c(out, pi = list(pi_point_estimate(fit, ...))),
+      "theta" = c(out, theta = list(theta_point_estimate(fit, ...))),
+      "z" = c(out, z = list(z_point_estimate(fit, ...))),
       stop("Unknown parameter passed", call. = FALSE)
     )
   }
