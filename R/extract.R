@@ -108,14 +108,20 @@ posterior_interval.optim_fit <- function(object,
 #'
 #' @param fit A rater_fit object
 #' @param pars A character vector of parmeter names to select
-#' @param format TODO
+#' @param ... Extra arguments
 #'
 #' @details If the passed fit object was fit using MCMC then the posterior
 #'   means are used. If it was fit through optimisation the MAP esimates
 #'   are returned.
 #'
-#' @return TODO
+#' @return A named list of the parameter values. See details for the precise
+#'   statistical interpretation of the values.
 #'
+#' @examples
+#' fit <- rater(long_data(anesthesia), method = "optim")
+#' point_estimate(fit, pars = "pi")
+#'
+#' @export
 point_estimate <- function(fit,
                            pars = c("pi", "theta", "z"),
                            ...) {

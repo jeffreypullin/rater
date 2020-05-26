@@ -11,10 +11,11 @@ point_estimate(fit, pars = c("pi", "theta", "z"), ...)
 
 \item{pars}{A character vector of parmeter names to select}
 
-\item{format}{TODO}
+\item{...}{Extra arguments}
 }
 \value{
-TODO
+A named list of the parameter values. See details for the precise
+  statistical interpretation of the values.
 }
 \description{
 Extract point estimates of parameters from a fit object
@@ -23,4 +24,9 @@ Extract point estimates of parameters from a fit object
 If the passed fit object was fit using MCMC then the posterior
   means are used. If it was fit through optimisation the MAP esimates
   are returned.
+}
+\examples{
+fit <- rater(long_data(anesthesia), method = "optim")
+point_estimate(fit, pars = "pi")
+
 }
