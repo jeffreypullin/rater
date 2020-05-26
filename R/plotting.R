@@ -9,7 +9,7 @@
 #' @importFrom rlang .data
 #'
 plot_pi <- function(fit) {
-  pi <- extract_pi(fit)
+  pi <- pi_point_estimate(fit)
   plot_data <- data.frame(cat = as.factor(1:length(pi)),
                           pi = pi,
                           round_pi = round(pi, 2))
@@ -39,7 +39,7 @@ plot_pi <- function(fit) {
 #' @importFrom rlang .data
 #'
 plot_theta <- function(fit, which = NULL) {
-  theta <- extract_theta(fit, which = which)
+  theta <- theta_point_estimate(fit, which = which)
 
   # theta will always have dim[[2]] and it will always be == K
   K <- dim(theta)[[2]]
@@ -146,8 +146,6 @@ plot_z.matrix <- function(x, ...) {
 #' @export
 #'
 plot_z.rater_fit <- function(x, ...){
-
-  p_z <- extract_z(x)
-
+  p_z <- z_point_estimate(x)
   plot_z.matrix(p_z)
 }

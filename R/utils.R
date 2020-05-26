@@ -22,3 +22,4 @@ check_convergence <- function(draws) {
             call. = FALSE)
   }
 }
+
