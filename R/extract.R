@@ -4,35 +4,30 @@
 #' @param pars A specification of which parameters to return draws from
 #' @param ... Extra arguments
 #'
-#' @return If multiple draws are requested then a list of arrays, otherwise
-#'  a single array.
+#' @return A named list of parameter draws
 #'
 #' @importFrom rstan extract
+#'
 #' @export
 #'
-posterior_draws <- function(fit, pars = c("pi", "theta"), ...) {
+posterior_samples <- function(fit, pars = c("pi", "theta"), ...) {
   if (inherits(fit, "optim_fit")) {
     stop("Cannot return draws from an optimisaton fit", call. = FALSE)
   }
 
-  draws <- list()
-  for (i in seq_along(pars)) {
-    par <- match.arg(pars[[i]], c("pi", "theta", "z"))
-    draws[[i]] <- switch(par,
-      "pi"    = rstan::extract(fit$draws)$pi,
-      "theta" = rstan::extract(fit$draws)$theta,
+  samples <- list()
+  for (par in pars) {
+    par <- match.arg(par, c("pi", "theta", "z"))
+    samples <- switch(par,
+      "pi"    = c(samples, pi = list(rstan::extract(fit$draws)$pi)),
+      "theta" = c(samples, theta = list(rstan::extract(fit$draws)$theta)),
       "z"     = stop("Cannot return draws for marginalised discrete parameter",
-                 call. = FALSE),
+                     call. = FALSE),
       stop("Invalid pars argument", call. = FALSE)
     )
   }
 
-  if (length(draws) == 1L) {
-    out <- draws[[1]]
-  } else {
-    out <- draws
-  }
-  out
+  samples
 }
 
 #' Extract posterior intervals for parameters of the model
@@ -56,13 +51,13 @@ posterior_interval.mcmc_fit <- function(object,
     par <- match.arg(pars[[i]], c("pi", "theta"))
 
     if (par == "pi") {
-      pi_draws <- posterior_draws(fit, pars = "pi")
+      pi_draws <- posterior_samples(fit, pars = "pi")[[1]]
       colnames(pi_draws) <- sprintf("pi[%s]", 1:K)
       pi_interval <- rstantools::posterior_interval(pi_draws, prob, ...)
       intervals[[i]] <- pi_interval
 
     } else if (par == "theta") {
-      theta_draws_raw <- posterior_draws(fit, pars = "theta")
+      theta_draws_raw <- posterior_samples(fit, pars = "theta")[[1]]
       n_draws <- dim(theta_draws_raw)[[1]]
 
       theta_draws_mat <- matrix(0, nrow = n_draws, ncol = J * K * K)
@@ -153,7 +148,7 @@ pi_point_estimate <- function(fit, ...) {
 #' @rdname pi_point_estimate
 #' @export
 pi_point_estimate.mcmc_fit <- function(fit, ...) {
-  pi_draws <- posterior_draws(fit, pars = "pi")
+  pi_draws <- posterior_samples(fit, pars = "pi")[[1]]
   apply(pi_draws, 2, mean)
 }
 
@@ -182,7 +177,7 @@ z_point_estimate <- function(fit, ...) {
 #' @rdname z_point_estimate
 #' @export
 z_point_estimate.mcmc_fit <- function(fit, ...) {
-  # We can't use posterior_draws here because these are not technically draws.
+  # We can't use posterior_samples here because these are not technically draws.
   log_p_z_samps <- rstan::extract(fit$draws)$log_p_z
   p_z_samps <- aperm(apply(log_p_z_samps, c(1, 2), softmax), c(2, 3, 1))
   p_z <- apply(p_z_samps, c(2, 3), mean)
@@ -235,7 +230,7 @@ theta_point_estimate.mcmc_fit <- function(fit, which = NULL, ...) {
 }
 
 theta_point_estimate_ds_mcmc <- function(fit, which, ...) {
-  theta_samps <- posterior_draws(fit, pars = "theta")
+  theta_samps <- posterior_samples(fit, pars = "theta")[[1]]
 
   J <- dim(theta_samps)[[2]]
   if (is.null(which)) {
@@ -248,7 +243,7 @@ theta_point_estimate_ds_mcmc <- function(fit, which, ...) {
 }
 
 theta_point_estimate_ccds_mcmc <- function(fit, which, ...) {
-  cc_theta_samps <- posterior_draws(fit, pars = "theta")
+  cc_theta_samps <- posterior_samples(fit, pars = "theta")[[1]]
 
   J <- dim(cc_theta_samps)[[2]]
   if (is.null(which)) {
