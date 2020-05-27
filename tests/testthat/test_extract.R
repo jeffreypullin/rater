@@ -57,8 +57,8 @@ test_that("point estimate output for pi has correct form", {
   out <- point_estimate(ds_fit_optim, pars = "pi")[[1]]
   expect_equal(length(out), K)
   expect_equal(sum(out), 1)
-  # table
-  out <- point_estimate(ds_fit_table, pars = "pi")[[1]]
+  # grouped
+  out <- point_estimate(ds_fit_grouped, pars = "pi")[[1]]
   expect_equal(length(out), K_caries)
   expect_equal(sum(out), 1)
 })
@@ -72,8 +72,8 @@ test_that("point estimate output for z has the correct form", {
   out <- point_estimate(ds_fit_optim, pars = "z")[[1]]
   expect_equal(dim(out), c(I, K))
   expect_equal(rowSums(out), rep(1, I))
-  # table
-  out <- point_estimate(ds_fit_table, pars = "z")[[1]]
+  # grouped
+  out <- point_estimate(ds_fit_grouped, pars = "z")[[1]]
   expect_equal(dim(out), c(I_caries, K_caries))
   expect_equal(rowSums(out), rep(1, I_caries))
 })
@@ -109,9 +109,9 @@ test_that("point esimate (optim) output for theta has correct form", {
 
 })
 
-test_that("extract_theta (table) output has correct form", {
+test_that("extract_theta (grouped) output has correct form", {
 
-  ds_out <- point_estimate(ds_fit_table, pars = "theta")[[1]]
+  ds_out <- point_estimate(ds_fit_grouped, pars = "theta")[[1]]
 
   # dawid skene
 
