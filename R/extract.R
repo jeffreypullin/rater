@@ -55,7 +55,7 @@ posterior_interval.mcmc_fit <- function(object,
 
   intervals <- list()
   for (i in 1:length(pars)) {
-    par <- match.arg(pars[[i]], c("pi", "theta"))
+    par <- match.arg(pars[[i]], c("pi", "theta", "z"))
 
     if (par == "pi") {
       pi_draws <- posterior_draws(fit, pars = "pi")
@@ -80,8 +80,8 @@ posterior_interval.mcmc_fit <- function(object,
       colnames(theta_draws_mat) <- col_names
       intervals[[i]] <- rstantools::posterior_interval(theta_draws_mat,
                                                        prob, ...)
-    } else if (par == "pi") {
-      stop("Cannot calculate quantiles for pi.", call. = FALSE)
+    } else if (par == "z") {
+      stop("Cannot calculate quantiles for z", call. = FALSE)
     }
   }
 
