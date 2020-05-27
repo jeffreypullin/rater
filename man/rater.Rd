@@ -4,15 +4,16 @@
 \alias{rater}
 \title{Fit noisy catergrical rating models using Stan}
 \usage{
-rater(data, model, method = "mcmc", inits = NULL, ...)
+rater(data, model, method = "mcmc", data_format = "long", inits = NULL, ...)
 }
 \arguments{
-\item{data}{Data for the model in long format as a three column dataframe of
-ii, jj, yy}
+\item{data}{TODO}
 
 \item{model}{Model to fit to data of class model}
 
 \item{method}{method the method used to fit the model}
+
+\item{data_format}{TODO}
 
 \item{inits}{the initialization points of the fitting algorithm}
 
@@ -23,4 +24,11 @@ An object of type fit containing the fitted parameters
 }
 \description{
 Fit noisy catergrical rating models using Stan
+}
+\details{
+TODO
+}
+\examples{
+"TODO"
+
 }
