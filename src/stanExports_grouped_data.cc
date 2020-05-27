@@ -2,12 +2,12 @@
 
 #include <Rcpp.h>
 using namespace Rcpp ;
-#include "stanExports_table_data.h"
+#include "stanExports_grouped_data.h"
 
-RCPP_MODULE(stan_fit4table_data_mod) {
+RCPP_MODULE(stan_fit4grouped_data_mod) {
 
 
-    class_<rstan::stan_fit<stan_model, boost::random::ecuyer1988> >("model_table_data")
+    class_<rstan::stan_fit<stan_model, boost::random::ecuyer1988> >("model_grouped_data")
 
     .constructor<SEXP,SEXP,SEXP>()
 
