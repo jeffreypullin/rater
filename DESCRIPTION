@@ -1,6 +1,6 @@
 Package: rater
 Title: Fit Bayesian Models of Noisy Categorial Ratings
-Version: 0.1.900
+Version: 0.1.9001
 Authors@R: c(person("Jeffrey", "Pullin",
              role = c("aut", "cre"),
              email = "jeffrey.pullin@gmail.com",
