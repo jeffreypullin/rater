@@ -4,14 +4,14 @@
 \alias{data_types}
 \alias{wide_data}
 \alias{long_data}
-\alias{table_data}
+\alias{grouped_data}
 \title{Data types compatible with the models of categorical annotation}
 \usage{
 wide_data(data)
 
 long_data(data)
 
-table_data(data)
+grouped_data(data)
 }
 \arguments{
 \item{data}{a numeric matrix}

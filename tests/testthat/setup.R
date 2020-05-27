@@ -19,7 +19,7 @@ hds_fit_optim <- rater(long_data(anesthesia), hier_dawid_skene(),
 ccds_fit_optim <- rater(long_data(anesthesia), class_conditional_dawid_skene(),
                         method = "optim")
 
-ds_fit_table <- rater(table_data(caries), dawid_skene(), iter = 200, chains = 1)
+ds_fit_grouped <- rater(grouped_data(caries), dawid_skene(), iter = 200, chains = 1)
 
 ds_model <- dawid_skene()
 hds_model <- hier_dawid_skene()

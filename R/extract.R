@@ -183,7 +183,7 @@ z_point_estimate.mcmc_fit <- function(fit, ...) {
   log_p_z_samps <- rstan::extract(fit$draws)$log_p_z
   p_z_samps <- aperm(apply(log_p_z_samps, c(1, 2), softmax), c(2, 3, 1))
   p_z <- apply(p_z_samps, c(2, 3), mean)
-  if (is.table_data(fit$data)) {
+  if (is.grouped_data(fit$data)) {
     p_z <- enlarge_z(p_z, fit)
   }
   p_z
@@ -197,7 +197,7 @@ z_point_estimate.optim_fit <- function(fit, ...) {
   log_p_z_values <- par[grep("log_p_z", names(par))]
   log_p_z <- matrix(log_p_z_values, nrow = stan_data$I, ncol = stan_data$K)
   p_z <- t(apply(log_p_z, 1, softmax))
-  if (is.table_data(fit$data)) {
+  if (is.grouped_data(fit$data)) {
     enlarge_z(p_z, fit)
   }
   p_z
@@ -312,7 +312,7 @@ validate_which <- function(which, J) {
 }
 
 enlarge_z <- function(p_z, fit) {
-  stopifnot(is.table_data(fit$data))
+  stopifnot(is.grouped_data(fit$data))
   p_z[rep(1:nrow(p_z), fit$data$stan_data$tally), ]
 }
 

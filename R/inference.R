@@ -167,8 +167,8 @@ check_K <- function(stan_data, model) {
 #'
 get_stan_file <- function(data, model) {
   # we assume here that only legal inputs are considered
-  if (is.table_data(data)) {
-    file <- "table_data"
+  if (is.grouped_data(data)) {
+    file <- "grouped_data"
   } else {
     file <- get_file(model)
   }
@@ -187,7 +187,7 @@ validate_input <- function(data, model) {
   if (!is.rater_model(model)) {
     stop("model must be a rater model", call. = FALSE)
   }
-  if (is.table_data(data) & !is.dawid_skene(model)) {
-    stop("table data can only be uses with the Dawid and Skene model", call. = FALSE)
+  if (is.grouped_data(data) & !is.dawid_skene(model)) {
+    stop("grouped data can only be uses with the Dawid and Skene model", call. = FALSE)
   }
 }

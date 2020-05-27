@@ -13,8 +13,8 @@ print.long_data <- function(x, ...) {
 }
 
 #' @export
-print.table_data <- function(x, ...) {
-  cat("`table` rater data\n")
+print.grouped_data <- function(x, ...) {
+  cat("`grouped` rater data\n")
   print(get_data(x))
 }
 
@@ -56,8 +56,8 @@ get_stan_data <- function(d) {
   d$stan_data
 }
 
-is.table_data <- function(x) {
-  inherits(x, "table_data")
+is.grouped_data <- function(x) {
+  inherits(x, "grouped_data")
 }
 
 

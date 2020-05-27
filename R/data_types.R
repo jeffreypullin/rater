@@ -35,11 +35,11 @@ long_data <- function(data) {
 #' @rdname data_types
 #' @export
 #'
-table_data <- function(data) {
+grouped_data <- function(data) {
   if (!is.numeric(data) || !inherits(data, "matrix")) {
     stop("Data must be a numeric matrix", call. = FALSE)
   }
-  new_table_data(data)
+  new_grouped_data(data)
 }
 
 #' Internal helper to creat a wide_data object
@@ -76,10 +76,10 @@ new_long_data <- function(data) {
   d
 }
 
-#' Internal helper to creat a table_data object
+#' Internal helper to creat a grouped_data object
 #' @param data a numeric matrix
 #'
-new_table_data <- function(data) {
+new_grouped_data <- function(data) {
   tally <- data[, ncol(data)]
   key <- data[, 1:(ncol(data) - 1)]
   stan_data <- list(N = nrow(data),
@@ -88,7 +88,7 @@ new_table_data <- function(data) {
                     key = key,
                     tally = tally)
   d <- list(data = data, stan_data = stan_data)
-  class(d) <- c("table_data", "rater_data")
+  class(d) <- c("grouped_data", "rater_data")
   d
 }
 
