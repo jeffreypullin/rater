@@ -117,7 +117,7 @@ posterior_interval.optim_fit <- function(object,
 #'   statistical interpretation of the values.
 #'
 #' @examples
-#' fit <- rater(long_data(anesthesia), dawid_skene(), method = "optim")
+#' fit <- rater(anesthesia, dawid_skene(), method = "optim")
 #' point_estimate(fit, pars = "pi")
 #'
 #' @export

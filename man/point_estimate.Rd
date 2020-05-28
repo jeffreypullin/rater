@@ -26,7 +26,7 @@ If the passed fit object was fit using MCMC then the posterior
   are returned.
 }
 \examples{
-fit <- rater(long_data(anesthesia), dawid_skene(), method = "optim")
+fit <- rater(anesthesia, dawid_skene(), method = "optim")
 point_estimate(fit, pars = "pi")
 
 }
