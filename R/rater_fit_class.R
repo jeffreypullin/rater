@@ -53,7 +53,7 @@ print.mcmc_fit <- function(x, ...) {
   max.print_default <- options("max.print")[[1]]
   options(max.print = 80)
   cat("Samples:\n\n")
-  print(get_draws(x))
+  print(get_samples(x))
   cat("\n")
   options(max.print = max.print_default)
 }
@@ -236,8 +236,13 @@ get_model <- function(f) {
   f$model
 }
 
-get_draws <- function(f) {
-  f$draws
+#' Get the posterior samples from a rater mcmc fit object
+#'
+#' @fit A rater mcmc fit object
+#'
+#' @noRd
+get_samples <- function(fit) {
+  fit$samples
 }
 
 get_estimates <- function(f) {

@@ -19,8 +19,8 @@ posterior_samples <- function(fit, pars = c("pi", "theta"), ...) {
   for (par in pars) {
     par <- match.arg(par, c("pi", "theta", "z"))
     samples <- switch(par,
-      "pi"    = c(samples, pi = list(rstan::extract(fit$draws)$pi)),
-      "theta" = c(samples, theta = list(rstan::extract(fit$draws)$theta)),
+      "pi"    = c(samples, pi = list(rstan::extract(get_samples(fit))$pi)),
+      "theta" = c(samples, theta = list(rstan::extract(get_samples(fit))$theta)),
       "z"     = stop("Cannot return draws for marginalised discrete parameter",
                      call. = FALSE),
       stop("Invalid pars argument", call. = FALSE)
@@ -180,7 +180,7 @@ z_point_estimate <- function(fit, ...) {
 #' @export
 z_point_estimate.mcmc_fit <- function(fit, ...) {
   # We can't use posterior_samples here because these are not technically draws.
-  log_p_z_samps <- rstan::extract(fit$draws)$log_p_z
+  log_p_z_samps <- rstan::extract(get_samples(fit))$log_p_z
   p_z_samps <- aperm(apply(log_p_z_samps, c(1, 2), softmax), c(2, 3, 1))
   p_z <- apply(p_z_samps, c(2, 3), mean)
   if (is.grouped_data(fit$data)) {
