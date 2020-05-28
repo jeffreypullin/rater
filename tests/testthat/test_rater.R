@@ -1,11 +1,22 @@
 context("rater")
 
-# This function needs more tests!
-
 test_that("rater returns objects of the correct type", {
 
   expect_equal(is.rater_fit(ds_fit), TRUE)
   expect_equal(is.mcmc_fit(ds_fit), TRUE)
+
+})
+
+test_that("rater errors correctly", {
+
+  expect_error(rater(anesthesia, "not_a_proper_model"))
+  expect_error(rater(caries, hier_dawid_skene(), data_format = "grouped"))
+  expect_error(rater(1:10, dawid_skene()))
+  expect_error(rater(data.frame(1, 2), dawid_skene()))
+  expect_error(rater(data.frame(item = 1, rater = 1, ratingg = 1),
+                     dawid_skene()))
+  expect_error(rater(data.frame(anything = 1, not_n = 1), dawid_skene(),
+                     data_format = "grouped"))
 
 })
 
