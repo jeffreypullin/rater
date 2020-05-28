@@ -13,7 +13,7 @@ test_that("parse priors are correct", {
 
   # dawid skene model
 
-  anesthesia_list <- get_stan_data(long_data(anesthesia))
+  anesthesia_list <- as_stan_data(anesthesia, "long")
 
   # test default priors
   K <- anesthesia_list$K
