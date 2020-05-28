@@ -41,7 +41,7 @@ We need to annotate this data as being long_data before we can use it for mode f
 We do this using the command:
 
 ```{r}
-anesthesia <- long_data(anesthesia)
+#anesthesia <- long_data(anesthesia)
 ```
 
 ## mcmc()
@@ -107,11 +107,11 @@ Similarly, we can extract all of the estimates used to make these plots for furt
 processing with the `extract` function:
 
 ```{r, eval = FALSE}
-extract_pi(fit)
-
-extract_theta(fit)
-
-extract_z(fit)
+# extract_pi(fit)
+# 
+# extract_theta(fit)
+# 
+# extract_z(fit)
 ```
 
 [^1]: In the example above we specified **Stan** to only run 1 chain
