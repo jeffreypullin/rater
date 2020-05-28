@@ -5,19 +5,12 @@
 \alias{caries}
 \title{Caries ratings of whether caries are 'sound' or not (c...)}
 \format{
-A matrix
-\describe{
-  \item{ii}{item index, which item is being rated}
-  \item{jj}{rater index, which rater is doing the rater}
-  \item{y}{what rating was given}
-}
+An object of class \code{matrix} (inherits from \code{array}) with 32 rows and 6 columns.
 }
 \usage{
 caries
 }
 \description{
-A dataset containing anesthetist ratings of patient readiness for surgery for
-5 anesthetists on 45 patients with 4 categories in 'long' format. Each row
-represents one unique rating or annotation
+TODO
 }
 \keyword{datasets}
