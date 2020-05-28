@@ -5,7 +5,7 @@
 \alias{caries}
 \title{Caries ratings of whether caries are 'sound' or not (c...)}
 \format{
-An object of class \code{matrix} (inherits from \code{array}) with 32 rows and 6 columns.
+An object of class \code{data.frame} with 32 rows and 6 columns.
 }
 \usage{
 caries

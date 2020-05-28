@@ -238,7 +238,7 @@ get_model <- function(f) {
 
 #' Get the posterior samples from a rater mcmc fit object
 #'
-#' @fit A rater mcmc fit object
+#' @param fit A rater mcmc fit object
 #'
 #' @noRd
 get_samples <- function(fit) {
