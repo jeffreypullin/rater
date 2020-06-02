@@ -294,7 +294,7 @@ validate_data <- function(data, data_format) {
   if (data_format == "long") {
 
     if (!ncol(data) == 3L) {
-      stop("`data` must have exactly three columns.")
+      stop("`data` must have exactly three columns.", call. = FALSE)
     }
 
     if (!(all(c("rater", "item", "rating") %in% colnames(data)))) {
