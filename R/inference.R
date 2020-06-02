@@ -291,6 +291,13 @@ validate_data <- function(data, data_format) {
   }
   data <- as.data.frame(data)
 
+  # FIXME We should accept non-numeric data (GitHub issue: #81) but for
+  # now we explicity check that is all columns contain numeric values.
+  if (!all(vapply(data, is.numeric, FUN.VALUE = logical(1)))) {
+    stop("All columns in `data` must contain only numeric values.",
+         call. = FALSE)
+  }
+
   if (data_format == "long") {
 
     if (!ncol(data) == 3L) {
