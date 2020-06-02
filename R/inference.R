@@ -1,20 +1,34 @@
-#' Fit noisy catergrical rating models using Stan
+#' Fit statistical models of noisy catergrical rating models using Stan
 #'
-#' @param data TODO
-#' @param model Model to fit to data of class model
-#' @param method method the method used to fit the model
-#' @param data_format TODO
-#' @param inits the initialization points of the fitting algorithm
-#' @param ... extra parameters to be passed to the Stan fitting interface
+#' This functions allows the user to fit statistical models of noisy
+#' categorical rating, based on the Dawid-Skene model, using Bayesian
+#' inference. A variety of data formats and models are supported. Inference
+#' is done using Stan, allowing models to be fit efficiently, using both
+#' optimisation and Markov Chain Monte Carlo (MCMC).
 #'
-#' @return An object of type fit containing the fitted parameters
+#' @param data A 2D data object: data.frame, matrix, tibble etc. with data in
+#'   either long or grouped format.
+#' @param model Model to fit to data - must be rater_model.
+#' @param method A length 1 character vector, either "mcmc" or "optim". This
+#'   represents the fitting method used by Stan.
+#' @param data_format A length 1 character vector, either "long" or "grouped".
+#'   The format that the passed data is in. Defaults to "long".
+#' @param inits The initialization points of the fitting algorithm
+#' @param ... Extra parameters which are passed to the Stan fitting interface
 #'
-#' @details TODO
+#' @return An object of type class rater_fit containing the fitted parameters.
+#'
+#' @details The MCMC algorithm used by Stan is No U Turn Sampling.
 #'
 #' @importFrom rstan sampling optimizing
 #'
 #' @examples
-#' "TODO"
+#' # Fit a model using optimisation.
+#' optim_fit <- rater(anesthesia, dawid_skene(), method = "optim")
+#'
+#' # Fit a model using grouped data (and optimisation).
+#' grouped_fit <- rater(caries, dawid_skene(), data_format = "grouped",
+#'                      method = "optim")
 #'
 #' @export
 #'

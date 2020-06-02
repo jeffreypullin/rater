@@ -2,33 +2,45 @@
 % Please edit documentation in R/inference.R
 \name{rater}
 \alias{rater}
-\title{Fit noisy catergrical rating models using Stan}
+\title{Fit statistical models of noisy catergrical rating models using Stan}
 \usage{
 rater(data, model, method = "mcmc", data_format = "long", inits = NULL, ...)
 }
 \arguments{
-\item{data}{TODO}
+\item{data}{A 2D data object: data.frame, matrix, tibble etc. with data in
+either long or grouped format.}
 
-\item{model}{Model to fit to data of class model}
+\item{model}{Model to fit to data - must be rater_model.}
 
-\item{method}{method the method used to fit the model}
+\item{method}{A length 1 character vector, either "mcmc" or "optim". This
+represents the fitting method used by Stan.}
 
-\item{data_format}{TODO}
+\item{data_format}{A length 1 character vector, either "long" or "grouped".
+The format that the passed data is in. Defaults to "long".}
 
-\item{inits}{the initialization points of the fitting algorithm}
+\item{inits}{The initialization points of the fitting algorithm}
 
-\item{...}{extra parameters to be passed to the Stan fitting interface}
+\item{...}{Extra parameters which are passed to the Stan fitting interface}
 }
 \value{
-An object of type fit containing the fitted parameters
+An object of type class rater_fit containing the fitted parameters.
 }
 \description{
-Fit noisy catergrical rating models using Stan
+This functions allows the user to fit statistical models of noisy
+categorical rating, based on the Dawid-Skene model, using Bayesian
+inference. A variety of data formats and models are supported. Inference
+is done using Stan, allowing models to be fit efficiently, using both
+optimisation and Markov Chain Monte Carlo (MCMC).
 }
 \details{
-TODO
+The MCMC algorithm used by Stan is No U Turn Sampling.
 }
 \examples{
-"TODO"
+# Fit a model using optimisation.
+optim_fit <- rater(anesthesia, dawid_skene(), method = "optim")
+
+# Fit a model using grouped data (and optimisation).
+grouped_fit <- rater(caries, dawid_skene(), data_format = "grouped",
+                     method = "optim")
 
 }
