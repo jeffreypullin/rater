@@ -1,25 +1,17 @@
-
 data("anesthesia")
 
-anesthesia <- as.matrix(anesthesia)
-pooled_anesthesia <- anesthesia[, c(1, 3)]
+ds_fit <- rater(anesthesia, dawid_skene(), iter = 200, chains = 1)
+hds_fit <- rater(anesthesia, hier_dawid_skene(), iter = 200, chains = 1)
+ccds_fit <- rater(anesthesia, class_conditional_dawid_skene(), iter = 200,
+                  chains = 1)
 
-ds_fit <- rater(long_data(anesthesia), dawid_skene(),
-                iter = 200, chains = 1)
-
-hds_fit <- rater(long_data(anesthesia), hier_dawid_skene(),
-                 iter = 200, chains = 1)
-
-ccds_fit <- rater(long_data(anesthesia), class_conditional_dawid_skene(),
-                  iter = 200, chains = 1)
-
-ds_fit_optim <- rater(long_data(anesthesia), dawid_skene(), method = "optim")
-hds_fit_optim <- rater(long_data(anesthesia), hier_dawid_skene(),
-                       method = "optim")
-ccds_fit_optim <- rater(long_data(anesthesia), class_conditional_dawid_skene(),
+ds_fit_optim <- rater(anesthesia, dawid_skene(), method = "optim")
+hds_fit_optim <- rater(anesthesia, hier_dawid_skene(), method = "optim")
+ccds_fit_optim <- rater(anesthesia, class_conditional_dawid_skene(),
                         method = "optim")
 
-ds_fit_grouped <- rater(grouped_data(caries), dawid_skene(), iter = 200, chains = 1)
+ds_fit_grouped <- rater(caries, dawid_skene(), data_format = "grouped",
+                        iter = 200, chains = 1)
 
 ds_model <- dawid_skene()
 hds_model <- hier_dawid_skene()

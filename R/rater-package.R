@@ -8,6 +8,7 @@
 #' @useDynLib rater, .registration = TRUE
 #' @import methods
 #' @import Rcpp
+#' @importFrom RcppParallel CxxFlags RcppParallelLibs
 #' @importFrom rstan sampling
 #' @aliases rater-package
 #' @references

@@ -1,13 +1,18 @@
 #' Make a mcmc_rater fit object
 #'
 #' @param model a rater model
-#' @param draws a stanfit object
+#' @param samples a stanfit object
 #' @param data the data used to fit the model
+#' @param data_format The format of the data used to fit the model
 #'
 #' @return a rater fit object
 #'
-new_mcmc_fit <- function(model, draws, data) {
-  new <- list(model = model, draws = draws, data = data)
+#' @noRd
+new_mcmc_fit <- function(model, samples, data, data_format) {
+  new <- list(model = model,
+              samples = samples,
+              data = data,
+              data_format = data_format)
   class(new) <- c("mcmc_fit", "rater_fit")
   new
 }
@@ -17,11 +22,16 @@ new_mcmc_fit <- function(model, draws, data) {
 #' @param model a rater model
 #' @param estimates a stan optimisation object
 #' @param data the data used to fit the model
+#' @param data_format The format of the data used to fit the model
 #'
 #' @return a rater fit object
 #'
-new_optim_fit <- function(model, estimates, data) {
-  new <- list(model = model, estimates = estimates, data = data)
+#' @noRd
+new_optim_fit <- function(model, estimates, data, data_format) {
+  new <- list(model = model,
+              estimates = estimates,
+              data = data,
+              data_format = data_format)
   class(new) <- c("optim_fit", "rater_fit")
   new
 }
@@ -43,7 +53,7 @@ print.mcmc_fit <- function(x, ...) {
   max.print_default <- options("max.print")[[1]]
   options(max.print = 80)
   cat("Samples:\n\n")
-  print(get_draws(x))
+  print(get_samples(x))
   cat("\n")
   options(max.print = max.print_default)
 }
@@ -226,8 +236,13 @@ get_model <- function(f) {
   f$model
 }
 
-get_draws <- function(f) {
-  f$draws
+#' Get the posterior samples from a rater mcmc fit object
+#'
+#' @param fit A rater mcmc fit object
+#'
+#' @noRd
+get_samples <- function(fit) {
+  fit$samples
 }
 
 get_estimates <- function(f) {

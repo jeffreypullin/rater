@@ -19,8 +19,8 @@ posterior_samples <- function(fit, pars = c("pi", "theta"), ...) {
   for (par in pars) {
     par <- match.arg(par, c("pi", "theta", "z"))
     samples <- switch(par,
-      "pi"    = c(samples, pi = list(rstan::extract(fit$draws)$pi)),
-      "theta" = c(samples, theta = list(rstan::extract(fit$draws)$theta)),
+      "pi"    = c(samples, pi = list(rstan::extract(get_samples(fit))$pi)),
+      "theta" = c(samples, theta = list(rstan::extract(get_samples(fit))$theta)),
       "z"     = stop("Cannot return draws for marginalised discrete parameter",
                      call. = FALSE),
       stop("Invalid pars argument", call. = FALSE)
@@ -45,8 +45,10 @@ posterior_interval.mcmc_fit <- function(object,
                                         ...) {
 
   fit <- object
-  K <- fit$data$stan_data$K
-  J <- fit$data$stan_data$J
+  # We could keep the stan data after fitting, but it doesn't seem worth
+  # the added complexity.
+  K <- max(fit$data$rating)
+  J <- max(fit$data$rater)
 
   intervals <- list()
   for (i in 1:length(pars)) {
@@ -115,7 +117,7 @@ posterior_interval.optim_fit <- function(object,
 #'   statistical interpretation of the values.
 #'
 #' @examples
-#' fit <- rater(long_data(anesthesia), dawid_skene(), method = "optim")
+#' fit <- rater(anesthesia, dawid_skene(), method = "optim")
 #' point_estimate(fit, pars = "pi")
 #'
 #' @export
@@ -180,10 +182,10 @@ z_point_estimate <- function(fit, ...) {
 #' @export
 z_point_estimate.mcmc_fit <- function(fit, ...) {
   # We can't use posterior_samples here because these are not technically draws.
-  log_p_z_samps <- rstan::extract(fit$draws)$log_p_z
+  log_p_z_samps <- rstan::extract(get_samples(fit))$log_p_z
   p_z_samps <- aperm(apply(log_p_z_samps, c(1, 2), softmax), c(2, 3, 1))
   p_z <- apply(p_z_samps, c(2, 3), mean)
-  if (is.grouped_data(fit$data)) {
+  if (fit$data_format == "grouped") {
     p_z <- enlarge_z(p_z, fit)
   }
   p_z
@@ -193,11 +195,12 @@ z_point_estimate.mcmc_fit <- function(fit, ...) {
 #' @export
 z_point_estimate.optim_fit <- function(fit, ...) {
   par <- fit$estimates$par
-  stan_data <- fit$data$stan_data
+  I <- max(fit$data$item)
+  K <- max(fit$data$rating)
   log_p_z_values <- par[grep("log_p_z", names(par))]
-  log_p_z <- matrix(log_p_z_values, nrow = stan_data$I, ncol = stan_data$K)
+  log_p_z <- matrix(log_p_z_values, nrow = I, ncol = K)
   p_z <- t(apply(log_p_z, 1, softmax))
-  if (is.grouped_data(fit$data)) {
+  if (fit$data_format == "grouped") {
     enlarge_z(p_z, fit)
   }
   p_z
@@ -272,8 +275,8 @@ theta_point_estimate.optim_fit <- function(fit, which = NULL, ...) {
 theta_point_estimate_ds_optim <- function(fit, which, ...) {
   par <- fit$estimates$par
   theta_values <- par[grep("\\btheta\\b", names(par))]
-  K <- fit$data$stan_data$K
-  J <- fit$data$stan_data$J
+  K <- max(fit$data$rating)
+  J <- max(fit$data$rater)
   if (is.null(which)) {
     which <- 1:J
   }
@@ -312,8 +315,8 @@ validate_which <- function(which, J) {
 }
 
 enlarge_z <- function(p_z, fit) {
-  stopifnot(is.grouped_data(fit$data))
-  p_z[rep(1:nrow(p_z), fit$data$stan_data$tally), ]
+  stopifnot(fit$data_format == "grouped")
+  p_z[rep(1:nrow(p_z), fit$data$n), ]
 }
 
 unspool_cc_theta <- function(cc_theta) {
