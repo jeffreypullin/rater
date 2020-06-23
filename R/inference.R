@@ -90,7 +90,7 @@ as_stan_data <- function(data, data_format) {
        J = max(data$rater),
        K = max(data$rating),
        ii = data$item,
-       jj = data$rating,
+       jj = data$rater,
        y = data$rating
       )
   } else if (data_format == "grouped") {
