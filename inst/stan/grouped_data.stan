@@ -15,7 +15,7 @@ parameters {
 
 transformed parameters {
   vector[K] log_p_z[N];
-  // use the prior for the prevalance
+  // use the prior for the prevalence
   for (i in 1:N) {
     log_p_z[i] = log(pi);
     for (j in 1:J)
