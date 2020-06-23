@@ -4,7 +4,6 @@
 #'
 #' @docType package
 #' @name rater-package
-#' @aliases rater
 #' @useDynLib rater, .registration = TRUE
 #' @import methods
 #' @import Rcpp

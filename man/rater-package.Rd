@@ -3,7 +3,6 @@
 \docType{package}
 \name{rater-package}
 \alias{rater-package}
-\alias{rater}
 \title{The 'rater' package.}
 \description{
 A DESCRIPTION OF THE PACKAGE
