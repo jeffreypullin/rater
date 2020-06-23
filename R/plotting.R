@@ -1,7 +1,7 @@
-#' Plot the popuation prevalence estimates
+#' Plot the prevalence estimates
 #'
 #' @param fit rater fit object
-#' @return Plot of the population prevelance esitmates extracted in fits
+#' @return Plot of the prevalence estimates extracted in fits
 #'
 #' @export
 #' @importFrom ggplot2 ggplot aes geom_bar geom_text coord_cartesian labs
@@ -19,7 +19,7 @@ plot_pi <- function(fit) {
     ggplot2::geom_text(ggplot2::aes(label = .data$round_pi), vjust = -3) +
     ggplot2::coord_cartesian(ylim = c(0, 1)) +
     ggplot2::labs(x = "Category",
-                  y = "Pop. prevelance prob.") +
+                  y = "Prevalence prob.") +
     ggplot2::theme_bw() +
     NULL
 

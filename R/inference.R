@@ -1,4 +1,4 @@
-#' Fit statistical models of noisy catergrical rating models using Stan
+#' Fit statistical models of noisy categorical rating data using Stan
 #'
 #' This functions allows the user to fit statistical models of noisy
 #' categorical rating, based on the Dawid-Skene model, using Bayesian

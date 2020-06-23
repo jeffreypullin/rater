@@ -119,7 +119,7 @@ plot.rater_fit <- function(x, pars = c("pi", "theta", "z"), ...) {
       "latent_class" = plot_z(x),
       # Luckily "p" will fall through correctly.
       "pi" = plot_pi(x),
-      "prevelance" = plot_pi(x),
+      "prevalence" = plot_pi(x),
       stop("Invalid pars argument", call. = FALSE)
     )
   }
