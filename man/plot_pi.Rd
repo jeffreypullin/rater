@@ -2,7 +2,7 @@
 % Please edit documentation in R/plotting.R
 \name{plot_pi}
 \alias{plot_pi}
-\title{Plot the population prevalence estimates}
+\title{Plot the prevalence estimates}
 \usage{
 plot_pi(fit)
 }
@@ -10,8 +10,8 @@ plot_pi(fit)
 \item{fit}{rater fit object}
 }
 \value{
-Plot of the population prevalence estimates extracted in fits
+Plot of the prevalence estimates extracted in fits
 }
 \description{
-Plot the population prevalence estimates
+Plot the prevalence estimates
 }
