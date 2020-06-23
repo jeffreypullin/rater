@@ -2,15 +2,9 @@
 % Please edit documentation in R/extract.R
 \name{z_point_estimate}
 \alias{z_point_estimate}
-\alias{z_point_estimate.mcmc_fit}
-\alias{z_point_estimate.optim_fit}
 \title{Extract latent class estimates from a fit}
 \usage{
 z_point_estimate(fit, ...)
-
-\method{z_point_estimate}{mcmc_fit}(fit, ...)
-
-\method{z_point_estimate}{optim_fit}(fit, ...)
 }
 \arguments{
 \item{fit}{fit object}
@@ -18,8 +12,14 @@ z_point_estimate(fit, ...)
 \item{...}{extra args}
 }
 \value{
-Probalistic latent class measurements
+Latent class estimates: A vector length I consisting of whole
+  numbers from 1 to K.
 }
 \description{
 Extract latent class estimates from a fit
+}
+\details{
+This function returns actual estimates of the latent class i.e.
+  whole numbers from 1 to K. These are found by taking the class with the
+  highest probability.
 }

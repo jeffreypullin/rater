@@ -146,6 +146,6 @@ plot_z.matrix <- function(x, ...) {
 #' @export
 #'
 plot_z.rater_fit <- function(x, ...){
-  p_z <- z_point_estimate(x)
+  p_z <- class_probabilities(x)
   plot_z.matrix(p_z)
 }

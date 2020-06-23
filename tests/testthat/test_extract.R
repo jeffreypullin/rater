@@ -77,16 +77,35 @@ test_that("point estimate output for pi has correct form", {
 })
 
 test_that("point estimate output for z has the correct form", {
-  # mcmc
+  # MCMC
   out <- point_estimate(ds_fit, pars = "z")[[1]]
-  expect_equal(dim(out), c(I, K))
-  expect_equal(rowSums(out), rep(1, I))
-  # optim
+  expect_equal(length(out), I)
+  expect_true(all(out %in% 1:K))
+
+  # Optimisation
   out <- point_estimate(ds_fit_optim, pars = "z")[[1]]
+  expect_equal(length(out), I)
+  expect_true(all(out %in% 1:K))
+
+  # Grouped data MCMC
+  out <- point_estimate(ds_fit_grouped, pars = "z")[[1]]
+  expect_equal(length(out), I_caries)
+  expect_true(all(out %in%  1:K_caries))
+})
+
+test_that("class_probabilites output has correct form", {
+  # MCMC
+  out <- class_probabilities(ds_fit)
   expect_equal(dim(out), c(I, K))
   expect_equal(rowSums(out), rep(1, I))
-  # grouped
-  out <- point_estimate(ds_fit_grouped, pars = "z")[[1]]
+
+  # Optimisation
+  out <- class_probabilities(ds_fit_optim)
+  expect_equal(dim(out), c(I, K))
+  expect_equal(rowSums(out), rep(1, I))
+
+  # Grouped data MCMC
+  out <- class_probabilities(ds_fit_grouped)
   expect_equal(dim(out), c(I_caries, K_caries))
   expect_equal(rowSums(out), rep(1, I_caries))
 })
