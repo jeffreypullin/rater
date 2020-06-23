@@ -2,7 +2,7 @@
 % Please edit documentation in R/inference.R
 \name{rater}
 \alias{rater}
-\title{Fit statistical models of noisy catergrical rating models using Stan}
+\title{Fit statistical models of noisy categorical rating data using Stan}
 \usage{
 rater(data, model, method = "mcmc", data_format = "long", inits = NULL, ...)
 }
