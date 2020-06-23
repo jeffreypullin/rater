@@ -1,5 +1,15 @@
 context("rater")
 
+test_that("rater infernce is 'correct'", {
+  # TODO This is a stopgap solution designed to detect large changes in
+  # behaviour. In future, it would be great to have a full framework to assess
+  # the the performance of the inference.
+  pi_est <- point_estimate(ds_fit_optim, pars = "pi")[[1]]
+  # Correct value is 0.41.
+  expect_lt(pi_est[[2]], 0.45)
+  expect_gt(pi_est[[2]], 0.35)
+})
+
 test_that("rater returns objects of the correct type", {
 
   expect_equal(is.rater_fit(ds_fit), TRUE)
