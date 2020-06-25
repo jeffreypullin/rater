@@ -81,7 +81,7 @@ plot_theta <- function(fit, which = NULL) {
   plot
 }
 
-#' Generic to plot z (latent class)
+#' Generic to plot the latent class probabilites
 #'
 #' @param x an object
 #' @param ... extra stuff
@@ -91,8 +91,8 @@ plot_theta <- function(fit, which = NULL) {
 #'
 #' @export
 #'
-plot_z <- function(x, ...) {
-  UseMethod("plot_z", x)
+plot_class_probabilities <- function(x, ...) {
+  UseMethod("plot_class_probabilities", x)
 }
 
 #' Plot the latent class estimates of a matrix
@@ -106,7 +106,7 @@ plot_z <- function(x, ...) {
 #'
 #' @export
 #'
-plot_z.matrix <- function(x, ...) {
+plot_class_probabilities.matrix <- function(x, ...) {
 
   # We could validate more stringently here if requrired
   if (!is.numeric(x)) {
@@ -145,7 +145,7 @@ plot_z.matrix <- function(x, ...) {
 #'
 #' @export
 #'
-plot_z.rater_fit <- function(x, ...){
+plot_class_probabilities.rater_fit <- function(x, ...){
   p_z <- class_probabilities(x)
-  plot_z.matrix(p_z)
+  plot_class_probabilities.matrix(p_z)
 }

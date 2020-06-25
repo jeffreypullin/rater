@@ -102,12 +102,14 @@ print.optim_fit <- function(x, ...) {
 #'
 #' @export
 #'
-plot.rater_fit <- function(x, pars = c("pi", "theta", "z"), ...) {
+plot.rater_fit <- function(x,
+                           pars = c("pi", "theta", "class_probabilities"),
+                           ...) {
   dots <- list(...)
   which <- dots$which
 
   plot_names <- c("theta", "raters", "pi",
-                  "prevalence", "z", "latent_class")
+                  "prevalence", "class_probabilities", "latent_class")
 
   plots <- list()
   for (i in seq_along(pars)) {
@@ -115,11 +117,12 @@ plot.rater_fit <- function(x, pars = c("pi", "theta", "z"), ...) {
     plots[[i]] <- switch(par,
       "theta" = plot_theta(x, which = which),
       "raters" = plot_theta(x, which = which),
-      "z" = plot_z(x),
-      "latent_class" = plot_z(x),
+      "class_probabilities" = plot_class_probabilities(x),
+      "latent_class" = plot_class_probabilities(x),
       # Luckily "p" will fall through correctly.
       "pi" = plot_pi(x),
       "prevalence" = plot_pi(x),
+      "z" = stop("Cannot plot z directly.", call. = FALSE),
       stop("Invalid pars argument", call. = FALSE)
     )
   }
