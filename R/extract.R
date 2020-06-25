@@ -39,6 +39,7 @@ posterior_samples <- function(fit, pars = c("pi", "theta"), ...) {
 #' @importFrom rstantools posterior_interval
 #'
 #' @export
+#' @export posterior_interval
 posterior_interval.mcmc_fit <- function(object,
                                         prob = 0.9,
                                         pars = c("pi", "theta"),
