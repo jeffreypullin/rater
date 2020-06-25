@@ -4,10 +4,12 @@
 \alias{summary.mcmc_fit}
 \title{Summary of mcmc fit}
 \usage{
-\method{summary}{mcmc_fit}(object, ...)
+\method{summary}{mcmc_fit}(object, n_pars = 8, ...)
 }
 \arguments{
 \item{object}{object of type rater fit}
+
+\item{n_pars}{the number of pi/theta parameters and z 'items' to display}
 
 \item{...}{other args passed to function}
 }

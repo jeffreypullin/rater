@@ -109,6 +109,7 @@ plot.rater_fit <- function(x, pars = c("pi", "theta", "z"), ...) {
 #' Summary of mcmc fit
 #'
 #' @param object object of type rater fit
+#' @param n_pars the number of pi/theta parameters and z 'items' to display
 #' @param ... other args passed to function
 #'
 #' @method summary mcmc_fit
@@ -160,11 +161,12 @@ summary.mcmc_fit <- function(object, n_pars = 8, ...) {
 #' Summary of optim fit
 #'
 #' @param object object of type rater fit
+#' @param n_pars the number of pi/theta parameters and z 'items' to display
 #' @param ... other args passed to function
 #'
 #' @method summary optim_fit
 #' @export
-summary.optim_fit <- function(object, n_pars = 10, ...) {
+summary.optim_fit <- function(object, n_pars = 8, ...) {
   x <- object
   fit <- object
 

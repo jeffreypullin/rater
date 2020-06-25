@@ -1,9 +1,11 @@
 context("fit_class")
 
-test_that("summary works for fit", {
+test_that("print works for fit", {
 
-  expect_output(summary(ds_fit), "Bayesian Dawid and Skene Model with MCMC draws")
-  expect_output(summary(hds_fit), "Bayesian Hierarchical Dawid and Skene Model with MCMC draws")
+  expect_output(print(ds_fit),
+                "Bayesian Dawid and Skene Model with MCMC draws")
+  expect_output(print(hds_fit),
+                "Bayesian Hierarchical Dawid and Skene Model with MCMC draws")
 
 })
 
