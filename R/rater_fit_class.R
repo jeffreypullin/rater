@@ -227,68 +227,6 @@ is.rater_fit <- function(x) {
   inherits(x, "rater_fit")
 }
 
-#' Generic to extract theta from a fit
-#'
-#' @param fit an object
-#' @param which which rater to select
-#' @param ... extra args
-#'
-#' @export
-#'
-extract_theta <- function (fit, which = NULL, ...) {
-   UseMethod("extract_theta", fit)
-}
-
-#' Generic to extract pi from a fit
-#'
-#' @param fit an object
-#' @param ... extra stuff
-#'
-#' @export
-#'
-extract_pi <- function(fit, ...) {
-  UseMethod("extract_pi", fit)
-}
-
-#' Generic to extract z (latent class) from a fit
-#'
-#' @param fit an object
-#' @param ... extra stuff
-#'
-#' @export
-#'
-extract_z <- function(fit, ...) {
-  UseMethod("extract_z", fit)
-}
-
-#' Function to extract prevalence from a fit
-#'
-#' @param fit an object
-#' @param ... extra stuff
-#'
-#' @export
-#'
-extract_prevalence <- extract_pi
-
-#' Generic to extract (latent class) from a fit
-#'
-#' @param fit an object
-#' @param ... extra stuff
-#'
-#' @export
-#'
-extract_latent_class <- extract_z
-
-#' Function to extract raters from a fit
-#'
-#' @param fit an object
-#' @param which which rater to select
-#' @param ... extra args
-#'
-#' @export
-#'
-extract_raters <- extract_theta
-
 get_model <- function(f) {
   f$model
 }
