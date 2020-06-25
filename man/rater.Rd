@@ -10,7 +10,9 @@ rater(data, model, method = "mcmc", data_format = "long", inits = NULL, ...)
 \item{data}{A 2D data object: data.frame, matrix, tibble etc. with data in
 either long or grouped format.}
 
-\item{model}{Model to fit to data - must be rater_model.}
+\item{model}{Model to fit to data - must be rater_model or a character
+string - the name of the model. If the character string is used, the
+prior parameters will be set to their default values.}
 
 \item{method}{A length 1 character vector, either "mcmc" or "optim". This
 represents the fitting method used by Stan.}
