@@ -8,7 +8,9 @@
 #'
 #' @param data A 2D data object: data.frame, matrix, tibble etc. with data in
 #'   either long or grouped format.
-#' @param model Model to fit to data - must be rater_model.
+#' @param model Model to fit to data - must be rater_model or a character
+#'   string - the name of the model. If the character string is used, the
+#'   prior parameters will be set to their default values.
 #' @param method A length 1 character vector, either "mcmc" or "optim". This
 #'   represents the fitting method used by Stan.
 #' @param data_format A length 1 character vector, either "long" or "grouped".
@@ -43,6 +45,8 @@ rater <- function(data,
   data_format <- match.arg(data_format, choices = c("long", "grouped"))
 
   data <- validate_input(data, model, data_format)
+  model <- validate_model(model)
+
   stan_data_list <- as_stan_data(data, data_format)
 
   # Check the priors and data are consistent.
@@ -249,6 +253,31 @@ get_stan_file <- function(data_format, model) {
   file
 }
 
+#' Helper to check if the passed model is valid.
+#'
+#' This function will return a rater_model object if one can be constrcuted
+#' from the input.
+#'
+#' @param model The `model` argument passed to [rater()]
+#'
+#' @noRd
+validate_model <- function(model) {
+
+  if (is.character(model)) {
+    model <- switch(model,
+      "dawid_skene" = dawid_skene(),
+      "hier_dawid_skene" = hier_dawid_skene(),
+      "class_conditional_dawid_skene" = class_conditional_dawid_skene(),
+      stop("Invalid model string specification.", .call = FALSE))
+  }
+
+  if (!is.rater_model(model)) {
+    stop("`model` must be a rater model object.", call. = FALSE)
+  }
+
+  model
+}
+
 #' Helper to check if passed data and model are valid and consistent
 #'
 #' @param data The `data` argument passed to [rater()]
@@ -257,10 +286,6 @@ get_stan_file <- function(data_format, model) {
 #'
 #' @noRd
 validate_input <- function(data, model, data_format) {
-
-  if (!is.rater_model(model)) {
-    stop("`model` must be a rater model object.", call. = FALSE)
-  }
 
   if (data_format == "grouped" & !is.dawid_skene(model)) {
     stop("Grouped data can only be usesed with the Dawid and Skene model",
