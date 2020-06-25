@@ -204,10 +204,10 @@ class_probabilities <- function(fit, ...) {
 #' @rdname class_probabilities
 #' @export
 class_probabilities.mcmc_fit <- function(fit, ...) {
-  # We can't use posterior_samples here because these are not technically
-  # draws.
+  # We can't use posterior_samples here because these are not technically draws.
   log_p_z_samps <- rstan::extract(get_samples(fit))$log_p_z
-  p_z_samps <- aperm(apply(log_p_z_samps, c(1, 2), softmax), c(2, 3, 1))
+  p_z_samps <- apply(log_p_z_samps, c(1, 2), softmax)
+  p_z_samps <- aperm(p_z_samps, c(2, 3, 1))
   p_z <- apply(p_z_samps, c(2, 3), mean)
   if (fit$data_format == "grouped") {
     p_z <- enlarge_z(p_z, fit)

@@ -45,17 +45,7 @@ new_optim_fit <- function(model, estimates, data, data_format) {
 #'
 # nocov start
 print.mcmc_fit <- function(x, ...) {
-  cat("Model:\n\n")
-  print(get_model(x))
-  cat("\n")
-
-  # stop print/show.stanfit from going crazy...
-  max.print_default <- options("max.print")[[1]]
-  options(max.print = 80)
-  cat("Samples:\n\n")
-  print(get_samples(x))
-  cat("\n")
-  options(max.print = max.print_default)
+  cat(get_name(get_model(x)), "with MCMC draws.")
 }
 # nocov end
 
@@ -68,24 +58,7 @@ print.mcmc_fit <- function(x, ...) {
 #'
 # nocov start
 print.optim_fit <- function(x, ...) {
-  cat("Fit method: Optimisation\n\n")
-
-  cat("Model:\n\n")
-  print(get_model(x))
-  cat("\n")
-
-  cat("Estimates:\n")
-
-  max.print_default <- options("max.print")[[1]]
-  options(max.print = 10)
-  est_data <- data.frame(get_estimates(x)$par)
-  colnames(est_data) <- NULL
-  print(est_data)
-  cat("\n")
-  options(max.print = max.print_default)
-
-  cat(paste0("Log probability: ", round(x$estimates$value, 4), "\n"))
-  cat(paste0("Fit converged: ", as.logical(x$estimates$return_code - 1), "\n"))
+  cat(get_name(get_model(x)), "with MAP estimates.")
 }
 # nocov end
 
@@ -139,9 +112,49 @@ plot.rater_fit <- function(x, pars = c("pi", "theta", "z"), ...) {
 #' @param ... other args passed to function
 #'
 #' @method summary mcmc_fit
+#'
 #' @export
-summary.mcmc_fit <- function(object, ...) {
-  cat(get_name(get_model(object)), "with MCMC draws")
+summary.mcmc_fit <- function(object, n_pars = 8, ...) {
+  fit <- object
+
+  # Prepare pi.
+  pi_est <- pi_to_long_format(pi_point_estimate(fit))
+  colnames(pi_est) <- "mean"
+  pi_interval <- posterior_interval(fit, pars = "pi")
+  pi <- cbind(pi_est, pi_interval)
+
+  # Prepare theta.
+  theta_est <- theta_to_long_format(theta_point_estimate(fit))
+  colnames(theta_est) <- "mean"
+  theta_interval <- posterior_interval(fit, pars = "theta")
+  theta <- cbind(theta_est, theta_interval)
+
+  pars <- rbind(pi, theta)
+
+  # Prepare z.
+  class_probs <- class_probabilities(fit)
+  colnames(class_probs) <- sprintf("Pr(z = %s)", 1:ncol(class_probs))
+  z <- z_to_long_format(apply(class_probs, 1, which.max))
+  colnames(z) <- "MAP"
+  z_out <- cbind(z, class_probs)
+
+  # Do the actual printing:
+
+  cat("Model:\n")
+  print(get_model(fit))
+
+  cat("\nFitting method: MCMC\n\n")
+
+  cat("\npi/theta samples:\n")
+  print(round(head(pars, n_pars), 2))
+  n_remaining <- length(pars) - n_pars
+  cat("# ... with", n_remaining, "more parameters\n")
+
+  cat("\nz:\n")
+  print(round(head(z_out, n_pars), 2))
+  n_remaining_z <- nrow(z) - n_pars
+  cat("# ... with", n_remaining_z, "more items\n")
+
 }
 
 #' Summary of optim fit
@@ -151,8 +164,47 @@ summary.mcmc_fit <- function(object, ...) {
 #'
 #' @method summary optim_fit
 #' @export
-summary.optim_fit <- function(object, ...) {
-  cat(get_name(get_model(object)), "with MAP estimates")
+summary.optim_fit <- function(object, n_pars = 10, ...) {
+  x <- object
+  fit <- object
+
+  # Prepare pi.
+  pi <- pi_to_long_format(pi_point_estimate(fit))
+  colnames(pi) <- "mean"
+
+  # Prepare theta.
+  theta <- theta_to_long_format(theta_point_estimate(fit))
+  colnames(theta) <- "mean"
+
+  pars <- rbind(pi, theta)
+
+  # Prepare z.
+  class_probs <- class_probabilities(fit)
+  colnames(class_probs) <- sprintf("Pr(z = %s)", 1:ncol(class_probs))
+  z <- z_to_long_format(apply(class_probs, 1, which.max))
+  colnames(z) <- "MAP"
+  z_out <- cbind(z, class_probs)
+
+  # Do the actual printing:
+
+  cat("Model:\n")
+  print(get_model(fit))
+
+  cat("\nFitting method: Optimisation\n")
+
+  cat("\npi/theta estimates:\n")
+  print(round(head(pars, n_pars), 2))
+  n_remaining <- length(pars) - n_pars
+  cat("# ... with", n_remaining, "more parameters\n")
+
+  cat("\nz:\n")
+  print(round(head(z_out, n_pars), 2))
+  n_remaining_z <- nrow(z) - n_pars
+  cat("# ... with", n_remaining_z, "more items\n")
+
+  cat("\n")
+  cat(paste0("Log probability: ", round(x$estimates$value, 4), "\n"))
+  cat(paste0("Fit converged: ", as.logical(x$estimates$return_code - 1), "\n"))
 }
 
 #' Check if object is of type fit
