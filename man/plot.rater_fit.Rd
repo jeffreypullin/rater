@@ -4,7 +4,7 @@
 \alias{plot.rater_fit}
 \title{Plot a rater_fit object}
 \usage{
-\method{plot}{rater_fit}(x, pars = c("pi", "theta", "z"), ...)
+\method{plot}{rater_fit}(x, pars = c("pi", "theta", "class_probabilities"), ...)
 }
 \arguments{
 \item{x}{A rater_fit object}

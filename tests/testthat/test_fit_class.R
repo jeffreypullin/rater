@@ -25,8 +25,8 @@ test_that("plot.fit dispatches correctly", {
   raters_plot <- plot_theta(ds_fit)
   expect_equal(plot(ds_fit, pars = "theta"), raters_plot)
 
-  latent_class_plot <- plot_z(ds_fit)
-  expect_equal(plot(ds_fit, pars = "z"), latent_class_plot)
+  latent_class_plot <- plot_class_probabilities(ds_fit)
+  expect_equal(plot(ds_fit, pars = "latent_class"), latent_class_plot)
 
   prevalence_plot <- plot_pi(ds_fit)
   expect_equal(plot(ds_fit, pars = "pi"), prevalence_plot)
