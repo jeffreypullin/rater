@@ -4,10 +4,12 @@
 \alias{summary.optim_fit}
 \title{Summary of optim fit}
 \usage{
-\method{summary}{optim_fit}(object, ...)
+\method{summary}{optim_fit}(object, n_pars = 8, ...)
 }
 \arguments{
 \item{object}{object of type rater fit}
+
+\item{n_pars}{the number of pi/theta parameters and z 'items' to display}
 
 \item{...}{other args passed to function}
 }
