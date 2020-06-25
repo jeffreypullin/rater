@@ -111,7 +111,8 @@ posterior_interval.optim_fit <- function(object,
 #'
 #' @details If the passed fit object was fit using MCMC then the posterior
 #'   means are used. If it was fit through optimisation the MAP esimates
-#'   are returned.
+#'   are returned. The z parameter returned is which value of the class
+#'   probabilities is largest.
 #'
 #' @return A named list of the parameter values. See details for the precise
 #'   statistical interpretation of the values.
@@ -170,18 +171,41 @@ pi_point_estimate.optim_fit <- function(fit, ...) {
 #' @param fit fit object
 #' @param ... extra args
 #'
-#' @return Probalistic latent class measurements
+#' @details This function returns actual estimates of the latent class i.e.
+#'   whole numbers from 1 to K. These are found by taking the class with the
+#'   highest probability.
+#'
+#' @return Latent class estimates: A vector length I consisting of whole
+#'   numbers from 1 to K.
 #'
 #' @export
 #'
 z_point_estimate <- function(fit, ...) {
-  UseMethod("z_point_estimate")
+  p_z <- class_probabilities(fit, ...)
+  # which.max only takes the first maximum if multiple are found but this
+  # is not a problem as we are dealing with floats.
+  apply(p_z, 1, which.max)
 }
 
-#' @rdname z_point_estimate
+#' Extract latent class probabilites from an object.
+#'
+#' @param fit A rater fit object.
+#' @param ... Extra arguments.
+#'
+#' @return A I * K matrix where each element is the probabily of item i being
+#'   of class k.
+#'
 #' @export
-z_point_estimate.mcmc_fit <- function(fit, ...) {
-  # We can't use posterior_samples here because these are not technically draws.
+#'
+class_probabilities <- function(fit, ...) {
+  UseMethod("class_probabilities")
+}
+
+#' @rdname class_probabilities
+#' @export
+class_probabilities.mcmc_fit <- function(fit, ...) {
+  # We can't use posterior_samples here because these are not technically
+  # draws.
   log_p_z_samps <- rstan::extract(get_samples(fit))$log_p_z
   p_z_samps <- aperm(apply(log_p_z_samps, c(1, 2), softmax), c(2, 3, 1))
   p_z <- apply(p_z_samps, c(2, 3), mean)
@@ -191,9 +215,9 @@ z_point_estimate.mcmc_fit <- function(fit, ...) {
   p_z
 }
 
-#' @rdname z_point_estimate
+#' @rdname class_probabilities
 #' @export
-z_point_estimate.optim_fit <- function(fit, ...) {
+class_probabilities.optim_fit <- function(fit, ...) {
   par <- fit$estimates$par
   I <- max(fit$data$item)
   K <- max(fit$data$rating)
