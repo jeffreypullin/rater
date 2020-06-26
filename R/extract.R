@@ -360,3 +360,76 @@ unspool_cc_theta <- function(cc_theta) {
   }
   theta_out
 }
+
+#' Retrive MCMC convergence diagnoistics for a rater fit
+#'
+#' @param fit an MCMC rater_fit object
+#' @param pars the parameters to return the diagnostics for
+#' @param diagnositics the MCMC diagnostics to return
+#'
+#' @return A matrix where the columns represent different diagnostics and the
+#'   rows are different parameters.
+#'
+#' @importFrom rstan extract Rhat ess_bulk
+#'
+#' @export
+#'
+mcmc_diagnostics <- function(fit,
+                             pars = c("pi", "theta")
+                             ) {
+
+  if (inherits(fit, "optim_fit")) {
+    stop("Cannot extract MCMC diagnositcs from a optimisation fit.",
+         call. = FALSE)
+  }
+
+  if ("z" %in% pars) {
+    stop("Cannot extract MCMC diagnostics for the latent class.",
+         call. = FALSE)
+  }
+
+  diagnostics <- matrix(nrow = 0, ncol = 2)
+
+  if ("pi" %in% pars) {
+    K <- fit$stan_data$K
+    pi_diagnostics <- matrix(nrow = K, ncol = 2)
+    row_names <- character(K)
+    draws <- rstan::extract(get_samples(fit), pars = "pi", permuted = FALSE)
+    for (i in 1:K) {
+      name <- paste0("pi[", i, "]")
+      pi_diagnostics[i, 1] <- rstan::Rhat(draws[, , name])
+      pi_diagnostics[i, 2] <- rstan::ess_bulk(draws[, , name])
+      row_names[[i]] <- name
+    }
+    colnames(pi_diagnostics) <- c("Rhat", "ess_bulk")
+    rownames(pi_diagnostics) <- row_names
+
+    diagnostics <- rbind(diagnostics, pi_diagnostics)
+  }
+
+  if ("theta" %in% pars) {
+    K <- fit$stan_data$K
+    J <- fit$stan_data$J
+    theta_diagnostics <- matrix(nrow = J * K * K, ncol = 2)
+    row_names <- character(J * K * K)
+    draws <- rstan::extract(get_samples(fit), pars = "theta", permuted = FALSE)
+    n <- 1
+    for (j in 1:J) {
+      for (k in 1:K) {
+        for (i in 1:K) {
+          stan_name <- sprintf("theta[%s,%s,%s]", j, k, i)
+          theta_diagnostics[n, 1] <- rstan::Rhat(draws[, , stan_name])
+          theta_diagnostics[n, 2] <- rstan::ess_bulk(draws[, , stan_name])
+          row_names[[n]] <- sprintf("theta[%s, %s, %s]", j, k, i)
+          n <- n + 1
+        }
+      }
+    }
+    colnames(theta_diagnostics) <- c("Rhat", "ess_bulk")
+    rownames(theta_diagnostics) <- row_names
+
+    diagnostics <- rbind(diagnostics, theta_diagnostics)
+  }
+
+  diagnostics
+}
