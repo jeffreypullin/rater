@@ -125,13 +125,15 @@ summary.mcmc_fit <- function(object, n_pars = 8, ...) {
   pi_est <- pi_to_long_format(pi_point_estimate(fit))
   colnames(pi_est) <- "mean"
   pi_interval <- posterior_interval(fit, pars = "pi")
-  pi <- cbind(pi_est, pi_interval)
+  pi_mcmc_diagnostics <- mcmc_diagnostics(fit, pars = "pi")
+  pi <- cbind(pi_est, pi_interval, pi_mcmc_diagnostics)
 
   # Prepare theta.
   theta_est <- theta_to_long_format(theta_point_estimate(fit))
   colnames(theta_est) <- "mean"
   theta_interval <- posterior_interval(fit, pars = "theta")
-  theta <- cbind(theta_est, theta_interval)
+  theta_mcmc_diagnostics <- mcmc_diagnostics(fit, pars = "theta")
+  theta <- cbind(theta_est, theta_interval, theta_mcmc_diagnostics)
 
   pars <- rbind(pi, theta)
 
@@ -147,7 +149,7 @@ summary.mcmc_fit <- function(object, n_pars = 8, ...) {
   cat("Model:\n")
   print(get_model(fit))
 
-  cat("\nFitting method: MCMC\n\n")
+  cat("\nFitting method: MCMC\n")
 
   cat("\npi/theta samples:\n")
   print(round(head(pars, n_pars), 2))
