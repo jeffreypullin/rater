@@ -45,7 +45,7 @@ new_optim_fit <- function(model, estimates, stan_data, data_format) {
 #'
 # nocov start
 print.mcmc_fit <- function(x, ...) {
-  cat(get_name(get_model(x)), "with MCMC draws.")
+  cat(get_name(get_model(x)), "with MCMC draws.\n")
 }
 # nocov end
 
@@ -58,7 +58,7 @@ print.mcmc_fit <- function(x, ...) {
 #'
 # nocov start
 print.optim_fit <- function(x, ...) {
-  cat(get_name(get_model(x)), "with MAP estimates.")
+  cat(get_name(get_model(x)), "with MAP estimates.\n")
 }
 # nocov end
 
