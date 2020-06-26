@@ -44,8 +44,8 @@ rater <- function(data,
   method <- match.arg(method, choices = c("mcmc", "optim"))
   data_format <- match.arg(data_format, choices = c("long", "grouped"))
 
-  data <- validate_input(data, model, data_format)
   model <- validate_model(model)
+  data <- validate_input(data, model, data_format)
 
   stan_data_list <- as_stan_data(data, data_format)
 
@@ -288,7 +288,7 @@ validate_model <- function(model) {
 validate_input <- function(data, model, data_format) {
 
   if (data_format == "grouped" & !is.dawid_skene(model)) {
-    stop("Grouped data can only be usesed with the Dawid and Skene model",
+    stop("Grouped data can only be used with the Dawid and Skene model",
          call. = FALSE)
   }
 

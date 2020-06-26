@@ -1,5 +1,21 @@
 context("rater")
 
+test_that("passing model as string works", {
+
+  # This was failing previously because the check of whether the model and
+  # format are compatible requires an *actual* model, so we have to validate
+  # and convert string -> model object before validating.
+  expect_error(rater(caries, "dawid_skene", method = "optim",
+                     data_format = "grouped"),
+               NA)
+
+  fit_model <- rater(anesthesia, dawid_skene(), method = "optim")
+  fit_string <- rater(anesthesia, "dawid_skene", method = "optim")
+
+  expect_equal(fit_model, fit_string)
+})
+
+
 test_that("rater infernce is 'correct'", {
   # TODO This is a stopgap solution designed to detect large changes in
   # behaviour. In future, it would be great to have a full framework to assess
