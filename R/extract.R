@@ -48,8 +48,8 @@ posterior_interval.mcmc_fit <- function(object,
   fit <- object
   # We could keep the stan data after fitting, but it doesn't seem worth
   # the added complexity.
-  K <- max(fit$data$rating)
-  J <- max(fit$data$rater)
+  K <- fit$stan_data$K
+  J <- fit$stan_data$J
 
   intervals <- list()
   for (i in 1:length(pars)) {
@@ -220,13 +220,17 @@ class_probabilities.mcmc_fit <- function(fit, ...) {
 #' @export
 class_probabilities.optim_fit <- function(fit, ...) {
   par <- fit$estimates$par
-  I <- max(fit$data$item)
-  K <- max(fit$data$rating)
+  K <- fit$stan_data$K
+  if (fit$data_format == "grouped") {
+    I <- length(fit$stan_data$tally)
+  } else {
+    I <- fit$stan_data$I
+  }
   log_p_z_values <- par[grep("log_p_z", names(par))]
   log_p_z <- matrix(log_p_z_values, nrow = I, ncol = K)
   p_z <- t(apply(log_p_z, 1, softmax))
   if (fit$data_format == "grouped") {
-    enlarge_z(p_z, fit)
+    p_z <- enlarge_z(p_z, fit)
   }
   p_z
 }
@@ -300,8 +304,8 @@ theta_point_estimate.optim_fit <- function(fit, which = NULL, ...) {
 theta_point_estimate_ds_optim <- function(fit, which, ...) {
   par <- fit$estimates$par
   theta_values <- par[grep("\\btheta\\b", names(par))]
-  K <- max(fit$data$rating)
-  J <- max(fit$data$rater)
+  K <- fit$stan_data$K
+  J <- fit$stan_data$J
   if (is.null(which)) {
     which <- 1:J
   }
@@ -312,8 +316,8 @@ theta_point_estimate_ds_optim <- function(fit, which, ...) {
 theta_point_estimate_ccds_optim <- function(fit, which, ...) {
   par <- fit$estimates$par
   cc_theta_values <- par[grep("\\btheta\\b", names(par))]
-  K <- fit$data$stan_data$K
-  J <- fit$data$stan_data$J
+  K <- fit$stan_data$K
+  J <- fit$stan_data$J
   if (is.null(which)) {
     which <- 1:J
   }
@@ -341,7 +345,7 @@ validate_which <- function(which, J) {
 
 enlarge_z <- function(p_z, fit) {
   stopifnot(fit$data_format == "grouped")
-  p_z[rep(1:nrow(p_z), fit$data$n), ]
+  p_z[rep(1:nrow(p_z), fit$stan_data$tally), ]
 }
 
 unspool_cc_theta <- function(cc_theta) {

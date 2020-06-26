@@ -91,6 +91,11 @@ test_that("point estimate output for z has the correct form", {
   out <- point_estimate(ds_fit_grouped, pars = "z")[[1]]
   expect_equal(length(out), I_caries)
   expect_true(all(out %in%  1:K_caries))
+
+  # Grouped data optim
+  out <- point_estimate(ds_fit_grouped_optim, pars = "z")[[1]]
+  expect_equal(length(out), I_caries)
+  expect_true(all(out %in%  1:K_caries))
 })
 
 test_that("class_probabilites output has correct form", {

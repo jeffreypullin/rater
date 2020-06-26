@@ -64,10 +64,10 @@ rater <- function(data,
 
   if (method == "mcmc") {
     samples <- rstan::sampling(stanmodels[[file]], stan_data, init = inits, ...)
-    out <- new_mcmc_fit(model, samples, data, data_format)
+    out <- new_mcmc_fit(model, samples, stan_data, data_format)
   } else if (method == "optim") {
     estimates <- rstan::optimizing(stanmodels[[file]], stan_data, init = inits, ...)
-    out <- new_optim_fit(model, estimates, data, data_format)
+    out <- new_optim_fit(model, estimates, stan_data, data_format)
   }
 
   out
