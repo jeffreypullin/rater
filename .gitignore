@@ -3,3 +3,4 @@
 *.so
 inst/doc
 .DS_Store
+^stanExports_*
