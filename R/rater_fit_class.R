@@ -2,16 +2,16 @@
 #'
 #' @param model a rater model
 #' @param samples a stanfit object
-#' @param data the data used to fit the model
+#' @param stan_data the data passed to Stan to fit the model
 #' @param data_format The format of the data used to fit the model
 #'
 #' @return a rater fit object
 #'
 #' @noRd
-new_mcmc_fit <- function(model, samples, data, data_format) {
+new_mcmc_fit <- function(model, samples, stan_data, data_format) {
   new <- list(model = model,
               samples = samples,
-              data = data,
+              stan_data = stan_data,
               data_format = data_format)
   class(new) <- c("mcmc_fit", "rater_fit")
   new
@@ -21,16 +21,16 @@ new_mcmc_fit <- function(model, samples, data, data_format) {
 #'
 #' @param model a rater model
 #' @param estimates a stan optimisation object
-#' @param data the data used to fit the model
+#' @param stan_data the data used to fit the model
 #' @param data_format The format of the data used to fit the model
 #'
 #' @return a rater fit object
 #'
 #' @noRd
-new_optim_fit <- function(model, estimates, data, data_format) {
+new_optim_fit <- function(model, estimates, stan_data, data_format) {
   new <- list(model = model,
               estimates = estimates,
-              data = data,
+              stan_data = stan_data,
               data_format = data_format)
   class(new) <- c("optim_fit", "rater_fit")
   new
