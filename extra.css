@@ -1,0 +1,17 @@
+/* Taken from: https://stackoverflow.com/questions/18529274/change-navbar-color-in-twitter-bootstrap */
+
+.navbar-default {
+    background-color: #4682b4;
+    border-color: #4682b4;
+}
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    color: #4682b4;
+    background-color: #FFFFFF;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #FFFFFF;
+}
