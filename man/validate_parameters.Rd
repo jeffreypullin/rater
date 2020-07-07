@@ -7,9 +7,9 @@
 validate_parameters(pars)
 }
 \arguments{
-\item{pars}{a (named) list of parmeters}
+\item{pars}{a (named) list of parameters}
 }
 \description{
-Checks the parameter are of the appropritate type/form and that they are
+Checks the parameter are of the appropriate type/form and that they are
 self consistent
 }

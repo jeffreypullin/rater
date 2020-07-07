@@ -8,6 +8,8 @@
 }
 \arguments{
 \item{x}{numeric matrix object}
+
+\item{...}{Other arguments}
 }
 \value{
 Plot of the rate accuracy estimates

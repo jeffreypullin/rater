@@ -7,9 +7,13 @@
 \method{posterior_interval}{optim_fit}(object, prob = 0.9, pars = c("pi", "theta"), ...)
 }
 \arguments{
-\item{object}{TODO}
+\item{object}{A rater optim_fit object}
 
-\item{prob}{TODO}
+\item{prob}{A probability}
+
+\item{pars}{The parameters to calculate the intervals for}
+
+\item{...}{Other arguments}
 }
 \description{
 Extract posterior intervals for parameters of the model

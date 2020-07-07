@@ -98,6 +98,8 @@ plot_class_probabilities <- function(x, ...) {
 #' Plot the latent class estimates of a matrix
 #'
 #' @param x numeric matrix object
+#' @param ... Other arguments
+#'
 #' @return Plot of the rate accuracy estimates
 #'
 #' @importFrom ggplot2 ggplot aes geom_tile geom_text labs theme_bw theme
@@ -108,7 +110,7 @@ plot_class_probabilities <- function(x, ...) {
 #'
 plot_class_probabilities.matrix <- function(x, ...) {
 
-  # We could validate more stringently here if requrired
+  # We could validate more stringently here if required
   if (!is.numeric(x)) {
     stop("Can only plot numeric matrices.", call. = FALSE)
   }
@@ -141,6 +143,8 @@ plot_class_probabilities.matrix <- function(x, ...) {
 #' Plot the latent class estimates of a rater_fit object
 #'
 #' @param x rater fit object
+#' @param ... Other arguments
+#'
 #' @return Plot of the rate accuracy estimates
 #'
 #' @export

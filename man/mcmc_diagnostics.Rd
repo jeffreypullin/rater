@@ -2,7 +2,7 @@
 % Please edit documentation in R/extract.R
 \name{mcmc_diagnostics}
 \alias{mcmc_diagnostics}
-\title{Retrive MCMC convergence diagnoistics for a rater fit}
+\title{Retrieve MCMC convergence diagnostics for a rater fit}
 \usage{
 mcmc_diagnostics(fit, pars = c("pi", "theta"))
 }
@@ -10,13 +10,11 @@ mcmc_diagnostics(fit, pars = c("pi", "theta"))
 \item{fit}{an MCMC rater_fit object}
 
 \item{pars}{the parameters to return the diagnostics for}
-
-\item{diagnositics}{the MCMC diagnostics to return}
 }
 \value{
 A matrix where the columns represent different diagnostics and the
   rows are different parameters.
 }
 \description{
-Retrive MCMC convergence diagnoistics for a rater fit
+Retrieve MCMC convergence diagnostics for a rater fit
 }
