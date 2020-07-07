@@ -1,6 +1,6 @@
 #' @name models
 #'
-#' @title Probablistic models of categorical data annotation
+#' @title Probabilistic models of categorical data annotation
 #' @description Functions to set up models and change their prior
 #'   parameters for use in \code{\link{rater}()}.
 #'
@@ -43,6 +43,9 @@ hier_dawid_skene <- function(alpha = NULL) {
 #' @rdname models
 #' @export
 #'
+#' @param beta_1 First on diagonal prior probability parameter
+#' @param beta_2 Second on diagonal prior probability parameter for theta
+#'
 class_conditional_dawid_skene <- function(alpha = NULL,
                                           beta_1 = NULL,
                                           beta_2 = NULL) {
@@ -58,10 +61,10 @@ class_conditional_dawid_skene <- function(alpha = NULL,
 
 #' Validate passed parameters
 #'
-#' Checks the parameter are of the appropritate type/form and that they are
+#' Checks the parameter are of the appropriate type/form and that they are
 #' self consistent
 #'
-#' @param pars a (named) list of parmeters
+#' @param pars a (named) list of parameters
 #'
 validate_parameters <- function(pars) {
   beta <- pars$beta

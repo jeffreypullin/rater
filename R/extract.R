@@ -35,11 +35,14 @@ posterior_samples <- function(fit, pars = c("pi", "theta"), ...) {
 #' @param object A rater mcmc_fit object
 #' @param prob A probability
 #' @param pars The parameters to calculate the intervals for
+#' @param ... Other arguments
 #'
+#' @aliases posterior_interval
+#' @method posterior_interval mcmc_fit
 #' @importFrom rstantools posterior_interval
-#'
 #' @export
 #' @export posterior_interval
+#'
 posterior_interval.mcmc_fit <- function(object,
                                         prob = 0.9,
                                         pars = c("pi", "theta"),
@@ -88,12 +91,15 @@ posterior_interval.mcmc_fit <- function(object,
 
 #' Extract posterior intervals for parameters of the model
 #'
-#' @param object TODO
-#' @param prob TODO
+#' @param object A rater optim_fit object
+#' @param prob A probability
+#' @param pars The parameters to calculate the intervals for
+#' @param ... Other arguments
 #'
+#' @method posterior_interval optim_fit
 #' @importFrom rstantools posterior_interval
-#'
 #' @export
+#' @export posterior_interval
 #'
 posterior_interval.optim_fit <- function(object,
                                          prob = 0.9,
@@ -139,9 +145,10 @@ point_estimate <- function(fit,
   out
 }
 
-#' Extract a point esimate of the pi parameter from an MCMC fit
+#' Extract a point estimate of the pi parameter from an MCMC fit
 #'
 #' @param fit A rater_fit object
+#' @param ... Other arguments
 #'
 #' @return A vector of length K containing the posterior mean of pi
 #'
@@ -361,11 +368,10 @@ unspool_cc_theta <- function(cc_theta) {
   theta_out
 }
 
-#' Retrive MCMC convergence diagnoistics for a rater fit
+#' Retrieve MCMC convergence diagnostics for a rater fit
 #'
 #' @param fit an MCMC rater_fit object
 #' @param pars the parameters to return the diagnostics for
-#' @param diagnositics the MCMC diagnostics to return
 #'
 #' @return A matrix where the columns represent different diagnostics and the
 #'   rows are different parameters.

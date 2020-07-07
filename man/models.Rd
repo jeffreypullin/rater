@@ -5,7 +5,7 @@
 \alias{dawid_skene}
 \alias{hier_dawid_skene}
 \alias{class_conditional_dawid_skene}
-\title{Probablistic models of categorical data annotation}
+\title{Probabilistic models of categorical data annotation}
 \usage{
 dawid_skene(alpha = NULL, beta = NULL)
 
@@ -17,6 +17,10 @@ class_conditional_dawid_skene(alpha = NULL, beta_1 = NULL, beta_2 = NULL)
 \item{alpha}{prior parameter for pi}
 
 \item{beta}{prior parameter for theta}
+
+\item{beta_1}{First on diagonal prior probability parameter}
+
+\item{beta_2}{Second on diagonal prior probability parameter for theta}
 }
 \value{
 a \code{model} object that can be passed to \code{\link{rater}}.

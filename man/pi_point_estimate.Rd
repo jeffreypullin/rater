@@ -4,7 +4,7 @@
 \alias{pi_point_estimate}
 \alias{pi_point_estimate.mcmc_fit}
 \alias{pi_point_estimate.optim_fit}
-\title{Extract a point esimate of the pi parameter from an MCMC fit}
+\title{Extract a point estimate of the pi parameter from an MCMC fit}
 \usage{
 pi_point_estimate(fit, ...)
 
@@ -14,10 +14,12 @@ pi_point_estimate(fit, ...)
 }
 \arguments{
 \item{fit}{A rater_fit object}
+
+\item{...}{Other arguments}
 }
 \value{
 A vector of length K containing the posterior mean of pi
 }
 \description{
-Extract a point esimate of the pi parameter from an MCMC fit
+Extract a point estimate of the pi parameter from an MCMC fit
 }

@@ -117,6 +117,8 @@ plot.rater_fit <- function(x,
 #'
 #' @method summary mcmc_fit
 #'
+#' @importFrom utils head
+#'
 #' @export
 summary.mcmc_fit <- function(object, n_pars = 8, ...) {
   fit <- object
@@ -152,7 +154,7 @@ summary.mcmc_fit <- function(object, n_pars = 8, ...) {
   cat("\nFitting method: MCMC\n")
 
   cat("\npi/theta samples:\n")
-  print(round(head(pars, n_pars), 2))
+  print(round(utils::head(pars, n_pars), 2))
   n_remaining <- length(pars) - n_pars
   cat("# ... with", n_remaining, "more parameters\n")
 
@@ -170,6 +172,9 @@ summary.mcmc_fit <- function(object, n_pars = 8, ...) {
 #' @param ... other args passed to function
 #'
 #' @method summary optim_fit
+#'
+#' @importFrom utils head
+#'
 #' @export
 summary.optim_fit <- function(object, n_pars = 8, ...) {
   x <- object
@@ -205,7 +210,7 @@ summary.optim_fit <- function(object, n_pars = 8, ...) {
   cat("# ... with", n_remaining, "more parameters\n")
 
   cat("\nz:\n")
-  print(round(head(z_out, n_pars), 2))
+  print(round(utils::head(z_out, n_pars), 2))
   n_remaining_z <- nrow(z) - n_pars
   cat("# ... with", n_remaining_z, "more items\n")
 

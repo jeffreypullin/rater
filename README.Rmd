@@ -9,8 +9,11 @@ set.seed(1)
 
 # rater <img src="man/figures/rater.png" align="right" width="160" />
 
+<!-- badges: start -->
 [![Build Status](https://travis-ci.com/jeffreypullin/rater.svg?branch=master)](https://travis-ci.com/jeffreypullin/rater)
 [![Coverage status](https://codecov.io/gh/jeffreypullin/rater/branch/master/graph/badge.svg)](https://codecov.io/github/jeffreypullin/rater?branch=master)
+[![R build status](https://github.com/jeffreypullin/rater/workflows/R-CMD-check/badge.svg)](https://github.com/jeffreypullin/rater/actions)
+<!-- badges: end -->
 
 **rater** provides tools for working with Bayesian models of categorical data 
 annotation. The package provides a simple interface to fit a selection of these 
