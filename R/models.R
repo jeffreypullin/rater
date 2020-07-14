@@ -2,9 +2,9 @@
 #'
 #' @title Probabilistic models of repeated categorical rating
 #' @description Functions to set up models and change their prior
-#'   parameters for use in \code{\link{rater}()}.
+#'   parameters for use in [rater()].
 #'
-#' @return a \code{model} object that can be passed to \code{\link{rater}}.
+#' @return a `model` object that can be passed to [rater()].
 #'
 NULL
 

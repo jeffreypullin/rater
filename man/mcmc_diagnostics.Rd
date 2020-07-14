@@ -13,7 +13,7 @@ mcmc_diagnostics(fit, pars = c("pi", "theta"))
 }
 \value{
 A matrix where the columns represent different diagnostics and the
-  rows are different parameters.
+rows are different parameters.
 }
 \description{
 Retrieve MCMC convergence diagnostics for a rater fit

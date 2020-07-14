@@ -15,16 +15,16 @@ point_estimate(fit, pars = c("pi", "theta", "z"), ...)
 }
 \value{
 A named list of the parameter values. See details for the precise
-  statistical interpretation of the values.
+statistical interpretation of the values.
 }
 \description{
 Extract point estimates of parameters from a fit object
 }
 \details{
 If the passed fit object was fit using MCMC then the posterior
-  means are used. If it was fit through optimisation the MAP esimates
-  are returned. The z parameter returned is which value of the class
-  probabilities is largest.
+means are used. If it was fit through optimisation the MAP esimates
+are returned. The z parameter returned is which value of the class
+probabilities is largest.
 }
 \examples{
 fit <- rater(anesthesia, dawid_skene(), method = "optim")

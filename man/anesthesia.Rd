@@ -7,9 +7,9 @@
 \format{
 A matrix with 315 rows and 3 columns:
 \describe{
-  \item{item}{item index, which item is being rated}
-  \item{rater}{rater index, which rater is doing the rater}
-  \item{rating}{what rating was given}
+\item{item}{item index, which item is being rated}
+\item{rater}{rater index, which rater is doing the rater}
+\item{rating}{what rating was given}
 }
 }
 \usage{

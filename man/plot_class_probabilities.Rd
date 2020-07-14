@@ -16,5 +16,5 @@ Generic to plot the latent class probabilites
 }
 \details{
 This method can either be used to plot matrices or rater_fit
-  objects
+objects
 }

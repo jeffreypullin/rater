@@ -30,8 +30,8 @@ The format that the passed data is in. Defaults to "long".}
 
 \item{inits}{The initialization points of the fitting algorithm}
 
-\item{verbose}{Should `rater()` produce information about the progress
-of the chains while using the MCMC algorithm. Defaults to `TRUE`}
+\item{verbose}{Should \code{rater()} produce information about the progress
+of the chains while using the MCMC algorithm. Defaults to \code{TRUE}}
 
 \item{...}{Extra parameters which are passed to the Stan fitting interface}
 }

@@ -13,13 +13,13 @@ z_point_estimate(fit, ...)
 }
 \value{
 Latent class estimates: A vector length I consisting of whole
-  numbers from 1 to K.
+numbers from 1 to K.
 }
 \description{
 Extract latent class estimates from a fit
 }
 \details{
 This function returns actual estimates of the latent class i.e.
-  whole numbers from 1 to K. These are found by taking the class with the
-  highest probability.
+whole numbers from 1 to K. These are found by taking the class with the
+highest probability.
 }

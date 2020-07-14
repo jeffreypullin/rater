@@ -19,7 +19,7 @@ class_probabilities(fit, ...)
 }
 \value{
 A I * K matrix where each element is the probabily of item i being
-  of class k.
+of class k.
 }
 \description{
 Extract latent class probabilites from an object.
