@@ -17,7 +17,7 @@ theta plots.}
 }
 \value{
 If one parameter is requested a ggplot2 plot. If multiple parameters
-  are requested a list of ggplot2 plots.
+are requested a list of ggplot2 plots.
 }
 \description{
 Plot a rater_fit object

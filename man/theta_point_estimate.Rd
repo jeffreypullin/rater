@@ -21,7 +21,7 @@ theta_point_estimate(fit, which = NULL, ...)
 }
 \value{
 list of matrices containing probability confusion matrices for each
- rater
+rater
 }
 \description{
 Extract rater accuracy/theta estimates from a Dawid Skene fit object

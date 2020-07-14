@@ -44,3 +44,4 @@ Suggests:
     covr
 VignetteBuilder: knitr
 SystemRequirements: GNU make
+Roxygen: list(markdown = TRUE)
