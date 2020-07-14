@@ -10,45 +10,58 @@ set.seed(1)
 # rater <img src="man/figures/rater.png" align="right" width="160" />
 
 <!-- badges: start -->
-[![Build Status](https://travis-ci.com/jeffreypullin/rater.svg?branch=master)](https://travis-ci.com/jeffreypullin/rater)
-[![Coverage status](https://codecov.io/gh/jeffreypullin/rater/branch/master/graph/badge.svg)](https://codecov.io/github/jeffreypullin/rater?branch=master)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/rater)](https://cran.r-project.org/package=rater)
 [![R build status](https://github.com/jeffreypullin/rater/workflows/R-CMD-check/badge.svg)](https://github.com/jeffreypullin/rater/actions)
+[![Coverage status](https://codecov.io/gh/jeffreypullin/rater/branch/master/graph/badge.svg)](https://codecov.io/github/jeffreypullin/rater?branch=master)
+![pkgdown](https://github.com/jeffreypullin/rater/workflows/pkgdown/badge.svg)
 <!-- badges: end -->
 
-**rater** provides tools for working with Bayesian models of categorical data 
-annotation. The package provides a simple interface to fit a selection of these 
-models, with arbitrary priors, using MCMC provided by [Stan](https://mc-stan.org/).
-A selection of functions are also provided to plot parts of these models and extract 
-key parameters. 
+**rater** provides tools for fitting and interrogating statistical models of repeated categorical rating data. The package provides a simple interface to fit a selection of these models, with arbitrary priors, using MCMC and optimisation provided by [Stan](https://mc-stan.org/). A selection of functions are also provided to plot parts of these models and extract key parameters. 
 
-### Usage:
+## Example usage:
 
-```{r, syntax_demo, message = FALSE, warning=FALSE, results="hide", }
+```{r fit-demo, message = FALSE, warning = FALSE, results = "hide"}
 library(rater)
-data(anesthesia)
 
-fit <- rater(long_data(anesthesia), dawid_skene()) # sampling output suppressed
-
-plot(fit, type = "raters")
+fit <- rater(anesthesia, "dawid_skene") # sampling output suppressed
 ```
 
-### Installation
+Get the posterior mean of the "pi" parameter.
 
-**rater** requires the **rstan** package to fit models. Detailed instructions to
-install **rstan** can be found [here](https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started)
+```{r extract-demo}
+point_estimate(fit, pars = "pi")
+```
 
-To install the **rater** package run:
+Plot the accuracy matrices of the raters.
 
-```{r, installation_demo, eval = FALSE}
-devtools::install_github("jeffreypullin/rater")
+```{r plot-demo}
+plot(fit, pars = "raters")
+```
+
+## Installation
+
+**rater** requires the **rstan** package to fit models. Detailed instructions to install **rstan** can be found [here](https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started)
+
+### CRAN 
+
+**rater** is not *yet* on CRAN; when it is you will be able to install it with: 
+
+```{r cran-installation, eval = FALSE}
+#install.packages("rater")
+```
+
+### Development
+
+To install the development version of **rater** from GitHub run:
+
+```{r dev-installation, eval = FALSE}
+# install.packages("remotes")
+remotes::install_github("jeffreypullin/rater")
 ```
 
 #### Installation notes:
 
-- The installation will download a yet to be released branch of the **rstantools**
-repository used to build the package
-- The **Stan** models will be compiled at install time - this will lead to an 
-install time of few minutes. Please be patient - this compilation means that
-**no** compilation is required when using the package
-- During the compilation many warnings may be displayed in the terminal these 
+- When installing from source, i.e. when installing the development version or installing from CRAN on Linux, the **Stan** models in the package will be compiled - this will lead to an install time of few minutes. Please be patient - this compilation means that **no** compilation is required when using the package
+
+- During compilation many warnings may be displayed in the terminal; these 
 are harmless but impossible to suppress.
