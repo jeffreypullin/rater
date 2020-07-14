@@ -3,7 +3,7 @@
 \docType{data}
 \name{anesthesia}
 \alias{anesthesia}
-\title{Anesthetist ratings for patient suitability for surgery}
+\title{Anaesthetist ratings for patient suitability for surgery}
 \format{
 A matrix with 315 rows and 3 columns:
 \describe{
@@ -16,8 +16,8 @@ A matrix with 315 rows and 3 columns:
 anesthesia
 }
 \description{
-A dataset containing anesthetist ratings of patient readiness for surgery for
-5 anesthetists on 45 patients with 4 categories in 'long' format. Each row
-represents one unique rating or annotation
+A dataset containing anaesthetist ratings of patient readiness for surgery for
+5 anaesthetists on 45 patients with 4 categories in 'long' format. Each row
+represents one unique rating.
 }
 \keyword{datasets}

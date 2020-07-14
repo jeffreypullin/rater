@@ -1,6 +1,6 @@
 #' @name models
 #'
-#' @title Probabilistic models of categorical data annotation
+#' @title Probabilistic models of repeated categorical rating
 #' @description Functions to set up models and change their prior
 #'   parameters for use in \code{\link{rater}()}.
 #'

@@ -1,8 +1,8 @@
-#' Anesthetist ratings for patient suitability for surgery
+#' Anaesthetist ratings for patient suitability for surgery
 #'
-#' A dataset containing anesthetist ratings of patient readiness for surgery for
-#' 5 anesthetists on 45 patients with 4 categories in 'long' format. Each row
-#' represents one unique rating or annotation
+#' A dataset containing anaesthetist ratings of patient readiness for surgery for
+#' 5 anaesthetists on 45 patients with 4 categories in 'long' format. Each row
+#' represents one unique rating.
 #'
 #' @format A matrix with 315 rows and 3 columns:
 #' \describe{

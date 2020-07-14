@@ -5,7 +5,7 @@
 \alias{dawid_skene}
 \alias{hier_dawid_skene}
 \alias{class_conditional_dawid_skene}
-\title{Probabilistic models of categorical data annotation}
+\title{Probabilistic models of repeated categorical rating}
 \usage{
 dawid_skene(alpha = NULL, beta = NULL)
 
