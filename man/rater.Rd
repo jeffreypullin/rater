@@ -4,7 +4,15 @@
 \alias{rater}
 \title{Fit statistical models of noisy categorical rating data using Stan}
 \usage{
-rater(data, model, method = "mcmc", data_format = "long", inits = NULL, ...)
+rater(
+  data,
+  model,
+  method = "mcmc",
+  data_format = "long",
+  inits = NULL,
+  verbose = TRUE,
+  ...
+)
 }
 \arguments{
 \item{data}{A 2D data object: data.frame, matrix, tibble etc. with data in
@@ -21,6 +29,9 @@ represents the fitting method used by Stan.}
 The format that the passed data is in. Defaults to "long".}
 
 \item{inits}{The initialization points of the fitting algorithm}
+
+\item{verbose}{Should `rater()` produce information about the progress
+of the chains while using the MCMC algorithm. Defaults to `TRUE`}
 
 \item{...}{Extra parameters which are passed to the Stan fitting interface}
 }

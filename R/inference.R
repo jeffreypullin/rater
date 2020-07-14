@@ -16,8 +16,10 @@
 #' @param data_format A length 1 character vector, either "long" or "grouped".
 #'   The format that the passed data is in. Defaults to "long".
 #' @param inits The initialization points of the fitting algorithm
+#' @param verbose Should `rater()` produce information about the progress
+#'   of the chains while using the MCMC algorithm. Defaults to `TRUE`
 #' @param ... Extra parameters which are passed to the Stan fitting interface
-#'
+#
 #' @return An object of type class rater_fit containing the fitted parameters.
 #'
 #' @details The MCMC algorithm used by Stan is No U Turn Sampling.
@@ -39,6 +41,7 @@ rater <- function(data,
                   method = "mcmc",
                   data_format = "long",
                   inits = NULL,
+                  verbose = TRUE,
                   ...) {
 
   method <- match.arg(method, choices = c("mcmc", "optim"))
@@ -52,7 +55,7 @@ rater <- function(data,
   # Check the priors and data are consistent.
   check_K(stan_data_list, model)
 
-  # Create the full passed info for stan and the inits.
+  # Create the full passed info for stan and the initialisation points.
   stan_data <- c(stan_data_list, parse_priors(model, stan_data_list$K))
 
   if (is.null(inits)) {
@@ -63,7 +66,15 @@ rater <- function(data,
   file <- get_stan_file(data_format, model)
 
   if (method == "mcmc") {
-    samples <- rstan::sampling(stanmodels[[file]], stan_data, init = inits, ...)
+
+    if (!verbose) {
+      capture.output(samples <- rstan::sampling(stanmodels[[file]], stan_data,
+                                                init = inits, ...))
+    } else {
+      samples <- rstan::sampling(stanmodels[[file]], stan_data, init = inits,
+                                 ...)
+    }
+
     out <- new_mcmc_fit(model, samples, stan_data, data_format)
   } else if (method == "optim") {
     estimates <- rstan::optimizing(stanmodels[[file]], stan_data, init = inits, ...)
