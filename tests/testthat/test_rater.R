@@ -1,5 +1,16 @@
 context("rater")
 
+test_that("verbose flag works", {
+
+  expect_message(
+    rater(anesthesia, "dawid_skene",
+          chains = 1, iter = 200, verbose = FALSE),
+    NA
+  )
+
+})
+
+
 test_that("passing model as string works", {
 
   # This was failing previously because the check of whether the model and
