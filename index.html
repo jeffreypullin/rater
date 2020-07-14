@@ -86,37 +86,57 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#rater-" class="anchor"></a>rater <img src="reference/figures/rater.png" align="right" width="160">
 </h1></div>
+<!-- badges: start -->
 
-<p><strong>rater</strong> provides tools for working with Bayesian models of categorical data annotation. The package provides a simple interface to fit a selection of these models, with arbitrary priors, using MCMC provided by <a href="https://mc-stan.org/">Stan</a>. A selection of functions are also provided to plot parts of these models and extract key parameters.</p>
-<div id="usage" class="section level3">
-<h3 class="hasAnchor">
-<a href="#usage" class="anchor"></a>Usage:</h3>
+<p><strong>rater</strong> provides tools for fitting and interrogating statistical models of repeated categorical rating data. The package provides a simple interface to fit a selection of these models, with arbitrary priors, using MCMC and optimisation provided by <a href="https://mc-stan.org/">Stan</a>. A selection of functions are also provided to plot parts of these models and extract key parameters.</p>
+<div id="example-usage" class="section level2">
+<h2 class="hasAnchor">
+<a href="#example-usage" class="anchor"></a>Example usage:</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://jeffreypullin.github.io/rater">rater</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="kw">anesthesia</span>)
 
-<span class="kw">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/rater.html">rater</a></span>(<span class="fu">long_data</span>(<span class="kw">anesthesia</span>), <span class="fu"><a href="reference/models.html">dawid_skene</a></span>()) <span class="co"># sampling output suppressed</span>
-
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">fit</span>, type = <span class="st">"raters"</span>)
+<span class="kw">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/rater.html">rater</a></span>(<span class="kw">anesthesia</span>, <span class="st">"dawid_skene"</span>) <span class="co"># sampling output suppressed</span>
 </pre></div>
-<p><img src="reference/figures/README-syntax_demo-1.png"><!-- --></p>
-</div>
-<div id="installation" class="section level3">
-<h3 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h3>
-<p><strong>rater</strong> requires the <strong>rstan</strong> package to fit models. Detailed instructions to install <strong>rstan</strong> can be found <a href="https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started">here</a></p>
-<p>To install the <strong>rater</strong> package run:</p>
+<p>Get the posterior mean of the “pi” parameter.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="kw">devtools</span>::<span class="fu">install_github</span>(<span class="st">"jeffreypullin/rater"</span>)
+<span class="fu"><a href="reference/point_estimate.html">point_estimate</a></span>(<span class="kw">fit</span>, pars = <span class="st">"pi"</span>)
+</pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">## $pi</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="co">## [1] 0.37374331 0.40673620 0.14712032 0.07240018</span></span></code></pre></div>
+<p>Plot the accuracy matrices of the raters.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">fit</span>, pars = <span class="st">"raters"</span>)
+</pre></div>
+<p><img src="reference/figures/README-plot-demo-1.png"><!-- --></p>
+</div>
+<div id="installation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#installation" class="anchor"></a>Installation</h2>
+<p><strong>rater</strong> requires the <strong>rstan</strong> package to fit models. Detailed instructions to install <strong>rstan</strong> can be found <a href="https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started">here</a></p>
+<div id="cran" class="section level3">
+<h3 class="hasAnchor">
+<a href="#cran" class="anchor"></a>CRAN</h3>
+<p><strong>rater</strong> is not <em>yet</em> on CRAN; when it is you will be able to install it with:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="co">#install.packages("rater")</span>
+</pre></div>
+</div>
+<div id="development" class="section level3">
+<h3 class="hasAnchor">
+<a href="#development" class="anchor"></a>Development</h3>
+<p>To install the development version of <strong>rater</strong> from GitHub run:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="co"># install.packages("remotes")</span>
+<span class="kw">remotes</span>::<span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"jeffreypullin/rater"</span>)
 </pre></div>
 <div id="installation-notes" class="section level4">
 <h4 class="hasAnchor">
 <a href="#installation-notes" class="anchor"></a>Installation notes:</h4>
 <ul>
-<li>The installation will download a yet to be released branch of the <strong>rstantools</strong> repository used to build the package</li>
-<li>The <strong>Stan</strong> models will be compiled at install time - this will lead to an install time of few minutes. Please be patient - this compilation means that <strong>no</strong> compilation is required when using the package</li>
-<li>During the compilation many warnings may be displayed in the terminal these are harmless but impossible to suppress.</li>
+<li><p>When installing from source, i.e. when installing the development version or installing from CRAN on Linux, the <strong>Stan</strong> models in the package will be compiled - this will lead to an install time of few minutes. Please be patient - this compilation means that <strong>no</strong> compilation is required when using the package</p></li>
+<li><p>During compilation many warnings may be displayed in the terminal; these are harmless but impossible to suppress.</p></li>
 </ul>
+</div>
 </div>
 </div>
 </div>
@@ -149,7 +169,8 @@
   <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://travis-ci.com/jeffreypullin/rater"><img src="https://travis-ci.com/jeffreypullin/rater.svg?branch=master" alt="Build Status"></a></li>
+<li><a href="https://cran.r-project.org/package=rater"><img src="https://www.r-pkg.org/badges/version/rater" alt="CRAN_Status_Badge"></a></li>
+<li><a href="https://github.com/jeffreypullin/rater/actions"><img src="https://github.com/jeffreypullin/rater/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
 <li><a href="https://codecov.io/github/jeffreypullin/rater?branch=master"><img src="https://codecov.io/gh/jeffreypullin/rater/branch/master/graph/badge.svg" alt="Coverage status"></a></li>
 </ul>
 </div>
