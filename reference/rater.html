@@ -139,7 +139,15 @@ is done using Stan, allowing models to be fit efficiently, using both
 optimisation and Markov Chain Monte Carlo (MCMC).</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/rater/man/rater.html'>rater</a></span>(<span class='kw'>data</span>, <span class='kw'>model</span>, method = <span class='st'>"mcmc"</span>, data_format = <span class='st'>"long"</span>, inits = <span class='kw'>NULL</span>, <span class='kw'>...</span>)</pre>
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/rater/man/rater.html'>rater</a></span>(
+  <span class='kw'>data</span>,
+  <span class='kw'>model</span>,
+  method = <span class='st'>"mcmc"</span>,
+  data_format = <span class='st'>"long"</span>,
+  inits = <span class='kw'>NULL</span>,
+  verbose = <span class='fl'>TRUE</span>,
+  <span class='kw'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -168,6 +176,11 @@ The format that the passed data is in. Defaults to "long".</p></td>
     <tr>
       <th>inits</th>
       <td><p>The initialization points of the fitting algorithm</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>Should `rater()` produce information about the progress
+of the chains while using the MCMC algorithm. Defaults to `TRUE`</p></td>
     </tr>
     <tr>
       <th>...</th>
