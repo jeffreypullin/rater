@@ -2,15 +2,15 @@
 % Please edit documentation in R/rater_fit_class.R
 \name{plot.rater_fit}
 \alias{plot.rater_fit}
-\title{Plot a rater_fit object}
+\title{Plot a \code{rater_fit} object}
 \usage{
 \method{plot}{rater_fit}(x, pars = c("pi", "theta", "class_probabilities"), ...)
 }
 \arguments{
-\item{x}{A rater_fit object}
+\item{x}{An object of class \code{rater_fit}.}
 
-\item{pars}{Which parameters to plot. Can use both mathematical or
-natural names.}
+\item{pars}{A character vector of the names of the parameters to plot. By
+default: \code{c("pi", "theta", "class_probabilities")}.}
 
 \item{...}{Other arguments. This should contain the which argument for
 theta plots.}
@@ -20,5 +20,20 @@ If one parameter is requested a ggplot2 plot. If multiple parameters
 are requested a list of ggplot2 plots.
 }
 \description{
-Plot a rater_fit object
+Plot a \code{rater_fit} object
+}
+\examples{
+
+\dontrun{
+
+fit <- rater(anesthesia, "dawid_skene")
+
+# Plot all the parameters.
+plot(fit)
+
+# Select which parameters to plot.
+plot(fit, pars = "pi")
+
+}
+
 }

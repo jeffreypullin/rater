@@ -1,9 +1,10 @@
-#' print a rater_model object
+#' Print a `rater_model` object.
 #'
-#' @param x a rater_model object
-#' @param ... other args
+#' @param x A `rater_model` object.
+#' @param ... Other arguments
 #'
 #' @export
+#'
 print.rater_model <- function(x, ...) {
   cat(get_name(x), "\n\n")
   pars <- get_parameters(x)
@@ -20,11 +21,13 @@ print.rater_model <- function(x, ...) {
   }
 }
 
-#' summarise a rater_model
+#' Summarise a `rater_model`.
 #'
-#' @param object a rater_model object
-#' @param ... other args
+#' @param object A `rater_model` object.
+#' @param ... Other arguments.
+#'
 #' @method summary rater_model
+#'
 #' @export
 #'
 summary.rater_model <- function(object, ...) {
@@ -49,15 +52,19 @@ is.class_conditional_dawid_skene <- function(m) {
 
 #' Gets the long name of a model
 #'
-#' @param m object of type rater_model
+#' @param m Object of type `rater_model`.
+#'
+#' @noRd
 #'
 get_name <- function(m) {
   m$name
 }
 
-#' Gets stan file name of a model
+#' Gets the stan file name of a model
 #'
-#' @param m object of type rater_model
+#' @param m object of type `rater_model`.
+#'
+#' @noRd
 #'
 get_file <- function(m) {
   m$file

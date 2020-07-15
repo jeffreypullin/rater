@@ -2,15 +2,15 @@
 % Please edit documentation in R/rater_model_class.R
 \name{summary.rater_model}
 \alias{summary.rater_model}
-\title{summarise a rater_model}
+\title{Summarise a \code{rater_model}.}
 \usage{
 \method{summary}{rater_model}(object, ...)
 }
 \arguments{
-\item{object}{a rater_model object}
+\item{object}{A \code{rater_model} object.}
 
-\item{...}{other args}
+\item{...}{Other arguments.}
 }
 \description{
-summarise a rater_model
+Summarise a \code{rater_model}.
 }

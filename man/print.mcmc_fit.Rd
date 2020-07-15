@@ -2,15 +2,15 @@
 % Please edit documentation in R/rater_fit_class.R
 \name{print.mcmc_fit}
 \alias{print.mcmc_fit}
-\title{Print a mcmc_fit object}
+\title{Print a \code{mcmc_fit} object}
 \usage{
 \method{print}{mcmc_fit}(x, ...)
 }
 \arguments{
-\item{x}{fit object to be printed}
+\item{x}{An object of class \code{mcmc_fit}.}
 
-\item{...}{other args passed to the function}
+\item{...}{Other arguments.}
 }
 \description{
-Print a mcmc_fit object
+Print a \code{mcmc_fit} object
 }

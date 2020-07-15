@@ -1,16 +1,40 @@
-#' Extract posterior draws from a rater_fit object
+#' Extract posterior samples from a rater fit object
 #'
-#' @param fit A rater_fit object
-#' @param pars A specification of which parameters to return draws from
-#' @param ... Extra arguments
+#' @param fit A rater fit object.
+#' @param pars A character vector of parameter names to return. By default
+#'   `c("pi", "theta")`.
 #'
-#' @return A named list of parameter draws
+#' @return A named list of the posterior samples for each parameters. For each
+#'   parameter the samples are in the form returned by [rstan::extract()].
+#'
+#' @details Posterior samples can only be returned for models fitting using
+#'   MCMC not optimisation. In addition, posterior samples cannot be returned
+#'   for the latent class due to the marginalisation technique used internally.
 #'
 #' @importFrom rstan extract
 #'
+#' @examples
+#'
+#' \dontrun{
+#'
+#' fit <- rater(anesthesia, "dawid_skene")
+#'
+#' samples <- posterior_samples(fit)
+#'
+#' # Look at first 6 samples for each of the pi parameters
+#' head(samples$pi)
+#'
+#' # Look at the first 6 samples for the theta[1, 1, 1] parameter
+#' head(samples$theta[, 1, 1, 1])
+#'
+#' # Only get the samples for the pi parameter:
+#' pi_samples <- posterior_samples(fit, pars = "pi")
+#'
+#' }
+#'
 #' @export
 #'
-posterior_samples <- function(fit, pars = c("pi", "theta"), ...) {
+posterior_samples <- function(fit, pars = c("pi", "theta")) {
   if (inherits(fit, "optim_fit")) {
     stop("Cannot return draws from an optimisaton fit", call. = FALSE)
   }
@@ -32,10 +56,32 @@ posterior_samples <- function(fit, pars = c("pi", "theta"), ...) {
 
 #' Extract posterior intervals for parameters of the model
 #'
-#' @param object A rater mcmc_fit object
-#' @param prob A probability
+#' @param object A rater `mcmc_fit` object.
+#' @param prob A single probability. The size of the credible interval
+#'   returned. By default `0.9`.
 #' @param pars The parameters to calculate the intervals for
-#' @param ... Other arguments
+#' @param ... Other arguments.
+#'
+#' @return A matrix with 2 columns. The first column is the lower bound of
+#'   of the credible interval and the second is the upper bound. Each row
+#'   corresponds to one individuals parameters. The rownames are the parameter
+#'   names.
+#'
+#' @details Posterior intervals can only be calculated for models fit with
+#'   MCMC. In addition, posterior intervals are not meaningful for the latent
+#'   class (and indeed cannot be calculated). The *full* posterior distribution
+#'   of the latent class can be extracted using [class_probabilities]
+#'
+#' @examples
+#'
+#' \dontrun{
+#'
+#' fit <- rater(anesthesia, "dawid_skene", verbose = FALSE, chains = 1)
+#'
+#' intervals <- posterior_interval(fit)
+#' head(intervals)
+#'
+#' }
 #'
 #' @aliases posterior_interval
 #' @method posterior_interval mcmc_fit
@@ -112,23 +158,41 @@ posterior_interval.optim_fit <- function(object,
 
 #' Extract point estimates of parameters from a fit object
 #'
-#' @param fit A rater_fit object
-#' @param pars A character vector of parmeter names to select
+#' @param fit A rater fit object
+#' @param pars A character vector of parameter names to return. By default
+#'   `c("pi", "theta", "z")`.
 #' @param ... Extra arguments
 #'
 #' @details If the passed fit object was fit using MCMC then the posterior
-#'   means are used. If it was fit through optimisation the MAP esimates
-#'   are returned. The z parameter returned is which value of the class
-#'   probabilities is largest.
+#'   means are returned. If it was fit through optimisation the maximum a
+#'   priori (MAP) estimates are returned. The z parameter returned is the
+#'   value of class probabilities which is largest. To return the full
+#'   posterior distributions of the latent class use `class_probabilities()`.
 #'
-#' @return A named list of the parameter values. See details for the precise
-#'   statistical interpretation of the values.
+#' @return A named list of the parameter estimates.
+#'
+#' @seealso `class_probabilities()`
 #'
 #' @examples
-#' fit <- rater(anesthesia, dawid_skene(), method = "optim")
-#' point_estimate(fit, pars = "pi")
+#'
+#' \dontrun{
+#'
+#' # A model fit using MCMC.
+#' mcmc_fit <- rater(anesthesia, "dawid_skene")
+#'
+#' # This will return the posterior mean (except for z)
+#' post_mean_estimate <- point_estimate(mcmc_fit)
+#'
+#' # A model fit using optimisation.
+#' optim_fit <- rater(anesthesia, dawid_skene(), method = "optim")
+#'
+#' # This will output MAP estimates of the parameters.
+#' map_estimate <- point_estimate(optim_fit)
+#'
+#' }
 #'
 #' @export
+#'
 point_estimate <- function(fit,
                            pars = c("pi", "theta", "z"),
                            ...) {
@@ -147,26 +211,26 @@ point_estimate <- function(fit,
 
 #' Extract a point estimate of the pi parameter from an MCMC fit
 #'
-#' @param fit A rater_fit object
-#' @param ... Other arguments
+#' @param fit A rater object.
+#' @param ... Other arguments.
 #'
-#' @return A vector of length K containing the posterior mean of pi
+#' @return A vector of length K containing the posterior mean (`mcmc_fit`)
+#'   or MAP estimate (`optim_fit`) of pi.
 #'
-#' @export
-#'
+#' @noRd
 pi_point_estimate <- function(fit, ...) {
   UseMethod("pi_point_estimate")
 }
 
 #' @rdname pi_point_estimate
-#' @export
+#' @noRd
 pi_point_estimate.mcmc_fit <- function(fit, ...) {
   pi_draws <- posterior_samples(fit, pars = "pi")[[1]]
   apply(pi_draws, 2, mean)
 }
 
 #' @rdname pi_point_estimate
-#' @export
+#' @noRd
 pi_point_estimate.optim_fit <- function(fit, ...) {
   par <- fit$estimates$par
   out <- par[grep("pi", names(par))]
@@ -176,17 +240,18 @@ pi_point_estimate.optim_fit <- function(fit, ...) {
 
 #' Extract latent class estimates from a fit
 #'
-#' @param fit fit object
-#' @param ... extra args
+#' @param fit A rater fit object.
+#' @param ... Extra arguments.
 #'
 #' @details This function returns actual estimates of the latent class i.e.
-#'   whole numbers from 1 to K. These are found by taking the class with the
-#'   highest probability.
+#'   whole numbers from 1 to K. This is taken to be the latent class with the
+#'   highest probability. (This can be thought of a kind of post-hoc MAP
+#'   estimate.)
 #'
 #' @return Latent class estimates: A vector length I consisting of whole
 #'   numbers from 1 to K.
 #'
-#' @export
+#' @noRd
 #'
 z_point_estimate <- function(fit, ...) {
   p_z <- class_probabilities(fit, ...)
@@ -195,13 +260,28 @@ z_point_estimate <- function(fit, ...) {
   apply(p_z, 1, which.max)
 }
 
-#' Extract latent class probabilites from an object.
+#' Extract latent class probabilities from a rater fit object
 #'
 #' @param fit A rater fit object.
 #' @param ... Extra arguments.
 #'
-#' @return A I * K matrix where each element is the probabily of item i being
-#'   of class k.
+#' @return A I * K matrix where each element is the probably of item i being
+#'   of class k. (I is the number of items and K the number of classes).
+#'
+#' @details The latent class probabilities are obtained by marginalising out
+#'   the latent class and then calculating, for each draw of pi and theta, the
+#'   conditional probability of the latent class given the other parameters
+#'   and the data. Averaging these conditional probabilities gives the
+#'   (unconditional) latent class probabilities retuned by this function.
+#'
+#' @examples
+#'
+#' \dontrun{
+#'
+#' fit <- rater(anesthesia, "dawid_skene")
+#' class_probabilities(fit)
+#'
+#' }
 #'
 #' @export
 #'
@@ -212,7 +292,8 @@ class_probabilities <- function(fit, ...) {
 #' @rdname class_probabilities
 #' @export
 class_probabilities.mcmc_fit <- function(fit, ...) {
-  # We can't use posterior_samples here because these are not technically draws.
+  # We can't use posterior_samples here because these are not technically
+  # draws.
   log_p_z_samps <- rstan::extract(get_samples(fit))$log_p_z
   p_z_samps <- apply(log_p_z_samps, c(1, 2), softmax)
   p_z_samps <- aperm(p_z_samps, c(2, 3, 1))
@@ -242,25 +323,24 @@ class_probabilities.optim_fit <- function(fit, ...) {
   p_z
 }
 
-#' Extract rater accuracy estimates for the Dawid Skene models
+#' Extract rater accuracy estimates for the Dawid-Skene models
 #'
 #' Extract rater accuracy/theta estimates from a Dawid Skene fit object
 #'
-#' @param fit fit object
-#' @param which which raters to extract
-#' @param ... extra args
+#' @param fit A rater fit object.
+#' @param which Which rater's error matrices should be returned.
+#' @param ... Extra arguments.
 #'
-#' @return list of matrices containing probability confusion matrices for each
-#'  rater
+#' @return An array of K * K matrices each a rater's accuracy matrix.
 #'
-#' @export
+#' @noRd
 #'
 theta_point_estimate <- function(fit, which = NULL, ...) {
   UseMethod("theta_point_estimate")
 }
 
 #' @rdname theta_point_estimate
-#' @export
+#' @noRd
 theta_point_estimate.mcmc_fit <- function(fit, which = NULL, ...) {
   switch(fit$model$file,
     "hierarchical_dawid_skene" = theta_point_estimate_hds(),
@@ -298,7 +378,7 @@ theta_point_estimate_ccds_mcmc <- function(fit, which, ...) {
 }
 
 #' @rdname theta_point_estimate
-#' @export
+#' @noRd
 theta_point_estimate.optim_fit <- function(fit, which = NULL, ...) {
   switch(fit$model$file,
     "hierarchical_dawid_skene" = theta_point_estimate_hds(),
@@ -370,19 +450,45 @@ unspool_cc_theta <- function(cc_theta) {
 
 #' Retrieve MCMC convergence diagnostics for a rater fit
 #'
-#' @param fit an MCMC rater_fit object
-#' @param pars the parameters to return the diagnostics for
+#' @param fit An rater `mcmc_fit` object.
+#' @param pars A character vector of parameter names to return. By default
+#'   `c("pi", "theta")`.
 #'
 #' @return A matrix where the columns represent different diagnostics and the
-#'   rows are different parameters.
+#'   rows are different parameters. Currently the first column contains
+#'   the Rhat statistic and the second bulk effective samples size. The
+#'   rownames contain the parameter names.
+#'
+#' @details MCMC diagnostics cannot be calculate for the z due to the
+#'   marginalisation used to fit the models.
+#'
+#' @seealso [rstan::Rhat()], [rstan::ess_bulk()].
 #'
 #' @importFrom rstan extract Rhat ess_bulk
 #'
+#' @references
+#' Aki Vehtari, Andrew Gelman, Daniel Simpson, Bob Carpenter, and
+#' Paul-Christian Bürkner (2019). Rank-normalization, folding, and
+#' localization: An improved R-hat for assessing convergence of
+#' MCMC. \emph{arXiv preprint} \code{arXiv:1903.08008}.
+#'
+#' @examples
+#'
+#' \dontrun{
+#'
+#' fit <- rater(anesthesia, "dawid_skene")
+#'
+#' # Calculate the diagnostics for all parameters.
+#' mcmc_diagnostics(fit)
+#'
+#' # Calculate the diagnostics just for the pi parameter.
+#' mcmc_diagnostics(fit, pars = "pi")
+#'
+#' }
+#'
 #' @export
 #'
-mcmc_diagnostics <- function(fit,
-                             pars = c("pi", "theta")
-                             ) {
+mcmc_diagnostics <- function(fit, pars = c("pi", "theta")) {
 
   if (inherits(fit, "optim_fit")) {
     stop("Cannot extract MCMC diagnositcs from a optimisation fit.",

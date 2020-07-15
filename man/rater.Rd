@@ -2,7 +2,7 @@
 % Please edit documentation in R/inference.R
 \name{rater}
 \alias{rater}
-\title{Fit statistical models of noisy categorical rating data using Stan}
+\title{Fit statistical models to repeated categorical rating data using Stan}
 \usage{
 rater(
   data,
@@ -22,21 +22,21 @@ either long or grouped format.}
 string - the name of the model. If the character string is used, the
 prior parameters will be set to their default values.}
 
-\item{method}{A length 1 character vector, either "mcmc" or "optim". This
-represents the fitting method used by Stan.}
+\item{method}{A length 1 character vector, either \code{"mcmc"} or \code{"optim"}.
+This will be fitting method used by Stan. By default \code{"mcmc"}}
 
-\item{data_format}{A length 1 character vector, either "long" or "grouped".
-The format that the passed data is in. Defaults to "long".}
+\item{data_format}{A length 1 character vector, either \code{"long"} or
+\code{"grouped"}. The format that the passed data is in. Defaults to \code{"long"}.}
 
 \item{inits}{The initialization points of the fitting algorithm}
 
 \item{verbose}{Should \code{rater()} produce information about the progress
 of the chains while using the MCMC algorithm. Defaults to \code{TRUE}}
 
-\item{...}{Extra parameters which are passed to the Stan fitting interface}
+\item{...}{Extra parameters which are passed to the Stan fitting interface.}
 }
 \value{
-An object of type class rater_fit containing the fitted parameters.
+An object of class rater_fit containing the fitted parameters.
 }
 \description{
 This functions allows the user to fit statistical models of noisy
@@ -46,14 +46,26 @@ is done using Stan, allowing models to be fit efficiently, using both
 optimisation and Markov Chain Monte Carlo (MCMC).
 }
 \details{
-The MCMC algorithm used by Stan is No U Turn Sampling.
+The default MCMC algorithm used by Stan is No U Turn Sampling
+(NUTS) and the default optimisation method is LGFGS. For MCMC 4 chains
+are run be default with 2000 iterations in total each.
 }
 \examples{
+
+\dontrun {
+
+# Fit a model using MCMC (the default).
+mcmc_fit <- rater(anesthesia, "dawid_skene")
+
 # Fit a model using optimisation.
 optim_fit <- rater(anesthesia, dawid_skene(), method = "optim")
 
-# Fit a model using grouped data (and optimisation).
-grouped_fit <- rater(caries, dawid_skene(), data_format = "grouped",
-                     method = "optim")
+# Fit a model using passing data grouped data.
+grouped_fit <- rater(caries, dawid_skene(), data_format = "grouped")
 
+}
+
+}
+\seealso{
+\code{\link[rstan:stanmodel-method-sampling]{rstan::sampling()}}, \code{\link[rstan:stanmodel-method-optimizing]{rstan::optimizing()}}
 }

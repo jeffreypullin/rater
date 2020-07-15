@@ -2,15 +2,15 @@
 % Please edit documentation in R/rater_model_class.R
 \name{print.rater_model}
 \alias{print.rater_model}
-\title{print a rater_model object}
+\title{Print a \code{rater_model} object.}
 \usage{
 \method{print}{rater_model}(x, ...)
 }
 \arguments{
-\item{x}{a rater_model object}
+\item{x}{A \code{rater_model} object.}
 
-\item{...}{other args}
+\item{...}{Other arguments}
 }
 \description{
-print a rater_model object
+Print a \code{rater_model} object.
 }
