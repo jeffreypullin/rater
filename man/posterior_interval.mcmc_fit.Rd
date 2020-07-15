@@ -8,14 +8,39 @@
 \method{posterior_interval}{mcmc_fit}(object, prob = 0.9, pars = c("pi", "theta"), ...)
 }
 \arguments{
-\item{object}{A rater mcmc_fit object}
+\item{object}{A rater \code{mcmc_fit} object.}
 
-\item{prob}{A probability}
+\item{prob}{A single probability. The size of the credible interval
+returned. By default \code{0.9}.}
 
 \item{pars}{The parameters to calculate the intervals for}
 
-\item{...}{Other arguments}
+\item{...}{Other arguments.}
+}
+\value{
+A matrix with 2 columns. The first column is the lower bound of
+of the credible interval and the second is the upper bound. Each row
+corresponds to one individuals parameters. The rownames are the parameter
+names.
 }
 \description{
 Extract posterior intervals for parameters of the model
+}
+\details{
+Posterior intervals can only be calculated for models fit with
+MCMC. In addition, posterior intervals are not meaningful for the latent
+class (and indeed cannot be calculated). The \emph{full} posterior distribution
+of the latent class can be extracted using \link{class_probabilities}
+}
+\examples{
+
+\dontrun{
+
+fit <- rater(anesthesia, "dawid_skene", verbose = FALSE, chains = 1)
+
+intervals <- posterior_interval(fit)
+head(intervals)
+
+}
+
 }

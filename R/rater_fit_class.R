@@ -1,13 +1,14 @@
-#' Make a mcmc_rater fit object
+#' Make an MCMC rater fit object
 #'
-#' @param model a rater model
-#' @param samples a stanfit object
-#' @param stan_data the data passed to Stan to fit the model
-#' @param data_format The format of the data used to fit the model
+#' @param model A rater model; an object of class `rater_model`.
+#' @param samples A stanfit object containing posterior samples.
+#' @param stan_data The data used to fit the model in the form passed to Stan.
+#' @param data_format The format of the data used to fit the model.
 #'
-#' @return a rater fit object
+#' @return An object of class `c("mcmc_fit", "rater_fit")`
 #'
 #' @noRd
+#'
 new_mcmc_fit <- function(model, samples, stan_data, data_format) {
   new <- list(model = model,
               samples = samples,
@@ -17,16 +18,17 @@ new_mcmc_fit <- function(model, samples, stan_data, data_format) {
   new
 }
 
-#' Make a optim_rater fit object
+#' Make an optimisation rater fit object
 #'
-#' @param model a rater model
-#' @param estimates a stan optimisation object
-#' @param stan_data the data used to fit the model
-#' @param data_format The format of the data used to fit the model
+#' @param model A rater model; an object of class `rater_model`.
+#' @param estimates A stanfit object containing parameter estimates.
+#' @param stan_data The data used to fit the model in the form passed to Stan.
+#' @param data_format The format of the data used to fit the model.
 #'
-#' @return a rater fit object
+#' @return An object of class `c("optim_fit", "rater_fit")`
 #'
 #' @noRd
+#'
 new_optim_fit <- function(model, estimates, stan_data, data_format) {
   new <- list(model = model,
               estimates = estimates,
@@ -36,10 +38,10 @@ new_optim_fit <- function(model, estimates, stan_data, data_format) {
   new
 }
 
-#' Print a mcmc_fit object
+#' Print a `mcmc_fit` object
 #'
-#' @param x fit object to be printed
-#' @param ... other args passed to the function
+#' @param x An object of class `mcmc_fit`.
+#' @param ... Other arguments.
 #'
 #' @export
 #'
@@ -49,10 +51,10 @@ print.mcmc_fit <- function(x, ...) {
 }
 # nocov end
 
-#' Print a optim_fit object
+#' Print a `optim_fit` object
 #'
-#' @param x fit object to be printed
-#' @param ... other args passed to the function
+#' @param x An object of class `optim_fit`.
+#' @param ... Other arguments.
 #'
 #' @export
 #'
@@ -62,16 +64,30 @@ print.optim_fit <- function(x, ...) {
 }
 # nocov end
 
-#' Plot a rater_fit object
+#' Plot a `rater_fit` object
 #'
-#' @param x A rater_fit object
-#' @param pars Which parameters to plot. Can use both mathematical or
-#'   natural names.
+#' @param x An object of class `rater_fit`.
+#' @param pars A character vector of the names of the parameters to plot. By
+#'   default: `c("pi", "theta", "class_probabilities")`.
 #' @param ... Other arguments. This should contain the which argument for
 #'   theta plots.
 #'
 #' @return If one parameter is requested a ggplot2 plot. If multiple parameters
 #'   are requested a list of ggplot2 plots.
+#'
+#' @examples
+#'
+#' \dontrun{
+#'
+#' fit <- rater(anesthesia, "dawid_skene")
+#'
+#' # Plot all the parameters.
+#' plot(fit)
+#'
+#' # Select which parameters to plot.
+#' plot(fit, pars = "pi")
+#'
+#' }
 #'
 #' @export
 #'
@@ -109,17 +125,18 @@ plot.rater_fit <- function(x,
   out
 }
 
-#' Summary of mcmc fit
+#' Summarise a `mcmc_fit` object
 #'
-#' @param object object of type rater fit
-#' @param n_pars the number of pi/theta parameters and z 'items' to display
-#' @param ... other args passed to function
+#' @param object An object of class `mcmc_fit`.
+#' @param n_pars The number of pi/theta parameters and z 'items' to display.
+#' @param ... Other arguments passed to function.
 #'
 #' @method summary mcmc_fit
 #'
 #' @importFrom utils head
 #'
 #' @export
+#'
 summary.mcmc_fit <- function(object, n_pars = 8, ...) {
   fit <- object
 
@@ -165,17 +182,18 @@ summary.mcmc_fit <- function(object, n_pars = 8, ...) {
 
 }
 
-#' Summary of optim fit
+#' Summarise an `optim_fit` object
 #'
-#' @param object object of type rater fit
-#' @param n_pars the number of pi/theta parameters and z 'items' to display
-#' @param ... other args passed to function
+#' @param object An object of class `optim_fit`.
+#' @param n_pars The number of pi/theta parameters and z 'items' to display.
+#' @param ... Other arguments passed to function.
 #'
 #' @method summary optim_fit
 #'
 #' @importFrom utils head
 #'
 #' @export
+#'
 summary.optim_fit <- function(object, n_pars = 8, ...) {
   x <- object
   fit <- object
@@ -219,9 +237,6 @@ summary.optim_fit <- function(object, n_pars = 8, ...) {
   cat(paste0("Fit converged: ", as.logical(x$estimates$return_code - 1), "\n"))
 }
 
-#' Check if object is of type fit
-#' @param x object
-#'
 is.mcmc_fit <- function(x) {
   inherits(x, "mcmc_fit")
 }
@@ -240,9 +255,10 @@ get_model <- function(f) {
 
 #' Get the posterior samples from a rater mcmc fit object
 #'
-#' @param fit A rater mcmc fit object
+#' @param fit A rater `mcmc_fit` object.
 #'
 #' @noRd
+#'
 get_samples <- function(fit) {
   fit$samples
 }

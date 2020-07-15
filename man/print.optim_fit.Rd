@@ -2,15 +2,15 @@
 % Please edit documentation in R/rater_fit_class.R
 \name{print.optim_fit}
 \alias{print.optim_fit}
-\title{Print a optim_fit object}
+\title{Print a \code{optim_fit} object}
 \usage{
 \method{print}{optim_fit}(x, ...)
 }
 \arguments{
-\item{x}{fit object to be printed}
+\item{x}{An object of class \code{optim_fit}.}
 
-\item{...}{other args passed to the function}
+\item{...}{Other arguments.}
 }
 \description{
-Print a optim_fit object
+Print a \code{optim_fit} object
 }

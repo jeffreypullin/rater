@@ -1,4 +1,4 @@
-#' Fit statistical models of noisy categorical rating data using Stan
+#' Fit statistical models to repeated categorical rating data using Stan
 #'
 #' This functions allows the user to fit statistical models of noisy
 #' categorical rating, based on the Dawid-Skene model, using Bayesian
@@ -11,28 +11,39 @@
 #' @param model Model to fit to data - must be rater_model or a character
 #'   string - the name of the model. If the character string is used, the
 #'   prior parameters will be set to their default values.
-#' @param method A length 1 character vector, either "mcmc" or "optim". This
-#'   represents the fitting method used by Stan.
-#' @param data_format A length 1 character vector, either "long" or "grouped".
-#'   The format that the passed data is in. Defaults to "long".
+#' @param method A length 1 character vector, either `"mcmc"` or `"optim"`.
+#'   This will be fitting method used by Stan. By default `"mcmc"`
+#' @param data_format A length 1 character vector, either `"long"` or
+#'   `"grouped"`. The format that the passed data is in. Defaults to `"long"`.
 #' @param inits The initialization points of the fitting algorithm
 #' @param verbose Should `rater()` produce information about the progress
 #'   of the chains while using the MCMC algorithm. Defaults to `TRUE`
-#' @param ... Extra parameters which are passed to the Stan fitting interface
+#' @param ... Extra parameters which are passed to the Stan fitting interface.
 #
-#' @return An object of type class rater_fit containing the fitted parameters.
+#' @return An object of class rater_fit containing the fitted parameters.
 #'
-#' @details The MCMC algorithm used by Stan is No U Turn Sampling.
+#' @details The default MCMC algorithm used by Stan is No U Turn Sampling
+#'   (NUTS) and the default optimisation method is LGFGS. For MCMC 4 chains
+#'   are run be default with 2000 iterations in total each.
 #'
 #' @importFrom rstan sampling optimizing
 #'
+#' @seealso [rstan::sampling()], [rstan::optimizing()]
+#'
 #' @examples
+#'
+#' \dontrun {
+#'
+#' # Fit a model using MCMC (the default).
+#' mcmc_fit <- rater(anesthesia, "dawid_skene")
+#'
 #' # Fit a model using optimisation.
 #' optim_fit <- rater(anesthesia, dawid_skene(), method = "optim")
 #'
-#' # Fit a model using grouped data (and optimisation).
-#' grouped_fit <- rater(caries, dawid_skene(), data_format = "grouped",
-#'                      method = "optim")
+#' # Fit a model using passing data grouped data.
+#' grouped_fit <- rater(caries, dawid_skene(), data_format = "grouped")
+#'
+#' }
 #'
 #' @export
 #'
@@ -93,9 +104,10 @@ rater <- function(data,
 #'   will be a data.frame with the appropriate column names. See
 #'   [validate_data()] for details.
 #'
-#' @return A list of component data parts as requrired by the Stan models.
+#' @return A list of component data parts as required by the Stan models.
 #'
 #' @noRd
+#'
 as_stan_data <- function(data, data_format) {
 
   if (data_format == "long") {
@@ -125,12 +137,13 @@ as_stan_data <- function(data, data_format) {
 
 #' Converts default prior parameter specification to full priors
 #'
-#' @param model the rater_model
-#' @param K the number of categories
+#' @param model The rater_model.
+#' @param K The number of categories in the data.
 #'
-#' @return the fully reliased prior parameters
+#' @return The fully realised prior parameters
 #'
 #' @noRd
+#'
 parse_priors <- function(model, K) {
   switch(get_file(model),
     "dawid_skene" = ds_parse_priors(model, K),
@@ -178,14 +191,15 @@ class_conditional_ds_parse_priors <- function(model, K) {
   pars
 }
 
-#' Creates inits for the stan MCMC chains
+#' Creates initialization points for the Stan.
 #'
 #' @param model rater model
 #' @param stan_data data in list form
 #'
-#' @return intits in the format required by stan
+#' @return Initialization points for the chains in the format required by Stan.
 #'
 #' @noRd
+#'
 creat_inits <- function(model, stan_data) {
   # better to have another short unique id...
   K <- stan_data$K
@@ -197,14 +211,15 @@ creat_inits <- function(model, stan_data) {
     stop("Unsupported model type", call. = FALSE))
 }
 
-#' Creates inits for the dawid and skene model
+#' Creates initialization points for the dawid and skene model.
 #'
 #' @param K number of categories
 #' @param J number of raters
 #'
-#' @return inits in the format required by stan
+#' @return Initialization points in the format required by Stan.
 #'
 #' @noRd
+#'
 dawid_skene_inits <- function(K, J) {
   pi_init <- rep(1/K, K)
   theta_init <- array(0.2 / (K - 1), c(J, K, K))
@@ -214,14 +229,15 @@ dawid_skene_inits <- function(K, J) {
   function(n) list(theta = theta_init, pi = pi_init)
 }
 
-#' Creates inits for the class conditional dawid and skene model
+#' Creates initialization points for the class conditional model
 #'
 #' @param K number of categories
 #' @param J number of raters
 #'
-#' @return inits in the format required by stan
+#' @return initialization points in the format required by stan
 #'
 #' @noRd
+#'
 class_conditional_dawid_skene_inits <- function(K, J) {
   pi_init <- rep(1/K, K)
   theta_init <- matrix(0.8, nrow = J, ncol = K)
@@ -233,9 +249,10 @@ class_conditional_dawid_skene_inits <- function(K, J) {
 #' @param stan_data data in stan format
 #' @param model the passed model
 #'
-#' @return the fully reliased prior parameters
+#' @return The fully realised prior parameters
 #'
 #' @noRd
+#'
 check_K <- function(stan_data, model) {
   # NB: this does not/cannot tell the user which of the pars is inconsistent
   # but we can return a vector (with NULLs and parse cleverly)
@@ -253,10 +270,11 @@ check_K <- function(stan_data, model) {
 #' @return the name (no .stan) of the stan file that should be run
 #'
 #' @noRd
+#'
 get_stan_file <- function(data_format, model) {
 
   file <- get_file(model)
-  # If the data is grouped overide this. We are assuming we have a
+  # If the data is grouped override this. We are assuming we have a
   # valid model/format pair.
   if (data_format == "grouped") {
     file <- "grouped_data"
@@ -266,12 +284,15 @@ get_stan_file <- function(data_format, model) {
 
 #' Helper to check if the passed model is valid.
 #'
-#' This function will return a rater_model object if one can be constrcuted
+#' This function will return a rater_model object if one can be constructed
 #' from the input.
 #'
-#' @param model The `model` argument passed to [rater()]
+#' @param model The `model` argument passed to [`rater()`]
+#'
+#' @return A rater model object.
 #'
 #' @noRd
+#'
 validate_model <- function(model) {
 
   if (is.character(model)) {
@@ -295,7 +316,11 @@ validate_model <- function(model) {
 #' @param model The `model` argument passed to [rater()]
 #' @param data_format The `data_format` argument passed to [rater()]
 #'
+#' @return Validated data. This will always be a data.frame with the
+#'   appropriate column names for the column names.
+#'
 #' @noRd
+#'
 validate_input <- function(data, model, data_format) {
 
   if (data_format == "grouped" & !is.dawid_skene(model)) {
@@ -315,6 +340,7 @@ validate_input <- function(data, model, data_format) {
 #'   appropriate column names for the column names.
 #'
 #' @noRd
+#'
 validate_data <- function(data, data_format) {
 
   # TODO: The error message in this function should refer to a vignette
@@ -328,7 +354,7 @@ validate_data <- function(data, data_format) {
   data <- as.data.frame(data)
 
   # FIXME We should accept non-numeric data (GitHub issue: #81) but for
-  # now we explicity check that is all columns contain numeric values.
+  # now we explicitly check that is all columns contain numeric values.
   if (!all(vapply(data, is.numeric, FUN.VALUE = logical(1)))) {
     stop("All columns in `data` must contain only numeric values.",
          call. = FALSE)

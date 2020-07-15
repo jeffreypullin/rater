@@ -2,17 +2,17 @@
 % Please edit documentation in R/rater_fit_class.R
 \name{summary.optim_fit}
 \alias{summary.optim_fit}
-\title{Summary of optim fit}
+\title{Summarise an \code{optim_fit} object}
 \usage{
 \method{summary}{optim_fit}(object, n_pars = 8, ...)
 }
 \arguments{
-\item{object}{object of type rater fit}
+\item{object}{An object of class \code{optim_fit}.}
 
-\item{n_pars}{the number of pi/theta parameters and z 'items' to display}
+\item{n_pars}{The number of pi/theta parameters and z 'items' to display.}
 
-\item{...}{other args passed to function}
+\item{...}{Other arguments passed to function.}
 }
 \description{
-Summary of optim fit
+Summarise an \code{optim_fit} object
 }

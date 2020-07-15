@@ -1,6 +1,9 @@
 #' The 'rater' package.
 #'
-#' @description A DESCRIPTION OF THE PACKAGE
+#' @description  Fit statistical models based on the Dawid-Skene model to repeated
+#'  categorical rating data. Full Bayesian inference for these models is
+#'  supported through the Stan modelling language. rater also allows the user to
+#'  extract and plot key parameters of these models.
 #'
 #' @docType package
 #' @name rater-package

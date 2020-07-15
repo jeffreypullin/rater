@@ -1,12 +1,14 @@
 #' Plot the prevalence estimates
 #'
-#' @param fit rater fit object
-#' @return Plot of the prevalence estimates extracted in fits
+#' @param fit A rater fit object.
 #'
-#' @export
+#' @return A plot of the prevalence estimates extracted from the fit.
+#'
 #' @importFrom ggplot2 ggplot aes geom_bar geom_text coord_cartesian labs
 #'     theme_bw
 #' @importFrom rlang .data
+#'
+#' @noRd
 #'
 plot_pi <- function(fit) {
   pi <- pi_point_estimate(fit)
@@ -33,10 +35,11 @@ plot_pi <- function(fit) {
 #'
 #' @return Plot of the rate accuracy estimates
 #'
-#' @export
 #' @importFrom ggplot2 ggplot aes geom_tile geom_text facet_wrap labs guides
 #'      scale_fill_gradient theme_bw theme element_rect element_blank
 #' @importFrom rlang .data
+#'
+#' @noRd
 #'
 plot_theta <- function(fit, which = NULL) {
   theta <- theta_point_estimate(fit, which = which)
@@ -81,21 +84,7 @@ plot_theta <- function(fit, which = NULL) {
   plot
 }
 
-#' Generic to plot the latent class probabilites
-#'
-#' @param x an object
-#' @param ... extra stuff
-#'
-#' @details This method can either be used to plot matrices or rater_fit
-#'   objects
-#'
-#' @export
-#'
-plot_class_probabilities <- function(x, ...) {
-  UseMethod("plot_class_probabilities", x)
-}
-
-#' Plot the latent class estimates of a matrix
+#' Plot the latent class estimates of a rater fit.
 #'
 #' @param x numeric matrix object
 #' @param ... Other arguments
@@ -106,9 +95,11 @@ plot_class_probabilities <- function(x, ...) {
 #'     scale_fill_gradient guides element_blank
 #' @importFrom rlang .data
 #'
-#' @export
+#' @noRd
 #'
-plot_class_probabilities.matrix <- function(x, ...) {
+plot_class_probabilities <- function(fit) {
+
+  x <- class_probabilities(fit)
 
   # We could validate more stringently here if required
   if (!is.numeric(x)) {
@@ -137,19 +128,4 @@ plot_class_probabilities.matrix <- function(x, ...) {
     NULL
 
   plot
-
-}
-
-#' Plot the latent class estimates of a rater_fit object
-#'
-#' @param x rater fit object
-#' @param ... Other arguments
-#'
-#' @return Plot of the rate accuracy estimates
-#'
-#' @export
-#'
-plot_class_probabilities.rater_fit <- function(x, ...){
-  p_z <- class_probabilities(x)
-  plot_class_probabilities.matrix(p_z)
 }

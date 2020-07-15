@@ -2,20 +2,45 @@
 % Please edit documentation in R/extract.R
 \name{posterior_samples}
 \alias{posterior_samples}
-\title{Extract posterior draws from a rater_fit object}
+\title{Extract posterior samples from a rater fit object}
 \usage{
-posterior_samples(fit, pars = c("pi", "theta"), ...)
+posterior_samples(fit, pars = c("pi", "theta"))
 }
 \arguments{
-\item{fit}{A rater_fit object}
+\item{fit}{A rater fit object.}
 
-\item{pars}{A specification of which parameters to return draws from}
-
-\item{...}{Extra arguments}
+\item{pars}{A character vector of parameter names to return. By default
+\code{c("pi", "theta")}.}
 }
 \value{
-A named list of parameter draws
+A named list of the posterior samples for each parameters. For each
+parameter the samples are in the form returned by \code{\link[rstan:stanfit-method-extract]{rstan::extract()}}.
 }
 \description{
-Extract posterior draws from a rater_fit object
+Extract posterior samples from a rater fit object
+}
+\details{
+Posterior samples can only be returned for models fitting using
+MCMC not optimisation. In addition, posterior samples cannot be returned
+for the latent class due to the marginalisation technique used internally.
+}
+\examples{
+
+\dontrun{
+
+fit <- rater(anesthesia, "dawid_skene")
+
+samples <- posterior_samples(fit)
+
+# Look at first 6 samples for each of the pi parameters
+head(samples$pi)
+
+# Look at the first 6 samples for the theta[1, 1, 1] parameter
+head(samples$theta[, 1, 1, 1])
+
+# Only get the samples for the pi parameter:
+pi_samples <- posterior_samples(fit, pars = "pi")
+
+}
+
 }

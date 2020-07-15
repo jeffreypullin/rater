@@ -2,17 +2,17 @@
 % Please edit documentation in R/rater_fit_class.R
 \name{summary.mcmc_fit}
 \alias{summary.mcmc_fit}
-\title{Summary of mcmc fit}
+\title{Summarise a \code{mcmc_fit} object}
 \usage{
 \method{summary}{mcmc_fit}(object, n_pars = 8, ...)
 }
 \arguments{
-\item{object}{object of type rater fit}
+\item{object}{An object of class \code{mcmc_fit}.}
 
-\item{n_pars}{the number of pi/theta parameters and z 'items' to display}
+\item{n_pars}{The number of pi/theta parameters and z 'items' to display.}
 
-\item{...}{other args passed to function}
+\item{...}{Other arguments passed to function.}
 }
 \description{
-Summary of mcmc fit
+Summarise a \code{mcmc_fit} object
 }

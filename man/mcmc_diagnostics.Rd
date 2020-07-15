@@ -7,14 +7,45 @@
 mcmc_diagnostics(fit, pars = c("pi", "theta"))
 }
 \arguments{
-\item{fit}{an MCMC rater_fit object}
+\item{fit}{An rater \code{mcmc_fit} object.}
 
-\item{pars}{the parameters to return the diagnostics for}
+\item{pars}{A character vector of parameter names to return. By default
+\code{c("pi", "theta")}.}
 }
 \value{
 A matrix where the columns represent different diagnostics and the
-rows are different parameters.
+rows are different parameters. Currently the first column contains
+the Rhat statistic and the second bulk effective samples size. The
+rownames contain the parameter names.
 }
 \description{
 Retrieve MCMC convergence diagnostics for a rater fit
+}
+\details{
+MCMC diagnostics cannot be calculate for the z due to the
+marginalisation used to fit the models.
+}
+\examples{
+
+\dontrun{
+
+fit <- rater(anesthesia, "dawid_skene")
+
+# Calculate the diagnostics for all parameters.
+mcmc_diagnostics(fit)
+
+# Calculate the diagnostics just for the pi parameter.
+mcmc_diagnostics(fit, pars = "pi")
+
+}
+
+}
+\references{
+Aki Vehtari, Andrew Gelman, Daniel Simpson, Bob Carpenter, and
+Paul-Christian Bürkner (2019). Rank-normalization, folding, and
+localization: An improved R-hat for assessing convergence of
+MCMC. \emph{arXiv preprint} \code{arXiv:1903.08008}.
+}
+\seealso{
+\code{\link[rstan:Rhat]{rstan::Rhat()}}, \code{\link[rstan:Rhat]{rstan::ess_bulk()}}.
 }

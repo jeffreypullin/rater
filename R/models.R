@@ -4,15 +4,16 @@
 #' @description Functions to set up models and change their prior
 #'   parameters for use in [rater()].
 #'
-#' @return a `model` object that can be passed to [rater()].
+#' @return a rater model object that can be passed to [rater()].
 #'
 NULL
 
 #' @rdname models
-#' @export
 #'
 #' @param alpha prior parameter for pi
 #' @param beta prior parameter for theta
+#'
+#' @export
 #'
 dawid_skene <- function(alpha = NULL, beta = NULL) {
   parameters <- list(alpha = alpha, beta = beta)
@@ -26,6 +27,7 @@ dawid_skene <- function(alpha = NULL, beta = NULL) {
 }
 
 #' @rdname models
+#'
 #' @export
 #'
 hier_dawid_skene <- function(alpha = NULL) {
@@ -41,10 +43,11 @@ hier_dawid_skene <- function(alpha = NULL) {
 }
 
 #' @rdname models
-#' @export
 #'
 #' @param beta_1 First on diagonal prior probability parameter
 #' @param beta_2 Second on diagonal prior probability parameter for theta
+#'
+#' @export
 #'
 class_conditional_dawid_skene <- function(alpha = NULL,
                                           beta_1 = NULL,
@@ -66,10 +69,11 @@ class_conditional_dawid_skene <- function(alpha = NULL,
 #'
 #' @param pars a (named) list of parameters
 #'
+#' @noRd
+#'
 validate_parameters <- function(pars) {
   beta <- pars$beta
   alpha <- pars$alpha
-  # noone should be using 1:n syntax for prior for al
   if (!is.null(alpha) && !is.numeric(alpha)) {
       stop("alpha must be a numeric vector", call. = FALSE)
   }
