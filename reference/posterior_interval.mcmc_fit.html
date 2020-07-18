@@ -139,11 +139,12 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>object</th>
-      <td><p>A rater mcmc_fit object</p></td>
+      <td><p>A rater <code>mcmc_fit</code> object.</p></td>
     </tr>
     <tr>
       <th>prob</th>
-      <td><p>A probability</p></td>
+      <td><p>A single probability. The size of the credible interval
+returned. By default <code>0.9</code>.</p></td>
     </tr>
     <tr>
       <th>pars</th>
@@ -151,11 +152,34 @@
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Other arguments</p></td>
+      <td><p>Other arguments.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>A matrix with 2 columns. The first column is the lower bound of
+of the credible interval and the second is the upper bound. Each row
+corresponds to one individuals parameters. The rownames are the parameter
+names.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Posterior intervals can only be calculated for models fit with
+MCMC. In addition, posterior intervals are not meaningful for the latent
+class (and indeed cannot be calculated). The <em>full</em> posterior distribution
+of the latent class can be extracted using <a href='https://rdrr.io/pkg/rater/man/class_probabilities.html'>class_probabilities</a></p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>
+<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+
+<span class='kw'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/rater/man/rater.html'>rater</a></span>(<span class='kw'>anesthesia</span>, <span class='st'>"dawid_skene"</span>, verbose = <span class='fl'>FALSE</span>, chains = <span class='fl'>1</span>)
+
+<span class='kw'>intervals</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/rater/man/posterior_interval.mcmc_fit.html'>posterior_interval</a></span>(<span class='kw'>fit</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>intervals</span>)
+
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

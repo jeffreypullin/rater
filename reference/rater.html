@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Fit statistical models of noisy categorical rating data using Stan — rater • rater</title>
+<title>Fit statistical models to repeated categorical rating data using Stan — rater • rater</title>
 
 
 <!-- jquery -->
@@ -41,7 +41,7 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Fit statistical models of noisy categorical rating data using Stan — rater" />
+<meta property="og:title" content="Fit statistical models to repeated categorical rating data using Stan — rater" />
 <meta property="og:description" content="This functions allows the user to fit statistical models of noisy
 categorical rating, based on the Dawid-Skene model, using Bayesian
 inference. A variety of data formats and models are supported. Inference
@@ -126,7 +126,7 @@ optimisation and Markov Chain Monte Carlo (MCMC)." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Fit statistical models of noisy categorical rating data using Stan</h1>
+    <h1>Fit statistical models to repeated categorical rating data using Stan</h1>
     <small class="dont-index">Source: <a href='https://github.com/jeffreypullin/rater/blob/master/R/inference.R'><code>R/inference.R</code></a></small>
     <div class="hidden name"><code>rater.Rd</code></div>
     </div>
@@ -165,13 +165,13 @@ prior parameters will be set to their default values.</p></td>
     </tr>
     <tr>
       <th>method</th>
-      <td><p>A length 1 character vector, either "mcmc" or "optim". This
-represents the fitting method used by Stan.</p></td>
+      <td><p>A length 1 character vector, either <code>"mcmc"</code> or <code>"optim"</code>.
+This will be fitting method used by Stan. By default <code>"mcmc"</code></p></td>
     </tr>
     <tr>
       <th>data_format</th>
-      <td><p>A length 1 character vector, either "long" or "grouped".
-The format that the passed data is in. Defaults to "long".</p></td>
+      <td><p>A length 1 character vector, either <code>"long"</code> or
+<code>"grouped"</code>. The format that the passed data is in. Defaults to <code>"long"</code>.</p></td>
     </tr>
     <tr>
       <th>inits</th>
@@ -179,29 +179,41 @@ The format that the passed data is in. Defaults to "long".</p></td>
     </tr>
     <tr>
       <th>verbose</th>
-      <td><p>Should `rater()` produce information about the progress
-of the chains while using the MCMC algorithm. Defaults to `TRUE`</p></td>
+      <td><p>Should <code><a href='https://rdrr.io/pkg/rater/man/rater.html'>rater()</a></code> produce information about the progress
+of the chains while using the MCMC algorithm. Defaults to <code>TRUE</code></p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Extra parameters which are passed to the Stan fitting interface</p></td>
+      <td><p>Extra parameters which are passed to the Stan fitting interface.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An object of type class rater_fit containing the fitted parameters.</p>
+    <p>An object of class rater_fit containing the fitted parameters.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The MCMC algorithm used by Stan is No U Turn Sampling.</p>
+    <p>The default MCMC algorithm used by Stan is No U Turn Sampling
+(NUTS) and the default optimisation method is LGFGS. For MCMC 4 chains
+are run be default with 2000 iterations in total each.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/rstan/man/stanmodel-method-sampling.html'>rstan::sampling()</a></code>, <code><a href='https://rdrr.io/pkg/rstan/man/stanmodel-method-optimizing.html'>rstan::optimizing()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Fit a model using optimisation.</span>
+    <pre class="examples"><div class='input'>
+<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+
+<span class='co'># Fit a model using MCMC (the default).</span>
+<span class='kw'>mcmc_fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/rater/man/rater.html'>rater</a></span>(<span class='kw'>anesthesia</span>, <span class='st'>"dawid_skene"</span>)
+
+<span class='co'># Fit a model using optimisation.</span>
 <span class='kw'>optim_fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/rater/man/rater.html'>rater</a></span>(<span class='kw'>anesthesia</span>, <span class='fu'><a href='https://rdrr.io/pkg/rater/man/models.html'>dawid_skene</a></span>(), method = <span class='st'>"optim"</span>)
 
-<span class='co'># Fit a model using grouped data (and optimisation).</span>
-<span class='kw'>grouped_fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/rater/man/rater.html'>rater</a></span>(<span class='kw'>caries</span>, <span class='fu'><a href='https://rdrr.io/pkg/rater/man/models.html'>dawid_skene</a></span>(), data_format = <span class='st'>"grouped"</span>,
-                     method = <span class='st'>"optim"</span>)
+<span class='co'># Fit a model using passing data grouped data.</span>
+<span class='kw'>grouped_fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/rater/man/rater.html'>rater</a></span>(<span class='kw'>caries</span>, <span class='fu'><a href='https://rdrr.io/pkg/rater/man/models.html'>dawid_skene</a></span>(), data_format = <span class='st'>"grouped"</span>)
+
+}
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

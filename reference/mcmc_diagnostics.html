@@ -138,19 +138,49 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>fit</th>
-      <td><p>an MCMC rater_fit object</p></td>
+      <td><p>An rater <code>mcmc_fit</code> object.</p></td>
     </tr>
     <tr>
       <th>pars</th>
-      <td><p>the parameters to return the diagnostics for</p></td>
+      <td><p>A character vector of parameter names to return. By default
+<code><a href='https://rdrr.io/r/base/c.html'>c("pi", "theta")</a></code>.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A matrix where the columns represent different diagnostics and the
-  rows are different parameters.</p>
+rows are different parameters. Currently the first column contains
+the Rhat statistic and the second bulk effective samples size. The
+rownames contain the parameter names.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
+    <p>MCMC diagnostics cannot be calculate for the z due to the
+marginalisation used to fit the models.</p>
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p>Aki Vehtari, Andrew Gelman, Daniel Simpson, Bob Carpenter, and
+Paul-Christian Bürkner (2019). Rank-normalization, folding, and
+localization: An improved R-hat for assessing convergence of
+MCMC. <em>arXiv preprint</em> <code>arXiv:1903.08008</code>.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/rstan/man/Rhat.html'>rstan::Rhat()</a></code>, <code><a href='https://rdrr.io/pkg/rstan/man/Rhat.html'>rstan::ess_bulk()</a></code>.</p></div>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>
+<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+
+<span class='kw'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/rater/man/rater.html'>rater</a></span>(<span class='kw'>anesthesia</span>, <span class='st'>"dawid_skene"</span>)
+
+<span class='co'># Calculate the diagnostics for all parameters.</span>
+<span class='fu'><a href='https://rdrr.io/pkg/rater/man/mcmc_diagnostics.html'>mcmc_diagnostics</a></span>(<span class='kw'>fit</span>)
+
+<span class='co'># Calculate the diagnostics just for the pi parameter.</span>
+<span class='fu'><a href='https://rdrr.io/pkg/rater/man/mcmc_diagnostics.html'>mcmc_diagnostics</a></span>(<span class='kw'>fit</span>, pars = <span class='st'>"pi"</span>)
+
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

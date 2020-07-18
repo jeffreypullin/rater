@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Extract posterior draws from a rater_fit object — posterior_samples • rater</title>
+<title>Extract posterior samples from a rater fit object — posterior_samples • rater</title>
 
 
 <!-- jquery -->
@@ -41,8 +41,8 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Extract posterior draws from a rater_fit object — posterior_samples" />
-<meta property="og:description" content="Extract posterior draws from a rater_fit object" />
+<meta property="og:title" content="Extract posterior samples from a rater fit object — posterior_samples" />
+<meta property="og:description" content="Extract posterior samples from a rater fit object" />
 
 
 
@@ -122,38 +122,60 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Extract posterior draws from a rater_fit object</h1>
+    <h1>Extract posterior samples from a rater fit object</h1>
     <small class="dont-index">Source: <a href='https://github.com/jeffreypullin/rater/blob/master/R/extract.R'><code>R/extract.R</code></a></small>
     <div class="hidden name"><code>posterior_samples.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Extract posterior draws from a rater_fit object</p>
+    <p>Extract posterior samples from a rater fit object</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/rater/man/posterior_samples.html'>posterior_samples</a></span>(<span class='kw'>fit</span>, pars = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"pi"</span>, <span class='st'>"theta"</span>), <span class='kw'>...</span>)</pre>
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/rater/man/posterior_samples.html'>posterior_samples</a></span>(<span class='kw'>fit</span>, pars = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"pi"</span>, <span class='st'>"theta"</span>))</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>fit</th>
-      <td><p>A rater_fit object</p></td>
+      <td><p>A rater fit object.</p></td>
     </tr>
     <tr>
       <th>pars</th>
-      <td><p>A specification of which parameters to return draws from</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Extra arguments</p></td>
+      <td><p>A character vector of parameter names to return. By default
+<code><a href='https://rdrr.io/r/base/c.html'>c("pi", "theta")</a></code>.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A named list of parameter draws</p>
+    <p>A named list of the posterior samples for each parameters. For each
+parameter the samples are in the form returned by <code><a href='https://rdrr.io/pkg/rstan/man/stanfit-method-extract.html'>rstan::extract()</a></code>.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
+    <p>Posterior samples can only be returned for models fitting using
+MCMC not optimisation. In addition, posterior samples cannot be returned
+for the latent class due to the marginalisation technique used internally.</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>
+<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+
+<span class='kw'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/rater/man/rater.html'>rater</a></span>(<span class='kw'>anesthesia</span>, <span class='st'>"dawid_skene"</span>)
+
+<span class='kw'>samples</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/rater/man/posterior_samples.html'>posterior_samples</a></span>(<span class='kw'>fit</span>)
+
+<span class='co'># Look at first 6 samples for each of the pi parameters</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>samples</span><span class='op'>$</span><span class='kw'>pi</span>)
+
+<span class='co'># Look at the first 6 samples for the theta[1, 1, 1] parameter</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>samples</span><span class='op'>$</span><span class='kw'>theta</span>[, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>])
+
+<span class='co'># Only get the samples for the pi parameter:</span>
+<span class='kw'>pi_samples</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/rater/man/posterior_samples.html'>posterior_samples</a></span>(<span class='kw'>fit</span>, pars = <span class='st'>"pi"</span>)
+
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
