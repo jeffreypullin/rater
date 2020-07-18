@@ -27,12 +27,13 @@
 #'   are run be default with 2000 iterations in total each.
 #'
 #' @importFrom rstan sampling optimizing
+#' @importFrom utils capture.output
 #'
 #' @seealso [rstan::sampling()], [rstan::optimizing()]
 #'
 #' @examples
 #'
-#' \dontrun {
+#' \dontrun{
 #'
 #' # Fit a model using MCMC (the default).
 #' mcmc_fit <- rater(anesthesia, "dawid_skene")
