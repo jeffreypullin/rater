@@ -32,7 +32,6 @@
 #' @seealso [rstan::sampling()], [rstan::optimizing()]
 #'
 #' @examples
-#'
 #' \dontrun{
 #'
 #' # Fit a model using MCMC (the default).

@@ -51,7 +51,6 @@ The default MCMC algorithm used by Stan is No U Turn Sampling
 are run be default with 2000 iterations in total each.
 }
 \examples{
-
 \dontrun{
 
 # Fit a model using MCMC (the default).
