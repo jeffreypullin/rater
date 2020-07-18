@@ -363,20 +363,75 @@ validate_data <- function(data, data_format) {
   if (data_format == "long") {
 
     if (!ncol(data) == 3L) {
-      stop("`data` must have exactly three columns.", call. = FALSE)
+      stop("Long format `data` must have exactly three columns.", call. = FALSE)
     }
 
     if (!(all(c("rater", "item", "rating") %in% colnames(data)))) {
-      stop("`data` must have three columns with names: `rater`, `item`, and",
-           " `rating`.", call. = FALSE)
+      stop("Long `data` must have three columns with names: `rater`, `item`,",
+           "and `rating`.", call. = FALSE)
+    }
+
+    # The following are errors about 0 elements. We try to show these errors
+    # all at once to prevent undue frustration.
+    error_messages <- character(0)
+    if (any(data[[1]] == 0)) {
+       error_messages <- c(error_messages, paste0(
+        "Some item indexes are 0. All indexes must be in 1:I",
+        " where I is the number of items."))
+    }
+
+    if (any(data[[2]] == 0)) {
+      error_messages <- c(error_messages, paste0(
+        "Some rater indexes are 0. All indexes must be in 1:J",
+        " where J is the number of raters."))
+    }
+
+    if (any(data[[3]] == 0)) {
+      error_messages <- c(error_messages, paste0(
+        "Some ratings are 0. All ratings must be in 1:K",
+        " where K is the number of classes."))
+    }
+
+    if (length(error_messages) > 0) {
+
+      if (length(error_messages) == 1) {
+        stop(error_messages[[1]], call. = FALSE)
+      } else if (length(error_messages) > 1) {
+        stop("\n", paste0("* ", error_messages, collapse = "\n"), call. = FALSE)
+      }
+
     }
 
   } else if (data_format == "grouped") {
 
     last_col_name <- colnames(data)[[ncol(data)]]
     if (!last_col_name == "n") {
-      stop("The last column must be named `n`.", call = FALSE)
+      stop("The last column must be named `n`.", call. = FALSE)
     }
+
+    error_messages <- character(0)
+    tally <- data$n
+    if (any(tally == 0)) {
+      error_messages <- c(error_messages,
+        "All elements of the column `n` must be > 0."
+      )
+    }
+
+    rest <- data[1:(ncol(data) - 1)]
+    if (any(rest == 0)) {
+      error_messages <- c(error_messages, paste0(
+        "Some ratings are 0. All ratings must be in 1:K",
+        " where K is the number of classes."))
+    }
+
+    if (length(error_messages) == 1) {
+        stop(error_messages[[1]], call. = FALSE)
+    }
+
+    if (length(error_messages) == 2) {
+        stop("\n", paste0("* ", error_messages, collapse = "\n"), call. = FALSE)
+    }
+
   }
 
   data
