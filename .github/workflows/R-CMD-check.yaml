@@ -60,7 +60,6 @@ jobs:
 
       - name: Install dependencies
         run: |
-          remotes::install_github("stan-dev/rstantools@v2.0.0")
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
