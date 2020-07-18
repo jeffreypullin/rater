@@ -16,7 +16,6 @@
 #' @examples
 #'
 #' \dontrun{
-#'
 #' fit <- rater(anesthesia, "dawid_skene")
 #'
 #' samples <- posterior_samples(fit)
@@ -75,7 +74,6 @@ posterior_samples <- function(fit, pars = c("pi", "theta")) {
 #' @examples
 #'
 #' \dontrun{
-#'
 #' fit <- rater(anesthesia, "dawid_skene", verbose = FALSE, chains = 1)
 #'
 #' intervals <- posterior_interval(fit)
@@ -176,7 +174,6 @@ posterior_interval.optim_fit <- function(object,
 #' @examples
 #'
 #' \dontrun{
-#'
 #' # A model fit using MCMC.
 #' mcmc_fit <- rater(anesthesia, "dawid_skene")
 #'
@@ -275,7 +272,6 @@ z_point_estimate <- function(fit, ...) {
 #'   (unconditional) latent class probabilities retuned by this function.
 #'
 #' @examples
-#'
 #' \dontrun{
 #'
 #' fit <- rater(anesthesia, "dawid_skene")
@@ -473,7 +469,6 @@ unspool_cc_theta <- function(cc_theta) {
 #' MCMC. \emph{arXiv preprint} \code{arXiv:1903.08008}.
 #'
 #' @examples
-#'
 #' \dontrun{
 #'
 #' fit <- rater(anesthesia, "dawid_skene")

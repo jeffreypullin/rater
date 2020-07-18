@@ -78,7 +78,6 @@ print.optim_fit <- function(x, ...) {
 #' @examples
 #'
 #' \dontrun{
-#'
 #' fit <- rater(anesthesia, "dawid_skene")
 #'
 #' # Plot all the parameters.

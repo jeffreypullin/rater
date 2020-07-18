@@ -27,7 +27,6 @@ for the latent class due to the marginalisation technique used internally.
 \examples{
 
 \dontrun{
-
 fit <- rater(anesthesia, "dawid_skene")
 
 samples <- posterior_samples(fit)
