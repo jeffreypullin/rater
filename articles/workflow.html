@@ -127,8 +127,8 @@
 <pre><code>#&gt; 
 #&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 1).
 #&gt; Chain 1: 
-#&gt; Chain 1: Gradient evaluation took 0.000347 seconds
-#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 3.47 seconds.
+#&gt; Chain 1: Gradient evaluation took 0.000264 seconds
+#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 2.64 seconds.
 #&gt; Chain 1: Adjust your expectations accordingly!
 #&gt; Chain 1: 
 #&gt; Chain 1: 
@@ -145,10 +145,13 @@
 #&gt; Chain 1: Iteration: 450 / 500 [ 90%]  (Sampling)
 #&gt; Chain 1: Iteration: 500 / 500 [100%]  (Sampling)
 #&gt; Chain 1: 
-#&gt; Chain 1:  Elapsed Time: 0.837949 seconds (Warm-up)
-#&gt; Chain 1:                0.622114 seconds (Sampling)
-#&gt; Chain 1:                1.46006 seconds (Total)
+#&gt; Chain 1:  Elapsed Time: 0.778545 seconds (Warm-up)
+#&gt; Chain 1:                0.610858 seconds (Sampling)
+#&gt; Chain 1:                1.3894 seconds (Total)
 #&gt; Chain 1:</code></pre>
+<pre><code>#&gt; Warning: The largest R-hat is 1.07, indicating chains have not mixed.
+#&gt; Running the chains for more iterations may help. See
+#&gt; http://mc-stan.org/misc/warnings.html#r-hat</code></pre>
 <pre><code>#&gt; Warning: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
 #&gt; Running the chains for more iterations may help. See
 #&gt; http://mc-stan.org/misc/warnings.html#bulk-ess</code></pre>
@@ -157,11 +160,11 @@
 #&gt; http://mc-stan.org/misc/warnings.html#tail-ess</code></pre>
 <p>You will see the normal progress output you get whenever <strong>Stan</strong> is sampling. Note that all models are compiled when the package is installed, rather than at runtime, meaning that you will not need to wait for a model to be compiled when running analyses.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 <p>You can also compute MAP esitmates by specifiying <code>method = "optim"</code>in the <code>rater</code> function.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit">
+<div class="sourceCode" id="cb10"><pre class="downlit">
 <span class="kw">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rater.html">rater</a></span>(<span class="kw">anesthesia</span>, <span class="fu"><a href="../reference/models.html">dawid_skene</a></span>(), method = <span class="st">"optim"</span>)
 </pre></div>
 <p>If you would like to change the prior parameters of the models you can do this by passing appropriate paraemters to the model function. For example to fit the dawid and skene model with prior parameter <span class="math inline">\(\alpha\)</span> <code>= c(4, 4, 4, 4)</code> you would run:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit">
+<div class="sourceCode" id="cb11"><pre class="downlit">
 <span class="kw">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rater.html">rater</a></span>(<span class="kw">anesthesia</span>, <span class="fu"><a href="../reference/models.html">dawid_skene</a></span>(alpha = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">4</span>)))
 </pre></div>
 </div>
@@ -170,7 +173,7 @@
 <a href="#plot" class="anchor"></a>plot()</h2>
 <p>Having fit the Dawid and Skene model to the data we can now plot and extract key parameter estimates from the model.</p>
 <p>To plot the population prevalence estimates (the parameter <span class="math inline">\(\pi\)</span> in the model) we run:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit">
+<div class="sourceCode" id="cb12"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">fit</span>, type = <span class="st">"pi"</span>) <span class="co"># or plot(fit, type = "prevalence")</span>
 </pre></div>
 <pre><code>#&gt; [[1]]</code></pre>
@@ -182,7 +185,7 @@
 #&gt; [[3]]</code></pre>
 <p><img src="workflow_files/figure-html/unnamed-chunk-6-3.png" width="576"></p>
 <p>To plot the probalistic confusion matrices of the raters (the parameter <span class="math inline">\(\theta\)</span> in the model) we run:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit">
+<div class="sourceCode" id="cb16"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">fit</span>, type = <span class="st">"theta"</span>) <span class="co"># or plot(fit, type = "raters")</span>
 </pre></div>
 <pre><code>#&gt; [[1]]</code></pre>
@@ -194,7 +197,7 @@
 #&gt; [[3]]</code></pre>
 <p><img src="workflow_files/figure-html/unnamed-chunk-7-3.png" width="576"></p>
 <p>To plot the latent class estimates (the parameter <span class="math inline">\(z\)</span> in the model) we run:</p>
-<div class="sourceCode" id="cb19"><pre class="downlit">
+<div class="sourceCode" id="cb20"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">fit</span>, type = <span class="st">"z"</span>) <span class="co"># or plot(fit, "latent_class")</span>
 </pre></div>
 <pre><code>#&gt; [[1]]</code></pre>
@@ -211,14 +214,14 @@
 <h2 class="hasAnchor">
 <a href="#extract" class="anchor"></a>extract</h2>
 <p>Similarly, we can extract all of the estimates used to make these plots for further processing with the <code>extract</code> function:</p>
-<div class="sourceCode" id="cb23"><pre class="downlit">
+<div class="sourceCode" id="cb24"><pre class="downlit">
 <span class="co"># extract_pi(fit)</span>
 <span class="co"># </span>
 <span class="co"># extract_theta(fit)</span>
 <span class="co"># </span>
 <span class="co"># extract_z(fit)</span>
 </pre></div>
-<div class="sourceCode" id="cb24"><pre class="downlit">
+<div class="sourceCode" id="cb25"><pre class="downlit">
 <span class="kw">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rater.html">rater</a></span>(<span class="kw">anesthesia</span>, <span class="fu"><a href="../reference/models.html">dawid_skene</a></span>())
 </pre></div>
 </div>

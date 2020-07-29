@@ -139,7 +139,7 @@ is done using Stan, allowing models to be fit efficiently, using both
 optimisation and Markov Chain Monte Carlo (MCMC).</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/rater/man/rater.html'>rater</a></span>(
+    <pre class="usage"><span class='fu'>rater</span>(
   <span class='kw'>data</span>,
   <span class='kw'>model</span>,
   method = <span class='st'>"mcmc"</span>,
@@ -179,7 +179,7 @@ This will be fitting method used by Stan. By default <code>"mcmc"</code></p></td
     </tr>
     <tr>
       <th>verbose</th>
-      <td><p>Should <code><a href='https://rdrr.io/pkg/rater/man/rater.html'>rater()</a></code> produce information about the progress
+      <td><p>Should <code>rater()</code> produce information about the progress
 of the chains while using the MCMC algorithm. Defaults to <code>TRUE</code></p></td>
     </tr>
     <tr>
@@ -198,19 +198,19 @@ of the chains while using the MCMC algorithm. Defaults to <code>TRUE</code></p><
 are run be default with 2000 iterations in total each.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/rstan/man/stanmodel-method-sampling.html'>rstan::sampling()</a></code>, <code><a href='https://rdrr.io/pkg/rstan/man/stanmodel-method-optimizing.html'>rstan::optimizing()</a></code></p></div>
+    <div class='dont-index'><p><code><a href='https://mc-stan.org/rstan/reference/stanmodel-method-sampling.html'>rstan::sampling()</a></code>, <code><a href='https://mc-stan.org/rstan/reference/stanmodel-method-optimizing.html'>rstan::optimizing()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
 
 <span class='co'># Fit a model using MCMC (the default).</span>
-<span class='kw'>mcmc_fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/rater/man/rater.html'>rater</a></span>(<span class='kw'>anesthesia</span>, <span class='st'>"dawid_skene"</span>)
+<span class='kw'>mcmc_fit</span> <span class='op'>&lt;-</span> <span class='fu'>rater</span>(<span class='kw'>anesthesia</span>, <span class='st'>"dawid_skene"</span>)
 
 <span class='co'># Fit a model using optimisation.</span>
-<span class='kw'>optim_fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/rater/man/rater.html'>rater</a></span>(<span class='kw'>anesthesia</span>, <span class='fu'><a href='https://rdrr.io/pkg/rater/man/models.html'>dawid_skene</a></span>(), method = <span class='st'>"optim"</span>)
+<span class='kw'>optim_fit</span> <span class='op'>&lt;-</span> <span class='fu'>rater</span>(<span class='kw'>anesthesia</span>, <span class='fu'><a href='models.html'>dawid_skene</a></span>(), method = <span class='st'>"optim"</span>)
 
 <span class='co'># Fit a model using passing data grouped data.</span>
-<span class='kw'>grouped_fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/rater/man/rater.html'>rater</a></span>(<span class='kw'>caries</span>, <span class='fu'><a href='https://rdrr.io/pkg/rater/man/models.html'>dawid_skene</a></span>(), data_format = <span class='st'>"grouped"</span>)
+<span class='kw'>grouped_fit</span> <span class='op'>&lt;-</span> <span class='fu'>rater</span>(<span class='kw'>caries</span>, <span class='fu'><a href='models.html'>dawid_skene</a></span>(), data_format = <span class='st'>"grouped"</span>)
 
 }
 </div></pre>

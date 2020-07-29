@@ -131,7 +131,7 @@
     <p>Extract point estimates of parameters from a fit object</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/rater/man/point_estimate.html'>point_estimate</a></span>(<span class='kw'>fit</span>, pars = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"pi"</span>, <span class='st'>"theta"</span>, <span class='st'>"z"</span>), <span class='kw'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>point_estimate</span>(<span class='kw'>fit</span>, pars = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"pi"</span>, <span class='st'>"theta"</span>, <span class='st'>"z"</span>), <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -160,25 +160,25 @@
 means are returned. If it was fit through optimisation the maximum a
 priori (MAP) estimates are returned. The z parameter returned is the
 value of class probabilities which is largest. To return the full
-posterior distributions of the latent class use <code><a href='https://rdrr.io/pkg/rater/man/class_probabilities.html'>class_probabilities()</a></code>.</p>
+posterior distributions of the latent class use <code><a href='class_probabilities.html'>class_probabilities()</a></code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/rater/man/class_probabilities.html'>class_probabilities()</a></code></p></div>
+    <div class='dont-index'><p><code><a href='class_probabilities.html'>class_probabilities()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='co'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'># A model fit using MCMC.</span>
-<span class='kw'>mcmc_fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/rater/man/rater.html'>rater</a></span>(<span class='kw'>anesthesia</span>, <span class='st'>"dawid_skene"</span>)
+<span class='kw'>mcmc_fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='rater.html'>rater</a></span>(<span class='kw'>anesthesia</span>, <span class='st'>"dawid_skene"</span>)
 
 <span class='co'># This will return the posterior mean (except for z)</span>
-<span class='kw'>post_mean_estimate</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/rater/man/point_estimate.html'>point_estimate</a></span>(<span class='kw'>mcmc_fit</span>)
+<span class='kw'>post_mean_estimate</span> <span class='op'>&lt;-</span> <span class='fu'>point_estimate</span>(<span class='kw'>mcmc_fit</span>)
 
 <span class='co'># A model fit using optimisation.</span>
-<span class='kw'>optim_fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/rater/man/rater.html'>rater</a></span>(<span class='kw'>anesthesia</span>, <span class='fu'><a href='https://rdrr.io/pkg/rater/man/models.html'>dawid_skene</a></span>(), method = <span class='st'>"optim"</span>)
+<span class='kw'>optim_fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='rater.html'>rater</a></span>(<span class='kw'>anesthesia</span>, <span class='fu'><a href='models.html'>dawid_skene</a></span>(), method = <span class='st'>"optim"</span>)
 
 <span class='co'># This will output MAP estimates of the parameters.</span>
-<span class='kw'>map_estimate</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/rater/man/point_estimate.html'>point_estimate</a></span>(<span class='kw'>optim_fit</span>)
+<span class='kw'>map_estimate</span> <span class='op'>&lt;-</span> <span class='fu'>point_estimate</span>(<span class='kw'>optim_fit</span>)
 
 }
 </div></pre>
