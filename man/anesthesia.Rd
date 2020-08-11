@@ -5,19 +5,28 @@
 \alias{anesthesia}
 \title{Anaesthetist ratings for patient suitability for surgery}
 \format{
-A matrix with 315 rows and 3 columns:
+A \code{data.frame} with 315 rows and 3 columns:
 \describe{
-\item{item}{item index, which item is being rated}
-\item{rater}{rater index, which rater is doing the rater}
-\item{rating}{what rating was given}
+\item{item}{The item index - which item is being rated}
+\item{rater}{The rater index - which rater is doing the rating}
+\item{rating}{The rating given}
 }
 }
 \usage{
 anesthesia
 }
 \description{
-A dataset containing anaesthetist ratings of patient readiness for surgery for
-5 anaesthetists on 45 patients with 4 categories in 'long' format. Each row
-represents one unique rating.
+The data consist of ratings, on a 4-point scale, made by four anaesthetists
+of patients' pre-operative health. The ratings were based on the
+anaesthetists assessments of a standard form completed for all of the
+patients. There are 45 patients (items) and four anaesthetists (raters) in
+total. The first anaesthetist assessed the forms a total of three times,
+spaced several weeks apart. The other anaesthetists each assessed the forms
+once. The data is in 'long' format.
+}
+\references{
+Dawid, A. P., and A. M. Skene. "Maximum Likelihood Estimation of Observer
+Error-Rates Using the EM Algorithm." Applied Statistics 28, no. 1 (1979): 20.
+\url{https://doi.org/10.2307/2346806}.
 }
 \keyword{datasets}

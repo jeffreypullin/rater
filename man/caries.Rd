@@ -3,14 +3,34 @@
 \docType{data}
 \name{caries}
 \alias{caries}
-\title{Caries ratings of whether caries are 'sound' or not (c...)}
+\title{Dentist ratings of whether caries are healthy or not based on X-rays}
 \format{
-An object of class \code{data.frame} with 32 rows and 6 columns.
+A \code{data.frame} with 6 columns and 32 rows.
+\describe{
+\item{rater_1}{The rating of the dentist 1}
+\item{rater_2}{The rating of the dentist 2}
+\item{rater_3}{The rating of the dentist 3}
+\item{rater_4}{The rating of the dentist 4}
+\item{rater_5}{The rating of the dentist 5}
+\item{n}{The number of times the rating pattern appears in the dataset}
+}
 }
 \usage{
 caries
 }
 \description{
-TODO
+It consists of binary ratings, made by 5 dentists, of whether a given tooth
+was healthy (sound) or had caries, also known as cavities. The ratings were
+performed using X-ray only, which was thought to be more error-prone than
+visual/tactile assessment of each tooth. In total 3,689 ratings were made.
+This data is in 'grouped' format. Each row is one of the 'pattern' with
+the final columns being a tally of how many times that pattern occurs in
+the dataset.
+}
+\references{
+Espeland, Mark A., and Stanley L. Handelman. “Using Latent Class Models to
+Characterize and Assess Relative Error in Discrete Measurements.”
+Biometrics 45, no. 2 (1989): 587–99.
+\url{https://doi.org/10.2307/2531499}.
 }
 \keyword{datasets}
