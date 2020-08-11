@@ -154,14 +154,20 @@ parse_priors <- function(model, K) {
 }
 
 ds_parse_priors <- function(model, K) {
-  # These are the priors from the stan manual.
   pars <- get_parameters(model)
+  # This is the default uniform prior taken from the Stan manual.
   if (is.null(pars$alpha)) {
     pars$alpha <- rep(3, K)
   }
+  # This prior parameter is based on conjugate priors for the simplified model
+  # where the true class in known. Here we match on the mean.
   if (is.null(pars$beta)) {
-    pars$beta <- matrix(1, nrow = K, ncol = K)
-    diag(pars$beta) <- 2.5 * K
+    N <- 7
+    p <- 0.64
+    on_diag <- N * p
+    off_diag <- N * (1 - p) / (K - 1)
+    pars$beta <- matrix(off_diag, nrow = K, ncol = K)
+    diag(pars$beta) <- on_diag
   }
   pars
 }
@@ -179,14 +185,15 @@ class_conditional_ds_parse_priors <- function(model, K) {
   if (is.null(pars$alpha)) {
     pars$alpha <- rep(3, K)
   }
-  # These priors are selected so that:
-  # mode(prior) = 0.7
-  # alpha + beta - 2  = 5 (mode denom, usual beta distribution parameters)
+  # These priors are selected so that, using the mean matching interpretation
+  # with N = 7, p = 0.64.
+  N <- 7
+  p <- 0.64
   if (is.null(pars$beta_1)) {
-    pars$beta_1 <- rep(4.5, K)
+    pars$beta_1 <- rep(N * p, K)
   }
   if (is.null(pars$beta_2)) {
-    pars$beta_2 <- rep(2.5, K)
+    pars$beta_2 <- rep(N * (1 - p), K)
   }
   pars
 }
