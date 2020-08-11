@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Caries ratings of whether caries are 'sound' or not (c...) — caries • rater</title>
+<title>Dentist ratings of whether caries are healthy or not based on X-rays — caries • rater</title>
 
 
 <!-- jquery -->
@@ -41,8 +41,14 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Caries ratings of whether caries are 'sound' or not (c...) — caries" />
-<meta property="og:description" content="TODO" />
+<meta property="og:title" content="Dentist ratings of whether caries are healthy or not based on X-rays — caries" />
+<meta property="og:description" content="It consists of binary ratings, made by 5 dentists, of whether a given tooth
+was healthy (sound) or had caries, also known as cavities. The ratings were
+performed using X-ray only, which was thought to be more error-prone than
+visual/tactile assessment of each tooth. In total 3,689 ratings were made.
+This data is in 'grouped' format. Each row is one of the 'pattern' with
+the final columns being a tally of how many times that pattern occurs in
+the dataset." />
 
 
 
@@ -122,13 +128,19 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Caries ratings of whether caries are 'sound' or not (c...)</h1>
+    <h1>Dentist ratings of whether caries are healthy or not based on X-rays</h1>
     <small class="dont-index">Source: <a href='https://github.com/jeffreypullin/rater/blob/master/R/data.R'><code>R/data.R</code></a></small>
     <div class="hidden name"><code>caries.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>TODO</p>
+    <p>It consists of binary ratings, made by 5 dentists, of whether a given tooth
+was healthy (sound) or had caries, also known as cavities. The ratings were
+performed using X-ray only, which was thought to be more error-prone than
+visual/tactile assessment of each tooth. In total 3,689 ratings were made.
+This data is in 'grouped' format. Each row is one of the 'pattern' with
+the final columns being a tally of how many times that pattern occurs in
+the dataset.</p>
     </div>
 
     <pre class="usage"><span class='kw'>caries</span></pre>
@@ -136,7 +148,22 @@
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>An object of class <code>data.frame</code> with 32 rows and 6 columns.</p>
+    <p>A <code>data.frame</code> with 6 columns and 32 rows.</p><dl>
+<dt>rater_1</dt><dd><p>The rating of the dentist 1</p></dd>
+<dt>rater_2</dt><dd><p>The rating of the dentist 2</p></dd>
+<dt>rater_3</dt><dd><p>The rating of the dentist 3</p></dd>
+<dt>rater_4</dt><dd><p>The rating of the dentist 4</p></dd>
+<dt>rater_5</dt><dd><p>The rating of the dentist 5</p></dd>
+<dt>n</dt><dd><p>The number of times the rating pattern appears in the dataset</p></dd>
+
+</dl>
+
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p>Espeland, Mark A., and Stanley L. Handelman. “Using Latent Class Models to
+Characterize and Assess Relative Error in Discrete Measurements.”
+Biometrics 45, no. 2 (1989): 587–99.
+<a href='https://doi.org/10.2307/2531499'>https://doi.org/10.2307/2531499</a>.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
