@@ -3,8 +3,10 @@ context("rater")
 test_that("verbose flag works", {
 
   expect_message(
-    rater(anesthesia, "dawid_skene",
-          chains = 1, iter = 200, verbose = FALSE),
+    suppressWarnings(
+      rater(anesthesia, "dawid_skene",
+            chains = 1, iter = 200, verbose = FALSE)
+      ),
     NA
   )
 
@@ -20,8 +22,14 @@ test_that("passing model as string works", {
                      data_format = "grouped"),
                NA)
 
-  fit_model <- rater(anesthesia, dawid_skene(), method = "optim")
-  fit_string <- rater(anesthesia, "dawid_skene", method = "optim")
+  # These were causing a non-zero return code warning but I can't reproduce
+  # it outside of testthat...
+  fit_model <- suppressWarnings(
+    rater(anesthesia, dawid_skene(), method = "optim")
+  )
+  fit_string <- suppressWarnings(
+    rater(anesthesia, "dawid_skene", method = "optim")
+  )
 
   expect_equal(fit_model, fit_string)
 })
@@ -76,7 +84,6 @@ test_that("parse priors are correct", {
   off_diag <- N * (1 - p) / (K - 1)
   default_beta <- matrix(off_diag, nrow = K, ncol = K)
   diag(default_beta) <- on_diag
-  diag(default_beta) <- 2.5 * K
 
   expect_equal(ds_priors$alpha, default_alpha)
   expect_equal(ds_priors$beta, default_beta)
