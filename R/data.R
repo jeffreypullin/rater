@@ -18,7 +18,6 @@
 #' @references
 #' Dawid, A. P., and A. M. Skene. "Maximum Likelihood Estimation of Observer
 #' Error-Rates Using the EM Algorithm." Applied Statistics 28, no. 1 (1979): 20.
-#' [https://doi.org/10.2307/2346806](https://doi.org/10.2307/2346806).
 #'
 "anesthesia"
 
@@ -46,6 +45,5 @@
 #' Espeland, Mark A., and Stanley L. Handelman. “Using Latent Class Models to
 #' Characterize and Assess Relative Error in Discrete Measurements.”
 #' Biometrics 45, no. 2 (1989): 587–99.
-#' [https://doi.org/10.2307/2531499](https://doi.org/10.2307/2531499).
 #'
 "caries"

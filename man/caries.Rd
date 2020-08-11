@@ -31,6 +31,5 @@ the dataset.
 Espeland, Mark A., and Stanley L. Handelman. “Using Latent Class Models to
 Characterize and Assess Relative Error in Discrete Measurements.”
 Biometrics 45, no. 2 (1989): 587–99.
-\url{https://doi.org/10.2307/2531499}.
 }
 \keyword{datasets}

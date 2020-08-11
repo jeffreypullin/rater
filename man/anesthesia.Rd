@@ -27,6 +27,5 @@ once. The data is in 'long' format.
 \references{
 Dawid, A. P., and A. M. Skene. "Maximum Likelihood Estimation of Observer
 Error-Rates Using the EM Algorithm." Applied Statistics 28, no. 1 (1979): 20.
-\url{https://doi.org/10.2307/2346806}.
 }
 \keyword{datasets}
