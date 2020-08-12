@@ -2,7 +2,7 @@
 title: "Workflow"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{rater workflow}
+  %\VignetteIndexEntry{Workflow}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -15,111 +15,89 @@ knitr::opts_chunk$set(
 
 ## What is rater?
 
-The **rater** package is designed to allow easy fitting and analysis of
-Bayesian models of categorical data annotation using
-[Stan](http://mc-stan.org/). Here we demonstrate the basic workflow for using
-the package.
+The {rater} package is designed to allow easy fitting and analysis of Bayesian models of categorical data annotation using [Stan](https://mc-stan.org/). Here we demonstrate the basic workflow for using the package.
 
 ## Data
 
-We will use the *anesthesia* data set taken from the paper *Maximum Likelihood
-Estimation of Observer Error-Rates Using the EM Algorithm* by A. P. Dawid and
-A. M. Skene, the paper which introduced the type of models used in this
-package. This dataset is included in **rater**. Run:
+We will use the *anesthesia* data set taken from the paper *Maximum Likelihood Estimation of Observer Error-Rates Using the EM Algorithm* by A. P. Dawid and A. M. Skene, the paper which introduced the original Dawid-Skene model the type of models used This dataset is included in **rater**. We can prepare the package and data with: 
 
-```{r}
-# load the rater package
+```{r package-load}
+# Load the rater package.
 library(rater)
 
+# Access the 'anesthesia' data set.
 data("anesthesia")
 ```
 
-to load the data. The data comes in the form of a numeric matrix with three columns
-`item_index`, `rater_index` and `rating`. In the nomenclature of the package we would 
-descibe this as *long* data. (For further information about data types see: __link__).
-We need to annotate this data as being long_data before we can use it for mode fitting.
-We do this using the command:
+The data comes in the form of a `data.frame` with three columns `item`, `rater` and `rating`. In the nomenclature of the package we would describe this as *long* data. *Long* data is the standard data format for passing data to inference functions in {rater}. The `item` column is the index of each item, the `rater` column is the index of the rater and `rating` is the actual rating. For example the twentieth row of the dataset: 
 
-```{r}
-#anesthesia <- long_data(anesthesia)
+```{r one-row}
+anesthesia[20, ]
 ```
 
-## mcmc()
+means that item 3 was rated as being in category 2 by the fourth rater. {rater} also allows the use of *grouped* data for fitting some of the models but that feature is not covered in this vignette. 
 
-The core function of the **rater** package is the `mcmc()` function which fits a model 
-to given data. This function has two arguments: `data`, data annotated as being in 
-an appropriate format and `model`, which specifies the model you would like to fit. 
+## Inference
 
-Currently we support Multinomial, Dawid and Skene and Hierachical Dawid and Skene models
-in the package. Models are specifed as a function with the name of the model you woudld 
-like to fit. 
+The core function of the {rater} package is the `rater()` function which fits a specified categorical rating to model to given data. This function has two arguments: `data`, data in an appropriate format and `model`, a character string or functions specifying the model you would like to fit. By default `rater()` will fit the model using MCMC (specifically NUTS) provided by Stan. To fit the basic Dawid-Skene model[^1] to the anesthesia data we can run. 
 
-```{r}
-# fit the model using MCMC via Stan 
-fit <- rater(anesthesia, dawid_skene(), iter = 500, chains = 1)
+```{r, inference, warnings = FALSE, message = FALSE}
+fit <- rater(anesthesia, "dawid_skene", chains = 1, verbose = FALSE)
 ```
 
-You will see the normal progress output you get whenever **Stan** is sampling.
-Note that all models are compiled when the package is installed, rather than at runtime, meaning that you will not need to wait for a model to be compiled when
-running analyses.[^1]
+Note that here we have set `verbose = FALSE` to suppress the normal Stan sampling output. We have also specified that we should use only 1 chain, simply to speed up the creation of the vignette. Other fitting parameters can be passed directly to the underlying Stan functions through the `...` in `rater()`. 
 
-You can also compute MAP esitmates by specifiying `method = "optim"`in the `rater` function.
-```{r}
-fit <- rater(anesthesia, dawid_skene(), method = "optim")
+We can also compute MAP estimates by specifying `method = "optim"`in `rater()`:
+
+```{r optim-fit}
+optim_fit <- rater(anesthesia, "dawid_skene", method = "optim")
 ```
 
-If you would like to change the prior parameters of the models you can do this 
-by passing appropriate paraemters to the model function. For example to fit the 
-dawid and skene model with prior parameter $\alpha$ `= c(4, 4, 4, 4)` you would run:
+## Plotting
 
-```{r, eval = FALSE}
-fit <- rater(anesthesia, dawid_skene(alpha = c(4, 4, 4, 4)))
-```
-
-## plot()
-
-Having fit the Dawid and Skene model to the data we can now plot and extract key 
-parameter estimates from the model. 
+Having fit the Dawid and Skene model to the data we can now plot parameter estimates from the model. 
 
 To plot the population prevalence estimates (the parameter $\pi$ in the model) we run:
 
-```{r, fig.width=6, fig.height=4}
-plot(fit, type = "pi") # or plot(fit, type = "prevalence")
+```{r plot-pi, fig.width = 6, fig.height = 4}
+plot(fit, pars = "pi")
 ```
 
-To plot the probalistic confusion matrices of the raters (the parameter $\theta$ in the model) we run:
+To plot the rater's error's matrices of the (the parameter $\theta$ in the model) we run:
 
-```{r, fig.width=6, fig.height=4}
-plot(fit, type = "theta") # or plot(fit, type = "raters")
+```{r plot-theta, fig.width = 6, fig.height = 4}
+plot(fit, pars = "theta")
 ```
 
-To plot the latent class estimates (the parameter $z$ in the model) we run:
+To plot the latent class estimates we run:
 
-```{r, fig.width=6, fig.height=8}
-plot(fit, type = "z") # or plot(fit, "latent_class")
+```{r plot-z, fig.width = 6, fig.height = 8}
+plot(fit, pars = "latent_class")
 ```
 
-For a discussion of what these parameters in the model represent, please see the vignette __models__.
+## Point estimates
 
-## extract
+In additions we can extract point estimates for all the parameters. These can be extracted using the `point_estimates()` function. Different parameters can be extracted using the `pars` argument i.e.
 
-Similarly, we can extract all of the estimates used to make these plots for further 
-processing with the `extract` function:
+```{r point-estimates}
+# Extract all parameters.
+all_parameters <- point_estimate(fit)
 
-```{r, eval = FALSE}
-# extract_pi(fit)
-# 
-# extract_theta(fit)
-# 
-# extract_z(fit)
+# Extract only the 'pi' parameter. 
+point_estimate(fit, pars = "pi")
 ```
 
-[^1]: In the example above we specified **Stan** to only run 1 chain
-with 500 iterations in order to speed up the creation of this vignette and
-reduce the volume of output. In general, we recommend running `mcmc()` using
-the **Stan** sampling defaults, which will be used if you only specify the
-`data` and `model` arguments in `mcmc()` i.e.
+Note that the interpretation of the point estimates returned will differ depending on whether the model has been fit using MCMC or optimisation. 
 
-```{r, eval = FALSE}
-fit <- rater(anesthesia, dawid_skene())
-```
+## Other functions
+
+{rater} also supports a variety of other functions to extract useful quantities from fit objects which are listed below:
+
+* `posterior_samples()`
+* `posterior_interval()`
+* `class_probabilities()`
+* `mcmc_diagnostics()`
+
+Hopefully the uses of these functions are fairly self explanatory. 
+
+[^1]: {rater} also supports the 'class conditional' and 'hierarchical' Dawid-Skene models as well as setting (some of) the prior parameters in all three models. 
