@@ -93,14 +93,14 @@
 <div id="what-is-rater" class="section level2">
 <h2 class="hasAnchor">
 <a href="#what-is-rater" class="anchor"></a>What is rater?</h2>
-<p>The <strong>rater</strong> package is designed to allow easy fitting and analysis of Bayesian models of categorical data annotation using <a href="http://mc-stan.org/">Stan</a>. Here we demonstrate the basic workflow for using the package.</p>
+<p>The {rater} package is designed to allow easy fitting and analysis of Bayesian models of categorical data annotation using <a href="https://mc-stan.org/">Stan</a>. Here we demonstrate the basic workflow for using the package.</p>
 </div>
 <div id="data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#data" class="anchor"></a>Data</h2>
-<p>We will use the <em>anesthesia</em> data set taken from the paper <em>Maximum Likelihood Estimation of Observer Error-Rates Using the EM Algorithm</em> by A. P. Dawid and A. M. Skene, the paper which introduced the type of models used in this package. This dataset is included in <strong>rater</strong>. Run:</p>
+<p>We will use the <em>anesthesia</em> data set taken from the paper <em>Maximum Likelihood Estimation of Observer Error-Rates Using the EM Algorithm</em> by A. P. Dawid and A. M. Skene, the paper which introduced the original Dawid-Skene model the type of models used This dataset is included in <strong>rater</strong>. We can prepare the package and data with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="co"># load the rater package</span>
+<span class="co"># Load the rater package.</span>
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://jeffreypullin.github.io/rater">rater</a></span>)
 </pre></div>
 <pre><code>#&gt; * The rater package uses `Stan` to fit bayesian models.
@@ -108,128 +108,82 @@
 #&gt; * options(mc.cores = parallel::detectCores())
 #&gt; * This will allow Stan to run inference on multiple cores in parallel.</code></pre>
 <div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="co"># Access the 'anesthesia' data set.</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"anesthesia"</span>)
 </pre></div>
-<p>to load the data. The data comes in the form of a numeric matrix with three columns <code>item_index</code>, <code>rater_index</code> and <code>rating</code>. In the nomenclature of the package we would descibe this as <em>long</em> data. (For further information about data types see: <strong>link</strong>). We need to annotate this data as being long_data before we can use it for mode fitting. We do this using the command:</p>
+<p>The data comes in the form of a <code>data.frame</code> with three columns <code>item</code>, <code>rater</code> and <code>rating</code>. In the nomenclature of the package we would describe this as <em>long</em> data. <em>Long</em> data is the standard data format for passing data to inference functions in {rater}. The <code>item</code> column is the index of each item, the <code>rater</code> column is the index of the rater and <code>rating</code> is the actual rating. For example the twentieth row of the dataset:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="co">#anesthesia &lt;- long_data(anesthesia)</span>
+<span class="kw">anesthesia</span>[<span class="fl">20</span>, ]
 </pre></div>
+<pre><code>#&gt;    item rater rating
+#&gt; 20    3     4      2</code></pre>
+<p>means that item 3 was rated as being in category 2 by the fourth rater. {rater} also allows the use of <em>grouped</em> data for fitting some of the models but that feature is not covered in this vignette.</p>
 </div>
-<div id="mcmc" class="section level2">
+<div id="inference" class="section level2">
 <h2 class="hasAnchor">
-<a href="#mcmc" class="anchor"></a>mcmc()</h2>
-<p>The core function of the <strong>rater</strong> package is the <code>mcmc()</code> function which fits a model to given data. This function has two arguments: <code>data</code>, data annotated as being in an appropriate format and <code>model</code>, which specifies the model you would like to fit.</p>
-<p>Currently we support Multinomial, Dawid and Skene and Hierachical Dawid and Skene models in the package. Models are specifed as a function with the name of the model you woudld like to fit.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="co"># fit the model using MCMC via Stan </span>
-<span class="kw">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rater.html">rater</a></span>(<span class="kw">anesthesia</span>, <span class="fu"><a href="../reference/models.html">dawid_skene</a></span>(), iter = <span class="fl">500</span>, chains = <span class="fl">1</span>)
+<a href="#inference" class="anchor"></a>Inference</h2>
+<p>The core function of the {rater} package is the <code><a href="../reference/rater.html">rater()</a></code> function which fits a specified categorical rating to model to given data. This function has two arguments: <code>data</code>, data in an appropriate format and <code>model</code>, a character string or functions specifying the model you would like to fit. By default <code><a href="../reference/rater.html">rater()</a></code> will fit the model using MCMC (specifically NUTS) provided by Stan. To fit the basic Dawid-Skene model<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> to the anesthesia data we can run.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="kw">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rater.html">rater</a></span>(<span class="kw">anesthesia</span>, <span class="st">"dawid_skene"</span>, chains = <span class="fl">1</span>, verbose = <span class="fl">FALSE</span>)
 </pre></div>
-<pre><code>#&gt; 
-#&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 1).
-#&gt; Chain 1: 
-#&gt; Chain 1: Gradient evaluation took 0.000238 seconds
-#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 2.38 seconds.
-#&gt; Chain 1: Adjust your expectations accordingly!
-#&gt; Chain 1: 
-#&gt; Chain 1: 
-#&gt; Chain 1: Iteration:   1 / 500 [  0%]  (Warmup)
-#&gt; Chain 1: Iteration:  50 / 500 [ 10%]  (Warmup)
-#&gt; Chain 1: Iteration: 100 / 500 [ 20%]  (Warmup)
-#&gt; Chain 1: Iteration: 150 / 500 [ 30%]  (Warmup)
-#&gt; Chain 1: Iteration: 200 / 500 [ 40%]  (Warmup)
-#&gt; Chain 1: Iteration: 250 / 500 [ 50%]  (Warmup)
-#&gt; Chain 1: Iteration: 251 / 500 [ 50%]  (Sampling)
-#&gt; Chain 1: Iteration: 300 / 500 [ 60%]  (Sampling)
-#&gt; Chain 1: Iteration: 350 / 500 [ 70%]  (Sampling)
-#&gt; Chain 1: Iteration: 400 / 500 [ 80%]  (Sampling)
-#&gt; Chain 1: Iteration: 450 / 500 [ 90%]  (Sampling)
-#&gt; Chain 1: Iteration: 500 / 500 [100%]  (Sampling)
-#&gt; Chain 1: 
-#&gt; Chain 1:  Elapsed Time: 0.84948 seconds (Warm-up)
-#&gt; Chain 1:                0.59707 seconds (Sampling)
-#&gt; Chain 1:                1.44655 seconds (Total)
-#&gt; Chain 1:</code></pre>
-<pre><code>#&gt; Warning: The largest R-hat is 1.06, indicating chains have not mixed.
-#&gt; Running the chains for more iterations may help. See
-#&gt; http://mc-stan.org/misc/warnings.html#r-hat</code></pre>
-<pre><code>#&gt; Warning: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
-#&gt; Running the chains for more iterations may help. See
-#&gt; http://mc-stan.org/misc/warnings.html#bulk-ess</code></pre>
-<pre><code>#&gt; Warning: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
-#&gt; Running the chains for more iterations may help. See
-#&gt; http://mc-stan.org/misc/warnings.html#tail-ess</code></pre>
-<p>You will see the normal progress output you get whenever <strong>Stan</strong> is sampling. Note that all models are compiled when the package is installed, rather than at runtime, meaning that you will not need to wait for a model to be compiled when running analyses.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
-<p>You can also compute MAP esitmates by specifiying <code>method = "optim"</code>in the <code>rater</code> function.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit">
-<span class="kw">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rater.html">rater</a></span>(<span class="kw">anesthesia</span>, <span class="fu"><a href="../reference/models.html">dawid_skene</a></span>(), method = <span class="st">"optim"</span>)
+<p>Note that here we have set <code>verbose = FALSE</code> to suppress the normal Stan sampling output. We have also specified that we should use only 1 chain, simply to speed up the creation of the vignette. Other fitting parameters can be passed directly to the underlying Stan functions through the <code>...</code> in <code><a href="../reference/rater.html">rater()</a></code>.</p>
+<p>We can also compute MAP estimates by specifying <code>method = "optim"</code>in <code><a href="../reference/rater.html">rater()</a></code>:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit">
+<span class="kw">optim_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rater.html">rater</a></span>(<span class="kw">anesthesia</span>, <span class="st">"dawid_skene"</span>, method = <span class="st">"optim"</span>)
 </pre></div>
 <pre><code>#&gt; Warning in .local(object, ...): non-zero return code in optimizing</code></pre>
-<p>If you would like to change the prior parameters of the models you can do this by passing appropriate paraemters to the model function. For example to fit the dawid and skene model with prior parameter <span class="math inline">\(\alpha\)</span> <code>= c(4, 4, 4, 4)</code> you would run:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit">
-<span class="kw">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rater.html">rater</a></span>(<span class="kw">anesthesia</span>, <span class="fu"><a href="../reference/models.html">dawid_skene</a></span>(alpha = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">4</span>)))
-</pre></div>
 </div>
-<div id="plot" class="section level2">
+<div id="plotting" class="section level2">
 <h2 class="hasAnchor">
-<a href="#plot" class="anchor"></a>plot()</h2>
-<p>Having fit the Dawid and Skene model to the data we can now plot and extract key parameter estimates from the model.</p>
+<a href="#plotting" class="anchor"></a>Plotting</h2>
+<p>Having fit the Dawid and Skene model to the data we can now plot parameter estimates from the model.</p>
 <p>To plot the population prevalence estimates (the parameter <span class="math inline">\(\pi\)</span> in the model) we run:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">fit</span>, type = <span class="st">"pi"</span>) <span class="co"># or plot(fit, type = "prevalence")</span>
+<div class="sourceCode" id="cb9"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">fit</span>, pars = <span class="st">"pi"</span>)
 </pre></div>
-<pre><code>#&gt; [[1]]</code></pre>
-<p><img src="workflow_files/figure-html/unnamed-chunk-6-1.png" width="576"></p>
-<pre><code>#&gt; 
-#&gt; [[2]]</code></pre>
-<p><img src="workflow_files/figure-html/unnamed-chunk-6-2.png" width="576"></p>
-<pre><code>#&gt; 
-#&gt; [[3]]</code></pre>
-<p><img src="workflow_files/figure-html/unnamed-chunk-6-3.png" width="576"></p>
-<p>To plot the probalistic confusion matrices of the raters (the parameter <span class="math inline">\(\theta\)</span> in the model) we run:</p>
-<div class="sourceCode" id="cb17"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">fit</span>, type = <span class="st">"theta"</span>) <span class="co"># or plot(fit, type = "raters")</span>
+<p><img src="workflow_files/figure-html/plot-pi-1.png" width="576"></p>
+<p>To plot the rater’s error’s matrices of the (the parameter <span class="math inline">\(\theta\)</span> in the model) we run:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">fit</span>, pars = <span class="st">"theta"</span>)
 </pre></div>
-<pre><code>#&gt; [[1]]</code></pre>
-<p><img src="workflow_files/figure-html/unnamed-chunk-7-1.png" width="576"></p>
-<pre><code>#&gt; 
-#&gt; [[2]]</code></pre>
-<p><img src="workflow_files/figure-html/unnamed-chunk-7-2.png" width="576"></p>
-<pre><code>#&gt; 
-#&gt; [[3]]</code></pre>
-<p><img src="workflow_files/figure-html/unnamed-chunk-7-3.png" width="576"></p>
-<p>To plot the latent class estimates (the parameter <span class="math inline">\(z\)</span> in the model) we run:</p>
-<div class="sourceCode" id="cb21"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">fit</span>, type = <span class="st">"z"</span>) <span class="co"># or plot(fit, "latent_class")</span>
+<p><img src="workflow_files/figure-html/plot-theta-1.png" width="576"></p>
+<p>To plot the latent class estimates we run:</p>
+<div class="sourceCode" id="cb11"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">fit</span>, pars = <span class="st">"latent_class"</span>)
 </pre></div>
-<pre><code>#&gt; [[1]]</code></pre>
-<p><img src="workflow_files/figure-html/unnamed-chunk-8-1.png" width="576"></p>
-<pre><code>#&gt; 
-#&gt; [[2]]</code></pre>
-<p><img src="workflow_files/figure-html/unnamed-chunk-8-2.png" width="576"></p>
-<pre><code>#&gt; 
-#&gt; [[3]]</code></pre>
-<p><img src="workflow_files/figure-html/unnamed-chunk-8-3.png" width="576"></p>
-<p>For a discussion of what these parameters in the model represent, please see the vignette <strong>models</strong>.</p>
+<p><img src="workflow_files/figure-html/plot-z-1.png" width="576"></p>
 </div>
-<div id="extract" class="section level2">
+<div id="point-estimates" class="section level2">
 <h2 class="hasAnchor">
-<a href="#extract" class="anchor"></a>extract</h2>
-<p>Similarly, we can extract all of the estimates used to make these plots for further processing with the <code>extract</code> function:</p>
-<div class="sourceCode" id="cb25"><pre class="downlit">
-<span class="co"># extract_pi(fit)</span>
-<span class="co"># </span>
-<span class="co"># extract_theta(fit)</span>
-<span class="co"># </span>
-<span class="co"># extract_z(fit)</span>
+<a href="#point-estimates" class="anchor"></a>Point estimates</h2>
+<p>In additions we can extract point estimates for all the parameters. These can be extracted using the <code>point_estimates()</code> function. Different parameters can be extracted using the <code>pars</code> argument i.e.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit">
+<span class="co"># Extract all parameters.</span>
+<span class="kw">all_parameters</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/point_estimate.html">point_estimate</a></span>(<span class="kw">fit</span>)
+
+<span class="co"># Extract only the 'pi' parameter. </span>
+<span class="fu"><a href="../reference/point_estimate.html">point_estimate</a></span>(<span class="kw">fit</span>, pars = <span class="st">"pi"</span>)
 </pre></div>
-<div class="sourceCode" id="cb26"><pre class="downlit">
-<span class="kw">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rater.html">rater</a></span>(<span class="kw">anesthesia</span>, <span class="fu"><a href="../reference/models.html">dawid_skene</a></span>())
-</pre></div>
+<pre><code>#&gt; $pi
+#&gt; [1] 0.37267600 0.40721049 0.14574093 0.07437258</code></pre>
+<p>Note that the interpretation of the point estimates returned will differ depending on whether the model has been fit using MCMC or optimisation.</p>
+</div>
+<div id="other-functions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#other-functions" class="anchor"></a>Other functions</h2>
+<p>{rater} also supports a variety of other functions to extract useful quantities from fit objects which are listed below:</p>
+<ul>
+<li><code><a href="../reference/posterior_samples.html">posterior_samples()</a></code></li>
+<li><code><a href="../reference/posterior_interval.mcmc_fit.html">posterior_interval()</a></code></li>
+<li><code><a href="../reference/class_probabilities.html">class_probabilities()</a></code></li>
+<li><code><a href="../reference/mcmc_diagnostics.html">mcmc_diagnostics()</a></code></li>
+</ul>
+<p>Hopefully the uses of these functions are fairly self explanatory.</p>
 </div>
 <div class="footnotes">
 <hr>
 <ol>
-<li id="fn1"><p>In the example above we specified <strong>Stan</strong> to only run 1 chain with 500 iterations in order to speed up the creation of this vignette and reduce the volume of output. In general, we recommend running <code>mcmc()</code> using the <strong>Stan</strong> sampling defaults, which will be used if you only specify the <code>data</code> and <code>model</code> arguments in <code>mcmc()</code> i.e.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn1"><p>{rater} also supports the ‘class conditional’ and ‘hierarchical’ Dawid-Skene models as well as setting (some of) the prior parameters in all three models.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
   </div>
