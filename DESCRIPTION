@@ -1,6 +1,6 @@
 Package: rater
 Title: Fit Statistical Models of Repeated Categorical Rating Data
-Version: 0.1.9001
+Version: 1.0.0
 Authors@R: c(person("Jeffrey", "Pullin",
              role = c("aut", "cre"),
              email = "jeffrey.pullin@gmail.com",
