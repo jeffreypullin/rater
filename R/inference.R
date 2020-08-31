@@ -163,7 +163,7 @@ ds_parse_priors <- function(model, K) {
   # where the true class in known. Here we match on the mean.
   if (is.null(pars$beta)) {
     N <- 7
-    p <- 0.64
+    p <- 0.65
     on_diag <- N * p
     off_diag <- N * (1 - p) / (K - 1)
     pars$beta <- matrix(off_diag, nrow = K, ncol = K)
@@ -188,7 +188,7 @@ class_conditional_ds_parse_priors <- function(model, K) {
   # These priors are selected so that, using the mean matching interpretation
   # with N = 7, p = 0.64.
   N <- 7
-  p <- 0.64
+  p <- 0.65
   if (is.null(pars$beta_1)) {
     pars$beta_1 <- rep(N * p, K)
   }
