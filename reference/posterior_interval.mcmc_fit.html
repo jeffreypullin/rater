@@ -171,13 +171,19 @@ of the latent class can be extracted using <a href='class_probabilities.html'>cl
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='co'># \donttest{</span>
 <span class='kw'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='rater.html'>rater</a></span>(<span class='kw'>anesthesia</span>, <span class='st'>"dawid_skene"</span>, verbose = <span class='fl'>FALSE</span>, chains = <span class='fl'>1</span>)
 
 <span class='kw'>intervals</span> <span class='op'>&lt;-</span> <span class='fu'>posterior_interval</span>(<span class='kw'>fit</span>)
 <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>intervals</span>)
-
-}
+</div><div class='output co'>#&gt;                        5%       95%
+#&gt; pi[1]          0.28020586 0.4788411
+#&gt; pi[2]          0.30289296 0.5199344
+#&gt; pi[3]          0.07550201 0.2267938
+#&gt; pi[4]          0.02524222 0.1437626
+#&gt; theta[1, 1, 1] 0.79625458 0.9380877
+#&gt; theta[2, 1, 1] 0.61370207 0.8972540</div><div class='input'>
+<span class='co'># }</span>
 
 </div></pre>
   </div>

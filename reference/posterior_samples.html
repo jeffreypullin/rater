@@ -159,21 +159,127 @@ for the latent class due to the marginalisation technique used internally.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='co'># \donttest{</span>
 <span class='kw'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='rater.html'>rater</a></span>(<span class='kw'>anesthesia</span>, <span class='st'>"dawid_skene"</span>)
-
+</div><div class='output co'>#&gt; 
+#&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 1).
+#&gt; Chain 1: 
+#&gt; Chain 1: Gradient evaluation took 0.000152 seconds
+#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 1.52 seconds.
+#&gt; Chain 1: Adjust your expectations accordingly!
+#&gt; Chain 1: 
+#&gt; Chain 1: 
+#&gt; Chain 1: Iteration:    1 / 2000 [  0%]  (Warmup)
+#&gt; Chain 1: Iteration:  200 / 2000 [ 10%]  (Warmup)
+#&gt; Chain 1: Iteration:  400 / 2000 [ 20%]  (Warmup)
+#&gt; Chain 1: Iteration:  600 / 2000 [ 30%]  (Warmup)
+#&gt; Chain 1: Iteration:  800 / 2000 [ 40%]  (Warmup)
+#&gt; Chain 1: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+#&gt; Chain 1: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+#&gt; Chain 1: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+#&gt; Chain 1: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+#&gt; Chain 1: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+#&gt; Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+#&gt; Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
+#&gt; Chain 1: 
+#&gt; Chain 1:  Elapsed Time: 2.33608 seconds (Warm-up)
+#&gt; Chain 1:                2.38888 seconds (Sampling)
+#&gt; Chain 1:                4.72495 seconds (Total)
+#&gt; Chain 1: 
+#&gt; 
+#&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 2).
+#&gt; Chain 2: 
+#&gt; Chain 2: Gradient evaluation took 0.000147 seconds
+#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 1.47 seconds.
+#&gt; Chain 2: Adjust your expectations accordingly!
+#&gt; Chain 2: 
+#&gt; Chain 2: 
+#&gt; Chain 2: Iteration:    1 / 2000 [  0%]  (Warmup)
+#&gt; Chain 2: Iteration:  200 / 2000 [ 10%]  (Warmup)
+#&gt; Chain 2: Iteration:  400 / 2000 [ 20%]  (Warmup)
+#&gt; Chain 2: Iteration:  600 / 2000 [ 30%]  (Warmup)
+#&gt; Chain 2: Iteration:  800 / 2000 [ 40%]  (Warmup)
+#&gt; Chain 2: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+#&gt; Chain 2: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+#&gt; Chain 2: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+#&gt; Chain 2: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+#&gt; Chain 2: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+#&gt; Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+#&gt; Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
+#&gt; Chain 2: 
+#&gt; Chain 2:  Elapsed Time: 2.4523 seconds (Warm-up)
+#&gt; Chain 2:                2.38197 seconds (Sampling)
+#&gt; Chain 2:                4.83427 seconds (Total)
+#&gt; Chain 2: 
+#&gt; 
+#&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 3).
+#&gt; Chain 3: 
+#&gt; Chain 3: Gradient evaluation took 0.000149 seconds
+#&gt; Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 1.49 seconds.
+#&gt; Chain 3: Adjust your expectations accordingly!
+#&gt; Chain 3: 
+#&gt; Chain 3: 
+#&gt; Chain 3: Iteration:    1 / 2000 [  0%]  (Warmup)
+#&gt; Chain 3: Iteration:  200 / 2000 [ 10%]  (Warmup)
+#&gt; Chain 3: Iteration:  400 / 2000 [ 20%]  (Warmup)
+#&gt; Chain 3: Iteration:  600 / 2000 [ 30%]  (Warmup)
+#&gt; Chain 3: Iteration:  800 / 2000 [ 40%]  (Warmup)
+#&gt; Chain 3: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+#&gt; Chain 3: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+#&gt; Chain 3: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+#&gt; Chain 3: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+#&gt; Chain 3: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+#&gt; Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+#&gt; Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
+#&gt; Chain 3: 
+#&gt; Chain 3:  Elapsed Time: 2.35623 seconds (Warm-up)
+#&gt; Chain 3:                2.2565 seconds (Sampling)
+#&gt; Chain 3:                4.61273 seconds (Total)
+#&gt; Chain 3: 
+#&gt; 
+#&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 4).
+#&gt; Chain 4: 
+#&gt; Chain 4: Gradient evaluation took 0.000162 seconds
+#&gt; Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 1.62 seconds.
+#&gt; Chain 4: Adjust your expectations accordingly!
+#&gt; Chain 4: 
+#&gt; Chain 4: 
+#&gt; Chain 4: Iteration:    1 / 2000 [  0%]  (Warmup)
+#&gt; Chain 4: Iteration:  200 / 2000 [ 10%]  (Warmup)
+#&gt; Chain 4: Iteration:  400 / 2000 [ 20%]  (Warmup)
+#&gt; Chain 4: Iteration:  600 / 2000 [ 30%]  (Warmup)
+#&gt; Chain 4: Iteration:  800 / 2000 [ 40%]  (Warmup)
+#&gt; Chain 4: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+#&gt; Chain 4: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+#&gt; Chain 4: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+#&gt; Chain 4: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+#&gt; Chain 4: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+#&gt; Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+#&gt; Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
+#&gt; Chain 4: 
+#&gt; Chain 4:  Elapsed Time: 2.48414 seconds (Warm-up)
+#&gt; Chain 4:                2.43658 seconds (Sampling)
+#&gt; Chain 4:                4.92073 seconds (Total)
+#&gt; Chain 4: </div><div class='input'>
 <span class='kw'>samples</span> <span class='op'>&lt;-</span> <span class='fu'>posterior_samples</span>(<span class='kw'>fit</span>)
 
 <span class='co'># Look at first 6 samples for each of the pi parameters</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>samples</span><span class='op'>$</span><span class='kw'>pi</span>)
-
+</div><div class='output co'>#&gt;           
+#&gt; iterations      [,1]      [,2]       [,3]       [,4]
+#&gt;       [1,] 0.4728970 0.3027399 0.11355033 0.11081275
+#&gt;       [2,] 0.3381559 0.4559680 0.13648317 0.06939297
+#&gt;       [3,] 0.3892225 0.4386213 0.09380006 0.07835616
+#&gt;       [4,] 0.3423020 0.3319228 0.24941782 0.07635743
+#&gt;       [5,] 0.4239868 0.3454763 0.17010919 0.06042778
+#&gt;       [6,] 0.4402786 0.2725387 0.17045176 0.11673093</div><div class='input'>
 <span class='co'># Look at the first 6 samples for the theta[1, 1, 1] parameter</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>samples</span><span class='op'>$</span><span class='kw'>theta</span>[, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>])
-
+</div><div class='output co'>#&gt; [1] 0.9079541 0.8530857 0.8952422 0.9190732 0.8112773 0.8724738</div><div class='input'>
 <span class='co'># Only get the samples for the pi parameter:</span>
 <span class='kw'>pi_samples</span> <span class='op'>&lt;-</span> <span class='fu'>posterior_samples</span>(<span class='kw'>fit</span>, pars = <span class='st'>"pi"</span>)
 
-}
+<span class='co'># }</span>
 
 </div></pre>
   </div>

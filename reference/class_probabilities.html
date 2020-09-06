@@ -165,12 +165,157 @@ and the data. Averaging these conditional probabilities gives the
 (unconditional) latent class probabilities retuned by this function.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 
 <span class='kw'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='rater.html'>rater</a></span>(<span class='kw'>anesthesia</span>, <span class='st'>"dawid_skene"</span>)
-<span class='fu'>class_probabilities</span>(<span class='kw'>fit</span>)
-
-}
+</div><div class='output co'>#&gt; 
+#&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 1).
+#&gt; Chain 1: 
+#&gt; Chain 1: Gradient evaluation took 0.000231 seconds
+#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 2.31 seconds.
+#&gt; Chain 1: Adjust your expectations accordingly!
+#&gt; Chain 1: 
+#&gt; Chain 1: 
+#&gt; Chain 1: Iteration:    1 / 2000 [  0%]  (Warmup)
+#&gt; Chain 1: Iteration:  200 / 2000 [ 10%]  (Warmup)
+#&gt; Chain 1: Iteration:  400 / 2000 [ 20%]  (Warmup)
+#&gt; Chain 1: Iteration:  600 / 2000 [ 30%]  (Warmup)
+#&gt; Chain 1: Iteration:  800 / 2000 [ 40%]  (Warmup)
+#&gt; Chain 1: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+#&gt; Chain 1: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+#&gt; Chain 1: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+#&gt; Chain 1: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+#&gt; Chain 1: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+#&gt; Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+#&gt; Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
+#&gt; Chain 1: 
+#&gt; Chain 1:  Elapsed Time: 2.46037 seconds (Warm-up)
+#&gt; Chain 1:                2.58101 seconds (Sampling)
+#&gt; Chain 1:                5.04138 seconds (Total)
+#&gt; Chain 1: 
+#&gt; 
+#&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 2).
+#&gt; Chain 2: 
+#&gt; Chain 2: Gradient evaluation took 0.000149 seconds
+#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 1.49 seconds.
+#&gt; Chain 2: Adjust your expectations accordingly!
+#&gt; Chain 2: 
+#&gt; Chain 2: 
+#&gt; Chain 2: Iteration:    1 / 2000 [  0%]  (Warmup)
+#&gt; Chain 2: Iteration:  200 / 2000 [ 10%]  (Warmup)
+#&gt; Chain 2: Iteration:  400 / 2000 [ 20%]  (Warmup)
+#&gt; Chain 2: Iteration:  600 / 2000 [ 30%]  (Warmup)
+#&gt; Chain 2: Iteration:  800 / 2000 [ 40%]  (Warmup)
+#&gt; Chain 2: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+#&gt; Chain 2: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+#&gt; Chain 2: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+#&gt; Chain 2: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+#&gt; Chain 2: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+#&gt; Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+#&gt; Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
+#&gt; Chain 2: 
+#&gt; Chain 2:  Elapsed Time: 2.51169 seconds (Warm-up)
+#&gt; Chain 2:                2.40439 seconds (Sampling)
+#&gt; Chain 2:                4.91608 seconds (Total)
+#&gt; Chain 2: 
+#&gt; 
+#&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 3).
+#&gt; Chain 3: 
+#&gt; Chain 3: Gradient evaluation took 0.000149 seconds
+#&gt; Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 1.49 seconds.
+#&gt; Chain 3: Adjust your expectations accordingly!
+#&gt; Chain 3: 
+#&gt; Chain 3: 
+#&gt; Chain 3: Iteration:    1 / 2000 [  0%]  (Warmup)
+#&gt; Chain 3: Iteration:  200 / 2000 [ 10%]  (Warmup)
+#&gt; Chain 3: Iteration:  400 / 2000 [ 20%]  (Warmup)
+#&gt; Chain 3: Iteration:  600 / 2000 [ 30%]  (Warmup)
+#&gt; Chain 3: Iteration:  800 / 2000 [ 40%]  (Warmup)
+#&gt; Chain 3: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+#&gt; Chain 3: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+#&gt; Chain 3: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+#&gt; Chain 3: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+#&gt; Chain 3: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+#&gt; Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+#&gt; Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
+#&gt; Chain 3: 
+#&gt; Chain 3:  Elapsed Time: 2.44463 seconds (Warm-up)
+#&gt; Chain 3:                2.41541 seconds (Sampling)
+#&gt; Chain 3:                4.86004 seconds (Total)
+#&gt; Chain 3: 
+#&gt; 
+#&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 4).
+#&gt; Chain 4: 
+#&gt; Chain 4: Gradient evaluation took 0.000144 seconds
+#&gt; Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 1.44 seconds.
+#&gt; Chain 4: Adjust your expectations accordingly!
+#&gt; Chain 4: 
+#&gt; Chain 4: 
+#&gt; Chain 4: Iteration:    1 / 2000 [  0%]  (Warmup)
+#&gt; Chain 4: Iteration:  200 / 2000 [ 10%]  (Warmup)
+#&gt; Chain 4: Iteration:  400 / 2000 [ 20%]  (Warmup)
+#&gt; Chain 4: Iteration:  600 / 2000 [ 30%]  (Warmup)
+#&gt; Chain 4: Iteration:  800 / 2000 [ 40%]  (Warmup)
+#&gt; Chain 4: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+#&gt; Chain 4: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+#&gt; Chain 4: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+#&gt; Chain 4: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+#&gt; Chain 4: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+#&gt; Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+#&gt; Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
+#&gt; Chain 4: 
+#&gt; Chain 4:  Elapsed Time: 2.32236 seconds (Warm-up)
+#&gt; Chain 4:                2.22695 seconds (Sampling)
+#&gt; Chain 4:                4.5493 seconds (Total)
+#&gt; Chain 4: </div><div class='input'><span class='fu'>class_probabilities</span>(<span class='kw'>fit</span>)
+</div><div class='output co'>#&gt;        
+#&gt;                 [,1]         [,2]         [,3]         [,4]
+#&gt;    [1,] 9.999997e-01 8.731982e-08 9.992601e-09 1.711454e-07
+#&gt;    [2,] 1.750842e-08 1.371765e-05 9.763236e-01 2.366268e-02
+#&gt;    [3,] 3.368581e-01 6.629174e-01 2.654882e-05 1.979729e-04
+#&gt;    [4,] 3.803930e-03 9.959950e-01 1.526206e-04 4.845146e-05
+#&gt;    [5,] 8.582182e-08 9.999725e-01 2.667837e-05 7.279134e-07
+#&gt;    [6,] 6.925506e-07 9.993471e-01 6.328875e-04 1.928128e-05
+#&gt;    [7,] 9.995410e-01 4.554309e-04 2.161347e-07 3.346099e-06
+#&gt;    [8,] 3.585170e-09 1.515919e-05 9.997058e-01 2.790741e-04
+#&gt;    [9,] 7.903103e-07 9.999639e-01 3.203909e-05 3.243127e-06
+#&gt;   [10,] 1.225284e-06 9.984039e-01 1.575446e-03 1.946159e-05
+#&gt;   [11,] 1.806091e-09 3.152196e-09 5.702883e-05 9.999430e-01
+#&gt;   [12,] 1.739232e-05 8.628931e-01 1.304996e-01 6.589888e-03
+#&gt;   [13,] 9.999997e-01 8.731982e-08 9.992601e-09 1.711454e-07
+#&gt;   [14,] 2.310577e-05 9.994495e-01 4.996595e-04 2.778331e-05
+#&gt;   [15,] 9.999914e-01 8.165048e-06 4.538685e-08 4.297355e-07
+#&gt;   [16,] 9.999935e-01 5.085458e-06 4.566030e-08 1.399359e-06
+#&gt;   [17,] 9.999997e-01 8.731982e-08 9.992601e-09 1.711454e-07
+#&gt;   [18,] 9.999997e-01 8.731982e-08 9.992601e-09 1.711454e-07
+#&gt;   [19,] 2.551688e-05 9.999704e-01 2.041748e-06 2.072466e-06
+#&gt;   [20,] 1.321770e-04 9.992552e-01 5.368387e-04 7.579268e-05
+#&gt;   [21,] 2.573457e-07 9.999985e-01 8.573933e-07 4.200437e-07
+#&gt;   [22,] 2.551688e-05 9.999704e-01 2.041748e-06 2.072466e-06
+#&gt;   [23,] 8.582182e-08 9.999725e-01 2.667837e-05 7.279134e-07
+#&gt;   [24,] 3.817474e-05 9.999579e-01 1.721140e-06 2.209949e-06
+#&gt;   [25,] 9.999997e-01 8.731982e-08 9.992601e-09 1.711454e-07
+#&gt;   [26,] 9.999997e-01 8.731982e-08 9.992601e-09 1.711454e-07
+#&gt;   [27,] 3.819103e-07 9.999462e-01 5.099732e-05 2.443960e-06
+#&gt;   [28,] 9.999997e-01 8.731982e-08 9.992601e-09 1.711454e-07
+#&gt;   [29,] 9.999997e-01 8.731982e-08 9.992601e-09 1.711454e-07
+#&gt;   [30,] 9.978040e-01 2.186882e-03 7.424803e-07 8.418222e-06
+#&gt;   [31,] 9.999997e-01 8.731982e-08 9.992601e-09 1.711454e-07
+#&gt;   [32,] 5.240556e-09 7.890585e-04 9.991362e-01 7.476633e-05
+#&gt;   [33,] 9.999997e-01 8.731982e-08 9.992601e-09 1.711454e-07
+#&gt;   [34,] 2.573457e-07 9.999985e-01 8.573933e-07 4.200437e-07
+#&gt;   [35,] 2.156027e-07 9.976738e-01 2.318929e-03 7.020548e-06
+#&gt;   [36,] 8.183360e-08 5.602901e-05 7.805065e-01 2.194373e-01
+#&gt;   [37,] 9.910167e-05 9.996640e-01 2.264694e-04 1.047125e-05
+#&gt;   [38,] 7.734384e-07 7.124348e-01 2.874329e-01 1.314589e-04
+#&gt;   [39,] 4.519632e-08 4.262076e-04 9.984059e-01 1.167875e-03
+#&gt;   [40,] 9.999997e-01 8.731982e-08 9.992601e-09 1.711454e-07
+#&gt;   [41,] 9.999997e-01 8.731982e-08 9.992601e-09 1.711454e-07
+#&gt;   [42,] 9.995410e-01 4.554309e-04 2.161347e-07 3.346099e-06
+#&gt;   [43,] 3.819103e-07 9.999462e-01 5.099732e-05 2.443960e-06
+#&gt;   [44,] 9.999914e-01 8.165048e-06 4.538685e-08 4.297355e-07
+#&gt;   [45,] 2.573457e-07 9.999985e-01 8.573933e-07 4.200437e-07</div><div class='input'>
+<span class='co'># }</span>
 
 </div></pre>
   </div>
