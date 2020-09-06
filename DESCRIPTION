@@ -9,10 +9,11 @@ Authors@R: c(person("Jeffrey", "Pullin",
              role = c("aut"),
              comment = c(ORCID = "0000-0001-7780-9586"))
              )
-Description: Fit statistical models based on the Dawid-Skene model to repeated
-  categorical rating data. Full Bayesian inference for these models is 
-  supported through the Stan modelling language. 'rater' also allows the user to 
-  extract and plot key parameters of these models.
+Description: Fit statistical models based on the Dawid-Skene model - Dawid and
+  Skene (1979) <doi:10.2307/2346806> - to repeated categorical rating data. 
+  Full Bayesian inference for these models is supported through the Stan 
+  modelling language. 'rater' also allows the user to extract and plot key 
+  parameters of these models.
 License: GPL-2
 URL: https://jeffreypullin.github.io/rater/, https://github.com/jeffreypullin/rater
 BugReports: https://github.com/jeffreypullin/rater/issues
