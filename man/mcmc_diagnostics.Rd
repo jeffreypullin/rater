@@ -26,7 +26,7 @@ MCMC diagnostics cannot be calculate for the z due to the
 marginalisation used to fit the models.
 }
 \examples{
-\dontrun{
+\donttest{
 
 fit <- rater(anesthesia, "dawid_skene")
 

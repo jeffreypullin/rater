@@ -32,7 +32,7 @@ and the data. Averaging these conditional probabilities gives the
 (unconditional) latent class probabilities retuned by this function.
 }
 \examples{
-\dontrun{
+\donttest{
 
 fit <- rater(anesthesia, "dawid_skene")
 class_probabilities(fit)

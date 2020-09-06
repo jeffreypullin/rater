@@ -24,7 +24,7 @@ Plot a \code{rater_fit} object
 }
 \examples{
 
-\dontrun{
+\donttest{
 fit <- rater(anesthesia, "dawid_skene")
 
 # Plot all the parameters.

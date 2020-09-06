@@ -34,7 +34,7 @@ of the latent class can be extracted using \link{class_probabilities}
 }
 \examples{
 
-\dontrun{
+\donttest{
 fit <- rater(anesthesia, "dawid_skene", verbose = FALSE, chains = 1)
 
 intervals <- posterior_interval(fit)

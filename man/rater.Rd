@@ -51,7 +51,7 @@ The default MCMC algorithm used by Stan is No U Turn Sampling
 are run be default with 2000 iterations in total each.
 }
 \examples{
-\dontrun{
+\donttest{
 
 # Fit a model using MCMC (the default).
 mcmc_fit <- rater(anesthesia, "dawid_skene")

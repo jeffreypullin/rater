@@ -29,7 +29,7 @@ posterior distributions of the latent class use \code{class_probabilities()}.
 }
 \examples{
 
-\dontrun{
+\donttest{
 # A model fit using MCMC.
 mcmc_fit <- rater(anesthesia, "dawid_skene")
 

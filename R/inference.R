@@ -32,7 +32,7 @@
 #' @seealso [rstan::sampling()], [rstan::optimizing()]
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'
 #' # Fit a model using MCMC (the default).
 #' mcmc_fit <- rater(anesthesia, "dawid_skene")
