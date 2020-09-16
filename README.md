@@ -51,11 +51,10 @@ instructions to install **rstan** can be found
 
 ### CRAN
 
-**rater** is not *yet* on CRAN; when it is you will be able to install
-it with:
+Install **rater** from CRAN with:
 
 ``` r
-#install.packages("rater")
+install.packages("rater")
 ```
 
 ### Development
