@@ -238,6 +238,43 @@ summary.optim_fit <- function(object, n_pars = 8, ...) {
   cat(paste0("Fit converged: ", as.logical(x$estimates$return_code - 1), "\n"))
 }
 
+#' Convert a rater_fit object to a {coda} `mcmc.list` object.
+#'
+#' @param fit A rater_fit object.
+#'
+#' @return A {coda} mcmc.list object.
+#'
+#' @importFrom rstan As.mcmc.list
+#'
+#' @examples
+#'
+#' \donttest{
+#'
+#' # Fit a model using MCMC (the default).
+#' mcmc_fit <- rater(anesthesia, "dawid_skene")
+#'
+#' # Convert it to an mcmc.list
+#' rater_mcmc_list <- as_mcmc.list(mcmc_fit)
+#'
+#' }
+#'
+#' @export
+#'
+as_mcmc.list <- function(fit) {
+
+  if (!inherits(fit, "rater_fit")) {
+    stop("`as_mcmc.list` must be passed a rater fit object.", call. = FALSE)
+  }
+
+  if (inherits(fit, "optim_fit")) {
+    stop("Cannot convert a optimisation fit to a mcmc.list object",
+         call. = FALSE)
+  }
+
+  # We must have a mcmc_fit, rater_fit!
+  rstan::As.mcmc.list(fit$samples)
+}
+
 is.mcmc_fit <- function(x) {
   inherits(x, "mcmc_fit")
 }

@@ -44,4 +44,12 @@ test_that("can plot multiple parameters", {
 
 })
 
+test_that("as_mcmc.list works", {
+
+  expect_error(as_mcmc.list(ds_fit_optim))
+  expect_error(as_mcmc.list(2))
+  expect_true(coda::is.mcmc.list(as_mcmc.list(ds_fit)))
+
+})
+
 
