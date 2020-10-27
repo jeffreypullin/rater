@@ -108,8 +108,8 @@ plot.rater_fit <- function(x,
       "class_probabilities" = plot_class_probabilities(x),
       "latent_class" = plot_class_probabilities(x),
       # Luckily "p" will fall through correctly.
-      "pi" = plot_pi(x),
-      "prevalence" = plot_pi(x),
+      "pi" = plot_pi(x, 0.9),
+      "prevalence" = plot_pi(x, 0.9),
       "z" = stop("Cannot plot z directly.", call. = FALSE),
       stop("Invalid pars argument", call. = FALSE)
     )
