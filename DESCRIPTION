@@ -38,7 +38,8 @@ LinkingTo:
     StanHeaders (>= 2.18.0),
     RcppParallel (>= 5.0.1)
 RoxygenNote: 7.1.1
-Suggests: 
+Suggests:
+    coda,
     testthat,
     knitr,
     rmarkdown,
