@@ -171,7 +171,8 @@ summary.mcmc_fit <- function(object, n_pars = 8, ...) {
 
   cat("\npi/theta samples:\n")
   print(round(utils::head(pars, n_pars), 2))
-  n_remaining <- length(pars) - n_pars
+  # pars is a matrix where each row is a parameter.
+  n_remaining <- nrow(pars) - n_pars
   cat("# ... with", n_remaining, "more parameters\n")
 
   cat("\nz:\n")
@@ -223,6 +224,7 @@ summary.optim_fit <- function(object, n_pars = 8, ...) {
 
   cat("\npi/theta estimates:\n")
   print(round(head(pars, n_pars), 2))
+  # pars is a *list*
   n_remaining <- length(pars) - n_pars
   cat("# ... with", n_remaining, "more parameters\n")
 
