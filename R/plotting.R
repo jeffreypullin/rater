@@ -1,7 +1,8 @@
 #' Plot the prevalence estimates
 #'
 #' @param fit A rater fit object.
-#'
+#' @param prob A single probability. The size of the credible interval
+#'   returned. By default 0.9.
 #' @return A plot of the prevalence estimates extracted from the fit.
 #'
 #' @importFrom ggplot2 ggplot aes geom_bar geom_text coord_cartesian labs
@@ -10,18 +11,28 @@
 #'
 #' @noRd
 #'
-plot_pi <- function(fit) {
-  pi <- pi_point_estimate(fit)
-  plot_data <- data.frame(cat = as.factor(1:length(pi)),
-                          pi = pi,
-                          round_pi = round(pi, 2))
+plot_pi <- function(fit, prob = 0.9) {
+  pi <- point_estimate(fit, pars = "pi")[[1]]
+  pi_cred_int <- posterior_interval(fit, prob = prob, pars = "pi")
 
+  plot_data <- data.frame(
+    cat = factor(1:length(pi), levels = length(pi):1),
+    pi = pi,
+    pi_lower = pi_cred_int[, 1],
+    pi_upper = pi_cred_int[, 2]
+  )
+
+  percent <- paste0(prob * 100, "%")
   plot <- ggplot2::ggplot(plot_data, ggplot2::aes(x = .data$cat, y = .data$pi)) +
-    ggplot2::geom_bar(stat = "identity", fill = "steelblue") +
-    ggplot2::geom_text(ggplot2::aes(label = .data$round_pi), vjust = -3) +
-    ggplot2::coord_cartesian(ylim = c(0, 1)) +
-    ggplot2::labs(x = "Category",
-                  y = "Prevalence prob.") +
+    ggplot2::geom_point(size = 2, colour = "steelblue") +
+    ggplot2::geom_errorbar(ggplot2::aes(ymin = .data$pi_lower,
+                                        ymax = .data$pi_upper),
+                           width = 0.15, colour = "steelblue") +
+    ggplot2::coord_flip(ylim = c(0, 1)) +
+    ggplot2::scale_y_continuous(breaks = seq(0, 1, by = 0.2)) +
+    ggplot2::labs(x = "Class",
+                  y = "Prevalence probability",
+                  caption = paste0(percent, " credible intervals")) +
     ggplot2::theme_bw() +
     NULL
 
