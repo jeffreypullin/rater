@@ -78,8 +78,8 @@ test_that("parse priors are correct", {
   # construct the default priors
   default_alpha <- rep(3, K)
 
-  N <- 7
-  p <- 0.65
+  N <- 8
+  p <- 0.6
   on_diag <- N * p
   off_diag <- N * (1 - p) / (K - 1)
   default_beta <- matrix(off_diag, nrow = K, ncol = K)
