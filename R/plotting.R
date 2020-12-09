@@ -16,7 +16,8 @@ plot_pi <- function(fit, prob = 0.9) {
   pi_cred_int <- posterior_interval(fit, prob = prob, pars = "pi")
 
   plot_data <- data.frame(
-    cat = factor(1:length(pi), levels = length(pi):1),
+    cat = factor(paste0("Class ", 1:length(pi)),
+                 levels = paste0("Class ", length(pi):1)),
     pi = pi,
     pi_lower = pi_cred_int[, 1],
     pi_upper = pi_cred_int[, 2]
@@ -30,7 +31,7 @@ plot_pi <- function(fit, prob = 0.9) {
                            width = 0.15, colour = "steelblue") +
     ggplot2::coord_flip(ylim = c(0, 1)) +
     ggplot2::scale_y_continuous(breaks = seq(0, 1, by = 0.2)) +
-    ggplot2::labs(x = "Class",
+    ggplot2::labs(x = "",
                   y = "Prevalence probability",
                   caption = paste0(percent, " credible intervals")) +
     ggplot2::theme_bw() +
