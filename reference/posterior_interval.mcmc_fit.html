@@ -135,7 +135,7 @@
     </div>
 
     <pre class="usage"><span class='co'># S3 method for mcmc_fit</span>
-<span class='fu'>posterior_interval</span>(<span class='kw'>object</span>, prob = <span class='fl'>0.9</span>, pars = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"pi"</span>, <span class='st'>"theta"</span>), <span class='kw'>...</span>)</pre>
+<span class='fu'>posterior_interval</span><span class='op'>(</span><span class='va'>object</span>, prob <span class='op'>=</span> <span class='fl'>0.9</span>, pars <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"pi"</span>, <span class='st'>"theta"</span><span class='op'>)</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -175,10 +175,10 @@ of the latent class can be extracted using <a href='class_probabilities.html'>cl
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='co'># \donttest{</span>
-<span class='kw'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='rater.html'>rater</a></span>(<span class='kw'>anesthesia</span>, <span class='st'>"dawid_skene"</span>, verbose = <span class='fl'>FALSE</span>, chains = <span class='fl'>1</span>)
+<span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='rater.html'>rater</a></span><span class='op'>(</span><span class='va'>anesthesia</span>, <span class='st'>"dawid_skene"</span>, verbose <span class='op'>=</span> <span class='cn'>FALSE</span>, chains <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
 
-<span class='kw'>intervals</span> <span class='op'>&lt;-</span> <span class='fu'>posterior_interval</span>(<span class='kw'>fit</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>intervals</span>)
+<span class='va'>intervals</span> <span class='op'>&lt;-</span> <span class='fu'>posterior_interval</span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>intervals</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;                        5%       95%
 #&gt; pi[1]          0.28020586 0.4788411
 #&gt; pi[2]          0.30289296 0.5199344

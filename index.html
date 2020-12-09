@@ -96,21 +96,18 @@
 <div id="example-usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example-usage" class="anchor"></a>Example usage:</h2>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://jeffreypullin.github.io/rater">rater</a></span>)
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jeffreypullin.github.io/rater/">rater</a></span><span class="op">)</span>
 
-<span class="kw">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/rater.html">rater</a></span>(<span class="kw">anesthesia</span>, <span class="st">"dawid_skene"</span>) <span class="co"># sampling output suppressed</span>
-</pre></div>
+<span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/rater.html">rater</a></span><span class="op">(</span><span class="va">anesthesia</span>, <span class="st">"dawid_skene"</span><span class="op">)</span> <span class="co"># sampling output suppressed</span></code></pre></div>
 <p>Get the posterior mean of the “pi” parameter.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="fu"><a href="reference/point_estimate.html">point_estimate</a></span>(<span class="kw">fit</span>, pars = <span class="st">"pi"</span>)
-</pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/point_estimate.html">point_estimate</a></span><span class="op">(</span><span class="va">fit</span>, pars <span class="op">=</span> <span class="st">"pi"</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">## $pi</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="co">## [1] 0.37374331 0.40673620 0.14712032 0.07240018</span></span></code></pre></div>
 <p>Plot the accuracy matrices of the raters.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">fit</span>, pars = <span class="st">"raters"</span>)
-</pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">fit</span>, pars <span class="op">=</span> <span class="st">"raters"</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-plot-demo-1.png"><!-- --></p>
 </div>
 <div id="installation" class="section level2">
@@ -121,18 +118,16 @@
 <h3 class="hasAnchor">
 <a href="#cran" class="anchor"></a>CRAN</h3>
 <p>Install <strong>rater</strong> from CRAN with:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"rater"</span>)
-</pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"rater"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="development" class="section level3">
 <h3 class="hasAnchor">
 <a href="#development" class="anchor"></a>Development</h3>
 <p>To install the development version of <strong>rater</strong> from GitHub run:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="co"># install.packages("remotes")</span>
-<span class="kw">remotes</span>::<span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"jeffreypullin/rater"</span>)
-</pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># install.packages("remotes")</span>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"jeffreypullin/rater"</span><span class="op">)</span></code></pre></div>
 <div id="installation-notes" class="section level4">
 <h4 class="hasAnchor">
 <a href="#installation-notes" class="anchor"></a>Installation notes:</h4>

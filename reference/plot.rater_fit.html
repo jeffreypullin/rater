@@ -135,7 +135,7 @@
     </div>
 
     <pre class="usage"><span class='co'># S3 method for rater_fit</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>x</span>, pars = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"pi"</span>, <span class='st'>"theta"</span>, <span class='st'>"class_probabilities"</span>), <span class='kw'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>x</span>, pars <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"pi"</span>, <span class='st'>"theta"</span>, <span class='st'>"class_probabilities"</span><span class='op'>)</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -164,12 +164,12 @@ are requested a list of ggplot2 plots.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='co'># \donttest{</span>
-<span class='kw'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='rater.html'>rater</a></span>(<span class='kw'>anesthesia</span>, <span class='st'>"dawid_skene"</span>)
+<span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='rater.html'>rater</a></span><span class='op'>(</span><span class='va'>anesthesia</span>, <span class='st'>"dawid_skene"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; 
 #&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 1).
 #&gt; Chain 1: 
-#&gt; Chain 1: Gradient evaluation took 0.000153 seconds
-#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 1.53 seconds.
+#&gt; Chain 1: Gradient evaluation took 0.000165 seconds
+#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 1.65 seconds.
 #&gt; Chain 1: Adjust your expectations accordingly!
 #&gt; Chain 1: 
 #&gt; Chain 1: 
@@ -186,15 +186,15 @@ are requested a list of ggplot2 plots.</p>
 #&gt; Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #&gt; Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
 #&gt; Chain 1: 
-#&gt; Chain 1:  Elapsed Time: 2.43236 seconds (Warm-up)
-#&gt; Chain 1:                2.38288 seconds (Sampling)
-#&gt; Chain 1:                4.81524 seconds (Total)
+#&gt; Chain 1:  Elapsed Time: 2.69797 seconds (Warm-up)
+#&gt; Chain 1:                2.59349 seconds (Sampling)
+#&gt; Chain 1:                5.29146 seconds (Total)
 #&gt; Chain 1: 
 #&gt; 
 #&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 2).
 #&gt; Chain 2: 
-#&gt; Chain 2: Gradient evaluation took 0.000147 seconds
-#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 1.47 seconds.
+#&gt; Chain 2: Gradient evaluation took 0.000164 seconds
+#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 1.64 seconds.
 #&gt; Chain 2: Adjust your expectations accordingly!
 #&gt; Chain 2: 
 #&gt; Chain 2: 
@@ -211,15 +211,15 @@ are requested a list of ggplot2 plots.</p>
 #&gt; Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #&gt; Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
 #&gt; Chain 2: 
-#&gt; Chain 2:  Elapsed Time: 2.38524 seconds (Warm-up)
-#&gt; Chain 2:                2.38205 seconds (Sampling)
-#&gt; Chain 2:                4.7673 seconds (Total)
+#&gt; Chain 2:  Elapsed Time: 2.61466 seconds (Warm-up)
+#&gt; Chain 2:                2.5967 seconds (Sampling)
+#&gt; Chain 2:                5.21136 seconds (Total)
 #&gt; Chain 2: 
 #&gt; 
 #&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 3).
 #&gt; Chain 3: 
-#&gt; Chain 3: Gradient evaluation took 0.000149 seconds
-#&gt; Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 1.49 seconds.
+#&gt; Chain 3: Gradient evaluation took 0.000164 seconds
+#&gt; Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 1.64 seconds.
 #&gt; Chain 3: Adjust your expectations accordingly!
 #&gt; Chain 3: 
 #&gt; Chain 3: 
@@ -236,15 +236,15 @@ are requested a list of ggplot2 plots.</p>
 #&gt; Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #&gt; Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
 #&gt; Chain 3: 
-#&gt; Chain 3:  Elapsed Time: 2.34062 seconds (Warm-up)
-#&gt; Chain 3:                2.3802 seconds (Sampling)
-#&gt; Chain 3:                4.72082 seconds (Total)
+#&gt; Chain 3:  Elapsed Time: 2.53036 seconds (Warm-up)
+#&gt; Chain 3:                2.63938 seconds (Sampling)
+#&gt; Chain 3:                5.16973 seconds (Total)
 #&gt; Chain 3: 
 #&gt; 
 #&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 4).
 #&gt; Chain 4: 
-#&gt; Chain 4: Gradient evaluation took 0.000147 seconds
-#&gt; Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 1.47 seconds.
+#&gt; Chain 4: Gradient evaluation took 0.000203 seconds
+#&gt; Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 2.03 seconds.
 #&gt; Chain 4: Adjust your expectations accordingly!
 #&gt; Chain 4: 
 #&gt; Chain 4: 
@@ -261,17 +261,17 @@ are requested a list of ggplot2 plots.</p>
 #&gt; Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #&gt; Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
 #&gt; Chain 4: 
-#&gt; Chain 4:  Elapsed Time: 2.45003 seconds (Warm-up)
-#&gt; Chain 4:                2.35745 seconds (Sampling)
-#&gt; Chain 4:                4.80748 seconds (Total)
+#&gt; Chain 4:  Elapsed Time: 2.67965 seconds (Warm-up)
+#&gt; Chain 4:                2.58157 seconds (Sampling)
+#&gt; Chain 4:                5.26122 seconds (Total)
 #&gt; Chain 4: </div><div class='input'>
 <span class='co'># Plot all the parameters.</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>fit</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [[1]]</div><div class='img'><img src='plot.rater_fit-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
 #&gt; [[2]]</div><div class='img'><img src='plot.rater_fit-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
 #&gt; [[3]]</div><div class='img'><img src='plot.rater_fit-3.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'>
 <span class='co'># Select which parameters to plot.</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>fit</span>, pars = <span class='st'>"pi"</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>fit</span>, pars <span class='op'>=</span> <span class='st'>"pi"</span><span class='op'>)</span>
 </div><div class='img'><img src='plot.rater_fit-4.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># }</span>
 

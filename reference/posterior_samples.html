@@ -134,7 +134,7 @@
     <p>Extract posterior samples from a rater fit object</p>
     </div>
 
-    <pre class="usage"><span class='fu'>posterior_samples</span>(<span class='kw'>fit</span>, pars = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"pi"</span>, <span class='st'>"theta"</span>))</pre>
+    <pre class="usage"><span class='fu'>posterior_samples</span><span class='op'>(</span><span class='va'>fit</span>, pars <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"pi"</span>, <span class='st'>"theta"</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -163,12 +163,12 @@ for the latent class due to the marginalisation technique used internally.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='co'># \donttest{</span>
-<span class='kw'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='rater.html'>rater</a></span>(<span class='kw'>anesthesia</span>, <span class='st'>"dawid_skene"</span>)
+<span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='rater.html'>rater</a></span><span class='op'>(</span><span class='va'>anesthesia</span>, <span class='st'>"dawid_skene"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; 
 #&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 1).
 #&gt; Chain 1: 
-#&gt; Chain 1: Gradient evaluation took 0.000153 seconds
-#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 1.53 seconds.
+#&gt; Chain 1: Gradient evaluation took 0.000165 seconds
+#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 1.65 seconds.
 #&gt; Chain 1: Adjust your expectations accordingly!
 #&gt; Chain 1: 
 #&gt; Chain 1: 
@@ -185,15 +185,15 @@ for the latent class due to the marginalisation technique used internally.</p>
 #&gt; Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #&gt; Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
 #&gt; Chain 1: 
-#&gt; Chain 1:  Elapsed Time: 2.31237 seconds (Warm-up)
-#&gt; Chain 1:                2.39056 seconds (Sampling)
-#&gt; Chain 1:                4.70293 seconds (Total)
+#&gt; Chain 1:  Elapsed Time: 2.51612 seconds (Warm-up)
+#&gt; Chain 1:                2.60106 seconds (Sampling)
+#&gt; Chain 1:                5.11718 seconds (Total)
 #&gt; Chain 1: 
 #&gt; 
 #&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 2).
 #&gt; Chain 2: 
-#&gt; Chain 2: Gradient evaluation took 0.000147 seconds
-#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 1.47 seconds.
+#&gt; Chain 2: Gradient evaluation took 0.000164 seconds
+#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 1.64 seconds.
 #&gt; Chain 2: Adjust your expectations accordingly!
 #&gt; Chain 2: 
 #&gt; Chain 2: 
@@ -210,15 +210,15 @@ for the latent class due to the marginalisation technique used internally.</p>
 #&gt; Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #&gt; Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
 #&gt; Chain 2: 
-#&gt; Chain 2:  Elapsed Time: 2.4222 seconds (Warm-up)
-#&gt; Chain 2:                2.39189 seconds (Sampling)
-#&gt; Chain 2:                4.81409 seconds (Total)
+#&gt; Chain 2:  Elapsed Time: 2.67116 seconds (Warm-up)
+#&gt; Chain 2:                2.58117 seconds (Sampling)
+#&gt; Chain 2:                5.25233 seconds (Total)
 #&gt; Chain 2: 
 #&gt; 
 #&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 3).
 #&gt; Chain 3: 
-#&gt; Chain 3: Gradient evaluation took 0.00015 seconds
-#&gt; Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 1.5 seconds.
+#&gt; Chain 3: Gradient evaluation took 0.000163 seconds
+#&gt; Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 1.63 seconds.
 #&gt; Chain 3: Adjust your expectations accordingly!
 #&gt; Chain 3: 
 #&gt; Chain 3: 
@@ -235,15 +235,15 @@ for the latent class due to the marginalisation technique used internally.</p>
 #&gt; Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #&gt; Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
 #&gt; Chain 3: 
-#&gt; Chain 3:  Elapsed Time: 2.34362 seconds (Warm-up)
-#&gt; Chain 3:                2.24376 seconds (Sampling)
-#&gt; Chain 3:                4.58738 seconds (Total)
+#&gt; Chain 3:  Elapsed Time: 2.54913 seconds (Warm-up)
+#&gt; Chain 3:                2.42953 seconds (Sampling)
+#&gt; Chain 3:                4.97867 seconds (Total)
 #&gt; Chain 3: 
 #&gt; 
 #&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 4).
 #&gt; Chain 4: 
-#&gt; Chain 4: Gradient evaluation took 0.00015 seconds
-#&gt; Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 1.5 seconds.
+#&gt; Chain 4: Gradient evaluation took 0.000164 seconds
+#&gt; Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 1.64 seconds.
 #&gt; Chain 4: Adjust your expectations accordingly!
 #&gt; Chain 4: 
 #&gt; Chain 4: 
@@ -260,14 +260,14 @@ for the latent class due to the marginalisation technique used internally.</p>
 #&gt; Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #&gt; Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
 #&gt; Chain 4: 
-#&gt; Chain 4:  Elapsed Time: 2.42371 seconds (Warm-up)
-#&gt; Chain 4:                2.31592 seconds (Sampling)
-#&gt; Chain 4:                4.73963 seconds (Total)
+#&gt; Chain 4:  Elapsed Time: 2.66848 seconds (Warm-up)
+#&gt; Chain 4:                2.57732 seconds (Sampling)
+#&gt; Chain 4:                5.2458 seconds (Total)
 #&gt; Chain 4: </div><div class='input'>
-<span class='kw'>samples</span> <span class='op'>&lt;-</span> <span class='fu'>posterior_samples</span>(<span class='kw'>fit</span>)
+<span class='va'>samples</span> <span class='op'>&lt;-</span> <span class='fu'>posterior_samples</span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
 
 <span class='co'># Look at first 6 samples for each of the pi parameters</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>samples</span><span class='op'>$</span><span class='kw'>pi</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>samples</span><span class='op'>$</span><span class='va'>pi</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;           
 #&gt; iterations      [,1]      [,2]       [,3]       [,4]
 #&gt;       [1,] 0.4728970 0.3027399 0.11355033 0.11081275
@@ -277,10 +277,10 @@ for the latent class due to the marginalisation technique used internally.</p>
 #&gt;       [5,] 0.4239868 0.3454763 0.17010919 0.06042778
 #&gt;       [6,] 0.4402786 0.2725387 0.17045176 0.11673093</div><div class='input'>
 <span class='co'># Look at the first 6 samples for the theta[1, 1, 1] parameter</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>samples</span><span class='op'>$</span><span class='kw'>theta</span>[, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>])
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>samples</span><span class='op'>$</span><span class='va'>theta</span><span class='op'>[</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span><span class='op'>]</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] 0.9079541 0.8530857 0.8952422 0.9190732 0.8112773 0.8724738</div><div class='input'>
 <span class='co'># Only get the samples for the pi parameter:</span>
-<span class='kw'>pi_samples</span> <span class='op'>&lt;-</span> <span class='fu'>posterior_samples</span>(<span class='kw'>fit</span>, pars = <span class='st'>"pi"</span>)
+<span class='va'>pi_samples</span> <span class='op'>&lt;-</span> <span class='fu'>posterior_samples</span><span class='op'>(</span><span class='va'>fit</span>, pars <span class='op'>=</span> <span class='st'>"pi"</span><span class='op'>)</span>
 
 <span class='co'># }</span>
 
