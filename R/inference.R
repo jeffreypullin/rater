@@ -67,7 +67,7 @@ rater <- function(data,
   check_K(stan_data_list, model)
 
   # Create the full passed info for stan and the initialisation points.
-  stan_data <- c(stan_data_list, parse_priors(model, stan_data_list$K))
+  stan_data <- c(stan_data_list, parse_priors(model, stan_data_list$K, method))
 
   if (is.null(inits)) {
     inits <- creat_inits(model, stan_data_list)
@@ -139,21 +139,22 @@ as_stan_data <- function(data, data_format) {
 #'
 #' @param model The rater_model.
 #' @param K The number of categories in the data.
+#' @param method The passed fitting method.
 #'
 #' @return The fully realised prior parameters
 #'
 #' @noRd
 #'
-parse_priors <- function(model, K) {
+parse_priors <- function(model, K, method) {
   switch(get_file(model),
-    "dawid_skene" = ds_parse_priors(model, K),
+    "dawid_skene" = ds_parse_priors(model, K, method),
     "class_conditional_dawid_skene" =
       class_conditional_ds_parse_priors(model, K),
     "hierarchical_dawid_skene" = hier_ds_parse_priors(model, K),
     stop("Unsupported model type", call. = FALSE))
 }
 
-ds_parse_priors <- function(model, K) {
+ds_parse_priors <- function(model, K, method) {
   pars <- get_parameters(model)
   # This is the default uniform prior taken from the Stan manual.
   if (is.null(pars$alpha)) {
@@ -166,9 +167,18 @@ ds_parse_priors <- function(model, K) {
     p <- 0.6
     on_diag <- N * p
     off_diag <- N * (1 - p) / (K - 1)
+
     pars$beta <- matrix(off_diag, nrow = K, ncol = K)
     diag(pars$beta) <- on_diag
   }
+
+  off_diag_problem <- any(pars$beta[row(pars$beta) != col(pars$beta)] <= 1.0)
+  if (method == "optim" && off_diag_problem) {
+      warning("Optimization may not converge if the off diagonal elements of ",
+              "beta are less than 1. Consider changing the prior parameters.",
+              call. = FALSE)
+  }
+
   pars
 }
 
