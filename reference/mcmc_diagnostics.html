@@ -195,15 +195,15 @@ MCMC. <em>arXiv preprint</em> <code>arXiv:1903.08008</code>.</p>
 #&gt; Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #&gt; Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
 #&gt; Chain 1: 
-#&gt; Chain 1:  Elapsed Time: 2.5604 seconds (Warm-up)
-#&gt; Chain 1:                2.56178 seconds (Sampling)
-#&gt; Chain 1:                5.12218 seconds (Total)
+#&gt; Chain 1:  Elapsed Time: 2.37392 seconds (Warm-up)
+#&gt; Chain 1:                2.47024 seconds (Sampling)
+#&gt; Chain 1:                4.84416 seconds (Total)
 #&gt; Chain 1: 
 #&gt; 
 #&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 2).
 #&gt; Chain 2: 
-#&gt; Chain 2: Gradient evaluation took 0.000157 seconds
-#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 1.57 seconds.
+#&gt; Chain 2: Gradient evaluation took 0.000153 seconds
+#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 1.53 seconds.
 #&gt; Chain 2: Adjust your expectations accordingly!
 #&gt; Chain 2: 
 #&gt; Chain 2: 
@@ -220,9 +220,9 @@ MCMC. <em>arXiv preprint</em> <code>arXiv:1903.08008</code>.</p>
 #&gt; Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #&gt; Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
 #&gt; Chain 2: 
-#&gt; Chain 2:  Elapsed Time: 2.57023 seconds (Warm-up)
-#&gt; Chain 2:                2.49293 seconds (Sampling)
-#&gt; Chain 2:                5.06316 seconds (Total)
+#&gt; Chain 2:  Elapsed Time: 2.22888 seconds (Warm-up)
+#&gt; Chain 2:                2.42537 seconds (Sampling)
+#&gt; Chain 2:                4.65425 seconds (Total)
 #&gt; Chain 2: 
 #&gt; 
 #&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 3).
@@ -245,15 +245,15 @@ MCMC. <em>arXiv preprint</em> <code>arXiv:1903.08008</code>.</p>
 #&gt; Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #&gt; Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
 #&gt; Chain 3: 
-#&gt; Chain 3:  Elapsed Time: 2.74913 seconds (Warm-up)
-#&gt; Chain 3:                2.52552 seconds (Sampling)
-#&gt; Chain 3:                5.27465 seconds (Total)
+#&gt; Chain 3:  Elapsed Time: 2.3348 seconds (Warm-up)
+#&gt; Chain 3:                2.5457 seconds (Sampling)
+#&gt; Chain 3:                4.8805 seconds (Total)
 #&gt; Chain 3: 
 #&gt; 
 #&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 4).
 #&gt; Chain 4: 
-#&gt; Chain 4: Gradient evaluation took 0.000157 seconds
-#&gt; Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 1.57 seconds.
+#&gt; Chain 4: Gradient evaluation took 0.000159 seconds
+#&gt; Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 1.59 seconds.
 #&gt; Chain 4: Adjust your expectations accordingly!
 #&gt; Chain 4: 
 #&gt; Chain 4: 
@@ -270,104 +270,104 @@ MCMC. <em>arXiv preprint</em> <code>arXiv:1903.08008</code>.</p>
 #&gt; Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #&gt; Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
 #&gt; Chain 4: 
-#&gt; Chain 4:  Elapsed Time: 2.54319 seconds (Warm-up)
-#&gt; Chain 4:                2.55565 seconds (Sampling)
-#&gt; Chain 4:                5.09883 seconds (Total)
+#&gt; Chain 4:  Elapsed Time: 2.27526 seconds (Warm-up)
+#&gt; Chain 4:                2.35184 seconds (Sampling)
+#&gt; Chain 4:                4.6271 seconds (Total)
 #&gt; Chain 4: </div><div class='input'>
 <span class='co'># Calculate the diagnostics for all parameters.</span>
 <span class='fu'>mcmc_diagnostics</span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;                     Rhat  ess_bulk
-#&gt; pi[1]          1.0018564  8721.963
-#&gt; pi[2]          0.9996735  7868.430
-#&gt; pi[3]          1.0005077  6812.458
-#&gt; pi[4]          0.9994999  8285.913
-#&gt; theta[1, 1, 1] 1.0007480 10168.516
-#&gt; theta[1, 1, 2] 1.0014520  8925.406
-#&gt; theta[1, 1, 3] 1.0000533  6300.617
-#&gt; theta[1, 1, 4] 1.0003481  5661.020
-#&gt; theta[1, 2, 1] 1.0010566  5575.687
-#&gt; theta[1, 2, 2] 1.0012662  7806.467
-#&gt; theta[1, 2, 3] 1.0003874  8392.915
-#&gt; theta[1, 2, 4] 1.0000659  5715.003
-#&gt; theta[1, 3, 1] 1.0005545  4925.573
-#&gt; theta[1, 3, 2] 1.0006557  3731.670
-#&gt; theta[1, 3, 3] 1.0005597  5225.978
-#&gt; theta[1, 3, 4] 1.0023118  4117.378
-#&gt; theta[1, 4, 1] 1.0001805  5319.607
-#&gt; theta[1, 4, 2] 1.0005297  5107.003
-#&gt; theta[1, 4, 3] 1.0004068  3247.035
-#&gt; theta[1, 4, 4] 1.0000499  4243.765
-#&gt; theta[2, 1, 1] 0.9996267  7879.288
-#&gt; theta[2, 1, 2] 1.0001880  7499.573
-#&gt; theta[2, 1, 3] 1.0000980  4875.765
-#&gt; theta[2, 1, 4] 1.0005510  6110.191
-#&gt; theta[2, 2, 1] 1.0034727  6346.392
-#&gt; theta[2, 2, 2] 1.0002752  7919.640
-#&gt; theta[2, 2, 3] 1.0017209  7795.188
-#&gt; theta[2, 2, 4] 1.0004780  4859.868
-#&gt; theta[2, 3, 1] 1.0008183  5374.839
-#&gt; theta[2, 3, 2] 1.0003102  4881.564
-#&gt; theta[2, 3, 3] 0.9998637  6989.675
-#&gt; theta[2, 3, 4] 0.9999747  5378.795
-#&gt; theta[2, 4, 1] 1.0009720  5495.259
-#&gt; theta[2, 4, 2] 1.0012059  4447.321
-#&gt; theta[2, 4, 3] 1.0001370  4901.837
-#&gt; theta[2, 4, 4] 0.9998724  5654.051
-#&gt; theta[3, 1, 1] 1.0019557  7646.504
-#&gt; theta[3, 1, 2] 1.0005018  5779.294
-#&gt; theta[3, 1, 3] 1.0001362  5279.720
-#&gt; theta[3, 1, 4] 1.0002711  5432.293
-#&gt; theta[3, 2, 1] 1.0012126  5654.674
-#&gt; theta[3, 2, 2] 1.0026247  8646.743
-#&gt; theta[3, 2, 3] 1.0013172  7637.378
-#&gt; theta[3, 2, 4] 1.0005383  5669.388
-#&gt; theta[3, 3, 1] 0.9992102  4941.167
-#&gt; theta[3, 3, 2] 1.0009436  6095.358
-#&gt; theta[3, 3, 3] 1.0041810  7444.046
-#&gt; theta[3, 3, 4] 1.0019049  8018.247
-#&gt; theta[3, 4, 1] 0.9998732  5591.010
-#&gt; theta[3, 4, 2] 0.9998484  6368.196
-#&gt; theta[3, 4, 3] 1.0020156  3623.746
-#&gt; theta[3, 4, 4] 1.0004888  5917.485
-#&gt; theta[4, 1, 1] 1.0022814  7910.919
-#&gt; theta[4, 1, 2] 1.0006736  6578.881
-#&gt; theta[4, 1, 3] 0.9996692  5247.724
-#&gt; theta[4, 1, 4] 1.0010484  5701.457
-#&gt; theta[4, 2, 1] 1.0007064  7113.989
-#&gt; theta[4, 2, 2] 1.0009202  7273.050
-#&gt; theta[4, 2, 3] 1.0013751  6715.464
-#&gt; theta[4, 2, 4] 1.0011090  5377.885
-#&gt; theta[4, 3, 1] 1.0006028  4622.753
-#&gt; theta[4, 3, 2] 1.0004774  5162.700
-#&gt; theta[4, 3, 3] 1.0001719  6164.472
-#&gt; theta[4, 3, 4] 0.9998938  4478.527
-#&gt; theta[4, 4, 1] 1.0003378  5581.756
-#&gt; theta[4, 4, 2] 1.0014798  5338.750
-#&gt; theta[4, 4, 3] 1.0007643  5786.495
-#&gt; theta[4, 4, 4] 1.0012853  5952.254
-#&gt; theta[5, 1, 1] 1.0003670  6115.770
-#&gt; theta[5, 1, 2] 1.0000329  4824.212
-#&gt; theta[5, 1, 3] 1.0011425  4599.584
-#&gt; theta[5, 1, 4] 0.9999472  5132.004
-#&gt; theta[5, 2, 1] 1.0035525  9264.842
-#&gt; theta[5, 2, 2] 1.0005297  7581.178
-#&gt; theta[5, 2, 3] 1.0018928  6053.396
-#&gt; theta[5, 2, 4] 1.0000284  5200.117
-#&gt; theta[5, 3, 1] 1.0005089  5543.668
-#&gt; theta[5, 3, 2] 1.0012199  7312.621
-#&gt; theta[5, 3, 3] 1.0004916  6811.750
-#&gt; theta[5, 3, 4] 1.0002861  4650.799
-#&gt; theta[5, 4, 1] 1.0006259  6014.800
-#&gt; theta[5, 4, 2] 1.0011635  5102.783
-#&gt; theta[5, 4, 3] 1.0004533  4183.315
-#&gt; theta[5, 4, 4] 1.0012785  6453.276</div><div class='input'>
+</div><div class='output co'>#&gt;                     Rhat ess_bulk
+#&gt; pi[1]          1.0006874 9165.515
+#&gt; pi[2]          1.0000095 7435.337
+#&gt; pi[3]          1.0000698 7010.809
+#&gt; pi[4]          1.0019716 7099.340
+#&gt; theta[1, 1, 1] 1.0006911 7350.180
+#&gt; theta[1, 1, 2] 1.0012603 6915.628
+#&gt; theta[1, 1, 3] 0.9997892 4570.808
+#&gt; theta[1, 1, 4] 1.0005698 5476.473
+#&gt; theta[1, 2, 1] 1.0002884 5451.698
+#&gt; theta[1, 2, 2] 1.0017554 7573.263
+#&gt; theta[1, 2, 3] 1.0011414 7145.931
+#&gt; theta[1, 2, 4] 1.0007399 5689.668
+#&gt; theta[1, 3, 1] 1.0001895 4581.661
+#&gt; theta[1, 3, 2] 1.0000589 4060.818
+#&gt; theta[1, 3, 3] 1.0039186 4965.210
+#&gt; theta[1, 3, 4] 1.0001973 4068.320
+#&gt; theta[1, 4, 1] 1.0018336 5319.441
+#&gt; theta[1, 4, 2] 1.0007460 5094.769
+#&gt; theta[1, 4, 3] 1.0005415 3667.178
+#&gt; theta[1, 4, 4] 1.0008039 4838.014
+#&gt; theta[2, 1, 1] 1.0009069 7333.458
+#&gt; theta[2, 1, 2] 1.0012992 6679.299
+#&gt; theta[2, 1, 3] 0.9995234 6197.190
+#&gt; theta[2, 1, 4] 1.0012822 5416.188
+#&gt; theta[2, 2, 1] 1.0013879 5422.098
+#&gt; theta[2, 2, 2] 1.0000269 7618.734
+#&gt; theta[2, 2, 3] 0.9999148 7168.803
+#&gt; theta[2, 2, 4] 1.0006752 5242.643
+#&gt; theta[2, 3, 1] 1.0015658 6024.517
+#&gt; theta[2, 3, 2] 1.0008364 5225.844
+#&gt; theta[2, 3, 3] 1.0000552 5769.258
+#&gt; theta[2, 3, 4] 1.0009687 5185.471
+#&gt; theta[2, 4, 1] 1.0028758 5217.953
+#&gt; theta[2, 4, 2] 1.0004153 5713.684
+#&gt; theta[2, 4, 3] 1.0007788 6359.119
+#&gt; theta[2, 4, 4] 0.9995145 5900.342
+#&gt; theta[3, 1, 1] 1.0020730 6426.711
+#&gt; theta[3, 1, 2] 1.0003359 5437.425
+#&gt; theta[3, 1, 3] 1.0023235 5339.487
+#&gt; theta[3, 1, 4] 1.0006497 5337.428
+#&gt; theta[3, 2, 1] 1.0002669 5771.379
+#&gt; theta[3, 2, 2] 1.0014357 6992.115
+#&gt; theta[3, 2, 3] 1.0015851 7845.650
+#&gt; theta[3, 2, 4] 1.0012477 5730.388
+#&gt; theta[3, 3, 1] 1.0016708 5416.998
+#&gt; theta[3, 3, 2] 1.0002243 7332.935
+#&gt; theta[3, 3, 3] 1.0001119 7346.074
+#&gt; theta[3, 3, 4] 1.0011757 7466.608
+#&gt; theta[3, 4, 1] 0.9997852 5563.553
+#&gt; theta[3, 4, 2] 1.0011315 4971.381
+#&gt; theta[3, 4, 3] 1.0010613 4265.540
+#&gt; theta[3, 4, 4] 1.0000629 6109.696
+#&gt; theta[4, 1, 1] 1.0004442 7004.972
+#&gt; theta[4, 1, 2] 1.0016262 5972.479
+#&gt; theta[4, 1, 3] 0.9997587 5615.267
+#&gt; theta[4, 1, 4] 1.0002934 4892.751
+#&gt; theta[4, 2, 1] 1.0004065 6501.743
+#&gt; theta[4, 2, 2] 1.0040249 7221.118
+#&gt; theta[4, 2, 3] 1.0011188 6687.334
+#&gt; theta[4, 2, 4] 1.0023318 5352.540
+#&gt; theta[4, 3, 1] 1.0015256 4559.254
+#&gt; theta[4, 3, 2] 1.0003687 5257.267
+#&gt; theta[4, 3, 3] 1.0008385 5973.068
+#&gt; theta[4, 3, 4] 1.0008532 4543.026
+#&gt; theta[4, 4, 1] 0.9999175 4693.724
+#&gt; theta[4, 4, 2] 1.0006661 5006.557
+#&gt; theta[4, 4, 3] 0.9999001 5428.939
+#&gt; theta[4, 4, 4] 1.0001529 6570.219
+#&gt; theta[5, 1, 1] 1.0003145 6723.214
+#&gt; theta[5, 1, 2] 1.0006152 4981.374
+#&gt; theta[5, 1, 3] 1.0020150 5497.373
+#&gt; theta[5, 1, 4] 1.0006912 5686.466
+#&gt; theta[5, 2, 1] 1.0021598 6808.272
+#&gt; theta[5, 2, 2] 1.0015022 7410.671
+#&gt; theta[5, 2, 3] 1.0004876 6682.222
+#&gt; theta[5, 2, 4] 1.0010714 5409.959
+#&gt; theta[5, 3, 1] 0.9998827 5089.149
+#&gt; theta[5, 3, 2] 0.9993039 6145.370
+#&gt; theta[5, 3, 3] 1.0001661 6808.274
+#&gt; theta[5, 3, 4] 0.9998667 6189.820
+#&gt; theta[5, 4, 1] 0.9999274 5220.206
+#&gt; theta[5, 4, 2] 1.0003150 5069.214
+#&gt; theta[5, 4, 3] 1.0000284 5317.893
+#&gt; theta[5, 4, 4] 1.0011572 6229.724</div><div class='input'>
 <span class='co'># Calculate the diagnostics just for the pi parameter.</span>
 <span class='fu'>mcmc_diagnostics</span><span class='op'>(</span><span class='va'>fit</span>, pars <span class='op'>=</span> <span class='st'>"pi"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;            Rhat ess_bulk
-#&gt; pi[1] 1.0018564 8721.963
-#&gt; pi[2] 0.9996735 7868.430
-#&gt; pi[3] 1.0005077 6812.458
-#&gt; pi[4] 0.9994999 8285.913</div><div class='input'>
+</div><div class='output co'>#&gt;           Rhat ess_bulk
+#&gt; pi[1] 1.000687 9165.515
+#&gt; pi[2] 1.000009 7435.337
+#&gt; pi[3] 1.000070 7010.809
+#&gt; pi[4] 1.001972 7099.340</div><div class='input'>
 <span class='co'># }</span>
 
 </div></pre>
