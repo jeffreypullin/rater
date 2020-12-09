@@ -73,7 +73,7 @@ test_that("parse priors are correct", {
 
   # test default priors
   K <- anesthesia_list$K
-  ds_priors <- parse_priors(dawid_skene(), K)
+  ds_priors <- parse_priors(dawid_skene(), K, "mcmc")
 
   # construct the default priors
   default_alpha <- rep(3, K)
@@ -93,17 +93,19 @@ test_that("parse priors are correct", {
   test_beta <- matrix(17, nrow = K, ncol = K)
   test_beta_1 <- rep(1, K)
   test_beta_2 <- rep(98, K)
-  ds_priors <- parse_priors(dawid_skene(alpha = test_alpha, beta = test_beta), K)
+  ds_priors <- parse_priors(dawid_skene(alpha = test_alpha, beta = test_beta),
+                            K,
+                            "mcmc")
 
   expect_equal(ds_priors$alpha, test_alpha)
   expect_equal(ds_priors$beta, test_beta)
 
   # default priors
-  hds_priors <- parse_priors(hier_dawid_skene(), K)
+  hds_priors <- parse_priors(hier_dawid_skene(), K, "mcmc")
   expect_equal(hds_priors$alpha, default_alpha)
 
   # non-default priors
-  hds_priors <- parse_priors(hier_dawid_skene(alpha = test_alpha), K)
+  hds_priors <- parse_priors(hier_dawid_skene(alpha = test_alpha), K, "mcmc")
   expect_equal(hds_priors$alpha, test_alpha)
 
   # Class conditional model
@@ -112,7 +114,8 @@ test_that("parse priors are correct", {
       alpha = test_alpha,
       beta_1 = test_beta_1,
       beta_2 = test_beta_2),
-    K
+    K,
+    "mcmc"
   )
 
   expect_equal(ccds_priors$alpha, test_alpha)
