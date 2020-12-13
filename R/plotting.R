@@ -2,8 +2,11 @@
 #'
 #' @param fit A rater fit object.
 #' @param prob A single probability. The size of the credible interval
-#'   returned. By default 0.9.
-#' @return A plot of the prevalence estimates extracted from the fit.
+#'   returned, if the fit is an `mcmc_fit`. Silently ignored if a the fit is
+#'   an `optim_fit` object. By default 0.9.
+#' @return A plot of the prevalence estimates extracted from the fit. If the
+#'   fit is a `mcmc_fit` this will include credible intervals, if it is an
+#'   `optim_fit` it will not.
 #'
 #' @importFrom ggplot2 ggplot aes geom_bar geom_text coord_cartesian labs
 #'     theme_bw
@@ -12,7 +15,15 @@
 #' @noRd
 #'
 plot_pi <- function(fit, prob = 0.9) {
+  UseMethod("plot_pi")
+}
+
+#' @rdname plot_pi
+#' @noRd
+plot_pi.mcmc_fit <- function(fit, prob = 0.9) {
   pi <- point_estimate(fit, pars = "pi")[[1]]
+
+  # Here we know that the fit is an `mcmc_fit` so this will work.
   pi_cred_int <- posterior_interval(fit, prob = prob, pars = "pi")
 
   plot_data <- data.frame(
@@ -34,8 +45,29 @@ plot_pi <- function(fit, prob = 0.9) {
     ggplot2::labs(x = "",
                   y = "Prevalence probability",
                   caption = paste0(percent, " credible intervals")) +
-    ggplot2::theme_bw() +
-    NULL
+    ggplot2::theme_bw()
+
+  plot
+}
+
+#' @rdname plot_pi
+#' @noRd
+plot_pi.optim_fit <- function(fit, prob = 0.9) {
+   pi <- point_estimate(fit, pars = "pi")[[1]]
+
+  plot_data <- data.frame(
+    cat = factor(paste0("Class ", 1:length(pi)),
+                 levels = paste0("Class ", length(pi):1)),
+    pi = pi
+  )
+
+  plot <- ggplot2::ggplot(plot_data, ggplot2::aes(x = .data$cat, y = .data$pi)) +
+    ggplot2::geom_point(size = 2, colour = "steelblue") +
+    ggplot2::coord_flip(ylim = c(0, 1)) +
+    ggplot2::scale_y_continuous(breaks = seq(0, 1, by = 0.2)) +
+    ggplot2::labs(x = "",
+                  y = "Prevalence probability") +
+    ggplot2::theme_bw()
 
   plot
 }

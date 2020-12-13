@@ -7,6 +7,13 @@ test_that("plot_prevalence output has correct type", {
 
 })
 
+test_that("can plot pi with optim_fit", {
+
+  expect_error(plot(ds_fit_optim, pars = "pi"), NA)
+
+})
+
+
 test_that("plot_raters output has correct type", {
 
   ds_plot <- plot_theta(ds_fit)
