@@ -1,4 +1,3 @@
-context("fit_class")
 
 test_that("print works for fit", {
 
@@ -24,25 +23,29 @@ test_that("is.mcmc_fit works", {
 
 test_that("plot.fit dispatches correctly", {
 
-  raters_plot <- plot_theta(ds_fit)
-  expect_equal(plot(ds_fit, pars = "theta"), raters_plot)
+  # Why does this test not compare the plots directly?
+  # Because of the internals of {rater} the plots are created in different
+  # environments causing testthat 3e and R 4.1 to fail. In any case testing
+  # the geoms is probably sufficient here as we are really testing the sanity
+  # of the switch statement controlling plot dispatch.
 
-  latent_class_plot <- plot_class_probabilities(ds_fit)
-  expect_equal(plot(ds_fit, pars = "latent_class"), latent_class_plot)
+  plot_theta_p <- plot_theta(ds_fit)
+  plot_p <- plot(ds_fit, pars = "theta")
+  expect_equal(get_geoms(plot_p), get_geoms(plot_theta_p))
 
-  # Problems comparing the enviroment of the plots.
-  #prevalence_plot <- plot_pi(ds_fit)
-  #expect_equal(plot(ds_fit, pars = "pi"), prevalence_plot)
+  plot_class_probs_p <- plot_theta(ds_fit)
+  plot_p <- plot(ds_fit, pars = "latent_class")
+  expect_equal(get_geoms(plot_p), get_geoms(plot_class_probs_p))
+
+  plot_pi_p <- plot_pi(ds_fit)
+  plot_p <- plot(ds_fit, pars = "pi")
+  expect_equal(get_geoms(plot_p), get_geoms(plot_pi_p))
 
 })
 
 test_that("can plot multiple parameters", {
 
-  skip("environment comparison problems")
-  raters_plot <- plot_theta(ds_fit)
-  prevalence_plot <- plot_pi(ds_fit)
-  expect_equal(plot(ds_fit, pars = c("theta", "pi")),
-              list(raters_plot, prevalence_plot))
+  expect_error(plot(ds_fit, pars = c("theta", "pi")), NA)
 
 })
 

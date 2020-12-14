@@ -1,4 +1,3 @@
-context("plotting")
 
 test_that("plot_prevalence output has correct type", {
 

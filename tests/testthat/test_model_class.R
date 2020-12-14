@@ -1,5 +1,3 @@
-context("model_class")
-
 # TODO: why are there more backslashes?
 
 test_that("print works for models", {

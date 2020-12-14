@@ -1,5 +1,3 @@
-context("extract")
-
 test_that("mcmc_diagnostics works", {
 
   mcmc_diags_pi <- mcmc_diagnostics(ds_fit, pars = "pi")
