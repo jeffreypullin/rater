@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Extract latent class probabilities from a rater fit object — class_probabilities • rater</title>
+<title>Convert a rater_fit object to a coda mcmc.list object. — as_mcmc.list • rater</title>
 
 
 <!-- jquery -->
@@ -41,8 +41,8 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Extract latent class probabilities from a rater fit object — class_probabilities" />
-<meta property="og:description" content="Extract latent class probabilities from a rater fit object" />
+<meta property="og:title" content="Convert a rater_fit object to a coda mcmc.list object. — as_mcmc.list" />
+<meta property="og:description" content="Convert a rater_fit object to a coda mcmc.list object." />
 
 
 
@@ -125,57 +125,41 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Extract latent class probabilities from a rater fit object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jeffreypullin/rater/blob/master/R/extract.R'><code>R/extract.R</code></a></small>
-    <div class="hidden name"><code>class_probabilities.Rd</code></div>
+    <h1>Convert a rater_fit object to a coda <code>mcmc.list</code> object.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jeffreypullin/rater/blob/master/R/rater_fit_class.R'><code>R/rater_fit_class.R</code></a></small>
+    <div class="hidden name"><code>as_mcmc.list.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Extract latent class probabilities from a rater fit object</p>
+    <p>Convert a rater_fit object to a coda <code>mcmc.list</code> object.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>class_probabilities</span><span class='op'>(</span><span class='va'>fit</span>, <span class='va'>...</span><span class='op'>)</span>
-
-<span class='co'># S3 method for mcmc_fit</span>
-<span class='fu'>class_probabilities</span><span class='op'>(</span><span class='va'>fit</span>, <span class='va'>...</span><span class='op'>)</span>
-
-<span class='co'># S3 method for optim_fit</span>
-<span class='fu'>class_probabilities</span><span class='op'>(</span><span class='va'>fit</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>as_mcmc.list</span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>fit</th>
-      <td><p>A rater fit object.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Extra arguments.</p></td>
+      <td><p>A rater_fit object.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A I * K matrix where each element is the probably of item i being
-of class k. (I is the number of items and K the number of classes).</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>The latent class probabilities are obtained by marginalising out
-the latent class and then calculating, for each draw of pi and theta, the
-conditional probability of the latent class given the other parameters
-and the data. Averaging these conditional probabilities gives the
-(unconditional) latent class probabilities retuned by this function.</p>
+    <p>A coda mcmc.list object.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+    <pre class="examples"><div class='input'>
+<span class='co'># \donttest{</span>
 
-<span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='rater.html'>rater</a></span><span class='op'>(</span><span class='va'>anesthesia</span>, <span class='st'>"dawid_skene"</span><span class='op'>)</span>
+<span class='co'># Fit a model using MCMC (the default).</span>
+<span class='va'>mcmc_fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='rater.html'>rater</a></span><span class='op'>(</span><span class='va'>anesthesia</span>, <span class='st'>"dawid_skene"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; 
 #&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 1).
 #&gt; Chain 1: 
-#&gt; Chain 1: Gradient evaluation took 0.000164 seconds
-#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 1.64 seconds.
+#&gt; Chain 1: Gradient evaluation took 0.000334 seconds
+#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 3.34 seconds.
 #&gt; Chain 1: Adjust your expectations accordingly!
 #&gt; Chain 1: 
 #&gt; Chain 1: 
@@ -192,15 +176,15 @@ and the data. Averaging these conditional probabilities gives the
 #&gt; Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #&gt; Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
 #&gt; Chain 1: 
-#&gt; Chain 1:  Elapsed Time: 2.36965 seconds (Warm-up)
-#&gt; Chain 1:                2.47466 seconds (Sampling)
-#&gt; Chain 1:                4.84431 seconds (Total)
+#&gt; Chain 1:  Elapsed Time: 2.31665 seconds (Warm-up)
+#&gt; Chain 1:                2.60001 seconds (Sampling)
+#&gt; Chain 1:                4.91666 seconds (Total)
 #&gt; Chain 1: 
 #&gt; 
 #&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 2).
 #&gt; Chain 2: 
-#&gt; Chain 2: Gradient evaluation took 0.000159 seconds
-#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 1.59 seconds.
+#&gt; Chain 2: Gradient evaluation took 0.000165 seconds
+#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 1.65 seconds.
 #&gt; Chain 2: Adjust your expectations accordingly!
 #&gt; Chain 2: 
 #&gt; Chain 2: 
@@ -217,15 +201,15 @@ and the data. Averaging these conditional probabilities gives the
 #&gt; Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #&gt; Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
 #&gt; Chain 2: 
-#&gt; Chain 2:  Elapsed Time: 2.23265 seconds (Warm-up)
-#&gt; Chain 2:                2.39148 seconds (Sampling)
-#&gt; Chain 2:                4.62413 seconds (Total)
+#&gt; Chain 2:  Elapsed Time: 2.33164 seconds (Warm-up)
+#&gt; Chain 2:                2.46062 seconds (Sampling)
+#&gt; Chain 2:                4.79226 seconds (Total)
 #&gt; Chain 2: 
 #&gt; 
 #&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 3).
 #&gt; Chain 3: 
-#&gt; Chain 3: Gradient evaluation took 0.000155 seconds
-#&gt; Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 1.55 seconds.
+#&gt; Chain 3: Gradient evaluation took 0.000162 seconds
+#&gt; Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 1.62 seconds.
 #&gt; Chain 3: Adjust your expectations accordingly!
 #&gt; Chain 3: 
 #&gt; Chain 3: 
@@ -242,15 +226,15 @@ and the data. Averaging these conditional probabilities gives the
 #&gt; Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #&gt; Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
 #&gt; Chain 3: 
-#&gt; Chain 3:  Elapsed Time: 2.31479 seconds (Warm-up)
-#&gt; Chain 3:                2.45729 seconds (Sampling)
-#&gt; Chain 3:                4.77207 seconds (Total)
+#&gt; Chain 3:  Elapsed Time: 2.29288 seconds (Warm-up)
+#&gt; Chain 3:                2.50961 seconds (Sampling)
+#&gt; Chain 3:                4.80249 seconds (Total)
 #&gt; Chain 3: 
 #&gt; 
 #&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 4).
 #&gt; Chain 4: 
-#&gt; Chain 4: Gradient evaluation took 0.000161 seconds
-#&gt; Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 1.61 seconds.
+#&gt; Chain 4: Gradient evaluation took 0.000166 seconds
+#&gt; Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 1.66 seconds.
 #&gt; Chain 4: Adjust your expectations accordingly!
 #&gt; Chain 4: 
 #&gt; Chain 4: 
@@ -267,57 +251,13 @@ and the data. Averaging these conditional probabilities gives the
 #&gt; Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #&gt; Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
 #&gt; Chain 4: 
-#&gt; Chain 4:  Elapsed Time: 2.22466 seconds (Warm-up)
-#&gt; Chain 4:                2.30522 seconds (Sampling)
-#&gt; Chain 4:                4.52988 seconds (Total)
-#&gt; Chain 4: </div><div class='input'><span class='fu'>class_probabilities</span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;        
-#&gt;                 [,1]         [,2]         [,3]         [,4]
-#&gt;    [1,] 9.999994e-01 1.513086e-07 2.250443e-08 4.589398e-07
-#&gt;    [2,] 1.324118e-07 2.401225e-05 9.724620e-01 2.751383e-02
-#&gt;    [3,] 3.967390e-01 6.026154e-01 8.568844e-05 5.598518e-04
-#&gt;    [4,] 5.974179e-03 9.933459e-01 5.013417e-04 1.785872e-04
-#&gt;    [5,] 2.576392e-07 9.999624e-01 3.446117e-05 2.902222e-06
-#&gt;    [6,] 1.759037e-06 9.993465e-01 6.178621e-04 3.384616e-05
-#&gt;    [7,] 9.994626e-01 5.285483e-04 6.536575e-07 8.215098e-06
-#&gt;    [8,] 8.978779e-09 3.105648e-05 9.994133e-01 5.555960e-04
-#&gt;    [9,] 1.900186e-06 9.999387e-01 5.230578e-05 7.109979e-06
-#&gt;   [10,] 3.514526e-06 9.975213e-01 2.435034e-03 4.011286e-05
-#&gt;   [11,] 1.553142e-08 1.482233e-08 1.141234e-04 9.998858e-01
-#&gt;   [12,] 3.519863e-05 8.748544e-01 1.158655e-01 9.244921e-03
-#&gt;   [13,] 9.999994e-01 1.513086e-07 2.250443e-08 4.589398e-07
-#&gt;   [14,] 3.321280e-05 9.994100e-01 5.172009e-04 3.954810e-05
-#&gt;   [15,] 9.999864e-01 1.210200e-05 1.140775e-07 1.404057e-06
-#&gt;   [16,] 9.999914e-01 6.093148e-06 1.339187e-07 2.397569e-06
-#&gt;   [17,] 9.999994e-01 1.513086e-07 2.250443e-08 4.589398e-07
-#&gt;   [18,] 9.999994e-01 1.513086e-07 2.250443e-08 4.589398e-07
-#&gt;   [19,] 4.807450e-05 9.999413e-01 4.526289e-06 6.094116e-06
-#&gt;   [20,] 2.255543e-04 9.992316e-01 4.139703e-04 1.288558e-04
-#&gt;   [21,] 5.794304e-07 9.999967e-01 1.636413e-06 1.099114e-06
-#&gt;   [22,] 4.807450e-05 9.999413e-01 4.526289e-06 6.094116e-06
-#&gt;   [23,] 2.576392e-07 9.999624e-01 3.446117e-05 2.902222e-06
-#&gt;   [24,] 8.160831e-05 9.999055e-01 6.249930e-06 6.685116e-06
-#&gt;   [25,] 9.999994e-01 1.513086e-07 2.250443e-08 4.589398e-07
-#&gt;   [26,] 9.999994e-01 1.513086e-07 2.250443e-08 4.589398e-07
-#&gt;   [27,] 9.432000e-07 9.999001e-01 9.235778e-05 6.618282e-06
-#&gt;   [28,] 9.999994e-01 1.513086e-07 2.250443e-08 4.589398e-07
-#&gt;   [29,] 9.999994e-01 1.513086e-07 2.250443e-08 4.589398e-07
-#&gt;   [30,] 9.979335e-01 2.042208e-03 1.511844e-06 2.275775e-05
-#&gt;   [31,] 9.999994e-01 1.513086e-07 2.250443e-08 4.589398e-07
-#&gt;   [32,] 1.409713e-08 1.118664e-03 9.987543e-01 1.269730e-04
-#&gt;   [33,] 9.999994e-01 1.513086e-07 2.250443e-08 4.589398e-07
-#&gt;   [34,] 5.794304e-07 9.999967e-01 1.636413e-06 1.099114e-06
-#&gt;   [35,] 7.413719e-07 9.975069e-01 2.469749e-03 2.259642e-05
-#&gt;   [36,] 2.892119e-07 9.857067e-05 7.778991e-01 2.220021e-01
-#&gt;   [37,] 1.945542e-04 9.994015e-01 3.652721e-04 3.866016e-05
-#&gt;   [38,] 1.942063e-06 7.093638e-01 2.901984e-01 4.358631e-04
-#&gt;   [39,] 8.806004e-08 7.609073e-04 9.973798e-01 1.859190e-03
-#&gt;   [40,] 9.999994e-01 1.513086e-07 2.250443e-08 4.589398e-07
-#&gt;   [41,] 9.999994e-01 1.513086e-07 2.250443e-08 4.589398e-07
-#&gt;   [42,] 9.994626e-01 5.285483e-04 6.536575e-07 8.215098e-06
-#&gt;   [43,] 9.432000e-07 9.999001e-01 9.235778e-05 6.618282e-06
-#&gt;   [44,] 9.999864e-01 1.210200e-05 1.140775e-07 1.404057e-06
-#&gt;   [45,] 5.794304e-07 9.999967e-01 1.636413e-06 1.099114e-06</div><div class='input'>
+#&gt; Chain 4:  Elapsed Time: 2.36748 seconds (Warm-up)
+#&gt; Chain 4:                2.49879 seconds (Sampling)
+#&gt; Chain 4:                4.86627 seconds (Total)
+#&gt; Chain 4: </div><div class='input'>
+<span class='co'># Convert it to an mcmc.list</span>
+<span class='va'>rater_mcmc_list</span> <span class='op'>&lt;-</span> <span class='fu'>as_mcmc.list</span><span class='op'>(</span><span class='va'>mcmc_fit</span><span class='op'>)</span>
+
 <span class='co'># }</span>
 
 </div></pre>
