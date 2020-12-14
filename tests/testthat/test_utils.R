@@ -1,4 +1,3 @@
-context("utils")
 
 test_that("logsumexp works", {
   # could/should come up with some better identities

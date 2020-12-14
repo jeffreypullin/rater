@@ -1,4 +1,3 @@
-context("rater")
 
 test_that("verbose flag works", {
 

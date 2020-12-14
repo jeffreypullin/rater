@@ -1,4 +1,3 @@
-context("models")
 
 test_that("test dawid_skene constructor", {
 
