@@ -46,6 +46,8 @@
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -81,7 +83,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -107,7 +109,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/Voltemand/rater">
-    <span class="fa fa-lg fa-github"></span>
+    <span class="fas fa-lg fa-github"></span>
      
   </a>
 </li>
@@ -133,6 +135,7 @@
 <a href="#rater-development-version" class="anchor"></a>rater (development version)<small> Unreleased </small>
 </h1>
 <ul>
+<li><p>Rater specific prior parameters can now be used in the Dawid-Skene model for both grouped and long data. In practice this means that it is now possible to pass a J * K * K array for <code>beta</code> into <code><a href="../reference/models.html">dawid_skene()</a></code> which encodes a K * K prior parameter for each of the J raters’ error matrices. For backwards compatibility and ease of use it is still possible to pass a single matrix for <code>beta</code> which will still be interpreted as the prior parameter for all the of the raters’ error matrices.</p></li>
 <li><p>The plot produced for the pi parameter has been changed. The new plot represents the uncertainty in the point estimates when MCMC has been used to fit the model.</p></li>
 <li><p>Prior parameters for the Dawid-Skene and class conditional Dawid-Skene models have been altered slightly to improve convergence of optimization when the number of classes is small.</p></li>
 <li><p><code>summary.mcmc_fit</code> now displays the number of remaining parameters correctly.</p></li>
