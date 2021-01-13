@@ -69,7 +69,7 @@ rater <- function(data,
   # Create the full passed info for stan and the initialisation points.
   priors <- parse_priors(model, stan_data_list$K, stan_data_list$J)
 
-  if (method == "optim") {
+  if (method == "optim" && inherits(model, "dawid_skene")) {
     check_beta_values(priors$beta)
   }
   stan_data <- c(stan_data_list, priors)
@@ -460,7 +460,7 @@ validate_data <- function(data, data_format) {
 check_beta_values <- function(beta) {
 
   J <- dim(beta)[[1]]
-  problems <- numeric(J)
+  problems <- logical(J)
   for (j in 1:J) {
     beta_j <- beta[j, , ]
     problems[[j]] <- any(beta_j[row(beta_j) != col(beta_j)] <= 1.0)
