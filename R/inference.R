@@ -162,11 +162,29 @@ parse_priors <- function(model, K, J) {
 
 ds_parse_priors <- function(model, K, J) {
   pars <- get_parameters(model)
+
   # This is the default uniform prior taken from the Stan manual.
   if (is.null(pars$alpha)) {
     pars$alpha <- rep(3, K)
   }
 
+  # We need to alter the passed beta if:
+  # 1. It is a matrix - and we need to convert it into an array.
+  # 2. It is null - we need to create the default prior.
+  # Ideally this would be done earlier but we need to to know J. The matrix
+  # has already been validated i.e. it is square.
+
+  # 1.
+  # Convert from matrix to array.
+  if (is.matrix(pars$beta)) {
+    beta_slice <- pars$beta
+    pars$beta <- array(dim = c(J, K, K))
+    for (j in 1:J) {
+      pars$beta[j, , ] <- beta_slice
+    }
+  }
+
+  # 2.
   # This prior parameter is based on conjugate priors for the simplified model
   # where the true class in known.
   if (is.null(pars$beta)) {
@@ -463,7 +481,7 @@ check_beta_values <- function(beta) {
   problems <- logical(J)
   for (j in 1:J) {
     beta_j <- beta[j, , ]
-    problems[[j]] <- any(beta_j[row(beta_j) != col(beta_j)] <= 1.0)
+    problems[[j]] <- any(beta_j[row(beta_j) != col(beta_j)] < 1.0)
   }
   off_diag_problem <- any(problems)
   if (off_diag_problem) {
