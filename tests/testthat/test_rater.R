@@ -94,18 +94,26 @@ test_that("parse priors are correct", {
 
   # test non-default priors
   test_alpha <- rep(9, K)
-  test_beta <- matrix(17, nrow = K, ncol = K)
-  test_beta_result <- array(dim = c(J, K, K))
+  test_beta_mat <- matrix(17, nrow = K, ncol = K)
+  test_beta_array <- array(dim = c(J, K, K))
   for (j in 1:J) {
-    test_beta_result[j, , ] <- test_beta
+    test_beta_array[j, , ] <- test_beta_mat
   }
 
-  ds_priors <- parse_priors(dawid_skene(alpha = test_alpha, beta = test_beta),
-                            K,
-                            J)
+  ds_priors_mat <- parse_priors(dawid_skene(alpha = test_alpha,
+                                            beta = test_beta_mat),
+                                K,
+                                J)
 
-  expect_equal(ds_priors$alpha, test_alpha)
-  expect_equal(ds_priors$beta, test_beta_result)
+  expect_equal(ds_priors_mat$alpha, test_alpha)
+  expect_equal(ds_priors_mat$beta, test_beta_array)
+
+  ds_priors_array <- parse_priors(dawid_skene(alpha = test_alpha,
+                                              beta = test_beta_array),
+                                  K,
+                                  J)
+
+  expect_equal(ds_priors_array$beta, test_beta_array)
 
   # default priors
   hds_priors <- parse_priors(hier_dawid_skene(), K, J)
