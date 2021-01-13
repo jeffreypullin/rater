@@ -5,7 +5,7 @@ data {
   real tally[N];                   // total of each different combination
   int<lower=1,upper=K> key[N, J];  //
   vector<lower=0>[K] alpha;        // prior for pi
-  vector<lower=0>[K] beta[K];      // prior for theta
+  vector<lower=0>[K] beta[J, K];   // prior for theta
 }
 
 parameters {
@@ -30,7 +30,7 @@ model {
 
   for (j in 1:J) {
     for (k in 1:K) {
-      theta[j, k] ~ dirichlet(beta[k]);
+      theta[j, k] ~ dirichlet(beta[j, k]);
     }
   }
 
