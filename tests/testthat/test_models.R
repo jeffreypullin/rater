@@ -29,15 +29,15 @@ test_that("test hier_dawid_skene constructor", {
   expect_equal(length(model), 4)
   expect_equal(length(get_parameters(model)), 1)
 
-  # defualt parameter values
+  # default parameter values
   expect_equal(get_parameters(model)$alpha, NULL)
 })
 
 test_that("model functions error correctly", {
-  expect_error(dawid_skene(beta = 4), "beta must be a square numeric matrix")
+  expect_error(dawid_skene(beta = 4), "beta must be a numeric matrix or array")
   expect_error(dawid_skene(alpha = "cat"), "alpha must be a numeric vector")
   expect_error(dawid_skene(alpha = 1:3, beta = matrix(1:4, nrow = 2)),
-               "alpha and beta must have the same dimensions")
+               "`alpha` and `beta` are not compatible.")
 })
 
 test_that("compute K works", {
