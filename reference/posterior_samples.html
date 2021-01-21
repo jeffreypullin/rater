@@ -128,7 +128,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Extract posterior samples from a rater fit object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jeffreypullin/rater/blob/master/R/extract.R'><code>R/extract.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/jeffreypullin/rater/blob/master/R/posterior_samples.R'><code>R/posterior_samples.R</code></a></small>
     <div class="hidden name"><code>posterior_samples.Rd</code></div>
     </div>
 
@@ -169,8 +169,8 @@ for the latent class due to the marginalisation technique used internally.</p>
 </div><div class='output co'>#&gt; 
 #&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 1).
 #&gt; Chain 1: 
-#&gt; Chain 1: Gradient evaluation took 0.000201 seconds
-#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 2.01 seconds.
+#&gt; Chain 1: Gradient evaluation took 0.000193 seconds
+#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 1.93 seconds.
 #&gt; Chain 1: Adjust your expectations accordingly!
 #&gt; Chain 1: 
 #&gt; Chain 1: 
@@ -187,9 +187,9 @@ for the latent class due to the marginalisation technique used internally.</p>
 #&gt; Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #&gt; Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
 #&gt; Chain 1: 
-#&gt; Chain 1:  Elapsed Time: 2.42541 seconds (Warm-up)
-#&gt; Chain 1:                2.44707 seconds (Sampling)
-#&gt; Chain 1:                4.87248 seconds (Total)
+#&gt; Chain 1:  Elapsed Time: 2.48988 seconds (Warm-up)
+#&gt; Chain 1:                2.49202 seconds (Sampling)
+#&gt; Chain 1:                4.9819 seconds (Total)
 #&gt; Chain 1: 
 #&gt; 
 #&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 2).
@@ -212,15 +212,15 @@ for the latent class due to the marginalisation technique used internally.</p>
 #&gt; Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #&gt; Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
 #&gt; Chain 2: 
-#&gt; Chain 2:  Elapsed Time: 2.50856 seconds (Warm-up)
-#&gt; Chain 2:                2.70593 seconds (Sampling)
-#&gt; Chain 2:                5.21449 seconds (Total)
+#&gt; Chain 2:  Elapsed Time: 2.54871 seconds (Warm-up)
+#&gt; Chain 2:                2.75034 seconds (Sampling)
+#&gt; Chain 2:                5.29905 seconds (Total)
 #&gt; Chain 2: 
 #&gt; 
 #&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 3).
 #&gt; Chain 3: 
-#&gt; Chain 3: Gradient evaluation took 0.000175 seconds
-#&gt; Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 1.75 seconds.
+#&gt; Chain 3: Gradient evaluation took 0.00017 seconds
+#&gt; Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 1.7 seconds.
 #&gt; Chain 3: Adjust your expectations accordingly!
 #&gt; Chain 3: 
 #&gt; Chain 3: 
@@ -237,15 +237,15 @@ for the latent class due to the marginalisation technique used internally.</p>
 #&gt; Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #&gt; Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
 #&gt; Chain 3: 
-#&gt; Chain 3:  Elapsed Time: 2.52376 seconds (Warm-up)
-#&gt; Chain 3:                2.75781 seconds (Sampling)
-#&gt; Chain 3:                5.28158 seconds (Total)
+#&gt; Chain 3:  Elapsed Time: 2.56783 seconds (Warm-up)
+#&gt; Chain 3:                2.78913 seconds (Sampling)
+#&gt; Chain 3:                5.35696 seconds (Total)
 #&gt; Chain 3: 
 #&gt; 
 #&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 4).
 #&gt; Chain 4: 
-#&gt; Chain 4: Gradient evaluation took 0.000175 seconds
-#&gt; Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 1.75 seconds.
+#&gt; Chain 4: Gradient evaluation took 0.000163 seconds
+#&gt; Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 1.63 seconds.
 #&gt; Chain 4: Adjust your expectations accordingly!
 #&gt; Chain 4: 
 #&gt; Chain 4: 
@@ -262,9 +262,9 @@ for the latent class due to the marginalisation technique used internally.</p>
 #&gt; Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #&gt; Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
 #&gt; Chain 4: 
-#&gt; Chain 4:  Elapsed Time: 2.5524 seconds (Warm-up)
-#&gt; Chain 4:                2.65767 seconds (Sampling)
-#&gt; Chain 4:                5.21007 seconds (Total)
+#&gt; Chain 4:  Elapsed Time: 2.59984 seconds (Warm-up)
+#&gt; Chain 4:                2.69735 seconds (Sampling)
+#&gt; Chain 4:                5.29719 seconds (Total)
 #&gt; Chain 4: </div><div class='input'>
 <span class='va'>samples</span> <span class='op'>&lt;-</span> <span class='fu'>posterior_samples</span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
 
