@@ -67,23 +67,34 @@ print.optim_fit <- function(x, ...) {
 #' Plot a `rater_fit` object
 #'
 #' @param x An object of class `rater_fit`.
-#' @param pars A character vector of the names of the parameters to plot. By
-#'   default: `c("pi", "theta", "class_probabilities")`.
-#' @param ... Other arguments. This should contain the which argument for
-#'   theta plots.
+#' @param pars A length one character vector specifying the parameter to plot.
+#'   By default `"theta"`.
+#' @param prob The coverage of the credible intervals shown in the `"pi"` plot.
+#'   If not plotting pi this argument will be ignored. By default `0.9`.
+#' @param rater_index The indexes of the raters shown in the `"theta` plot.
+#'   If not plotting theta this argument will be ignored. By default `NULL`
+#'   which means that all raters will be plotted.
+#' @param item_index The indexes of the items shown in the class probabilities
+#'   plot. If not plotting the class probabilities this argument will be
+#'   ignored. By default `NULL` which means that all items will be plotted.
+#'   This argument is particularly useful to focus the subset of items with
+#'   substantial uncertiuanlty in their class assignments.
+#' @param ... Other arguments.
 #'
-#' @return If one parameter is requested a ggplot2 plot. If multiple parameters
-#'   are requested a list of ggplot2 plots.
+#' @return A ggplot2 object.
+#'
+#' @details The use of `pars` to refer to only one parameter is for backwards
+#'  compatibility and consistency with the rest of the interface.
 #'
 #' @examples
 #'
 #' \donttest{
 #' fit <- rater(anesthesia, "dawid_skene")
 #'
-#' # Plot all the parameters.
+#' # By default will just plot the theta plot
 #' plot(fit)
 #'
-#' # Select which parameters to plot.
+#' # Select which parameter to plot.
 #' plot(fit, pars = "pi")
 #'
 #' }
@@ -91,37 +102,36 @@ print.optim_fit <- function(x, ...) {
 #' @export
 #'
 plot.rater_fit <- function(x,
-                           pars = c("pi", "theta", "class_probabilities"),
+                           pars = "theta",
+                           prob = 0.9,
+                           rater_index = NULL,
+                           item_index = NULL,
                            ...) {
-  dots <- list(...)
-  which <- dots$which
 
-  plot_names <- c("theta", "raters", "pi",
-                  "prevalence", "class_probabilities", "latent_class")
-
-  plots <- list()
-  for (i in seq_along(pars)) {
-    par <- match.arg(pars[[i]], plot_names)
-    plots[[i]] <- switch(par,
-      "theta" = plot_theta(x, which = which),
-      "raters" = plot_theta(x, which = which),
-      "class_probabilities" = plot_class_probabilities(x),
-      "latent_class" = plot_class_probabilities(x),
-      # Luckily "p" will fall through correctly.
-      "pi" = plot_pi(x, 0.9),
-      "prevalence" = plot_pi(x, 0.9),
-      "z" = stop("Cannot plot z directly.", call. = FALSE),
-      stop("Invalid pars argument", call. = FALSE)
-    )
+  if (length(pars) > 1 || !is.character(pars)) {
+    stop("`pars` must be a length 1 character vector.", call. = FALSE)
   }
 
-  # Ensure that we return a bare plot if we are only returning one plot.
-  if (length(plots) == 1L) {
-    out <- plots[[1]]
-  } else {
-    out <- plots
-  }
-  out
+  which <- rater_index
+  plot_names <- c("theta", "raters",
+                  "pi", "prevalence",
+                  "class_probabilities", "latent_class")
+
+  par <- match.arg(pars, plot_names)
+  plot <- switch(par,
+    "theta" = plot_theta(x, which = which),
+    "raters" = plot_theta(x, which = which),
+    "class_probabilities" = plot_class_probabilities(x,
+                                                     item_index = item_index),
+    "latent_class" = plot_class_probabilities(x, item_index = item_index),
+    # Luckily "p" will fall through correctly.
+    "pi" = plot_pi(x, prob = prob),
+    "prevalence" = plot_pi(x, prob = prob),
+    "z" = stop("Cannot plot z directly.", call. = FALSE),
+    stop("Invalid pars argument", call. = FALSE)
+  )
+
+  plot
 }
 
 #' Summarise a `mcmc_fit` object
