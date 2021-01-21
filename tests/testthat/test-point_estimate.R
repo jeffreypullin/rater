@@ -1,46 +1,3 @@
-test_that("mcmc_diagnostics works", {
-
-  mcmc_diags_pi <- mcmc_diagnostics(ds_fit, pars = "pi")
-  expect_equal(nrow(mcmc_diags_pi), K)
-  expect_type(mcmc_diags_pi, "double")
-  expect_equal(colnames(mcmc_diags_pi), c("Rhat", "ess_bulk"))
-
-  mcmc_diags_theta <- mcmc_diagnostics(ds_fit, pars = "theta")
-  expect_equal(nrow(mcmc_diags_theta), J * K * K )
-  expect_type(mcmc_diags_theta, "double")
-  expect_equal(colnames(mcmc_diags_theta), c("Rhat", "ess_bulk"))
-
-  expect_error(mcmc_diagnostics(ds_fit_optim))
-  expect_error(mcmc_diagnostics(ds_fit, pars = "z"))
-})
-
-test_that("posterior_samples works", {
-
-  # We get a list if length(pars) > 1
-  expect_type(posterior_samples(ds_fit, pars = c("pi", "theta")), "list")
-  expect_named(posterior_samples(ds_fit, pars = c("pi", "theta")),
-               c("pi", "theta"))
-
-  # We error if the user requests draws from z
-  expect_error(posterior_samples(ds_fit, pars = c("z")))
-
-  # Or if they pass an invalid pararmaeter
-  expect_error(posterior_samples(ds_fit, pars = c("nonsense")))
-})
-
-test_that("posterior_interval works", {
-
-  all_intervals <- posterior_interval(ds_fit)
-  expect_type(all_intervals, "double")
-  expect_equal(dim(all_intervals), c(84, 2))
-
-  pi_intervals <- posterior_interval(ds_fit, pars = "pi")
-  expect_equal(dim(pi_intervals), c(4, 2))
-
-  expect_error(posterior_interval(ds_fit, pars = "z"))
-})
-
-
 test_that("point estiamte output is named", {
   all_pars <- point_estimate(ds_fit)
   expect_named(all_pars, c("pi", "theta", "z"))
@@ -173,15 +130,3 @@ test_that("extract_theta (grouped) output has correct form", {
   apply(ds_out, 1, function(x) expect_equal(rowSums(x), rep(1, K_caries)))
 
 })
-
-test_that("extract_ function are equivalent", {
-  skip("TODO: Decide on plain language interface")
-  expect_equal(extract_theta(ds_fit), extract_raters(ds_fit))
-  expect_equal(extract_z(ds_fit), extract_latent_class(ds_fit))
-  expect_equal(extract_pi(ds_fit), extract_prevalence(ds_fit))
-})
-
-
-
-
-
