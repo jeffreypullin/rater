@@ -1,5 +1,14 @@
 # rater (development version)
 
+* Plotting via `plot()` of the `rater_fit` object has been changed in several ways. `plot.rater_fit` now:
+
+  - Only returns one plot 
+  - Only returns the theta plot by default
+  - Exposes the `prob`, `which` (called `rater_index`) and new `item_index` 
+    arguments in the plot generic.
+    
+* Add the ability to only plot a subset of items when plotting the class probabilities. This can be controlled by the new `item_index` argument to `plot()`
+
 * Added the function `wide_to_long()` to convert wide data to long data.
 
 * Add the option `data_format = "wide"` to `rater()` to allow wide data to be passed into `rater()` directly.
