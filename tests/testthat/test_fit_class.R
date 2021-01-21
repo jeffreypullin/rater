@@ -57,4 +57,6 @@ test_that("as_mcmc.list works", {
 
 })
 
-
+test_that("prior_summary works", {
+  expect_equal(prior_summary(ds_fit), ds_fit$model)
+})

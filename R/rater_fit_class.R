@@ -275,6 +275,32 @@ as_mcmc.list <- function(fit) {
   rstan::As.mcmc.list(fit$samples)
 }
 
+#' Provide a summary of the priors specified in a `rater_fit` object.
+#'
+#' @param object A `rater_fit` object.
+#' @param ... Other arguments.
+#'
+#' @examples
+#'
+#' \donttest{
+#' # Fit a model using MCMC (the default).
+#' fit <- rater(anesthesia, "dawid_skene", verbose = FALSE)
+#'
+#' # Summarise the priors (and model) specified in the fit.
+#' prior_summary(fit)
+#'
+#' }
+#'
+#' @aliases prior_summary
+#' @method prior_summary rater_fit
+#' @importFrom rstantools prior_summary
+#' @export
+#' @export prior_summary
+#'
+prior_summary.rater_fit <- function(object, ...) {
+  get_model(object)
+}
+
 is.mcmc_fit <- function(x) {
   inherits(x, "mcmc_fit")
 }
