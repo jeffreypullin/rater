@@ -16,7 +16,11 @@ class_conditional_dawid_skene(alpha = NULL, beta_1 = NULL, beta_2 = NULL)
 \arguments{
 \item{alpha}{prior parameter for pi}
 
-\item{beta}{prior parameter for theta}
+\item{beta}{prior parameter for theta. This can either be a K * K matrix, in
+which case it is interpreted as the prior parameter of all of the J
+raters, or a J by K by K array in which case it is the fully specified
+prior parameter for all raters. (Here K is the number of categories in the
+data and J is the number of raters in the data.)}
 
 \item{beta_1}{First on diagonal prior probability parameter}
 

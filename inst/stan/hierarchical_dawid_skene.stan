@@ -67,3 +67,10 @@ model {
   }
 
 }
+
+generated quantities {
+  vector[I] log_lik;
+  for (i in 1:I) {
+    log_lik[i] = log_sum_exp(log_p_z[i]);
+  }
+}
