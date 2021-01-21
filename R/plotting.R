@@ -130,7 +130,7 @@ plot_theta <- function(fit, which = NULL) {
 
 #' Plot the latent class estimates of a rater fit.
 #'
-#' @param x numeric matrix object
+#' @param fit A `rater_fit` object.
 #' @param ... Other arguments
 #'
 #' @return Plot of the rate accuracy estimates
@@ -141,22 +141,34 @@ plot_theta <- function(fit, which = NULL) {
 #'
 #' @noRd
 #'
-plot_class_probabilities <- function(fit) {
+plot_class_probabilities <- function(fit, item_index = NULL) {
 
   x <- class_probabilities(fit)
-
-  # We could validate more stringently here if required
-  if (!is.numeric(x)) {
-    stop("Can only plot numeric matrices.", call. = FALSE)
-  }
-
   I <- nrow(x)
   K <- ncol(x)
 
-  plot_data <- data.frame(x = factor(rep(1:K, each = I), levels = 1:K),
-                          y = factor(rep(1:I, K), levels = I:1),
-                          prob = as.vector(x),
-                          round_prob = round(as.vector(x), 2))
+  if (is.null(item_index)) {
+    plot_data <- data.frame(
+      x = factor(rep(1:K, each = I), levels = 1:K),
+      y = factor(rep(1:I, K), levels = I:1),
+      prob = as.vector(x),
+      round_prob = round(as.vector(x), 2)
+    )
+  } else {
+
+    if (!is.numeric(item_index) || !(item_index %in% 1:I)) {
+      stop("`item_index` must be a numeric vector with elements in 1:I",
+           call. = FALSE)
+    }
+
+    x <- x[item_index, ]
+    plot_data <- data.frame(
+      x = factor(rep(1:K, each = length(item_index)), levels = 1:K),
+      y = factor(rep(item_index, K), levels = rev(item_index)),
+      prob = as.vector(x),
+      round_prob = round(as.vector(x), 2)
+    )
+  }
 
   plot <- ggplot2::ggplot(plot_data, ggplot2::aes(x = .data$x, y = .data$y)) +
     ggplot2::geom_tile(ggplot2::aes(fill = .data$prob), colour = "black") +

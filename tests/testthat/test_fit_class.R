@@ -43,12 +43,6 @@ test_that("plot.fit dispatches correctly", {
 
 })
 
-test_that("can plot multiple parameters", {
-
-  expect_error(plot(ds_fit, pars = c("theta", "pi")), NA)
-
-})
-
 test_that("as_mcmc.list works", {
 
   expect_error(as_mcmc.list(ds_fit_optim))

@@ -4,33 +4,48 @@
 \alias{plot.rater_fit}
 \title{Plot a \code{rater_fit} object}
 \usage{
-\method{plot}{rater_fit}(x, pars = c("pi", "theta", "class_probabilities"), ...)
+\method{plot}{rater_fit}(x, pars = "theta", prob = 0.9, rater_index = NULL, item_index = NULL, ...)
 }
 \arguments{
 \item{x}{An object of class \code{rater_fit}.}
 
-\item{pars}{A character vector of the names of the parameters to plot. By
-default: \code{c("pi", "theta", "class_probabilities")}.}
+\item{pars}{A length one character vector specifying the parameter to plot.
+By default \code{"theta"}.}
 
-\item{...}{Other arguments. This should contain the which argument for
-theta plots.}
+\item{prob}{The coverage of the credible intervals shown in the \code{"pi"} plot.
+If not plotting pi this argument will be ignored. By default \code{0.9}.}
+
+\item{rater_index}{The indexes of the raters shown in the \verb{"theta} plot.
+If not plotting theta this argument will be ignored. By default \code{NULL}
+which means that all raters will be plotted.}
+
+\item{item_index}{The indexes of the items shown in the class probabilities
+plot. If not plotting the class probabilities this argument will be
+ignored. By default \code{NULL} which means that all items will be plotted.
+This argument is particularly useful to focus the subset of items with
+substantial uncertiuanlty in their class assignments.}
+
+\item{...}{Other arguments.}
 }
 \value{
-If one parameter is requested a ggplot2 plot. If multiple parameters
-are requested a list of ggplot2 plots.
+A ggplot2 object.
 }
 \description{
 Plot a \code{rater_fit} object
+}
+\details{
+The use of \code{pars} to refer to only one parameter is for backwards
+compatibility and consistency with the rest of the interface.
 }
 \examples{
 
 \donttest{
 fit <- rater(anesthesia, "dawid_skene")
 
-# Plot all the parameters.
+# By default will just plot the theta plot
 plot(fit)
 
-# Select which parameters to plot.
+# Select which parameter to plot.
 plot(fit, pars = "pi")
 
 }
