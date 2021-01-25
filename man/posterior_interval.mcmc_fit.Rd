@@ -31,6 +31,11 @@ Posterior intervals can only be calculated for models fit with
 MCMC. In addition, posterior intervals are not meaningful for the latent
 class (and indeed cannot be calculated). The \emph{full} posterior distribution
 of the latent class can be extracted using \link{class_probabilities}
+
+For the class conditional model the 'full' theta parameterisation (i.e.
+appearing to have the same number of parameters as the standard
+Dawid-Skene model) is calculated and returned. This is designed to allow
+easier comparison with the full Dawid-Skene model.
 }
 \examples{
 

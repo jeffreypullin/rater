@@ -11,6 +11,11 @@
 #'   value of class probabilities which is largest. To return the full
 #'   posterior distributions of the latent class use `class_probabilities()`.
 #'
+#'   For the class conditional model the 'full' theta parameterisation (i.e.
+#'   appearing to have the same number of parameters as the standard
+#'   Dawid-Skene model) is calculated and returned. This is designed to allow
+#'   easier comparison with the full Dawid-Skene model.
+#'
 #' @return A named list of the parameter estimates.
 #'
 #' @seealso `class_probabilities()`

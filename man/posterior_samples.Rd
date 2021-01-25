@@ -24,9 +24,10 @@ Posterior samples can only be returned for models fitting using
 MCMC not optimisation. In addition, posterior samples cannot be returned
 for the latent class due to the marginalisation technique used internally.
 
-By default for the class conditional model the 'full' theta
-parameterisation (i.e. appearing to have the same number of parameters as
-the standard Dawid-Skene model) is returned.
+For the class conditional model the 'full' theta parameterisation (i.e.
+appearing to have the same number of parameters as the standard
+Dawid-Skene model) is calculated and returned. This is designed to allow
+easier comparison with the full Dawid-Skene model.
 }
 \examples{
 

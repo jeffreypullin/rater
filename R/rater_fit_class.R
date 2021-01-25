@@ -140,6 +140,11 @@ plot.rater_fit <- function(x,
 #' @param n_pars The number of pi/theta parameters and z 'items' to display.
 #' @param ... Other arguments passed to function.
 #'
+#' @details For the class conditional model the 'full' theta parameterisation
+#'   (i.e. appearing to have the same number of parameters as the standard
+#'   Dawid-Skene model) is calculated and returned. This is designed to allow
+#'   easier comparison with the full Dawid-Skene model.
+#'
 #' @method summary mcmc_fit
 #'
 #' @importFrom utils head
@@ -203,6 +208,11 @@ summary.mcmc_fit <- function(object, n_pars = 8, ...) {
 #' @param object An object of class `optim_fit`.
 #' @param n_pars The number of pi/theta parameters and z 'items' to display.
 #' @param ... Other arguments passed to function.
+#'
+#' @details For the class conditional model the 'full' theta parameterisation
+#'   (i.e. appearing to have the same number of parameters as the standard
+#'   Dawid-Skene model) is calculated and returned. This is designed to allow
+#'   easier comparison with the full Dawid-Skene model.
 #'
 #' @method summary optim_fit
 #'

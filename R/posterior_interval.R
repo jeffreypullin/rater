@@ -16,6 +16,11 @@
 #'   class (and indeed cannot be calculated). The *full* posterior distribution
 #'   of the latent class can be extracted using [class_probabilities]
 #'
+#'   For the class conditional model the 'full' theta parameterisation (i.e.
+#'   appearing to have the same number of parameters as the standard
+#'   Dawid-Skene model) is calculated and returned. This is designed to allow
+#'   easier comparison with the full Dawid-Skene model.
+#'
 #' @examples
 #'
 #' \donttest{
