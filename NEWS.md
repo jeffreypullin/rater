@@ -1,5 +1,7 @@
 # rater (development version)
 
+* Added an implementation of the `posterior_predict` generic from {rstantools} allowing simulation from the posterior predictive distribution of fitted standard, and class conditional, Dawid-Skene models. (The hierarchical Dawid-Skene model is not yet supported).
+
 * Added an implementation of the `prior_summary` generic from {rstantools} for `rater_fit` objects.
 
 * Added the `loo.rater_fit` method to allow the calculation of loo, a modern Bayesian model comparison metric, for rater models. loo values can be compared using the excellent {loo} package.
