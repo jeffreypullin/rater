@@ -43,7 +43,21 @@ posterior_samples <- function(fit, pars = c("pi", "theta")) {
     par <- match.arg(par, c("pi", "theta", "z"))
     samples <- switch(par,
       "pi"    = c(samples, pi = list(rstan::extract(get_samples(fit))$pi)),
-      "theta" = c(samples, theta = list(rstan::extract(get_samples(fit))$theta)),
+      "theta" = {
+        raw_theta <- rstan::extract(get_samples(fit))$theta
+        if (inherits(fit$model, "class_conditional_dawid_skene")) {
+          N <- dim(raw_theta)[[1]]
+          J <- fit$stan_data$J
+          K <- fit$stan_data$K
+          full_theta <- array(dim = c(N, J, K, K))
+          for (i in seq_len(N)) {
+            full_theta[i, , , ] <- unspool_cc_theta(raw_theta[i, , ])
+          }
+        } else {
+          full_theta <- raw_theta
+        }
+        c(samples, theta = list(full_theta))
+      },
       "z"     = stop("Cannot return draws for marginalised discrete parameter",
                      call. = FALSE),
       stop("Invalid pars argument", call. = FALSE)
