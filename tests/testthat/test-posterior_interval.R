@@ -9,3 +9,11 @@ test_that("posterior_interval works", {
 
   expect_error(posterior_interval(ds_fit, pars = "z"))
 })
+
+test_that("posterior_interval orders parameters correctly", {
+
+  correct_rownames <- sprintf("theta[1, 1, %s]", 1:K)
+  expect_equal(rownames(posterior_interval(ds_fit, pars = "theta"))[1:K],
+               correct_rownames)
+
+})
