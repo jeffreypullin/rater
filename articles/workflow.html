@@ -105,15 +105,17 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Load the rater package.</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jeffreypullin.github.io/rater/">rater</a></span><span class="op">)</span></code></pre></div>
+<pre><code>#&gt; Warning: S3 method 'posterior_predict.rater_fit' was declared in NAMESPACE but
+#&gt; not found</code></pre>
 <pre><code>#&gt; * The rater package uses `Stan` to fit bayesian models.
 #&gt; * If you are working on a local, multicore CPU with excess RAM please call:
 #&gt; * options(mc.cores = parallel::detectCores())
 #&gt; * This will allow Stan to run inference on multiple cores in parallel.</code></pre>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Access the 'anesthesia' data set.</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"anesthesia"</span><span class="op">)</span></code></pre></div>
 <p>The data comes in the form of a <code>data.frame</code> with three columns <code>item</code>, <code>rater</code> and <code>rating</code>. In the nomenclature of the package we would describe this as <em>long</em> data. <em>Long</em> data is the standard data format for passing data to inference functions in {rater}. The <code>item</code> column is the index of each item, the <code>rater</code> column is the index of the rater and <code>rating</code> is the actual rating. For example the twentieth row of the dataset:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">anesthesia</span><span class="op">[</span><span class="fl">20</span>, <span class="op">]</span></code></pre></div>
 <pre><code>#&gt;    item rater rating
 #&gt; 20    3     4      2</code></pre>
@@ -123,11 +125,11 @@
 <h2 class="hasAnchor">
 <a href="#inference" class="anchor"></a>Inference</h2>
 <p>The core function of the {rater} package is the <code><a href="../reference/rater.html">rater()</a></code> function which fits a specified categorical rating to model to given data. This function has two arguments: <code>data</code>, data in an appropriate format and <code>model</code>, a character string or functions specifying the model you would like to fit. By default <code><a href="../reference/rater.html">rater()</a></code> will fit the model using MCMC (specifically NUTS) provided by Stan. To fit the basic Dawid-Skene model<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> to the anesthesia data we can run.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rater.html">rater</a></span><span class="op">(</span><span class="va">anesthesia</span>, <span class="st">"dawid_skene"</span>, chains <span class="op">=</span> <span class="fl">1</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <p>Note that here we have set <code>verbose = FALSE</code> to suppress the normal Stan sampling output. We have also specified that we should use only 1 chain, simply to speed up the creation of the vignette. Other fitting parameters can be passed directly to the underlying Stan functions through the <code>...</code> in <code><a href="../reference/rater.html">rater()</a></code>.</p>
 <p>We can also compute MAP estimates by specifying <code>method = "optim"</code>in <code><a href="../reference/rater.html">rater()</a></code>:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">optim_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rater.html">rater</a></span><span class="op">(</span><span class="va">anesthesia</span>, <span class="st">"dawid_skene"</span>, method <span class="op">=</span> <span class="st">"optim"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="plotting" class="section level2">
@@ -135,15 +137,15 @@
 <a href="#plotting" class="anchor"></a>Plotting</h2>
 <p>Having fit the Dawid and Skene model to the data we can now plot parameter estimates from the model.</p>
 <p>To plot the population prevalence estimates (the parameter <span class="math inline">\(\pi\)</span> in the model) we run:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">fit</span>, pars <span class="op">=</span> <span class="st">"pi"</span><span class="op">)</span></code></pre></div>
 <p><img src="workflow_files/figure-html/plot-pi-1.png" width="576"></p>
 <p>To plot the rater’s error’s matrices of the (the parameter <span class="math inline">\(\theta\)</span> in the model) we run:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">fit</span>, pars <span class="op">=</span> <span class="st">"theta"</span><span class="op">)</span></code></pre></div>
 <p><img src="workflow_files/figure-html/plot-theta-1.png" width="576"></p>
 <p>To plot the latent class estimates we run:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">fit</span>, pars <span class="op">=</span> <span class="st">"latent_class"</span><span class="op">)</span></code></pre></div>
 <p><img src="workflow_files/figure-html/plot-z-1.png" width="576"></p>
 </div>
@@ -151,14 +153,14 @@
 <h2 class="hasAnchor">
 <a href="#point-estimates" class="anchor"></a>Point estimates</h2>
 <p>In additions we can extract point estimates for all the parameters. These can be extracted using the <code>point_estimates()</code> function. Different parameters can be extracted using the <code>pars</code> argument i.e.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Extract all parameters.</span>
 <span class="va">all_parameters</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/point_estimate.html">point_estimate</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span>
 
 <span class="co"># Extract only the 'pi' parameter. </span>
 <span class="fu"><a href="../reference/point_estimate.html">point_estimate</a></span><span class="op">(</span><span class="va">fit</span>, pars <span class="op">=</span> <span class="st">"pi"</span><span class="op">)</span></code></pre></div>
 <pre><code>#&gt; $pi
-#&gt; [1] 0.37327265 0.40726020 0.14499062 0.07447654</code></pre>
+#&gt; [1] 0.37390553 0.40653479 0.14556032 0.07399936</code></pre>
 <p>Note that the interpretation of the point estimates returned will differ depending on whether the model has been fit using MCMC or optimisation.</p>
 </div>
 <div id="other-functions" class="section level2">

@@ -166,10 +166,6 @@ means are returned. If it was fit through optimisation the maximum a
 priori (MAP) estimates are returned. The z parameter returned is the
 value of class probabilities which is largest. To return the full
 posterior distributions of the latent class use <code><a href='class_probabilities.html'>class_probabilities()</a></code>.</p>
-<p>For the class conditional model the 'full' theta parameterisation (i.e.
-appearing to have the same number of parameters as the standard
-Dawid-Skene model) is calculated and returned. This is designed to allow
-easier comparison with the full Dawid-Skene model.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='class_probabilities.html'>class_probabilities()</a></code></p></div>
@@ -200,15 +196,15 @@ easier comparison with the full Dawid-Skene model.</p>
 #&gt; Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #&gt; Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
 #&gt; Chain 1: 
-#&gt; Chain 1:  Elapsed Time: 2.6286 seconds (Warm-up)
-#&gt; Chain 1:                2.89368 seconds (Sampling)
-#&gt; Chain 1:                5.52229 seconds (Total)
+#&gt; Chain 1:  Elapsed Time: 2.46533 seconds (Warm-up)
+#&gt; Chain 1:                2.74781 seconds (Sampling)
+#&gt; Chain 1:                5.21314 seconds (Total)
 #&gt; Chain 1: 
 #&gt; 
 #&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 2).
 #&gt; Chain 2: 
-#&gt; Chain 2: Gradient evaluation took 0.000187 seconds
-#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 1.87 seconds.
+#&gt; Chain 2: Gradient evaluation took 0.000167 seconds
+#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 1.67 seconds.
 #&gt; Chain 2: Adjust your expectations accordingly!
 #&gt; Chain 2: 
 #&gt; Chain 2: 
@@ -225,15 +221,15 @@ easier comparison with the full Dawid-Skene model.</p>
 #&gt; Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #&gt; Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
 #&gt; Chain 2: 
-#&gt; Chain 2:  Elapsed Time: 2.62122 seconds (Warm-up)
-#&gt; Chain 2:                2.88811 seconds (Sampling)
-#&gt; Chain 2:                5.50933 seconds (Total)
+#&gt; Chain 2:  Elapsed Time: 2.53496 seconds (Warm-up)
+#&gt; Chain 2:                2.839 seconds (Sampling)
+#&gt; Chain 2:                5.37396 seconds (Total)
 #&gt; Chain 2: 
 #&gt; 
 #&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 3).
 #&gt; Chain 3: 
-#&gt; Chain 3: Gradient evaluation took 0.000188 seconds
-#&gt; Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 1.88 seconds.
+#&gt; Chain 3: Gradient evaluation took 0.000184 seconds
+#&gt; Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 1.84 seconds.
 #&gt; Chain 3: Adjust your expectations accordingly!
 #&gt; Chain 3: 
 #&gt; Chain 3: 
@@ -250,15 +246,15 @@ easier comparison with the full Dawid-Skene model.</p>
 #&gt; Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #&gt; Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
 #&gt; Chain 3: 
-#&gt; Chain 3:  Elapsed Time: 2.72127 seconds (Warm-up)
-#&gt; Chain 3:                2.81825 seconds (Sampling)
-#&gt; Chain 3:                5.53952 seconds (Total)
+#&gt; Chain 3:  Elapsed Time: 2.64638 seconds (Warm-up)
+#&gt; Chain 3:                2.76159 seconds (Sampling)
+#&gt; Chain 3:                5.40797 seconds (Total)
 #&gt; Chain 3: 
 #&gt; 
 #&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 4).
 #&gt; Chain 4: 
-#&gt; Chain 4: Gradient evaluation took 0.000184 seconds
-#&gt; Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 1.84 seconds.
+#&gt; Chain 4: Gradient evaluation took 0.000185 seconds
+#&gt; Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 1.85 seconds.
 #&gt; Chain 4: Adjust your expectations accordingly!
 #&gt; Chain 4: 
 #&gt; Chain 4: 
@@ -275,9 +271,9 @@ easier comparison with the full Dawid-Skene model.</p>
 #&gt; Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #&gt; Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
 #&gt; Chain 4: 
-#&gt; Chain 4:  Elapsed Time: 2.68055 seconds (Warm-up)
-#&gt; Chain 4:                2.62105 seconds (Sampling)
-#&gt; Chain 4:                5.3016 seconds (Total)
+#&gt; Chain 4:  Elapsed Time: 2.59516 seconds (Warm-up)
+#&gt; Chain 4:                2.56345 seconds (Sampling)
+#&gt; Chain 4:                5.15861 seconds (Total)
 #&gt; Chain 4: </div><div class='input'>
 <span class='co'># This will return the posterior mean (except for z)</span>
 <span class='va'>post_mean_estimate</span> <span class='op'>&lt;-</span> <span class='fu'>point_estimate</span><span class='op'>(</span><span class='va'>mcmc_fit</span><span class='op'>)</span>
