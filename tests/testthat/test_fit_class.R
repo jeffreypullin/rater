@@ -60,3 +60,14 @@ test_that("get_stanfit works", {
   expect_equal(get_stanfit(ds_fit_optim), ds_fit_optim$estimates)
   expect_error(get_stanfit(2))
 })
+
+test_that("summary works", {
+
+  expect_error(summary(ds_fit), NA)
+  expect_error(summary(ds_fit_optim), NA)
+  expect_error(summary(ds_fit_grouped, NA))
+
+  expect_error(summary(ccds_fit), NA)
+  expect_error(summary(hds_fit), NA)
+
+})
