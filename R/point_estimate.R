@@ -238,8 +238,8 @@ theta_point_estimate_ccds_optim <- function(fit, which, ...) {
 }
 
 theta_point_estimate_hds <- function() {
-  stop("Rater metrics cannot be extracted from the Hierachical Dawid and
-       Skene model.", call. = FALSE)
+  stop("theta cannot be extracted from the Hierachical Dawid-Skene model.",
+       "\nConsider using `pars = c('pi', 'z')`.", call. = FALSE)
 }
 
 # Helper functions

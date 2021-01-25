@@ -48,6 +48,11 @@ posterior_samples <- function(fit, pars = c("pi", "theta")) {
     samples <- switch(par,
       "pi"    = c(samples, pi = list(rstan::extract(get_samples(fit))$pi)),
       "theta" = {
+        if (inherits(fit$model, "hier_dawid_skene")) {
+          # HACK to get consistent error message.
+          theta_point_estimate_hds()
+        }
+
         raw_theta <- rstan::extract(get_samples(fit))$theta
         if (inherits(fit$model, "class_conditional_dawid_skene")) {
           N <- dim(raw_theta)[[1]]
