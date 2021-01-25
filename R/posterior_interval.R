@@ -59,13 +59,15 @@ posterior_interval.mcmc_fit <- function(object,
 
       theta_draws_mat <- matrix(0, nrow = n_draws, ncol = J * K * K)
       col_names <- character(J * K * K)
-      combs <- expand.grid(1:J, 1:K, 1:K)
-      for (n in 1:nrow(combs)) {
-        j <- combs[n, 1]
-        k <- combs[n, 2]
-        k_prime <- combs[n, 3]
-        theta_draws_mat[, n] <- theta_draws_raw[, j, k, k_prime]
-        col_names[[n]] <- sprintf("theta[%s, %s, %s]", j, k, k_prime)
+      n <- 1
+      for (j in 1:J) {
+        for (k in 1:K) {
+          for (i in 1:K) {
+            theta_draws_mat[, n] <- theta_draws_raw[, j, k, i]
+            col_names[[n]] <- sprintf("theta[%s, %s, %s]", j, k, i)
+            n <- n + 1
+          }
+        }
       }
       colnames(theta_draws_mat) <- col_names
       intervals[[i]] <- rstantools::posterior_interval(theta_draws_mat,
