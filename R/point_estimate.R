@@ -74,7 +74,9 @@ pi_point_estimate.mcmc_fit <- function(fit, ...) {
 #' @noRd
 pi_point_estimate.optim_fit <- function(fit, ...) {
   par <- fit$estimates$par
-  out <- par[grep("pi", names(par))]
+  # ^ is an anchor for the start of the line - needed due to the log_pi in the
+  # HDS model.
+  out <- par[grep("^pi", names(par))]
   names(out) <- NULL
   out
 }
