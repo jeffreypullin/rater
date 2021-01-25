@@ -1,5 +1,9 @@
 # rater (development version)
 
+* `summary()` now works with the class conditional and hierarchical Dawid-Skene models.
+
+* All functions applied to fitted class conditional Dawid-Skene models will automatically convert the relevant parameters of the model into a full theta parameter equivalent to the Dawid-Skene model. This is designed to allow easier comparison of the class conditional model with the full Dawid-Skene model.
+
 * Plotting via `plot()` of the `rater_fit` object has been changed in several ways. `plot.rater_fit` now:
 
   - Only returns one plot 
@@ -18,6 +22,8 @@
 * Added an implementation of the `posterior_predict` generic from {rstantools} allowing simulation from the posterior predictive distribution of fitted standard, and class conditional, Dawid-Skene models. (The hierarchical Dawid-Skene model is not yet supported).
 
 * Added an implementation of the `prior_summary` generic from {rstantools} for `rater_fit` objects.
+
+* Add the `loo.rater_fit` method to allow the calculation of loo, a modern Bayesian model comparison metric, for rater models. loo values can be compared using the excellent {loo} package.
 
 * Added the `loo.rater_fit` method to allow the calculation of loo, a modern Bayesian model comparison metric, for rater models. loo values can be compared using the excellent {loo} package.
 
