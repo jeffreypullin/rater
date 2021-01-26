@@ -12,7 +12,14 @@
 #' @details MCMC diagnostics cannot be calculate for the z due to the
 #'   marginalisation used to fit the models.
 #'
-#' @seealso [rstan::Rhat()], [rstan::ess_bulk()].
+#'   These MCMC diagnostics are intended as basic sanity check of the quality
+#'   of the MCMC samples returned. Users who want more in depth diagnostics
+#'   should consider using [as_mcmc.list()] to convert the samples to a
+#'   [coda::mcmc.list()] object, or [get_stanfit()] to extract the underlying
+#'   stanfit object.
+#'
+#' @seealso [rstan::Rhat()], [rstan::ess_bulk()] [as_mcmc.list()],
+#'   [get_stanfit()].
 #'
 #' @importFrom rstan extract Rhat ess_bulk
 #'
