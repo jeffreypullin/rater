@@ -301,6 +301,39 @@ prior_summary.rater_fit <- function(object, ...) {
   get_model(object)
 }
 
+#' Get the underlying `stanfit` object from a `rater_fit` object.
+#'
+#' @param fit A `rater_fit` object.
+#'
+#' @return A `stanfit` object from rstan.
+#'
+#' @examples
+#'
+#' \donttest{
+#' fit <- rater(anesthesia, "dawid_skene", verbose = FALSE)
+#'
+#' stan_fit <- get_stanfit(fit)
+#' stan_fit
+#'
+#' }
+#'
+#' @export
+#'
+get_stanfit <- function(fit) {
+
+  if (!inherits(fit, "rater_fit")) {
+    stop("`fit` must be rater_fit object.", call. = FALSE)
+  }
+
+  if (inherits(fit, "optim_fit")) {
+    stan_fit <- fit$estimates
+  } else {
+    stan_fit <- fit$samples
+  }
+
+  stan_fit
+}
+
 is.mcmc_fit <- function(x) {
   inherits(x, "mcmc_fit")
 }
