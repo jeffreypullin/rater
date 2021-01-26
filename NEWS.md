@@ -1,5 +1,7 @@
 # rater (development version)
 
+* Added the `get_stanfit()` function to extract the underlying stanfit object from a rater fit object.
+
 * Added an implementation of the `posterior_predict` generic from {rstantools} allowing simulation from the posterior predictive distribution of fitted standard, and class conditional, Dawid-Skene models. (The hierarchical Dawid-Skene model is not yet supported).
 
 * Added an implementation of the `prior_summary` generic from {rstantools} for `rater_fit` objects.
