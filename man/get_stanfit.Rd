@@ -10,7 +10,7 @@ get_stanfit(fit)
 \item{fit}{A \code{rater_fit} object.}
 }
 \value{
-A \code{stanfit} object from \link{rstan}
+A \code{stanfit} object from rstan.
 }
 \description{
 Get the underlying \code{stanfit} object from a \code{rater_fit} object.

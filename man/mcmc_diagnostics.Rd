@@ -24,6 +24,12 @@ Retrieve MCMC convergence diagnostics for a rater fit
 \details{
 MCMC diagnostics cannot be calculate for the z due to the
 marginalisation used to fit the models.
+
+These MCMC diagnostics are intended as basic sanity check of the quality
+of the MCMC samples returned. Users who want more in depth diagnostics
+should consider using \code{\link[=as_mcmc.list]{as_mcmc.list()}} to convert the samples to a
+\code{\link[coda:mcmc.list]{coda::mcmc.list()}} object, or \code{\link[=get_stanfit]{get_stanfit()}} to extract the underlying
+stanfit object.
 }
 \examples{
 \donttest{
@@ -46,5 +52,6 @@ localization: An improved R-hat for assessing convergence of
 MCMC. \emph{arXiv preprint} \code{arXiv:1903.08008}.
 }
 \seealso{
-\code{\link[rstan:Rhat]{rstan::Rhat()}}, \code{\link[rstan:Rhat]{rstan::ess_bulk()}}.
+\code{\link[rstan:Rhat]{rstan::Rhat()}}, \code{\link[rstan:Rhat]{rstan::ess_bulk()}} \code{\link[=as_mcmc.list]{as_mcmc.list()}},
+\code{\link[=get_stanfit]{get_stanfit()}}.
 }
