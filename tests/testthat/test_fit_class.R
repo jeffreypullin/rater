@@ -60,3 +60,9 @@ test_that("as_mcmc.list works", {
 test_that("prior_summary works", {
   expect_equal(prior_summary(ds_fit), ds_fit$model)
 })
+
+test_that("get_stanfit works", {
+  expect_equal(get_stanfit(ds_fit), ds_fit$samples)
+  expect_equal(get_stanfit(ds_fit_optim), ds_fit_optim$estimates)
+  expect_error(get_stanfit(2))
+})
