@@ -139,3 +139,36 @@ test_that("parse priors are correct", {
   expect_equal(ccds_priors$beta_1, test_beta_1)
   expect_equal(ccds_priors$beta_2, test_beta_2)
 })
+
+test_that("rater provides a useful messages for probably not long data", {
+
+  expect_error(
+    suppressMessages(
+      expect_message(
+        rater(data.frame(1, 2, 3, 3), "dawid_skene"),
+        "Is your data in wide format? Consider using `data_format = wide`."
+      )
+    )
+  )
+
+  expect_error(
+    suppressMessages(
+      expect_message(
+        rater(data.frame(1, 2, 3, 31), "dawid_skene"),
+        "Is your data in grouped format? Consider using `data_format = grouped`."
+      )
+    )
+  )
+})
+
+test_that("as_stan_data handles wide data correctly", {
+
+  wide_data <- data.frame(c(3, 2, 2), c(4, 2, 2))
+  long_data <- data.frame(item = c(1, 1, 2, 2, 3, 3),
+                          rater = c(1, 2, 1, 2, 1, 2),
+                          rating = c(3, 4, 2, 2, 2, 2))
+
+  expect_equal(as_stan_data(wide_data, "wide"),
+               as_stan_data(long_data, "long"))
+
+})

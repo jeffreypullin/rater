@@ -13,7 +13,7 @@
 #'   prior parameters will be set to their default values.
 #' @param method A length 1 character vector, either `"mcmc"` or `"optim"`.
 #'   This will be fitting method used by Stan. By default `"mcmc"`
-#' @param data_format A length 1 character vector, either `"long"` or
+#' @param data_format A length 1 character vector, `"long"`, `"wide"` and
 #'   `"grouped"`. The format that the passed data is in. Defaults to `"long"`.
 #' @param inits The initialization points of the fitting algorithm
 #' @param verbose Should `rater()` produce information about the progress
@@ -56,7 +56,7 @@ rater <- function(data,
                   ...) {
 
   method <- match.arg(method, choices = c("mcmc", "optim"))
-  data_format <- match.arg(data_format, choices = c("long", "grouped"))
+  data_format <- match.arg(data_format, choices = c("long", "grouped", "wide"))
 
   model <- validate_model(model)
   data <- validate_input(data, model, data_format)
@@ -115,17 +115,7 @@ rater <- function(data,
 #'
 as_stan_data <- function(data, data_format) {
 
-  if (data_format == "long") {
-     stan_data <- list(
-       N = nrow(data),
-       I = max(data$item),
-       J = max(data$rater),
-       K = max(data$rating),
-       ii = data$item,
-       jj = data$rater,
-       y = data$rating
-      )
-  } else if (data_format == "grouped") {
+  if (data_format == "grouped") {
     tally <- data[, ncol(data)]
     key <- data[, 1:(ncol(data) - 1)]
     stan_data <- list(
@@ -135,7 +125,25 @@ as_stan_data <- function(data, data_format) {
       key = key,
       tally = tally
     )
+    return(stan_data)
   }
+
+  if (data_format == "wide") {
+    # This also does validation.
+    data <- wide_to_long(data)
+  }
+
+  # The data must be in long format here.
+
+  stan_data <- list(
+    N = nrow(data),
+    I = max(data$item),
+    J = max(data$rater),
+    K = max(data$rating),
+    ii = data$item,
+    jj = data$rater,
+    y = data$rating
+  )
 
   stan_data
 }
@@ -400,6 +408,19 @@ validate_data <- function(data, data_format) {
 
   if (data_format == "long") {
 
+    # The data probably isn't in long format.
+    if (ncol(data) > 3) {
+
+      # If there is a value greater than 30 then the data probability includes
+      # a count/tally as a 30 category rating would be silly.
+      if (max(data, na.rm = TRUE) > 30) {
+         message("Is your data in grouped format? Consider using `data_format = grouped`.")
+      } else {
+        # Probably just wide data.
+        message("Is your data in wide format? Consider using `data_format = wide`.")
+      }
+    }
+
     if (!ncol(data) == 3L) {
       stop("Long format `data` must have exactly three columns.", call. = FALSE)
     }
@@ -471,6 +492,9 @@ validate_data <- function(data, data_format) {
     }
 
   }
+
+  # Case: wide data
+  # We don't need to validate wide data because wide_to_long already validates.
 
   data
 }
