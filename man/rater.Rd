@@ -25,7 +25,7 @@ prior parameters will be set to their default values.}
 \item{method}{A length 1 character vector, either \code{"mcmc"} or \code{"optim"}.
 This will be fitting method used by Stan. By default \code{"mcmc"}}
 
-\item{data_format}{A length 1 character vector, either \code{"long"} or
+\item{data_format}{A length 1 character vector, \code{"long"}, \code{"wide"} and
 \code{"grouped"}. The format that the passed data is in. Defaults to \code{"long"}.}
 
 \item{inits}{The initialization points of the fitting algorithm}
