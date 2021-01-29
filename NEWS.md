@@ -1,5 +1,9 @@
 # rater (development version)
 
+* Added the function `wide_to_long()` to convert wide data to long data.
+
+* Add the option `data_format = "wide"` to `rater()` to allow wide data to be passed into `rater()` directly.
+
 * Added the `get_stanfit()` function to extract the underlying stanfit object from a rater fit object.
 
 * Added an implementation of the `posterior_predict` generic from {rstantools} allowing simulation from the posterior predictive distribution of fitted standard, and class conditional, Dawid-Skene models. (The hierarchical Dawid-Skene model is not yet supported).
