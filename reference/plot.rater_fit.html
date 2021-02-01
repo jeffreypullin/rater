@@ -137,7 +137,7 @@
     </div>
 
     <pre class="usage"><span class='co'># S3 method for rater_fit</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>x</span>, pars <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"pi"</span>, <span class='st'>"theta"</span>, <span class='st'>"class_probabilities"</span><span class='op'>)</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>x</span>, pars <span class='op'>=</span> <span class='st'>"theta"</span>, prob <span class='op'>=</span> <span class='fl'>0.9</span>, rater_index <span class='op'>=</span> <span class='cn'>NULL</span>, item_index <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -148,20 +148,41 @@
     </tr>
     <tr>
       <th>pars</th>
-      <td><p>A character vector of the names of the parameters to plot. By
-default: <code><a href='https://rdrr.io/r/base/c.html'>c("pi", "theta", "class_probabilities")</a></code>.</p></td>
+      <td><p>A length one character vector specifying the parameter to plot.
+By default <code>"theta"</code>.</p></td>
+    </tr>
+    <tr>
+      <th>prob</th>
+      <td><p>The coverage of the credible intervals shown in the <code>"pi"</code> plot.
+If not plotting pi this argument will be ignored. By default <code>0.9</code>.</p></td>
+    </tr>
+    <tr>
+      <th>rater_index</th>
+      <td><p>The indexes of the raters shown in the <code>"theta</code> plot.
+If not plotting theta this argument will be ignored. By default <code>NULL</code>
+which means that all raters will be plotted.</p></td>
+    </tr>
+    <tr>
+      <th>item_index</th>
+      <td><p>The indexes of the items shown in the class probabilities
+plot. If not plotting the class probabilities this argument will be
+ignored. By default <code>NULL</code> which means that all items will be plotted.
+This argument is particularly useful to focus the subset of items with
+substantial uncertiuanlty in their class assignments.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Other arguments. This should contain the which argument for
-theta plots.</p></td>
+      <td><p>Other arguments.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>If one parameter is requested a ggplot2 plot. If multiple parameters
-are requested a list of ggplot2 plots.</p>
+    <p>A ggplot2 object.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The use of <code>pars</code> to refer to only one parameter is for backwards
+compatibility and consistency with the rest of the interface.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
@@ -170,8 +191,8 @@ are requested a list of ggplot2 plots.</p>
 </div><div class='output co'>#&gt; 
 #&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 1).
 #&gt; Chain 1: 
-#&gt; Chain 1: Gradient evaluation took 0.000179 seconds
-#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 1.79 seconds.
+#&gt; Chain 1: Gradient evaluation took 0.000187 seconds
+#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 1.87 seconds.
 #&gt; Chain 1: Adjust your expectations accordingly!
 #&gt; Chain 1: 
 #&gt; Chain 1: 
@@ -188,15 +209,15 @@ are requested a list of ggplot2 plots.</p>
 #&gt; Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #&gt; Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
 #&gt; Chain 1: 
-#&gt; Chain 1:  Elapsed Time: 2.52753 seconds (Warm-up)
-#&gt; Chain 1:                2.78923 seconds (Sampling)
-#&gt; Chain 1:                5.31676 seconds (Total)
+#&gt; Chain 1:  Elapsed Time: 2.57627 seconds (Warm-up)
+#&gt; Chain 1:                2.84464 seconds (Sampling)
+#&gt; Chain 1:                5.42091 seconds (Total)
 #&gt; Chain 1: 
 #&gt; 
 #&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 2).
 #&gt; Chain 2: 
-#&gt; Chain 2: Gradient evaluation took 0.000177 seconds
-#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 1.77 seconds.
+#&gt; Chain 2: Gradient evaluation took 0.000186 seconds
+#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 1.86 seconds.
 #&gt; Chain 2: Adjust your expectations accordingly!
 #&gt; Chain 2: 
 #&gt; Chain 2: 
@@ -213,15 +234,15 @@ are requested a list of ggplot2 plots.</p>
 #&gt; Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #&gt; Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
 #&gt; Chain 2: 
-#&gt; Chain 2:  Elapsed Time: 2.54248 seconds (Warm-up)
-#&gt; Chain 2:                2.79316 seconds (Sampling)
-#&gt; Chain 2:                5.33564 seconds (Total)
+#&gt; Chain 2:  Elapsed Time: 2.60233 seconds (Warm-up)
+#&gt; Chain 2:                2.85602 seconds (Sampling)
+#&gt; Chain 2:                5.45835 seconds (Total)
 #&gt; Chain 2: 
 #&gt; 
 #&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 3).
 #&gt; Chain 3: 
-#&gt; Chain 3: Gradient evaluation took 0.000179 seconds
-#&gt; Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 1.79 seconds.
+#&gt; Chain 3: Gradient evaluation took 0.000176 seconds
+#&gt; Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 1.76 seconds.
 #&gt; Chain 3: Adjust your expectations accordingly!
 #&gt; Chain 3: 
 #&gt; Chain 3: 
@@ -238,15 +259,15 @@ are requested a list of ggplot2 plots.</p>
 #&gt; Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #&gt; Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
 #&gt; Chain 3: 
-#&gt; Chain 3:  Elapsed Time: 2.64536 seconds (Warm-up)
-#&gt; Chain 3:                2.74806 seconds (Sampling)
-#&gt; Chain 3:                5.39342 seconds (Total)
+#&gt; Chain 3:  Elapsed Time: 2.67898 seconds (Warm-up)
+#&gt; Chain 3:                2.80529 seconds (Sampling)
+#&gt; Chain 3:                5.48427 seconds (Total)
 #&gt; Chain 3: 
 #&gt; 
 #&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 4).
 #&gt; Chain 4: 
-#&gt; Chain 4: Gradient evaluation took 0.000176 seconds
-#&gt; Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 1.76 seconds.
+#&gt; Chain 4: Gradient evaluation took 0.000186 seconds
+#&gt; Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 1.86 seconds.
 #&gt; Chain 4: Adjust your expectations accordingly!
 #&gt; Chain 4: 
 #&gt; Chain 4: 
@@ -263,18 +284,16 @@ are requested a list of ggplot2 plots.</p>
 #&gt; Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #&gt; Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
 #&gt; Chain 4: 
-#&gt; Chain 4:  Elapsed Time: 2.63019 seconds (Warm-up)
-#&gt; Chain 4:                2.55821 seconds (Sampling)
-#&gt; Chain 4:                5.1884 seconds (Total)
+#&gt; Chain 4:  Elapsed Time: 2.64508 seconds (Warm-up)
+#&gt; Chain 4:                2.56094 seconds (Sampling)
+#&gt; Chain 4:                5.20602 seconds (Total)
 #&gt; Chain 4: </div><div class='input'>
-<span class='co'># Plot all the parameters.</span>
+<span class='co'># By default will just plot the theta plot</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [[1]]</div><div class='img'><img src='plot.rater_fit-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
-#&gt; [[2]]</div><div class='img'><img src='plot.rater_fit-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
-#&gt; [[3]]</div><div class='img'><img src='plot.rater_fit-3.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'>
-<span class='co'># Select which parameters to plot.</span>
+</div><div class='img'><img src='plot.rater_fit-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'># Select which parameter to plot.</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>fit</span>, pars <span class='op'>=</span> <span class='st'>"pi"</span><span class='op'>)</span>
-</div><div class='img'><img src='plot.rater_fit-4.png' alt='' width='700' height='433' /></div><div class='input'>
+</div><div class='img'><img src='plot.rater_fit-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># }</span>
 
 </div></pre>

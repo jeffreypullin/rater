@@ -135,6 +135,15 @@
 <a href="#rater-development-version" class="anchor"></a>rater (development version)<small> Unreleased </small>
 </h1>
 <ul>
+<li>
+<p>Plotting via <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> of the <code>rater_fit</code> object has been changed in several ways. <code>plot.rater_fit</code> now:</p>
+<ul>
+<li>Only returns one plot</li>
+<li>Only returns the theta plot by default</li>
+<li>Exposes the <code>prob</code>, <code>which</code> (called <code>rater_index</code>) and new <code>item_index</code> arguments in the plot generic.</li>
+</ul>
+</li>
+<li><p>Add the ability to only plot a subset of items when plotting the class probabilities. This can be controlled by the new <code>item_index</code> argument to <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code></p></li>
 <li><p>Added the function <code><a href="../reference/wide_to_long.html">wide_to_long()</a></code> to convert wide data to long data.</p></li>
 <li><p>Add the option <code>data_format = "wide"</code> to <code><a href="../reference/rater.html">rater()</a></code> to allow wide data to be passed into <code><a href="../reference/rater.html">rater()</a></code> directly.</p></li>
 <li><p>Added the <code><a href="../reference/get_stanfit.html">get_stanfit()</a></code> function to extract the underlying stanfit object from a rater fit object.</p></li>
