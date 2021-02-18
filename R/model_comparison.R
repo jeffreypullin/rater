@@ -6,6 +6,8 @@
 #' @param cores The number of cores to use when calling the underlying
 #'   functions. By default the value of the `mc.cores` option.
 #'
+#' @return A loo object.
+#'
 #' @details This function is somewhat experimental; model comparison is always
 #'   difficult and choosing between variants of the Dawid-Skene model should
 #'   be largely guided by considerations of data size and what is known about
