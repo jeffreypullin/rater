@@ -14,3 +14,12 @@
 \description{
 Print a \code{optim_fit} object
 }
+\examples{
+\donttest{
+
+optim_fit <- rater(anesthesia, "dawid_skene", method = "optim")
+print(optim_fit)
+
+}
+
+}

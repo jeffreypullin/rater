@@ -16,7 +16,6 @@
 Provide a summary of the priors specified in a \code{rater_fit} object.
 }
 \examples{
-
 \donttest{
 # Fit a model using MCMC (the default).
 fit <- rater(anesthesia, "dawid_skene", verbose = FALSE)

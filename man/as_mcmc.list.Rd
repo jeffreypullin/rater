@@ -16,7 +16,6 @@ A {coda} mcmc.list object.
 Convert a rater_fit object to a {coda} \code{mcmc.list} object.
 }
 \examples{
-
 \donttest{
 
 # Fit a model using MCMC (the default).

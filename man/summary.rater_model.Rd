@@ -14,3 +14,8 @@
 \description{
 Summarise a \code{rater_model}.
 }
+\examples{
+mod <- dawid_skene()
+summary(mod)
+
+}
