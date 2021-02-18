@@ -78,18 +78,35 @@ mcmc_diagnostics <- function(fit, pars = c("pi", "theta")) {
   if ("theta" %in% pars) {
     K <- fit$stan_data$K
     J <- fit$stan_data$J
+    draws <- rstan::extract(get_samples(fit), pars = "theta", permuted = FALSE)
+
     theta_diagnostics <- matrix(nrow = J * K * K, ncol = 2)
     row_names <- character(J * K * K)
-    draws <- rstan::extract(get_samples(fit), pars = "theta", permuted = FALSE)
-    n <- 1
-    for (j in 1:J) {
-      for (k in 1:K) {
-        for (i in 1:K) {
-          stan_name <- sprintf("theta[%s,%s,%s]", j, k, i)
-          theta_diagnostics[n, 1] <- rstan::Rhat(draws[, , stan_name])
-          theta_diagnostics[n, 2] <- rstan::ess_bulk(draws[, , stan_name])
-          row_names[[n]] <- sprintf("theta[%s, %s, %s]", j, k, i)
-          n <- n + 1
+
+    if (inherits(get_model(fit), "class_conditional_dawid_skene")) {
+      n <- 1
+      for (j in 1:J) {
+        for (k in 1:K) {
+          par_draws <- draws[, , sprintf("theta[%s,%s]", j, k)]
+          for (i in 1:K) {
+            theta_diagnostics[n, 1] <- rstan::Rhat(par_draws)
+            theta_diagnostics[n, 2] <- rstan::ess_bulk(par_draws)
+            row_names[[n]] <- sprintf("theta[%s, %s, %i]", j, k, i)
+            n <- n + 1
+          }
+        }
+      }
+    } else {
+      n <- 1
+      for (j in 1:J) {
+        for (k in 1:K) {
+          for (i in 1:K) {
+            stan_name <- sprintf("theta[%s,%s,%s]", j, k, i)
+            theta_diagnostics[n, 1] <- rstan::Rhat(draws[, , stan_name])
+            theta_diagnostics[n, 2] <- rstan::ess_bulk(draws[, , stan_name])
+            row_names[[n]] <- sprintf("theta[%s, %s, %s]", j, k, i)
+            n <- n + 1
+          }
         }
       }
     }

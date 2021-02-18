@@ -26,6 +26,11 @@ means are returned. If it was fit through optimisation the maximum a
 priori (MAP) estimates are returned. The z parameter returned is the
 value of class probabilities which is largest. To return the full
 posterior distributions of the latent class use \code{class_probabilities()}.
+
+For the class conditional model the 'full' theta parameterisation (i.e.
+appearing to have the same number of parameters as the standard
+Dawid-Skene model) is calculated and returned. This is designed to allow
+easier comparison with the full Dawid-Skene model.
 }
 \examples{
 

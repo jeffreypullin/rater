@@ -140,6 +140,11 @@ plot.rater_fit <- function(x,
 #' @param n_pars The number of pi/theta parameters and z 'items' to display.
 #' @param ... Other arguments passed to function.
 #'
+#' @details For the class conditional model the 'full' theta parameterisation
+#'   (i.e. appearing to have the same number of parameters as the standard
+#'   Dawid-Skene model) is calculated and returned. This is designed to allow
+#'   easier comparison with the full Dawid-Skene model.
+#'
 #' @method summary mcmc_fit
 #'
 #' @importFrom utils head
@@ -156,14 +161,18 @@ summary.mcmc_fit <- function(object, n_pars = 8, ...) {
   pi_mcmc_diagnostics <- mcmc_diagnostics(fit, pars = "pi")
   pi <- cbind(pi_est, pi_interval, pi_mcmc_diagnostics)
 
-  # Prepare theta.
-  theta_est <- theta_to_long_format(theta_point_estimate(fit))
-  colnames(theta_est) <- "mean"
-  theta_interval <- posterior_interval(fit, pars = "theta")
-  theta_mcmc_diagnostics <- mcmc_diagnostics(fit, pars = "theta")
-  theta <- cbind(theta_est, theta_interval, theta_mcmc_diagnostics)
+  pars <- pi
 
-  pars <- rbind(pi, theta)
+  if (!inherits(get_model(fit), "hier_dawid_skene")) {
+    # Prepare theta.
+    theta_est <- theta_to_long_format(theta_point_estimate(fit))
+    colnames(theta_est) <- "mean"
+    theta_interval <- posterior_interval(fit, pars = "theta")
+    theta_mcmc_diagnostics <- mcmc_diagnostics(fit, pars = "theta")
+    theta <- cbind(theta_est, theta_interval, theta_mcmc_diagnostics)
+
+    pars <- rbind(pi, theta)
+  }
 
   # Prepare z.
   class_probs <- class_probabilities(fit)
@@ -181,9 +190,11 @@ summary.mcmc_fit <- function(object, n_pars = 8, ...) {
 
   cat("\npi/theta samples:\n")
   print(round(utils::head(pars, n_pars), 2))
-  # pars is a matrix where each row is a parameter.
-  n_remaining <- nrow(pars) - n_pars
-  cat("# ... with", n_remaining, "more parameters\n")
+  # pars is a matrix where each row is a parametery thing.
+  if (nrow(pars) > n_pars) {
+    n_remaining <- nrow(pars) - n_pars
+    cat("# ... with", n_remaining, "more rows\n")
+  }
 
   cat("\nz:\n")
   print(round(head(z_out, n_pars), 2))
@@ -197,6 +208,11 @@ summary.mcmc_fit <- function(object, n_pars = 8, ...) {
 #' @param object An object of class `optim_fit`.
 #' @param n_pars The number of pi/theta parameters and z 'items' to display.
 #' @param ... Other arguments passed to function.
+#'
+#' @details For the class conditional model the 'full' theta parameterisation
+#'   (i.e. appearing to have the same number of parameters as the standard
+#'   Dawid-Skene model) is calculated and returned. This is designed to allow
+#'   easier comparison with the full Dawid-Skene model.
 #'
 #' @method summary optim_fit
 #'
@@ -212,11 +228,14 @@ summary.optim_fit <- function(object, n_pars = 8, ...) {
   pi <- pi_to_long_format(pi_point_estimate(fit))
   colnames(pi) <- "mean"
 
-  # Prepare theta.
-  theta <- theta_to_long_format(theta_point_estimate(fit))
-  colnames(theta) <- "mean"
+  pars <- pi
 
-  pars <- rbind(pi, theta)
+  # Prepare theta.
+  if (!inherits(get_model(fit), "hier_dawid_skene")) {
+    theta <- theta_to_long_format(theta_point_estimate(fit))
+    colnames(theta) <- "mean"
+    pars <- rbind(pi, theta)
+  }
 
   # Prepare z.
   class_probs <- class_probabilities(fit)
@@ -233,10 +252,13 @@ summary.optim_fit <- function(object, n_pars = 8, ...) {
   cat("\nFitting method: Optimisation\n")
 
   cat("\npi/theta estimates:\n")
+
   print(round(head(pars, n_pars), 2))
   # pars is a *list*
-  n_remaining <- length(pars) - n_pars
-  cat("# ... with", n_remaining, "more parameters\n")
+  if (length(pars) > n_pars) {
+    n_remaining <- length(pars) - n_pars
+    cat("# ... with", n_remaining, "more rows\n")
+  }
 
   cat("\nz:\n")
   print(round(utils::head(z_out, n_pars), 2))

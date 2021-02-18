@@ -12,4 +12,6 @@ test_that("mcmc_diagnostics works", {
 
   expect_error(mcmc_diagnostics(ds_fit_optim))
   expect_error(mcmc_diagnostics(ds_fit, pars = "z"))
+
+  expect_error(mcmc_diagnostics(ccds_fit), NA)
 })

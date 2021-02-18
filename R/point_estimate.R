@@ -11,6 +11,11 @@
 #'   value of class probabilities which is largest. To return the full
 #'   posterior distributions of the latent class use `class_probabilities()`.
 #'
+#'   For the class conditional model the 'full' theta parameterisation (i.e.
+#'   appearing to have the same number of parameters as the standard
+#'   Dawid-Skene model) is calculated and returned. This is designed to allow
+#'   easier comparison with the full Dawid-Skene model.
+#'
 #' @return A named list of the parameter estimates.
 #'
 #' @seealso `class_probabilities()`
@@ -74,7 +79,9 @@ pi_point_estimate.mcmc_fit <- function(fit, ...) {
 #' @noRd
 pi_point_estimate.optim_fit <- function(fit, ...) {
   par <- fit$estimates$par
-  out <- par[grep("pi", names(par))]
+  # ^ is an anchor for the start of the line - needed due to the log_pi in the
+  # HDS model.
+  out <- par[grep("^pi", names(par))]
   names(out) <- NULL
   out
 }
@@ -182,15 +189,13 @@ theta_point_estimate <- function(fit, which = NULL, ...) {
 #' @rdname theta_point_estimate
 #' @noRd
 theta_point_estimate.mcmc_fit <- function(fit, which = NULL, ...) {
-  switch(fit$model$file,
-    "hierarchical_dawid_skene" = theta_point_estimate_hds(),
-    "dawid_skene" = theta_point_estimate_ds_mcmc(fit, which, ...),
-    "class_conditional_dawid_skene" =
-      theta_point_estimate_ccds_mcmc(fit, which, ...),
-    stop("Model type not supported", call. = FALSE))
-}
 
-theta_point_estimate_ds_mcmc <- function(fit, which, ...) {
+  if (inherits(fit$model, "hier_dawid_skene")) {
+    theta_point_estimate_hds()
+  }
+
+  # We now 'unspool' the theta parameter for the class conditional model by
+  # default so this works for both the standard and class conditional models.
   theta_samps <- posterior_samples(fit, pars = "theta")[[1]]
 
   J <- dim(theta_samps)[[2]]
@@ -200,20 +205,6 @@ theta_point_estimate_ds_mcmc <- function(fit, which, ...) {
   validate_which(which, J)
 
   theta <- apply(theta_samps, c(2, 3, 4), mean)
-  theta[which, , ]
-}
-
-theta_point_estimate_ccds_mcmc <- function(fit, which, ...) {
-  cc_theta_samps <- posterior_samples(fit, pars = "theta")[[1]]
-
-  J <- dim(cc_theta_samps)[[2]]
-  if (is.null(which)) {
-    which <- 1:J
-  }
-  validate_which(which, J)
-
-  cc_theta <- apply(cc_theta_samps, c(2, 3), mean)
-  theta <- unspool_cc_theta(cc_theta)
   theta[which, , ]
 }
 
@@ -254,8 +245,8 @@ theta_point_estimate_ccds_optim <- function(fit, which, ...) {
 }
 
 theta_point_estimate_hds <- function() {
-  stop("Rater metrics cannot be extracted from the Hierachical Dawid and
-       Skene model.", call. = FALSE)
+  stop("theta cannot be extracted from the Hierachical Dawid-Skene model.",
+       "\nConsider using `pars = c('pi', 'z')`.", call. = FALSE)
 }
 
 # Helper functions
