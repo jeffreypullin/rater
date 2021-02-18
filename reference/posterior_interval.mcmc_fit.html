@@ -60,9 +60,15 @@
 
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -173,6 +179,10 @@ names.</p>
 MCMC. In addition, posterior intervals are not meaningful for the latent
 class (and indeed cannot be calculated). The <em>full</em> posterior distribution
 of the latent class can be extracted using <a href='class_probabilities.html'>class_probabilities</a></p>
+<p>For the class conditional model the 'full' theta parameterisation (i.e.
+appearing to have the same number of parameters as the standard
+Dawid-Skene model) is calculated and returned. This is designed to allow
+easier comparison with the full Dawid-Skene model.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
@@ -187,7 +197,7 @@ of the latent class can be extracted using <a href='class_probabilities.html'>cl
 #&gt; pi[3]          0.06965083 0.2271108
 #&gt; pi[4]          0.02540593 0.1458762
 #&gt; theta[1, 1, 1] 0.78776218 0.9249320
-#&gt; theta[2, 1, 1] 0.60611334 0.8784381</div><div class='input'>
+#&gt; theta[1, 1, 2] 0.04620674 0.1726553</div><div class='input'>
 <span class='co'># }</span>
 
 </div></pre>
@@ -214,6 +224,8 @@ of the latent class can be extracted using <a href='class_probabilities.html'>cl
 
   
 
+
+  
 
   </body>
 </html>

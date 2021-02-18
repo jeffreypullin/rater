@@ -60,9 +60,15 @@
 
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -161,6 +167,10 @@ parameter the samples are in the form returned by <code><a href='https://mc-stan
     <p>Posterior samples can only be returned for models fitting using
 MCMC not optimisation. In addition, posterior samples cannot be returned
 for the latent class due to the marginalisation technique used internally.</p>
+<p>For the class conditional model the 'full' theta parameterisation (i.e.
+appearing to have the same number of parameters as the standard
+Dawid-Skene model) is calculated and returned. This is designed to allow
+easier comparison with the full Dawid-Skene model.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
@@ -169,8 +179,8 @@ for the latent class due to the marginalisation technique used internally.</p>
 </div><div class='output co'>#&gt; 
 #&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 1).
 #&gt; Chain 1: 
-#&gt; Chain 1: Gradient evaluation took 0.000186 seconds
-#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 1.86 seconds.
+#&gt; Chain 1: Gradient evaluation took 0.000178 seconds
+#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 1.78 seconds.
 #&gt; Chain 1: Adjust your expectations accordingly!
 #&gt; Chain 1: 
 #&gt; Chain 1: 
@@ -187,15 +197,15 @@ for the latent class due to the marginalisation technique used internally.</p>
 #&gt; Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #&gt; Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
 #&gt; Chain 1: 
-#&gt; Chain 1:  Elapsed Time: 2.56855 seconds (Warm-up)
-#&gt; Chain 1:                2.7164 seconds (Sampling)
-#&gt; Chain 1:                5.28495 seconds (Total)
+#&gt; Chain 1:  Elapsed Time: 2.49949 seconds (Warm-up)
+#&gt; Chain 1:                2.62947 seconds (Sampling)
+#&gt; Chain 1:                5.12897 seconds (Total)
 #&gt; Chain 1: 
 #&gt; 
 #&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 2).
 #&gt; Chain 2: 
-#&gt; Chain 2: Gradient evaluation took 0.000174 seconds
-#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 1.74 seconds.
+#&gt; Chain 2: Gradient evaluation took 0.000168 seconds
+#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 1.68 seconds.
 #&gt; Chain 2: Adjust your expectations accordingly!
 #&gt; Chain 2: 
 #&gt; Chain 2: 
@@ -212,15 +222,15 @@ for the latent class due to the marginalisation technique used internally.</p>
 #&gt; Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #&gt; Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
 #&gt; Chain 2: 
-#&gt; Chain 2:  Elapsed Time: 2.59904 seconds (Warm-up)
-#&gt; Chain 2:                2.30631 seconds (Sampling)
-#&gt; Chain 2:                4.90535 seconds (Total)
+#&gt; Chain 2:  Elapsed Time: 2.53073 seconds (Warm-up)
+#&gt; Chain 2:                2.23889 seconds (Sampling)
+#&gt; Chain 2:                4.76962 seconds (Total)
 #&gt; Chain 2: 
 #&gt; 
 #&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 3).
 #&gt; Chain 3: 
-#&gt; Chain 3: Gradient evaluation took 0.000178 seconds
-#&gt; Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 1.78 seconds.
+#&gt; Chain 3: Gradient evaluation took 0.000168 seconds
+#&gt; Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 1.68 seconds.
 #&gt; Chain 3: Adjust your expectations accordingly!
 #&gt; Chain 3: 
 #&gt; Chain 3: 
@@ -237,15 +247,15 @@ for the latent class due to the marginalisation technique used internally.</p>
 #&gt; Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #&gt; Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
 #&gt; Chain 3: 
-#&gt; Chain 3:  Elapsed Time: 2.56738 seconds (Warm-up)
-#&gt; Chain 3:                2.7893 seconds (Sampling)
-#&gt; Chain 3:                5.35668 seconds (Total)
+#&gt; Chain 3:  Elapsed Time: 2.50187 seconds (Warm-up)
+#&gt; Chain 3:                2.68895 seconds (Sampling)
+#&gt; Chain 3:                5.19082 seconds (Total)
 #&gt; Chain 3: 
 #&gt; 
 #&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 4).
 #&gt; Chain 4: 
-#&gt; Chain 4: Gradient evaluation took 0.00018 seconds
-#&gt; Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 1.8 seconds.
+#&gt; Chain 4: Gradient evaluation took 0.000171 seconds
+#&gt; Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 1.71 seconds.
 #&gt; Chain 4: Adjust your expectations accordingly!
 #&gt; Chain 4: 
 #&gt; Chain 4: 
@@ -262,9 +272,9 @@ for the latent class due to the marginalisation technique used internally.</p>
 #&gt; Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #&gt; Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
 #&gt; Chain 4: 
-#&gt; Chain 4:  Elapsed Time: 2.47766 seconds (Warm-up)
-#&gt; Chain 4:                2.50597 seconds (Sampling)
-#&gt; Chain 4:                4.98363 seconds (Total)
+#&gt; Chain 4:  Elapsed Time: 2.40422 seconds (Warm-up)
+#&gt; Chain 4:                2.44708 seconds (Sampling)
+#&gt; Chain 4:                4.8513 seconds (Total)
 #&gt; Chain 4: </div><div class='input'>
 <span class='va'>samples</span> <span class='op'>&lt;-</span> <span class='fu'>posterior_samples</span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
 
@@ -310,6 +320,8 @@ for the latent class due to the marginalisation technique used internally.</p>
 
   
 
+
+  
 
   </body>
 </html>
