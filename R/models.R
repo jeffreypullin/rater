@@ -118,7 +118,7 @@ dawid_skene <- function(alpha = NULL, beta = NULL) {
 #' hier_dawid_skene()
 #'
 #' # Changing alpha
-#' hier_daiwd_skene(alpha = c(2, 2))
+#' hier_dawid_skene(alpha = c(2, 2))
 #'
 #' @export
 #'

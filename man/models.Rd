@@ -62,7 +62,7 @@ beta_array_m <- dawid_skene(beta = beta_array)
 hier_dawid_skene()
 
 # Changing alpha
-hier_daiwd_skene(alpha = c(2, 2))
+hier_dawid_skene(alpha = c(2, 2))
 
 # Default:
 class_conditional_dawid_skene()
