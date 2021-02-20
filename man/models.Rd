@@ -55,7 +55,7 @@ beta_array_m <- dawid_skene(beta = beta_array)
 
 # But you can also specify an array where each slice is different.
 # (Again, see details for how this is interpreted.)
-beta_array[1, , ] <- array(1, nrow = 4, ncol = 4)
+beta_array[1, , ] <- matrix(1, nrow = 4, ncol = 4)
 beta_array_m <- dawid_skene(beta = beta_array)
 
 # Default:
@@ -69,8 +69,8 @@ class_conditional_dawid_skene()
 
 # Not default:
 class_conditional_dawid_skene(
-  alpha = c(2, 2)
-  beta_1 = c(4, 4)
+  alpha = c(2, 2),
+  beta_1 = c(4, 4),
   beta_2 = c(2, 2)
 )
 
