@@ -16,6 +16,9 @@ except the basic Dawid-Skene model fit with grouped data.}
 \item{cores}{The number of cores to use when calling the underlying
 functions. By default the value of the \code{mc.cores} option.}
 }
+\value{
+A loo object.
+}
 \description{
 Compute the PSIS LOO CV - a measure of model fit - of a rater fit object.
 }

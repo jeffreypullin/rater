@@ -14,3 +14,13 @@
 \description{
 Print a \code{mcmc_fit} object
 }
+\examples{
+\donttest{
+
+# Suppress sampling output.
+mcmc_fit <- rater(anesthesia, "dawid_skene", verbose = FALSE)
+print(mcmc_fit)
+
+}
+
+}

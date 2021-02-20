@@ -16,6 +16,14 @@
 #'   labelled by their column position (1 indexed, left to right). Only numeric
 #'   ratings are currently supported.
 #'
+#' @examples
+#' wide_data <- data.frame(dater_1 = c(3, 2, 2), rater_2 = c(4, 2, 2))
+#' wide_data
+#'
+#' long_data <- wide_to_long(wide_data)
+#' long_data
+#'
+#'
 #' @export
 #'
 wide_to_long <- function(data) {

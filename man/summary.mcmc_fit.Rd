@@ -22,3 +22,13 @@ For the class conditional model the 'full' theta parameterisation
 Dawid-Skene model) is calculated and returned. This is designed to allow
 easier comparison with the full Dawid-Skene model.
 }
+\examples{
+\donttest{
+
+fit <- rater(anesthesia, "dawid_skene", verbose = FALSE)
+
+summary(fit)
+
+}
+
+}

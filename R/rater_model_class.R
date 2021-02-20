@@ -3,6 +3,10 @@
 #' @param x A `rater_model` object.
 #' @param ... Other arguments
 #'
+#' @examples
+#' mod <- dawid_skene()
+#' print(mod)
+#'
 #' @export
 #'
 print.rater_model <- function(x, ...) {
@@ -25,6 +29,10 @@ print.rater_model <- function(x, ...) {
 #'
 #' @param object A `rater_model` object.
 #' @param ... Other arguments.
+#'
+#' @examples
+#' mod <- dawid_skene()
+#' summary(mod)
 #'
 #' @method summary rater_model
 #'

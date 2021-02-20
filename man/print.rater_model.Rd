@@ -14,3 +14,8 @@
 \description{
 Print a \code{rater_model} object.
 }
+\examples{
+mod <- dawid_skene()
+print(mod)
+
+}

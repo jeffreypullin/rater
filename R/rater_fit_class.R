@@ -43,6 +43,15 @@ new_optim_fit <- function(model, estimates, stan_data, data_format) {
 #' @param x An object of class `mcmc_fit`.
 #' @param ... Other arguments.
 #'
+#' @examples
+#' \donttest{
+#'
+#' # Suppress sampling output.
+#' mcmc_fit <- rater(anesthesia, "dawid_skene", verbose = FALSE)
+#' print(mcmc_fit)
+#'
+#' }
+#'
 #' @export
 #'
 # nocov start
@@ -55,6 +64,14 @@ print.mcmc_fit <- function(x, ...) {
 #'
 #' @param x An object of class `optim_fit`.
 #' @param ... Other arguments.
+#'
+#' @examples
+#' \donttest{
+#'
+#' optim_fit <- rater(anesthesia, "dawid_skene", method = "optim")
+#' print(optim_fit)
+#'
+#' }
 #'
 #' @export
 #'
@@ -145,6 +162,15 @@ plot.rater_fit <- function(x,
 #'   Dawid-Skene model) is calculated and returned. This is designed to allow
 #'   easier comparison with the full Dawid-Skene model.
 #'
+#' @examples
+#' \donttest{
+#'
+#' fit <- rater(anesthesia, "dawid_skene", verbose = FALSE)
+#'
+#' summary(fit)
+#'
+#' }
+#'
 #' @method summary mcmc_fit
 #'
 #' @importFrom utils head
@@ -214,6 +240,15 @@ summary.mcmc_fit <- function(object, n_pars = 8, ...) {
 #'   Dawid-Skene model) is calculated and returned. This is designed to allow
 #'   easier comparison with the full Dawid-Skene model.
 #'
+#' @examples
+#' \donttest{
+#'
+#' fit <- rater(anesthesia, "dawid_skene", method = "optim")
+#'
+#' summary(fit)
+#'
+#' }
+#'
 #' @method summary optim_fit
 #'
 #' @importFrom utils head
@@ -279,7 +314,6 @@ summary.optim_fit <- function(object, n_pars = 8, ...) {
 #' @importFrom rstan As.mcmc.list
 #'
 #' @examples
-#'
 #' \donttest{
 #'
 #' # Fit a model using MCMC (the default).
@@ -313,7 +347,6 @@ as_mcmc.list <- function(fit) {
 #' @param ... Other arguments.
 #'
 #' @examples
-#'
 #' \donttest{
 #' # Fit a model using MCMC (the default).
 #' fit <- rater(anesthesia, "dawid_skene", verbose = FALSE)
