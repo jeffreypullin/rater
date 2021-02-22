@@ -135,6 +135,12 @@ plot.rater_fit <- function(x,
                   "class_probabilities", "latent_class")
 
   par <- match.arg(pars, plot_names)
+
+  if (is.hier_dawid_skene(get_model(x)) && (par %in% c("theta", "raters"))) {
+    stop("Cannot plot rater error matrices - theta - for hierarchical model.",
+         call. = FALSE)
+  }
+
   plot <- switch(par,
     "theta" = plot_theta(x, which = which),
     "raters" = plot_theta(x, which = which),

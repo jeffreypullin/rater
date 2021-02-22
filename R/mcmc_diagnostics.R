@@ -56,6 +56,11 @@ mcmc_diagnostics <- function(fit, pars = c("pi", "theta")) {
          call. = FALSE)
   }
 
+  if (is.hier_dawid_skene(get_model(fit)) && ("theta" %in% pars)) {
+     stop("theta cannot be extracted from the Hierachical Dawid-Skene model.",
+          "\nConsider using `pars = c('pi')`.", call. = FALSE)
+  }
+
   diagnostics <- matrix(nrow = 0, ncol = 2)
 
   if ("pi" %in% pars) {

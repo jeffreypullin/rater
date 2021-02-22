@@ -16,6 +16,10 @@ get_facet_dim <- function(p) {
   length(unique(ggplot2::ggplot_build(p)$data[[1]]$PANEL))
 }
 
+# Taken from greta.
+expect_ok <- function(expr) {
+  expect_error(expr, NA)
+}
 
 
 

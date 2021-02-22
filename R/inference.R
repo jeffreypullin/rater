@@ -346,7 +346,7 @@ validate_model <- function(model) {
       "dawid_skene" = dawid_skene(),
       "hier_dawid_skene" = hier_dawid_skene(),
       "class_conditional_dawid_skene" = class_conditional_dawid_skene(),
-      stop("Invalid model string specification.", .call = FALSE))
+      stop("Invalid model string specification.", call. = FALSE))
   }
 
   if (!is.rater_model(model)) {
@@ -370,7 +370,7 @@ validate_model <- function(model) {
 validate_input <- function(data, model, data_format) {
 
   if (data_format == "grouped" & !is.dawid_skene(model)) {
-    stop("Grouped data can only be used with the Dawid and Skene model",
+    stop("Grouped data can only be used with the Dawid and Skene model.",
          call. = FALSE)
   }
 
@@ -395,7 +395,7 @@ validate_data <- function(data, data_format) {
   # Note that this test for allow things like tibbles to be accepted. We
   # next use as.data.frame to standardise the input.
   if (!inherits(data, "data.frame") &&  !inherits(data, "matrix")) {
-    stop("`data` must be a data.frame or matrix.", call = FALSE)
+    stop("`data` must be a data.frame or matrix.", call. = FALSE)
   }
   data <- as.data.frame(data)
 
@@ -426,8 +426,8 @@ validate_data <- function(data, data_format) {
     }
 
     if (!(all(c("rater", "item", "rating") %in% colnames(data)))) {
-      stop("Long `data` must have three columns with names: `rater`, `item`,",
-           "and `rating`.", call. = FALSE)
+      stop("Long `data` must have three columns with names: `rater`, `item`",
+           " and `rating`.", call. = FALSE)
     }
 
     # The following are errors about 0 elements. We try to show these errors
