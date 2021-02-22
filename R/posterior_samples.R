@@ -50,8 +50,8 @@ posterior_samples <- function(fit, pars = c("pi", "theta")) {
       "pi"    = c(samples, pi = list(rstan::extract(get_samples(fit))$pi)),
       "theta" = {
         if (inherits(fit$model, "hier_dawid_skene")) {
-          # HACK to get consistent error message.
-          theta_point_estimate_hds()
+           stop("theta cannot be extracted from the Hierachical Dawid-Skene model.",
+                "\nConsider using `pars = c('pi')`.", call. = FALSE)
         }
 
         raw_theta <- rstan::extract(get_samples(fit))$theta

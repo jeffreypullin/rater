@@ -164,7 +164,7 @@ class_conditional_dawid_skene <- function(alpha = NULL,
   ks <- ks[ks > 0]
 
   if (length(unique(ks)) > 1) {
-    stop("alpha and beta are not compatible", call. = FALSE)
+    stop("Prior parameters are not compatible.", call. = FALSE)
   }
   K <- if (length(ks) > 0) unique(ks) else NULL
 
