@@ -24,6 +24,8 @@ navbar:
       menu:
       - text: rater workflow
         href: articles/workflow.html
+      - text: Data formats
+        href: articles/data-formats.html
     github:
       icon: fa-lg fa-github
       href: https://github.com/Voltemand/rater

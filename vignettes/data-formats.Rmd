@@ -1,0 +1,87 @@
+---
+title: "Data formats"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Data formats}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(rater)
+```
+
+## Data formats for rater
+
+{rater} allows the user to fit statistical models to repeated categorical rating data. There are, however, different formats this rating data can be arranged in. {rater} supports three of the most common, which we call `"long"`, `"wide"` and `"grouped"`. This vignette explains: 
+
+* What characterises each format,
+* What features of each format {rater} relies on, and, 
+* In what circumstances you may want to use each format. 
+
+## Long format
+
+The default format for data passed to the `rater()` function is `"long"`. This is the default format because it is capable of representing rating data with incomplete designs (not every rater rates each item) and with repeated ratings (raters ratings items more than once). Long data is defined by having three columns: 
+
+1. The index of the rater
+2. The index of the item 
+3. The rating given by that rater for that item
+
+in {rater}, for this data to be recognised, these columns must have names `"rater"`, `"item"` and `"rating"` respectively. An example of long data in the appropriate format for {rater} is given illustrated below: 
+
+```{r show-long-data, echo = FALSE}
+long_data <- data.frame(
+  item = c(1, 1, 2, 2, 3, 3), 
+  rater = c(1, 2, 1, 2, 1, 2), 
+  rating = c(3, 4, 2, 2, 2, 2)
+)
+knitr::kable(long_data)
+```
+
+We can read the first row, for example, of the dataset as saying that the item 1 was rated a 3 by rater 1. Repeated ratings are represented by rows with the same rater and item (and possibly rating) combination and missing data is represented simply by the absence of certain rater and item combinations. Long data is useful because it can represent *all* possible categorical rating data. The `anesthesia` data included with {rater} (which includes repeated ratings) is represented in this format.
+
+To illustrate the differences between formats, the data used in the long data example will be used also presented in the wide and grouped formats below.
+
+## Wide data
+
+The next data format which can be used in `rater()` is the wide format. In wide format data each column corresponds to the ratings of a particular rater, each row is an item and the entries of the corresponding table are the ratings themselves. For example the following table presents the previous long data example in wide format:
+
+```{r show-wide-data, echo = FALSE} 
+wide_data <- data.frame(
+  rater_1 = c(3, 2, 2), 
+  rater_2 = c(4, 2, 2)
+)
+knitr::kable(wide_data)
+```
+
+This format is natural if there are no repeated ratings, which cannot be represented in this format. Missing data can be represented by explicit `NA` entries in the data. In `rater()` this format can be used by setting `data_format = "wide"`. Internally this simply converts the data to long format; there is no computational advantage to using wide data. 
+
+Note that when wide data is passed to `rater()` any column names (i.e. `rater_1` and `rater_2` above) will be ignored and the raters will be numbered as they appear in the data left to right. In future 'labelling' of the rater may be supported in which case the columns names will be interpreted as the labels.
+
+## Grouped data 
+
+The final format of data supported by {rater} is the grouped format. This format can be thought of as an extension of the wide format where rating 'patterns' which occurs multiple times are collapsed together, while a new column is added to represent how many times each pattern occurred in the original data. For example in the running data example the pattern of both raters giving the rating 2 occurs twice, while the pattern of rater 1 giving the rating a 3 and rater 2 giving the rating 4 occurs once. This is illustrated in the grouped data representation of the example data below:
+
+```{r show-grouped-data, echo = FALSE} 
+grouped_data <- data.frame(
+  data.frame(
+    rater_1 = c(3, 2), 
+    rater_2 = c(4, 2), 
+    n = c(1, 2))
+)
+
+knitr::kable(grouped_data)
+```
+
+Here the column `n` represents the number of times each pattern occurs. `rater()` requires that a column named `n` is the right most column in grouped data and will interpret the remaining columns as for wide data. Currently grouped data passed to `rater()` cannot contain any missing values. The `caries` data included in the package is in the {rater} grouped data format.
+
+The grouped format can only represent the same data as wide format, but it is still useful. This is because using grouped data allows a different from of the likelihood of the statistical models implemented in rater to be used, which can greatly speed up model fitting. If the number of patterns in the data is much less than the number of item by rater combinations (i.e. the number of rows in the long format) then using grouped data can lead to large speed-ups. Currently this re-writing of the likelihood is only available for the Dawid-Skene model, not any of the extensions implemented in the package. 
+
+--- 
