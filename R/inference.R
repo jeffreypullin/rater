@@ -15,6 +15,7 @@
 #'   This will be fitting method used by Stan. By default `"mcmc"`
 #' @param data_format A length 1 character vector, `"long"`, `"wide"` and
 #'   `"grouped"`. The format that the passed data is in. Defaults to `"long"`.
+#'   See `vignette("data-formats)` for details.
 #' @param inits The initialization points of the fitting algorithm
 #' @param verbose Should `rater()` produce information about the progress
 #'   of the chains while using the MCMC algorithm. Defaults to `TRUE`
