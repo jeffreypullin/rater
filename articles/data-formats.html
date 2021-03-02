@@ -163,13 +163,13 @@
 </tr>
 </tbody>
 </table>
-<p>For example, we can read the first row of the dataset as saying that the item 1 was rated a 3 by rater 1. Repeated ratings are represented by row with the same rater and item (and possibly rating) combination and missing data is represented simply by the absence of certain rater and item combinations. Long data is useful because it can represent <em>all</em> possible categorical rating data. Note that the <code>anesthesia</code> data included with the package (which included repeated ratings) is represented in this format.</p>
-<p>To illustrate the differences between data formats the same data as in the long data example will be used to illustrate the wide and grouped format.</p>
+<p>We can read the first row, for example, of the dataset as saying that the item 1 was rated a 3 by rater 1. Repeated ratings are represented by rows with the same rater and item (and possibly rating) combination and missing data is represented simply by the absence of certain rater and item combinations. Long data is useful because it can represent <em>all</em> possible categorical rating data. The <code>anesthesia</code> data included with {rater} (which includes repeated ratings) is represented in this format.</p>
+<p>To illustrate the differences between formats, the data used in the long data example will be used also presented in the wide and grouped formats below.</p>
 </div>
 <div id="wide-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#wide-data" class="anchor"></a>Wide data</h2>
-<p>The next data format which can be used in <code><a href="../reference/rater.html">rater()</a></code> is the so-called wide format. In wide format data each column corresponds to the ratings of a particular rater, each row is an item and the entries of the corresponding table are the ratings themselves. For example the following table represents the previous long data example in wide format:</p>
+<p>The next data format which can be used in <code><a href="../reference/rater.html">rater()</a></code> is the wide format. In wide format data each column corresponds to the ratings of a particular rater, each row is an item and the entries of the corresponding table are the ratings themselves. For example the following table presents the previous long data example in wide format:</p>
 <table class="table">
 <thead><tr class="header">
 <th align="right">rater_1</th>
@@ -196,7 +196,7 @@
 <div id="grouped-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#grouped-data" class="anchor"></a>Grouped data</h2>
-<p>The final format of data supported by {rater} is the grouped format. This format can be thought of as an extension of the wide format where rating ‘patterns’ which occurs multiple times are collapsed together, while a new column is added to represent how many times each pattern occurred in the original data. For example in the example data the pattern of both raters giving the rating 2 occurs twice, while the pattern of rater 1 giving the rating a 3 and rater 2 giving the rating 4 occurs 1. This is illustrated in the grouped data representation of the example data below:</p>
+<p>The final format of data supported by {rater} is the grouped format. This format can be thought of as an extension of the wide format where rating ‘patterns’ which occurs multiple times are collapsed together, while a new column is added to represent how many times each pattern occurred in the original data. For example in the running data example the pattern of both raters giving the rating 2 occurs twice, while the pattern of rater 1 giving the rating a 3 and rater 2 giving the rating 4 occurs once. This is illustrated in the grouped data representation of the example data below:</p>
 <table class="table">
 <thead><tr class="header">
 <th align="right">rater_1</th>
@@ -216,8 +216,8 @@
 </tr>
 </tbody>
 </table>
-<p>Here the column <code>n</code> represents the number of times each pattern occurs. <code><a href="../reference/rater.html">rater()</a></code> requires that a column names <code>n</code> is the right most column in grouped data and will interpret the remaining columns as for wide data. Currently grouped data passed to <code><a href="../reference/rater.html">rater()</a></code> cannot contain any missing values. The <code>caries</code> data included in the package is in the {rater} grouped data format.</p>
-<p>The grouped format can only represent the same data as wide format, but it is still useful. This is because using grouped data allows a different from of the likelihood of the statistical models implemented in rater to be used, which can greatly speed up model fitting. If the number of patterns in the data is much less than the number of item * rater combinations (i.e. the number of rows in the long format) then using grouped data can lead to large speed-ups. Currently this re-writing of the likelihood is only available for the Dawid-Skene model, not any of the extensions implemented in the package.</p>
+<p>Here the column <code>n</code> represents the number of times each pattern occurs. <code><a href="../reference/rater.html">rater()</a></code> requires that a column named <code>n</code> is the right most column in grouped data and will interpret the remaining columns as for wide data. Currently grouped data passed to <code><a href="../reference/rater.html">rater()</a></code> cannot contain any missing values. The <code>caries</code> data included in the package is in the {rater} grouped data format.</p>
+<p>The grouped format can only represent the same data as wide format, but it is still useful. This is because using grouped data allows a different from of the likelihood of the statistical models implemented in rater to be used, which can greatly speed up model fitting. If the number of patterns in the data is much less than the number of item by rater combinations (i.e. the number of rows in the long format) then using grouped data can lead to large speed-ups. Currently this re-writing of the likelihood is only available for the Dawid-Skene model, not any of the extensions implemented in the package.</p>
 <hr>
 </div>
   </div>
