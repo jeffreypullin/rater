@@ -1,25 +1,18 @@
-## Resubmission 
+## rater 1.1.0
 
-This is a resubmission with changes based on CRAN's comments. In this version 
-I have: 
-
-* Added a citation to the Description. Note that the added DOI triggers a 
-possibly invalid DOI note as the paper is behind a paywall on JSTOR. 
-
-* Changed from using \dontrun to \donttest in the examples
+This is a new version of the package which corrects the check problems and adds many new improvements and features.
 
 ## Test environments
 
 * local mac OS install, R 4.0.2
-* ubuntu 16.04 (on github actions), R 4.0.2
-* mac OS 10.15.4 (on github actions) R 4.0.2
-* Microsoft Windows Server 2019 10.0.17763 (on github actions) R 4.0.2
+* ubuntu 16.04 (on github actions), R 4.0.4
+* mac OS 10.15.4 (on github actions) R 4.0.4
+* Microsoft Windows Server 2019 10.0.17763 (on github actions) R 4.0.4
 * win-builder (devel)
 
 ## R CMD check results
 
-Dawid and Skene are names and not mispelled. The DOI points to JSTOR causing 
-the note. 
+Dawid and Skene are names and not misspelled.
 
 rater uses rstan which causes the two additional notes.  
 
@@ -29,15 +22,15 @@ rater uses rstan which causes the two additional notes.
   
   New submission
   
+  Package was archived on CRAN
+  
   Possibly mis-spelled words in DESCRIPTION:
     Dawid (12:50, 12:70)
     Skene (12:56, 13:3)
   
-  Found the following (possibly) invalid DOIs:
-    DOI: 10.2307/2346806
-      From: DESCRIPTION
-      Status: Forbidden
-      Message: 403
+  CRAN repository db overrides:
+    X-CRAN-Comment: Archived on 2021-01-10 as check problems were not
+       corrected in time.
  
 * checking installed package size ... NOTE
     installed size is  5.8Mb
