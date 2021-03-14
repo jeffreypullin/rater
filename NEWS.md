@@ -1,3 +1,5 @@
+# rater (development version)
+
 # rater 1.1.0
 
 * `summary()` now works with the class conditional and hierarchical Dawid-Skene models.
