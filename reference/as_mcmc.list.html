@@ -60,6 +60,9 @@
 
 
 
+<!-- dependencies from examples -->
+
+
   
 
   
@@ -168,8 +171,8 @@
 </div><div class='output co'>#&gt; 
 #&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 1).
 #&gt; Chain 1: 
-#&gt; Chain 1: Gradient evaluation took 0.000303 seconds
-#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 3.03 seconds.
+#&gt; Chain 1: Gradient evaluation took 0.0003 seconds
+#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 3 seconds.
 #&gt; Chain 1: Adjust your expectations accordingly!
 #&gt; Chain 1: 
 #&gt; Chain 1: 
@@ -186,15 +189,15 @@
 #&gt; Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #&gt; Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
 #&gt; Chain 1: 
-#&gt; Chain 1:  Elapsed Time: 2.56325 seconds (Warm-up)
-#&gt; Chain 1:                2.8415 seconds (Sampling)
-#&gt; Chain 1:                5.40474 seconds (Total)
+#&gt; Chain 1:  Elapsed Time: 2.57054 seconds (Warm-up)
+#&gt; Chain 1:                2.85528 seconds (Sampling)
+#&gt; Chain 1:                5.42582 seconds (Total)
 #&gt; Chain 1: 
 #&gt; 
 #&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 2).
 #&gt; Chain 2: 
-#&gt; Chain 2: Gradient evaluation took 0.00018 seconds
-#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 1.8 seconds.
+#&gt; Chain 2: Gradient evaluation took 0.000206 seconds
+#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 2.06 seconds.
 #&gt; Chain 2: Adjust your expectations accordingly!
 #&gt; Chain 2: 
 #&gt; Chain 2: 
@@ -211,15 +214,15 @@
 #&gt; Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #&gt; Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
 #&gt; Chain 2: 
-#&gt; Chain 2:  Elapsed Time: 2.57296 seconds (Warm-up)
-#&gt; Chain 2:                2.74777 seconds (Sampling)
-#&gt; Chain 2:                5.32073 seconds (Total)
+#&gt; Chain 2:  Elapsed Time: 2.59315 seconds (Warm-up)
+#&gt; Chain 2:                2.76429 seconds (Sampling)
+#&gt; Chain 2:                5.35744 seconds (Total)
 #&gt; Chain 2: 
 #&gt; 
 #&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 3).
 #&gt; Chain 3: 
-#&gt; Chain 3: Gradient evaluation took 0.000183 seconds
-#&gt; Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 1.83 seconds.
+#&gt; Chain 3: Gradient evaluation took 0.000186 seconds
+#&gt; Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 1.86 seconds.
 #&gt; Chain 3: Adjust your expectations accordingly!
 #&gt; Chain 3: 
 #&gt; Chain 3: 
@@ -236,15 +239,15 @@
 #&gt; Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #&gt; Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
 #&gt; Chain 3: 
-#&gt; Chain 3:  Elapsed Time: 2.5627 seconds (Warm-up)
-#&gt; Chain 3:                2.78091 seconds (Sampling)
-#&gt; Chain 3:                5.34361 seconds (Total)
+#&gt; Chain 3:  Elapsed Time: 2.57888 seconds (Warm-up)
+#&gt; Chain 3:                2.80929 seconds (Sampling)
+#&gt; Chain 3:                5.38817 seconds (Total)
 #&gt; Chain 3: 
 #&gt; 
 #&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 4).
 #&gt; Chain 4: 
-#&gt; Chain 4: Gradient evaluation took 0.000181 seconds
-#&gt; Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 1.81 seconds.
+#&gt; Chain 4: Gradient evaluation took 0.000189 seconds
+#&gt; Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 1.89 seconds.
 #&gt; Chain 4: Adjust your expectations accordingly!
 #&gt; Chain 4: 
 #&gt; Chain 4: 
@@ -261,9 +264,9 @@
 #&gt; Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #&gt; Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
 #&gt; Chain 4: 
-#&gt; Chain 4:  Elapsed Time: 2.63728 seconds (Warm-up)
-#&gt; Chain 4:                2.79034 seconds (Sampling)
-#&gt; Chain 4:                5.42762 seconds (Total)
+#&gt; Chain 4:  Elapsed Time: 2.65807 seconds (Warm-up)
+#&gt; Chain 4:                2.81765 seconds (Sampling)
+#&gt; Chain 4:                5.47572 seconds (Total)
 #&gt; Chain 4: </div><div class='input'>
 <span class='co'># Convert it to an mcmc.list</span>
 <span class='va'>rater_mcmc_list</span> <span class='op'>&lt;-</span> <span class='fu'>as_mcmc.list</span><span class='op'>(</span><span class='va'>mcmc_fit</span><span class='op'>)</span>
@@ -282,11 +285,11 @@
 
       <footer>
       <div class="copyright">
-  <p><p>Developed by Jeffrey Pullin, Damjan Vukcevic.</p></p>
+  <p><p>Developed by Jeffrey Pullin, Damjan Vukcevic, Lars Mølgaard Saxhaug.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9000.</p></p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
