@@ -13,8 +13,8 @@ Authors@R:
              comment = c(ORCID = "0000-0001-7780-9586")),
       person(given = "Lars Mølgaard",
              family = "Saxhaug",
-             role = "aut"),
-             comment = c(ORCID = "0000-0001-5084-1578"))
+             role = "aut",
+             comment = c(ORCID = "0000-0001-5084-1578")))
 Description: Fit statistical models based on the Dawid-Skene model - Dawid
     and Skene (1979) <doi:10.2307/2346806> - to repeated categorical
     rating data.  Full Bayesian inference for these models is supported
