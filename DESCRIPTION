@@ -1,51 +1,59 @@
 Package: rater
 Title: Statistical Models of Repeated Categorical Rating Data
 Version: 1.1.0.9000
-Authors@R: c(person("Jeffrey", "Pullin",
+Authors@R: 
+    c(person(given = "Jeffrey",
+             family = "Pullin",
              role = c("aut", "cre", "cph"),
              email = "jeffrey.pullin@gmail.com",
              comment = c(ORCID = "0000-0003-3651-5471")),
-             person("Damjan", "Vukcevic",
-             role = c("aut"),
-             comment = c(ORCID = "0000-0001-7780-9586"))
-             )
-Description: Fit statistical models based on the Dawid-Skene model - Dawid and
-  Skene (1979) <doi:10.2307/2346806> - to repeated categorical rating data. 
-  Full Bayesian inference for these models is supported through the Stan 
-  modelling language. 'rater' also allows the user to extract and plot key 
-  parameters of these models.
+      person(given = "Damjan",
+             family = "Vukcevic",
+             role = "aut",
+             comment = c(ORCID = "0000-0001-7780-9586")),
+      person(given = "Lars Mølgaard",
+             family = "Saxhaug",
+             role = "aut"),
+             comment = c(ORCID = "0000-0001-5084-1578"))
+Description: Fit statistical models based on the Dawid-Skene model - Dawid
+    and Skene (1979) <doi:10.2307/2346806> - to repeated categorical
+    rating data.  Full Bayesian inference for these models is supported
+    through the Stan modelling language. 'rater' also allows the user to
+    extract and plot key parameters of these models.
 License: GPL-2
-URL: https://jeffreypullin.github.io/rater/, https://github.com/jeffreypullin/rater
+URL: https://jeffreypullin.github.io/rater/,
+    https://github.com/jeffreypullin/rater
 BugReports: https://github.com/jeffreypullin/rater/issues
-Encoding: UTF-8
-LazyData: true
-Biarch: true
 Depends:
     R (>= 3.4.0)
 Imports:
+    ggplot2 (>= 2.2.1),
+    loo (> 2.0.0),
     methods,
     Rcpp (>= 0.12.0),
-    rstan (>= 2.19.2),
-    rstantools (>= 2.0.0),
     RcppParallel (>= 5.0.1),
-    ggplot2 (>= 2.2.1),
     rlang (> 0.2.0),
-    loo (> 2.0.0)
+    rstan (>= 2.19.2),
+    rstantools (>= 2.0.0)
+Suggests:
+    coda,
+    covr,
+    knitr,
+    rmarkdown,
+    testthat
 LinkingTo:
     BH (>= 1.66.0),
     Rcpp (>= 0.12.0),
     RcppEigen (>= 0.3.3.3.0),
+    RcppParallel (>= 5.0.1),
     rstan (>= 2.18.1),
-    StanHeaders (>= 2.18.0),
-    RcppParallel (>= 5.0.1)
-RoxygenNote: 7.1.1
-Suggests:
-    coda,
-    testthat,
-    knitr,
-    rmarkdown,
-    covr
-VignetteBuilder: knitr
-SystemRequirements: GNU make
-Roxygen: list(markdown = TRUE)
+    StanHeaders (>= 2.18.0)
+VignetteBuilder: 
+    knitr
+Biarch: true
 Config/testthat/edition: 3
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+SystemRequirements: GNU make
