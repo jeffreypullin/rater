@@ -117,7 +117,7 @@ plot_theta <- function(fit, which = NULL) {
    ggplot2::scale_fill_gradient(low = "white", high = "steelblue") +
    ggplot2::labs(y = "True label",
                  x = "Assigned label") +
-   ggplot2::guides(fill = FALSE) +
+   ggplot2::guides(fill = "none") +
    ggplot2::theme_bw() +
    ggplot2::theme(strip.background = ggplot2::element_rect(fill = "white"),
                   panel.grid.major = ggplot2::element_blank(),
@@ -176,7 +176,7 @@ plot_class_probabilities <- function(fit, item_index = NULL) {
     ggplot2::labs(x = "Latent Class",
                   y = "Item") +
     ggplot2::scale_fill_gradient(low = "white", high = "steelblue") +
-    ggplot2::guides(fill = FALSE) +
+    ggplot2::guides(fill = "none") +
     ggplot2::theme_bw() +
     ggplot2::theme(panel.grid.major = ggplot2::element_blank(),
                    panel.grid.minor = ggplot2::element_blank(),
