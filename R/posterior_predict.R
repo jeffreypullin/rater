@@ -51,7 +51,7 @@ posterior_predict.rater_fit <- function(object, new_data, seed = NULL, ...) {
     stop("`new_data` must have two columns 'item' and 'rater'", call. = FALSE)
   }
 
-  if (max(new_data$rater) != fit$stan_data$J) {
+  if (!all(new_data$rater %in% 1:fit$stan_data$J)) {
     stop("The number of raters in the fitted and new data must match",
          call. = FALSE)
   }

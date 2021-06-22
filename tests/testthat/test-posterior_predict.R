@@ -41,3 +41,8 @@ test_that("posterior_predict validates new_data correctly", {
     "The number of raters in the fitted and new data must match"
   )
 })
+
+test_that("posterior_predict works for single rater new data", {
+  expect_ok(posterior_predict(ds_fit, data.frame(item = 1:2, rater = 1)))
+  expect_ok(posterior_predict(ds_fit, data.frame(item = 1:2, rater = 5)))
+})
