@@ -146,24 +146,28 @@
 <p>To plot the rater’s error’s matrices of the (the parameter <span class="math inline">\(\theta\)</span> in the model) we run:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">fit</span>, pars <span class="op">=</span> <span class="st">"theta"</span><span class="op">)</span></code></pre></div>
+<pre><code>#&gt; Warning: `guides(&lt;scale&gt; = FALSE)` is deprecated. Please use `guides(&lt;scale&gt; =
+#&gt; "none")` instead.</code></pre>
 <p><img src="workflow_files/figure-html/plot-theta-1.png" width="576"></p>
 <p>To plot the latent class estimates we run:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">fit</span>, pars <span class="op">=</span> <span class="st">"latent_class"</span><span class="op">)</span></code></pre></div>
+<pre><code>#&gt; Warning: `guides(&lt;scale&gt; = FALSE)` is deprecated. Please use `guides(&lt;scale&gt; =
+#&gt; "none")` instead.</code></pre>
 <p><img src="workflow_files/figure-html/plot-z-1.png" width="576"></p>
 </div>
 <div id="point-estimates" class="section level2">
 <h2 class="hasAnchor">
 <a href="#point-estimates" class="anchor" aria-hidden="true"></a>Point estimates</h2>
 <p>In additions we can extract point estimates for all the parameters. These can be extracted using the <code>point_estimates()</code> function. Different parameters can be extracted using the <code>pars</code> argument i.e.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Extract all parameters.</span>
 <span class="va">all_parameters</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/point_estimate.html">point_estimate</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span>
 
 <span class="co"># Extract only the 'pi' parameter. </span>
 <span class="fu"><a href="../reference/point_estimate.html">point_estimate</a></span><span class="op">(</span><span class="va">fit</span>, pars <span class="op">=</span> <span class="st">"pi"</span><span class="op">)</span></code></pre></div>
 <pre><code>#&gt; $pi
-#&gt; [1] 0.37380562 0.40579903 0.14512990 0.07526545</code></pre>
+#&gt; [1] 0.37614196 0.40566509 0.14303930 0.07515365</code></pre>
 <p>Note that the interpretation of the point estimates returned will differ depending on whether the model has been fit using MCMC or optimisation.</p>
 </div>
 <div id="other-functions" class="section level2">
