@@ -60,9 +60,6 @@
 
 
 
-<!-- dependencies from examples -->
-
-
   
 
   
@@ -93,7 +90,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
+    <span class="fa fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -122,7 +119,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/Voltemand/rater">
-    <span class="fas fa-lg fa-github"></span>
+    <span class="fa fa-lg fa-github"></span>
      
   </a>
 </li>
@@ -148,8 +145,8 @@
     <p>Print a <code>optim_fit</code> object</p>
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for optim_fit</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='co'># S3 method for optim_fit</span>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -166,14 +163,15 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-
-<span class='va'>optim_fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='rater.html'>rater</a></span><span class='op'>(</span><span class='va'>anesthesia</span>, <span class='st'>"dawid_skene"</span>, method <span class='op'>=</span> <span class='st'>"optim"</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>optim_fit</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Bayesian Dawid and Skene Model with MAP estimates.</div><div class='input'>
-<span class='co'># }</span>
-
-</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='co'># \donttest{</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>optim_fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='rater.html'>rater</a></span><span class='op'>(</span><span class='va'>anesthesia</span>, <span class='st'>"dawid_skene"</span>, method <span class='op'>=</span> <span class='st'>"optim"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>optim_fit</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Bayesian Dawid and Skene Model with MAP estimates.</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># }</span></span>
+<span class='r-in'></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

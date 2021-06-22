@@ -60,9 +60,6 @@
 
 
 
-<!-- dependencies from examples -->
-
-
   
 
   
@@ -93,7 +90,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
+    <span class="fa fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -122,7 +119,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/Voltemand/rater">
-    <span class="fas fa-lg fa-github"></span>
+    <span class="fa fa-lg fa-github"></span>
      
   </a>
 </li>
@@ -148,7 +145,7 @@
     <p>Convert a rater_fit object to a coda <code>mcmc.list</code> object.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>as_mcmc.list</span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span></pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>as_mcmc.list</span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -164,116 +161,117 @@
     <p>A coda mcmc.list object.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-
-<span class='co'># Fit a model using MCMC (the default).</span>
-<span class='va'>mcmc_fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='rater.html'>rater</a></span><span class='op'>(</span><span class='va'>anesthesia</span>, <span class='st'>"dawid_skene"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; 
-#&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 1).
-#&gt; Chain 1: 
-#&gt; Chain 1: Gradient evaluation took 0.0003 seconds
-#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 3 seconds.
-#&gt; Chain 1: Adjust your expectations accordingly!
-#&gt; Chain 1: 
-#&gt; Chain 1: 
-#&gt; Chain 1: Iteration:    1 / 2000 [  0%]  (Warmup)
-#&gt; Chain 1: Iteration:  200 / 2000 [ 10%]  (Warmup)
-#&gt; Chain 1: Iteration:  400 / 2000 [ 20%]  (Warmup)
-#&gt; Chain 1: Iteration:  600 / 2000 [ 30%]  (Warmup)
-#&gt; Chain 1: Iteration:  800 / 2000 [ 40%]  (Warmup)
-#&gt; Chain 1: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-#&gt; Chain 1: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-#&gt; Chain 1: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-#&gt; Chain 1: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-#&gt; Chain 1: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-#&gt; Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-#&gt; Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
-#&gt; Chain 1: 
-#&gt; Chain 1:  Elapsed Time: 2.44733 seconds (Warm-up)
-#&gt; Chain 1:                2.71544 seconds (Sampling)
-#&gt; Chain 1:                5.16277 seconds (Total)
-#&gt; Chain 1: 
-#&gt; 
-#&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 2).
-#&gt; Chain 2: 
-#&gt; Chain 2: Gradient evaluation took 0.000199 seconds
-#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 1.99 seconds.
-#&gt; Chain 2: Adjust your expectations accordingly!
-#&gt; Chain 2: 
-#&gt; Chain 2: 
-#&gt; Chain 2: Iteration:    1 / 2000 [  0%]  (Warmup)
-#&gt; Chain 2: Iteration:  200 / 2000 [ 10%]  (Warmup)
-#&gt; Chain 2: Iteration:  400 / 2000 [ 20%]  (Warmup)
-#&gt; Chain 2: Iteration:  600 / 2000 [ 30%]  (Warmup)
-#&gt; Chain 2: Iteration:  800 / 2000 [ 40%]  (Warmup)
-#&gt; Chain 2: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-#&gt; Chain 2: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-#&gt; Chain 2: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-#&gt; Chain 2: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-#&gt; Chain 2: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-#&gt; Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-#&gt; Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
-#&gt; Chain 2: 
-#&gt; Chain 2:  Elapsed Time: 2.45538 seconds (Warm-up)
-#&gt; Chain 2:                2.62843 seconds (Sampling)
-#&gt; Chain 2:                5.08381 seconds (Total)
-#&gt; Chain 2: 
-#&gt; 
-#&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 3).
-#&gt; Chain 3: 
-#&gt; Chain 3: Gradient evaluation took 0.000171 seconds
-#&gt; Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 1.71 seconds.
-#&gt; Chain 3: Adjust your expectations accordingly!
-#&gt; Chain 3: 
-#&gt; Chain 3: 
-#&gt; Chain 3: Iteration:    1 / 2000 [  0%]  (Warmup)
-#&gt; Chain 3: Iteration:  200 / 2000 [ 10%]  (Warmup)
-#&gt; Chain 3: Iteration:  400 / 2000 [ 20%]  (Warmup)
-#&gt; Chain 3: Iteration:  600 / 2000 [ 30%]  (Warmup)
-#&gt; Chain 3: Iteration:  800 / 2000 [ 40%]  (Warmup)
-#&gt; Chain 3: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-#&gt; Chain 3: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-#&gt; Chain 3: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-#&gt; Chain 3: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-#&gt; Chain 3: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-#&gt; Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-#&gt; Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
-#&gt; Chain 3: 
-#&gt; Chain 3:  Elapsed Time: 2.46391 seconds (Warm-up)
-#&gt; Chain 3:                2.67448 seconds (Sampling)
-#&gt; Chain 3:                5.13839 seconds (Total)
-#&gt; Chain 3: 
-#&gt; 
-#&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 4).
-#&gt; Chain 4: 
-#&gt; Chain 4: Gradient evaluation took 0.000176 seconds
-#&gt; Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 1.76 seconds.
-#&gt; Chain 4: Adjust your expectations accordingly!
-#&gt; Chain 4: 
-#&gt; Chain 4: 
-#&gt; Chain 4: Iteration:    1 / 2000 [  0%]  (Warmup)
-#&gt; Chain 4: Iteration:  200 / 2000 [ 10%]  (Warmup)
-#&gt; Chain 4: Iteration:  400 / 2000 [ 20%]  (Warmup)
-#&gt; Chain 4: Iteration:  600 / 2000 [ 30%]  (Warmup)
-#&gt; Chain 4: Iteration:  800 / 2000 [ 40%]  (Warmup)
-#&gt; Chain 4: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-#&gt; Chain 4: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-#&gt; Chain 4: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-#&gt; Chain 4: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-#&gt; Chain 4: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-#&gt; Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-#&gt; Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
-#&gt; Chain 4: 
-#&gt; Chain 4:  Elapsed Time: 2.52074 seconds (Warm-up)
-#&gt; Chain 4:                2.67321 seconds (Sampling)
-#&gt; Chain 4:                5.19395 seconds (Total)
-#&gt; Chain 4: </div><div class='input'>
-<span class='co'># Convert it to an mcmc.list</span>
-<span class='va'>rater_mcmc_list</span> <span class='op'>&lt;-</span> <span class='fu'>as_mcmc.list</span><span class='op'>(</span><span class='va'>mcmc_fit</span><span class='op'>)</span>
-
-<span class='co'># }</span>
-
-</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='co'># \donttest{</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Fit a model using MCMC (the default).</span></span>
+<span class='r-in'><span class='va'>mcmc_fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='rater.html'>rater</a></span><span class='op'>(</span><span class='va'>anesthesia</span>, <span class='st'>"dawid_skene"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 1).</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: Gradient evaluation took 0.000282 seconds</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 2.82 seconds.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: Adjust your expectations accordingly!</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: Iteration:    1 / 2000 [  0%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: Iteration:  200 / 2000 [ 10%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: Iteration:  400 / 2000 [ 20%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: Iteration:  600 / 2000 [ 30%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: Iteration:  800 / 2000 [ 40%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: Iteration: 1000 / 2000 [ 50%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: Iteration: 1001 / 2000 [ 50%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: Iteration: 1200 / 2000 [ 60%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: Iteration: 1400 / 2000 [ 70%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: Iteration: 1600 / 2000 [ 80%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1:  Elapsed Time: 2.22262 seconds (Warm-up)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1:                2.46889 seconds (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1:                4.69151 seconds (Total)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 2).</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: Gradient evaluation took 0.000153 seconds</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 1.53 seconds.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: Adjust your expectations accordingly!</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: Iteration:    1 / 2000 [  0%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: Iteration:  200 / 2000 [ 10%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: Iteration:  400 / 2000 [ 20%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: Iteration:  600 / 2000 [ 30%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: Iteration:  800 / 2000 [ 40%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: Iteration: 1000 / 2000 [ 50%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: Iteration: 1001 / 2000 [ 50%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: Iteration: 1200 / 2000 [ 60%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: Iteration: 1400 / 2000 [ 70%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: Iteration: 1600 / 2000 [ 80%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2:  Elapsed Time: 2.23785 seconds (Warm-up)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2:                2.3867 seconds (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2:                4.62456 seconds (Total)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 3).</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: Gradient evaluation took 0.000162 seconds</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 1.62 seconds.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: Adjust your expectations accordingly!</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: Iteration:    1 / 2000 [  0%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: Iteration:  200 / 2000 [ 10%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: Iteration:  400 / 2000 [ 20%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: Iteration:  600 / 2000 [ 30%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: Iteration:  800 / 2000 [ 40%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: Iteration: 1000 / 2000 [ 50%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: Iteration: 1001 / 2000 [ 50%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: Iteration: 1200 / 2000 [ 60%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: Iteration: 1400 / 2000 [ 70%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: Iteration: 1600 / 2000 [ 80%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3:  Elapsed Time: 2.22409 seconds (Warm-up)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3:                2.42457 seconds (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3:                4.64867 seconds (Total)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 4).</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: Gradient evaluation took 0.000153 seconds</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 1.53 seconds.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: Adjust your expectations accordingly!</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: Iteration:    1 / 2000 [  0%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: Iteration:  200 / 2000 [ 10%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: Iteration:  400 / 2000 [ 20%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: Iteration:  600 / 2000 [ 30%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: Iteration:  800 / 2000 [ 40%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: Iteration: 1000 / 2000 [ 50%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: Iteration: 1001 / 2000 [ 50%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: Iteration: 1200 / 2000 [ 60%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: Iteration: 1400 / 2000 [ 70%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: Iteration: 1600 / 2000 [ 80%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4:  Elapsed Time: 2.29479 seconds (Warm-up)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4:                2.43279 seconds (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4:                4.72757 seconds (Total)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Convert it to an mcmc.list</span></span>
+<span class='r-in'><span class='va'>rater_mcmc_list</span> <span class='op'>&lt;-</span> <span class='fu'>as_mcmc.list</span><span class='op'>(</span><span class='va'>mcmc_fit</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># }</span></span>
+<span class='r-in'></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

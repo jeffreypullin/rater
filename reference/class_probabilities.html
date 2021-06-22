@@ -60,9 +60,6 @@
 
 
 
-<!-- dependencies from examples -->
-
-
   
 
   
@@ -93,7 +90,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
+    <span class="fa fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -122,7 +119,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/Voltemand/rater">
-    <span class="fas fa-lg fa-github"></span>
+    <span class="fa fa-lg fa-github"></span>
      
   </a>
 </li>
@@ -148,13 +145,13 @@
     <p>Extract latent class probabilities from a rater fit object</p>
     </div>
 
-    <pre class="usage"><span class='fu'>class_probabilities</span><span class='op'>(</span><span class='va'>fit</span>, <span class='va'>...</span><span class='op'>)</span>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>class_probabilities</span><span class='op'>(</span><span class='va'>fit</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for mcmc_fit</span>
 <span class='fu'>class_probabilities</span><span class='op'>(</span><span class='va'>fit</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for optim_fit</span>
-<span class='fu'>class_probabilities</span><span class='op'>(</span><span class='va'>fit</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+<span class='fu'>class_probabilities</span><span class='op'>(</span><span class='va'>fit</span>, <span class='va'>...</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -182,159 +179,161 @@ and the data. Averaging these conditional probabilities gives the
 (unconditional) latent class probabilities retuned by this function.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-
-<span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='rater.html'>rater</a></span><span class='op'>(</span><span class='va'>anesthesia</span>, <span class='st'>"dawid_skene"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; 
-#&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 1).
-#&gt; Chain 1: 
-#&gt; Chain 1: Gradient evaluation took 0.000179 seconds
-#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 1.79 seconds.
-#&gt; Chain 1: Adjust your expectations accordingly!
-#&gt; Chain 1: 
-#&gt; Chain 1: 
-#&gt; Chain 1: Iteration:    1 / 2000 [  0%]  (Warmup)
-#&gt; Chain 1: Iteration:  200 / 2000 [ 10%]  (Warmup)
-#&gt; Chain 1: Iteration:  400 / 2000 [ 20%]  (Warmup)
-#&gt; Chain 1: Iteration:  600 / 2000 [ 30%]  (Warmup)
-#&gt; Chain 1: Iteration:  800 / 2000 [ 40%]  (Warmup)
-#&gt; Chain 1: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-#&gt; Chain 1: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-#&gt; Chain 1: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-#&gt; Chain 1: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-#&gt; Chain 1: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-#&gt; Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-#&gt; Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
-#&gt; Chain 1: 
-#&gt; Chain 1:  Elapsed Time: 2.55605 seconds (Warm-up)
-#&gt; Chain 1:                2.65142 seconds (Sampling)
-#&gt; Chain 1:                5.20747 seconds (Total)
-#&gt; Chain 1: 
-#&gt; 
-#&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 2).
-#&gt; Chain 2: 
-#&gt; Chain 2: Gradient evaluation took 0.000169 seconds
-#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 1.69 seconds.
-#&gt; Chain 2: Adjust your expectations accordingly!
-#&gt; Chain 2: 
-#&gt; Chain 2: 
-#&gt; Chain 2: Iteration:    1 / 2000 [  0%]  (Warmup)
-#&gt; Chain 2: Iteration:  200 / 2000 [ 10%]  (Warmup)
-#&gt; Chain 2: Iteration:  400 / 2000 [ 20%]  (Warmup)
-#&gt; Chain 2: Iteration:  600 / 2000 [ 30%]  (Warmup)
-#&gt; Chain 2: Iteration:  800 / 2000 [ 40%]  (Warmup)
-#&gt; Chain 2: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-#&gt; Chain 2: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-#&gt; Chain 2: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-#&gt; Chain 2: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-#&gt; Chain 2: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-#&gt; Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-#&gt; Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
-#&gt; Chain 2: 
-#&gt; Chain 2:  Elapsed Time: 2.39351 seconds (Warm-up)
-#&gt; Chain 2:                2.59689 seconds (Sampling)
-#&gt; Chain 2:                4.9904 seconds (Total)
-#&gt; Chain 2: 
-#&gt; 
-#&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 3).
-#&gt; Chain 3: 
-#&gt; Chain 3: Gradient evaluation took 0.000177 seconds
-#&gt; Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 1.77 seconds.
-#&gt; Chain 3: Adjust your expectations accordingly!
-#&gt; Chain 3: 
-#&gt; Chain 3: 
-#&gt; Chain 3: Iteration:    1 / 2000 [  0%]  (Warmup)
-#&gt; Chain 3: Iteration:  200 / 2000 [ 10%]  (Warmup)
-#&gt; Chain 3: Iteration:  400 / 2000 [ 20%]  (Warmup)
-#&gt; Chain 3: Iteration:  600 / 2000 [ 30%]  (Warmup)
-#&gt; Chain 3: Iteration:  800 / 2000 [ 40%]  (Warmup)
-#&gt; Chain 3: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-#&gt; Chain 3: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-#&gt; Chain 3: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-#&gt; Chain 3: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-#&gt; Chain 3: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-#&gt; Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-#&gt; Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
-#&gt; Chain 3: 
-#&gt; Chain 3:  Elapsed Time: 2.52385 seconds (Warm-up)
-#&gt; Chain 3:                2.71599 seconds (Sampling)
-#&gt; Chain 3:                5.23984 seconds (Total)
-#&gt; Chain 3: 
-#&gt; 
-#&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 4).
-#&gt; Chain 4: 
-#&gt; Chain 4: Gradient evaluation took 0.000168 seconds
-#&gt; Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 1.68 seconds.
-#&gt; Chain 4: Adjust your expectations accordingly!
-#&gt; Chain 4: 
-#&gt; Chain 4: 
-#&gt; Chain 4: Iteration:    1 / 2000 [  0%]  (Warmup)
-#&gt; Chain 4: Iteration:  200 / 2000 [ 10%]  (Warmup)
-#&gt; Chain 4: Iteration:  400 / 2000 [ 20%]  (Warmup)
-#&gt; Chain 4: Iteration:  600 / 2000 [ 30%]  (Warmup)
-#&gt; Chain 4: Iteration:  800 / 2000 [ 40%]  (Warmup)
-#&gt; Chain 4: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-#&gt; Chain 4: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-#&gt; Chain 4: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-#&gt; Chain 4: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-#&gt; Chain 4: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-#&gt; Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-#&gt; Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
-#&gt; Chain 4: 
-#&gt; Chain 4:  Elapsed Time: 2.46353 seconds (Warm-up)
-#&gt; Chain 4:                2.52277 seconds (Sampling)
-#&gt; Chain 4:                4.9863 seconds (Total)
-#&gt; Chain 4: </div><div class='input'><span class='fu'>class_probabilities</span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;        
-#&gt;                 [,1]         [,2]         [,3]         [,4]
-#&gt;    [1,] 9.999994e-01 1.513086e-07 2.250443e-08 4.589398e-07
-#&gt;    [2,] 1.324118e-07 2.401225e-05 9.724620e-01 2.751383e-02
-#&gt;    [3,] 3.967390e-01 6.026154e-01 8.568844e-05 5.598518e-04
-#&gt;    [4,] 5.974179e-03 9.933459e-01 5.013417e-04 1.785872e-04
-#&gt;    [5,] 2.576392e-07 9.999624e-01 3.446117e-05 2.902222e-06
-#&gt;    [6,] 1.759037e-06 9.993465e-01 6.178621e-04 3.384616e-05
-#&gt;    [7,] 9.994626e-01 5.285483e-04 6.536575e-07 8.215098e-06
-#&gt;    [8,] 8.978779e-09 3.105648e-05 9.994133e-01 5.555960e-04
-#&gt;    [9,] 1.900186e-06 9.999387e-01 5.230578e-05 7.109979e-06
-#&gt;   [10,] 3.514526e-06 9.975213e-01 2.435034e-03 4.011286e-05
-#&gt;   [11,] 1.553142e-08 1.482233e-08 1.141234e-04 9.998858e-01
-#&gt;   [12,] 3.519863e-05 8.748544e-01 1.158655e-01 9.244921e-03
-#&gt;   [13,] 9.999994e-01 1.513086e-07 2.250443e-08 4.589398e-07
-#&gt;   [14,] 3.321280e-05 9.994100e-01 5.172009e-04 3.954810e-05
-#&gt;   [15,] 9.999864e-01 1.210200e-05 1.140775e-07 1.404057e-06
-#&gt;   [16,] 9.999914e-01 6.093148e-06 1.339187e-07 2.397569e-06
-#&gt;   [17,] 9.999994e-01 1.513086e-07 2.250443e-08 4.589398e-07
-#&gt;   [18,] 9.999994e-01 1.513086e-07 2.250443e-08 4.589398e-07
-#&gt;   [19,] 4.807450e-05 9.999413e-01 4.526289e-06 6.094116e-06
-#&gt;   [20,] 2.255543e-04 9.992316e-01 4.139703e-04 1.288558e-04
-#&gt;   [21,] 5.794304e-07 9.999967e-01 1.636413e-06 1.099114e-06
-#&gt;   [22,] 4.807450e-05 9.999413e-01 4.526289e-06 6.094116e-06
-#&gt;   [23,] 2.576392e-07 9.999624e-01 3.446117e-05 2.902222e-06
-#&gt;   [24,] 8.160831e-05 9.999055e-01 6.249930e-06 6.685116e-06
-#&gt;   [25,] 9.999994e-01 1.513086e-07 2.250443e-08 4.589398e-07
-#&gt;   [26,] 9.999994e-01 1.513086e-07 2.250443e-08 4.589398e-07
-#&gt;   [27,] 9.432000e-07 9.999001e-01 9.235778e-05 6.618282e-06
-#&gt;   [28,] 9.999994e-01 1.513086e-07 2.250443e-08 4.589398e-07
-#&gt;   [29,] 9.999994e-01 1.513086e-07 2.250443e-08 4.589398e-07
-#&gt;   [30,] 9.979335e-01 2.042208e-03 1.511844e-06 2.275775e-05
-#&gt;   [31,] 9.999994e-01 1.513086e-07 2.250443e-08 4.589398e-07
-#&gt;   [32,] 1.409713e-08 1.118664e-03 9.987543e-01 1.269730e-04
-#&gt;   [33,] 9.999994e-01 1.513086e-07 2.250443e-08 4.589398e-07
-#&gt;   [34,] 5.794304e-07 9.999967e-01 1.636413e-06 1.099114e-06
-#&gt;   [35,] 7.413719e-07 9.975069e-01 2.469749e-03 2.259642e-05
-#&gt;   [36,] 2.892119e-07 9.857067e-05 7.778991e-01 2.220021e-01
-#&gt;   [37,] 1.945542e-04 9.994015e-01 3.652721e-04 3.866016e-05
-#&gt;   [38,] 1.942063e-06 7.093638e-01 2.901984e-01 4.358631e-04
-#&gt;   [39,] 8.806004e-08 7.609073e-04 9.973798e-01 1.859190e-03
-#&gt;   [40,] 9.999994e-01 1.513086e-07 2.250443e-08 4.589398e-07
-#&gt;   [41,] 9.999994e-01 1.513086e-07 2.250443e-08 4.589398e-07
-#&gt;   [42,] 9.994626e-01 5.285483e-04 6.536575e-07 8.215098e-06
-#&gt;   [43,] 9.432000e-07 9.999001e-01 9.235778e-05 6.618282e-06
-#&gt;   [44,] 9.999864e-01 1.210200e-05 1.140775e-07 1.404057e-06
-#&gt;   [45,] 5.794304e-07 9.999967e-01 1.636413e-06 1.099114e-06</div><div class='input'>
-<span class='co'># }</span>
-
-</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='co'># \donttest{</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='rater.html'>rater</a></span><span class='op'>(</span><span class='va'>anesthesia</span>, <span class='st'>"dawid_skene"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 1).</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: Gradient evaluation took 0.000246 seconds</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 2.46 seconds.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: Adjust your expectations accordingly!</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: Iteration:    1 / 2000 [  0%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: Iteration:  200 / 2000 [ 10%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: Iteration:  400 / 2000 [ 20%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: Iteration:  600 / 2000 [ 30%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: Iteration:  800 / 2000 [ 40%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: Iteration: 1000 / 2000 [ 50%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: Iteration: 1001 / 2000 [ 50%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: Iteration: 1200 / 2000 [ 60%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: Iteration: 1400 / 2000 [ 70%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: Iteration: 1600 / 2000 [ 80%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1:  Elapsed Time: 2.31527 seconds (Warm-up)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1:                2.41893 seconds (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1:                4.73421 seconds (Total)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 2).</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: Gradient evaluation took 0.000154 seconds</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 1.54 seconds.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: Adjust your expectations accordingly!</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: Iteration:    1 / 2000 [  0%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: Iteration:  200 / 2000 [ 10%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: Iteration:  400 / 2000 [ 20%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: Iteration:  600 / 2000 [ 30%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: Iteration:  800 / 2000 [ 40%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: Iteration: 1000 / 2000 [ 50%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: Iteration: 1001 / 2000 [ 50%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: Iteration: 1200 / 2000 [ 60%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: Iteration: 1400 / 2000 [ 70%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: Iteration: 1600 / 2000 [ 80%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2:  Elapsed Time: 2.1836 seconds (Warm-up)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2:                2.35965 seconds (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2:                4.54325 seconds (Total)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 3).</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: Gradient evaluation took 0.00016 seconds</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 1.6 seconds.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: Adjust your expectations accordingly!</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: Iteration:    1 / 2000 [  0%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: Iteration:  200 / 2000 [ 10%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: Iteration:  400 / 2000 [ 20%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: Iteration:  600 / 2000 [ 30%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: Iteration:  800 / 2000 [ 40%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: Iteration: 1000 / 2000 [ 50%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: Iteration: 1001 / 2000 [ 50%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: Iteration: 1200 / 2000 [ 60%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: Iteration: 1400 / 2000 [ 70%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: Iteration: 1600 / 2000 [ 80%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3:  Elapsed Time: 2.27095 seconds (Warm-up)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3:                2.46682 seconds (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3:                4.73777 seconds (Total)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 4).</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: Gradient evaluation took 0.000146 seconds</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 1.46 seconds.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: Adjust your expectations accordingly!</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: Iteration:    1 / 2000 [  0%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: Iteration:  200 / 2000 [ 10%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: Iteration:  400 / 2000 [ 20%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: Iteration:  600 / 2000 [ 30%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: Iteration:  800 / 2000 [ 40%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: Iteration: 1000 / 2000 [ 50%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: Iteration: 1001 / 2000 [ 50%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: Iteration: 1200 / 2000 [ 60%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: Iteration: 1400 / 2000 [ 70%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: Iteration: 1600 / 2000 [ 80%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4:  Elapsed Time: 2.22214 seconds (Warm-up)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4:                2.28212 seconds (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4:                4.50426 seconds (Total)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: </span>
+<span class='r-in'><span class='fu'>class_probabilities</span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>        </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                 [,1]         [,2]         [,3]         [,4]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    [1,] 9.999994e-01 1.513086e-07 2.250443e-08 4.589398e-07</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    [2,] 1.324118e-07 2.401225e-05 9.724620e-01 2.751383e-02</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    [3,] 3.967390e-01 6.026154e-01 8.568844e-05 5.598518e-04</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    [4,] 5.974179e-03 9.933459e-01 5.013417e-04 1.785872e-04</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    [5,] 2.576392e-07 9.999624e-01 3.446117e-05 2.902222e-06</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    [6,] 1.759037e-06 9.993465e-01 6.178621e-04 3.384616e-05</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    [7,] 9.994626e-01 5.285483e-04 6.536575e-07 8.215098e-06</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    [8,] 8.978779e-09 3.105648e-05 9.994133e-01 5.555960e-04</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    [9,] 1.900186e-06 9.999387e-01 5.230578e-05 7.109979e-06</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [10,] 3.514526e-06 9.975213e-01 2.435034e-03 4.011286e-05</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [11,] 1.553142e-08 1.482233e-08 1.141234e-04 9.998858e-01</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [12,] 3.519863e-05 8.748544e-01 1.158655e-01 9.244921e-03</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [13,] 9.999994e-01 1.513086e-07 2.250443e-08 4.589398e-07</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [14,] 3.321280e-05 9.994100e-01 5.172009e-04 3.954810e-05</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [15,] 9.999864e-01 1.210200e-05 1.140775e-07 1.404057e-06</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [16,] 9.999914e-01 6.093148e-06 1.339187e-07 2.397569e-06</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [17,] 9.999994e-01 1.513086e-07 2.250443e-08 4.589398e-07</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [18,] 9.999994e-01 1.513086e-07 2.250443e-08 4.589398e-07</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [19,] 4.807450e-05 9.999413e-01 4.526289e-06 6.094116e-06</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [20,] 2.255543e-04 9.992316e-01 4.139703e-04 1.288558e-04</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [21,] 5.794304e-07 9.999967e-01 1.636413e-06 1.099114e-06</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [22,] 4.807450e-05 9.999413e-01 4.526289e-06 6.094116e-06</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [23,] 2.576392e-07 9.999624e-01 3.446117e-05 2.902222e-06</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [24,] 8.160831e-05 9.999055e-01 6.249930e-06 6.685116e-06</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [25,] 9.999994e-01 1.513086e-07 2.250443e-08 4.589398e-07</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [26,] 9.999994e-01 1.513086e-07 2.250443e-08 4.589398e-07</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [27,] 9.432000e-07 9.999001e-01 9.235778e-05 6.618282e-06</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [28,] 9.999994e-01 1.513086e-07 2.250443e-08 4.589398e-07</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [29,] 9.999994e-01 1.513086e-07 2.250443e-08 4.589398e-07</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [30,] 9.979335e-01 2.042208e-03 1.511844e-06 2.275775e-05</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [31,] 9.999994e-01 1.513086e-07 2.250443e-08 4.589398e-07</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [32,] 1.409713e-08 1.118664e-03 9.987543e-01 1.269730e-04</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [33,] 9.999994e-01 1.513086e-07 2.250443e-08 4.589398e-07</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [34,] 5.794304e-07 9.999967e-01 1.636413e-06 1.099114e-06</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [35,] 7.413719e-07 9.975069e-01 2.469749e-03 2.259642e-05</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [36,] 2.892119e-07 9.857067e-05 7.778991e-01 2.220021e-01</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [37,] 1.945542e-04 9.994015e-01 3.652721e-04 3.866016e-05</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [38,] 1.942063e-06 7.093638e-01 2.901984e-01 4.358631e-04</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [39,] 8.806004e-08 7.609073e-04 9.973798e-01 1.859190e-03</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [40,] 9.999994e-01 1.513086e-07 2.250443e-08 4.589398e-07</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [41,] 9.999994e-01 1.513086e-07 2.250443e-08 4.589398e-07</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [42,] 9.994626e-01 5.285483e-04 6.536575e-07 8.215098e-06</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [43,] 9.432000e-07 9.999001e-01 9.235778e-05 6.618282e-06</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [44,] 9.999864e-01 1.210200e-05 1.140775e-07 1.404057e-06</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [45,] 5.794304e-07 9.999967e-01 1.636413e-06 1.099114e-06</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># }</span></span>
+<span class='r-in'></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

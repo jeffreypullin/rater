@@ -46,7 +46,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
+    <span class="fa fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -75,7 +75,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/Voltemand/rater">
-    <span class="fas fa-lg fa-github"></span>
+    <span class="fa fa-lg fa-github"></span>
      
   </a>
 </li>
@@ -93,14 +93,14 @@
   <div class="contents col-md-9">
 <div id="rater-" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#rater-" class="anchor"></a>rater <img src="reference/figures/rater.png" align="right" width="160">
+<a href="#rater-" class="anchor" aria-hidden="true"></a>rater <img src="reference/figures/rater.png" align="right" width="160">
 </h1></div>
 <!-- badges: start -->
 
 <p><strong>rater</strong> provides tools for fitting and interrogating statistical models of repeated categorical rating data. The package provides a simple interface to fit a selection of these models, with arbitrary prior parameters, using MCMC and optimisation provided by <a href="https://mc-stan.org/" class="external-link">Stan</a>. A selection of functions are also provided to plot parts of these models and extract key parameters.</p>
 <div id="example-usage" class="section level2">
 <h2 class="hasAnchor">
-<a href="#example-usage" class="anchor"></a>Example usage:</h2>
+<a href="#example-usage" class="anchor" aria-hidden="true"></a>Example usage:</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jeffreypullin.github.io/rater/" class="external-link">rater</a></span><span class="op">)</span>
 
@@ -117,25 +117,25 @@
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<a href="#installation" class="anchor" aria-hidden="true"></a>Installation</h2>
 <p><strong>rater</strong> requires the <strong>rstan</strong> package to fit models. Detailed instructions to install <strong>rstan</strong> can be found <a href="https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started" class="external-link">here</a></p>
 <div id="cran" class="section level3">
 <h3 class="hasAnchor">
-<a href="#cran" class="anchor"></a>CRAN</h3>
+<a href="#cran" class="anchor" aria-hidden="true"></a>CRAN</h3>
 <p>Install <strong>rater</strong> from CRAN with:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"rater"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="development" class="section level3">
 <h3 class="hasAnchor">
-<a href="#development" class="anchor"></a>Development</h3>
+<a href="#development" class="anchor" aria-hidden="true"></a>Development</h3>
 <p>To install the development version of <strong>rater</strong> from GitHub run:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("remotes")</span>
 <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"jeffreypullin/rater"</span><span class="op">)</span></code></pre></div>
 <div id="installation-notes" class="section level4">
 <h4 class="hasAnchor">
-<a href="#installation-notes" class="anchor"></a>Installation notes:</h4>
+<a href="#installation-notes" class="anchor" aria-hidden="true"></a>Installation notes:</h4>
 <ul>
 <li><p>When installing from source, i.e. when installing the development version or installing from CRAN on Linux, the <strong>Stan</strong> models in the package will be compiled - this will lead to an install time of few minutes. Please be patient - this compilation means that <strong>no</strong> compilation is required when using the package</p></li>
 <li><p>During compilation many warnings may be displayed in the terminal; these are harmless but impossible to suppress.</p></li>

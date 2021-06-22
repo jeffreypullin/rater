@@ -60,9 +60,6 @@
 
 
 
-<!-- dependencies from examples -->
-
-
   
 
   
@@ -93,7 +90,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
+    <span class="fa fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -122,7 +119,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/Voltemand/rater">
-    <span class="fas fa-lg fa-github"></span>
+    <span class="fa fa-lg fa-github"></span>
      
   </a>
 </li>
@@ -148,7 +145,7 @@
     <p>Retrieve MCMC convergence diagnostics for a rater fit</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mcmc_diagnostics</span><span class='op'>(</span><span class='va'>fit</span>, pars <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"pi"</span>, <span class='st'>"theta"</span><span class='op'>)</span><span class='op'>)</span></pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>mcmc_diagnostics</span><span class='op'>(</span><span class='va'>fit</span>, pars <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"pi"</span>, <span class='st'>"theta"</span><span class='op'>)</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -160,7 +157,7 @@
     <tr>
       <th>pars</th>
       <td><p>A character vector of parameter names to return. By default
-<code><a href='https://rdrr.io/r/base/c.html'>c("pi", "theta")</a></code>.</p></td>
+<code>c("pi", "theta")</code>.</p></td>
     </tr>
     </table>
 
@@ -191,206 +188,209 @@ MCMC. <em>arXiv preprint</em> <code>arXiv:1903.08008</code>.</p>
 <code><a href='get_stanfit.html'>get_stanfit()</a></code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-
-<span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='rater.html'>rater</a></span><span class='op'>(</span><span class='va'>anesthesia</span>, <span class='st'>"dawid_skene"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; 
-#&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 1).
-#&gt; Chain 1: 
-#&gt; Chain 1: Gradient evaluation took 0.000306 seconds
-#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 3.06 seconds.
-#&gt; Chain 1: Adjust your expectations accordingly!
-#&gt; Chain 1: 
-#&gt; Chain 1: 
-#&gt; Chain 1: Iteration:    1 / 2000 [  0%]  (Warmup)
-#&gt; Chain 1: Iteration:  200 / 2000 [ 10%]  (Warmup)
-#&gt; Chain 1: Iteration:  400 / 2000 [ 20%]  (Warmup)
-#&gt; Chain 1: Iteration:  600 / 2000 [ 30%]  (Warmup)
-#&gt; Chain 1: Iteration:  800 / 2000 [ 40%]  (Warmup)
-#&gt; Chain 1: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-#&gt; Chain 1: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-#&gt; Chain 1: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-#&gt; Chain 1: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-#&gt; Chain 1: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-#&gt; Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-#&gt; Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
-#&gt; Chain 1: 
-#&gt; Chain 1:  Elapsed Time: 2.56285 seconds (Warm-up)
-#&gt; Chain 1:                2.53129 seconds (Sampling)
-#&gt; Chain 1:                5.09414 seconds (Total)
-#&gt; Chain 1: 
-#&gt; 
-#&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 2).
-#&gt; Chain 2: 
-#&gt; Chain 2: Gradient evaluation took 0.000169 seconds
-#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 1.69 seconds.
-#&gt; Chain 2: Adjust your expectations accordingly!
-#&gt; Chain 2: 
-#&gt; Chain 2: 
-#&gt; Chain 2: Iteration:    1 / 2000 [  0%]  (Warmup)
-#&gt; Chain 2: Iteration:  200 / 2000 [ 10%]  (Warmup)
-#&gt; Chain 2: Iteration:  400 / 2000 [ 20%]  (Warmup)
-#&gt; Chain 2: Iteration:  600 / 2000 [ 30%]  (Warmup)
-#&gt; Chain 2: Iteration:  800 / 2000 [ 40%]  (Warmup)
-#&gt; Chain 2: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-#&gt; Chain 2: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-#&gt; Chain 2: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-#&gt; Chain 2: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-#&gt; Chain 2: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-#&gt; Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-#&gt; Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
-#&gt; Chain 2: 
-#&gt; Chain 2:  Elapsed Time: 2.5743 seconds (Warm-up)
-#&gt; Chain 2:                2.51804 seconds (Sampling)
-#&gt; Chain 2:                5.09235 seconds (Total)
-#&gt; Chain 2: 
-#&gt; 
-#&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 3).
-#&gt; Chain 3: 
-#&gt; Chain 3: Gradient evaluation took 0.000169 seconds
-#&gt; Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 1.69 seconds.
-#&gt; Chain 3: Adjust your expectations accordingly!
-#&gt; Chain 3: 
-#&gt; Chain 3: 
-#&gt; Chain 3: Iteration:    1 / 2000 [  0%]  (Warmup)
-#&gt; Chain 3: Iteration:  200 / 2000 [ 10%]  (Warmup)
-#&gt; Chain 3: Iteration:  400 / 2000 [ 20%]  (Warmup)
-#&gt; Chain 3: Iteration:  600 / 2000 [ 30%]  (Warmup)
-#&gt; Chain 3: Iteration:  800 / 2000 [ 40%]  (Warmup)
-#&gt; Chain 3: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-#&gt; Chain 3: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-#&gt; Chain 3: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-#&gt; Chain 3: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-#&gt; Chain 3: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-#&gt; Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-#&gt; Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
-#&gt; Chain 3: 
-#&gt; Chain 3:  Elapsed Time: 2.48023 seconds (Warm-up)
-#&gt; Chain 3:                2.6539 seconds (Sampling)
-#&gt; Chain 3:                5.13413 seconds (Total)
-#&gt; Chain 3: 
-#&gt; 
-#&gt; SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 4).
-#&gt; Chain 4: 
-#&gt; Chain 4: Gradient evaluation took 0.000159 seconds
-#&gt; Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 1.59 seconds.
-#&gt; Chain 4: Adjust your expectations accordingly!
-#&gt; Chain 4: 
-#&gt; Chain 4: 
-#&gt; Chain 4: Iteration:    1 / 2000 [  0%]  (Warmup)
-#&gt; Chain 4: Iteration:  200 / 2000 [ 10%]  (Warmup)
-#&gt; Chain 4: Iteration:  400 / 2000 [ 20%]  (Warmup)
-#&gt; Chain 4: Iteration:  600 / 2000 [ 30%]  (Warmup)
-#&gt; Chain 4: Iteration:  800 / 2000 [ 40%]  (Warmup)
-#&gt; Chain 4: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-#&gt; Chain 4: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-#&gt; Chain 4: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-#&gt; Chain 4: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-#&gt; Chain 4: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-#&gt; Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-#&gt; Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
-#&gt; Chain 4: 
-#&gt; Chain 4:  Elapsed Time: 2.61876 seconds (Warm-up)
-#&gt; Chain 4:                2.73782 seconds (Sampling)
-#&gt; Chain 4:                5.35658 seconds (Total)
-#&gt; Chain 4: </div><div class='input'>
-<span class='co'># Calculate the diagnostics for all parameters.</span>
-<span class='fu'>mcmc_diagnostics</span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;                     Rhat ess_bulk
-#&gt; pi[1]          1.0006688 7536.012
-#&gt; pi[2]          1.0002824 7724.902
-#&gt; pi[3]          1.0003219 6477.104
-#&gt; pi[4]          1.0005436 5992.348
-#&gt; theta[1, 1, 1] 1.0023179 6256.385
-#&gt; theta[1, 1, 2] 1.0023577 5972.062
-#&gt; theta[1, 1, 3] 1.0018354 4966.070
-#&gt; theta[1, 1, 4] 0.9998727 6070.492
-#&gt; theta[1, 2, 1] 1.0020289 4706.006
-#&gt; theta[1, 2, 2] 1.0010258 5499.630
-#&gt; theta[1, 2, 3] 1.0020700 7504.405
-#&gt; theta[1, 2, 4] 1.0000109 4636.965
-#&gt; theta[1, 3, 1] 1.0017330 4602.951
-#&gt; theta[1, 3, 2] 1.0022695 3127.109
-#&gt; theta[1, 3, 3] 1.0014145 4944.165
-#&gt; theta[1, 3, 4] 1.0009240 4231.545
-#&gt; theta[1, 4, 1] 1.0008114 4556.905
-#&gt; theta[1, 4, 2] 1.0006435 4328.103
-#&gt; theta[1, 4, 3] 1.0009426 3750.929
-#&gt; theta[1, 4, 4] 1.0001113 5238.316
-#&gt; theta[2, 1, 1] 1.0006641 6677.133
-#&gt; theta[2, 1, 2] 1.0024703 6901.862
-#&gt; theta[2, 1, 3] 1.0007436 4893.037
-#&gt; theta[2, 1, 4] 1.0008416 5678.301
-#&gt; theta[2, 2, 1] 1.0005690 5910.738
-#&gt; theta[2, 2, 2] 1.0004376 7198.246
-#&gt; theta[2, 2, 3] 0.9999781 6343.079
-#&gt; theta[2, 2, 4] 1.0003039 5500.578
-#&gt; theta[2, 3, 1] 1.0002705 5013.332
-#&gt; theta[2, 3, 2] 1.0015402 4874.960
-#&gt; theta[2, 3, 3] 1.0003530 6000.721
-#&gt; theta[2, 3, 4] 1.0008237 5643.125
-#&gt; theta[2, 4, 1] 0.9999134 4810.295
-#&gt; theta[2, 4, 2] 1.0003948 4811.758
-#&gt; theta[2, 4, 3] 1.0010111 5374.459
-#&gt; theta[2, 4, 4] 1.0032842 7008.554
-#&gt; theta[3, 1, 1] 0.9998689 6552.903
-#&gt; theta[3, 1, 2] 1.0001043 5348.570
-#&gt; theta[3, 1, 3] 1.0008994 5259.064
-#&gt; theta[3, 1, 4] 1.0040870 5426.149
-#&gt; theta[3, 2, 1] 1.0016355 5207.847
-#&gt; theta[3, 2, 2] 1.0016451 5958.102
-#&gt; theta[3, 2, 3] 1.0015199 5978.363
-#&gt; theta[3, 2, 4] 1.0006719 5355.952
-#&gt; theta[3, 3, 1] 1.0003478 4422.657
-#&gt; theta[3, 3, 2] 1.0003770 5739.931
-#&gt; theta[3, 3, 3] 1.0016223 7577.290
-#&gt; theta[3, 3, 4] 1.0009141 7374.498
-#&gt; theta[3, 4, 1] 1.0007752 5106.530
-#&gt; theta[3, 4, 2] 1.0004672 5317.196
-#&gt; theta[3, 4, 3] 1.0013516 4636.500
-#&gt; theta[3, 4, 4] 1.0014369 5085.755
-#&gt; theta[4, 1, 1] 1.0020313 7668.029
-#&gt; theta[4, 1, 2] 0.9998707 5746.712
-#&gt; theta[4, 1, 3] 1.0029446 5596.504
-#&gt; theta[4, 1, 4] 1.0005949 5743.286
-#&gt; theta[4, 2, 1] 1.0007532 6337.060
-#&gt; theta[4, 2, 2] 1.0012732 6275.168
-#&gt; theta[4, 2, 3] 1.0018723 5634.306
-#&gt; theta[4, 2, 4] 1.0000583 4982.776
-#&gt; theta[4, 3, 1] 1.0010020 4982.843
-#&gt; theta[4, 3, 2] 1.0008020 4722.004
-#&gt; theta[4, 3, 3] 1.0003578 6515.672
-#&gt; theta[4, 3, 4] 0.9992833 4610.018
-#&gt; theta[4, 4, 1] 1.0011763 5273.404
-#&gt; theta[4, 4, 2] 1.0014970 4649.697
-#&gt; theta[4, 4, 3] 1.0004121 4204.700
-#&gt; theta[4, 4, 4] 1.0010679 6231.757
-#&gt; theta[5, 1, 1] 1.0001792 6557.049
-#&gt; theta[5, 1, 2] 1.0005235 4866.532
-#&gt; theta[5, 1, 3] 1.0007479 5437.706
-#&gt; theta[5, 1, 4] 0.9995831 5603.904
-#&gt; theta[5, 2, 1] 1.0002202 6726.497
-#&gt; theta[5, 2, 2] 1.0011971 6782.414
-#&gt; theta[5, 2, 3] 1.0030786 5382.966
-#&gt; theta[5, 2, 4] 1.0000816 5473.616
-#&gt; theta[5, 3, 1] 0.9996354 4485.019
-#&gt; theta[5, 3, 2] 1.0002388 5957.994
-#&gt; theta[5, 3, 3] 1.0017647 5595.337
-#&gt; theta[5, 3, 4] 1.0020277 6514.691
-#&gt; theta[5, 4, 1] 1.0004888 4921.206
-#&gt; theta[5, 4, 2] 1.0004917 5317.187
-#&gt; theta[5, 4, 3] 1.0007315 4188.021
-#&gt; theta[5, 4, 4] 1.0000796 6254.621</div><div class='input'>
-<span class='co'># Calculate the diagnostics just for the pi parameter.</span>
-<span class='fu'>mcmc_diagnostics</span><span class='op'>(</span><span class='va'>fit</span>, pars <span class='op'>=</span> <span class='st'>"pi"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;           Rhat ess_bulk
-#&gt; pi[1] 1.000669 7536.012
-#&gt; pi[2] 1.000282 7724.902
-#&gt; pi[3] 1.000322 6477.104
-#&gt; pi[4] 1.000544 5992.348</div><div class='input'>
-<span class='co'># }</span>
-
-</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='co'># \donttest{</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='rater.html'>rater</a></span><span class='op'>(</span><span class='va'>anesthesia</span>, <span class='st'>"dawid_skene"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 1).</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: Gradient evaluation took 0.000161 seconds</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 1.61 seconds.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: Adjust your expectations accordingly!</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: Iteration:    1 / 2000 [  0%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: Iteration:  200 / 2000 [ 10%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: Iteration:  400 / 2000 [ 20%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: Iteration:  600 / 2000 [ 30%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: Iteration:  800 / 2000 [ 40%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: Iteration: 1000 / 2000 [ 50%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: Iteration: 1001 / 2000 [ 50%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: Iteration: 1200 / 2000 [ 60%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: Iteration: 1400 / 2000 [ 70%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: Iteration: 1600 / 2000 [ 80%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1:  Elapsed Time: 2.2717 seconds (Warm-up)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1:                2.28255 seconds (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1:                4.55425 seconds (Total)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 1: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 2).</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: Gradient evaluation took 0.000147 seconds</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 1.47 seconds.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: Adjust your expectations accordingly!</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: Iteration:    1 / 2000 [  0%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: Iteration:  200 / 2000 [ 10%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: Iteration:  400 / 2000 [ 20%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: Iteration:  600 / 2000 [ 30%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: Iteration:  800 / 2000 [ 40%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: Iteration: 1000 / 2000 [ 50%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: Iteration: 1001 / 2000 [ 50%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: Iteration: 1200 / 2000 [ 60%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: Iteration: 1400 / 2000 [ 70%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: Iteration: 1600 / 2000 [ 80%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2:  Elapsed Time: 2.29859 seconds (Warm-up)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2:                2.28295 seconds (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2:                4.58155 seconds (Total)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 2: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 3).</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: Gradient evaluation took 0.000153 seconds</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 1.53 seconds.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: Adjust your expectations accordingly!</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: Iteration:    1 / 2000 [  0%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: Iteration:  200 / 2000 [ 10%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: Iteration:  400 / 2000 [ 20%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: Iteration:  600 / 2000 [ 30%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: Iteration:  800 / 2000 [ 40%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: Iteration: 1000 / 2000 [ 50%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: Iteration: 1001 / 2000 [ 50%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: Iteration: 1200 / 2000 [ 60%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: Iteration: 1400 / 2000 [ 70%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: Iteration: 1600 / 2000 [ 80%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3:  Elapsed Time: 2.23093 seconds (Warm-up)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3:                2.37823 seconds (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3:                4.60916 seconds (Total)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 3: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> SAMPLING FOR MODEL 'dawid_skene' NOW (CHAIN 4).</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: Gradient evaluation took 0.000163 seconds</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 1.63 seconds.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: Adjust your expectations accordingly!</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: Iteration:    1 / 2000 [  0%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: Iteration:  200 / 2000 [ 10%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: Iteration:  400 / 2000 [ 20%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: Iteration:  600 / 2000 [ 30%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: Iteration:  800 / 2000 [ 40%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: Iteration: 1000 / 2000 [ 50%]  (Warmup)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: Iteration: 1001 / 2000 [ 50%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: Iteration: 1200 / 2000 [ 60%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: Iteration: 1400 / 2000 [ 70%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: Iteration: 1600 / 2000 [ 80%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4:  Elapsed Time: 2.34291 seconds (Warm-up)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4:                2.44823 seconds (Sampling)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4:                4.79114 seconds (Total)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chain 4: </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Calculate the diagnostics for all parameters.</span></span>
+<span class='r-in'><span class='fu'>mcmc_diagnostics</span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                     Rhat ess_bulk</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> pi[1]          1.0006688 7536.012</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> pi[2]          1.0002824 7724.902</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> pi[3]          1.0003219 6477.104</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> pi[4]          1.0005436 5992.348</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[1, 1, 1] 1.0023179 6256.385</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[1, 1, 2] 1.0023577 5972.062</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[1, 1, 3] 1.0018354 4966.070</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[1, 1, 4] 0.9998727 6070.492</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[1, 2, 1] 1.0020289 4706.006</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[1, 2, 2] 1.0010258 5499.630</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[1, 2, 3] 1.0020700 7504.405</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[1, 2, 4] 1.0000109 4636.965</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[1, 3, 1] 1.0017330 4602.951</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[1, 3, 2] 1.0022695 3127.109</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[1, 3, 3] 1.0014145 4944.165</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[1, 3, 4] 1.0009240 4231.545</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[1, 4, 1] 1.0008114 4556.905</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[1, 4, 2] 1.0006435 4328.103</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[1, 4, 3] 1.0009426 3750.929</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[1, 4, 4] 1.0001113 5238.316</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[2, 1, 1] 1.0006641 6677.133</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[2, 1, 2] 1.0024703 6901.862</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[2, 1, 3] 1.0007436 4893.037</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[2, 1, 4] 1.0008416 5678.301</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[2, 2, 1] 1.0005690 5910.738</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[2, 2, 2] 1.0004376 7198.246</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[2, 2, 3] 0.9999781 6343.079</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[2, 2, 4] 1.0003039 5500.578</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[2, 3, 1] 1.0002705 5013.332</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[2, 3, 2] 1.0015402 4874.960</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[2, 3, 3] 1.0003530 6000.721</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[2, 3, 4] 1.0008237 5643.125</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[2, 4, 1] 0.9999134 4810.295</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[2, 4, 2] 1.0003948 4811.758</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[2, 4, 3] 1.0010111 5374.459</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[2, 4, 4] 1.0032842 7008.554</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[3, 1, 1] 0.9998689 6552.903</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[3, 1, 2] 1.0001043 5348.570</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[3, 1, 3] 1.0008994 5259.064</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[3, 1, 4] 1.0040870 5426.149</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[3, 2, 1] 1.0016355 5207.847</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[3, 2, 2] 1.0016451 5958.102</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[3, 2, 3] 1.0015199 5978.363</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[3, 2, 4] 1.0006719 5355.952</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[3, 3, 1] 1.0003478 4422.657</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[3, 3, 2] 1.0003770 5739.931</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[3, 3, 3] 1.0016223 7577.290</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[3, 3, 4] 1.0009141 7374.498</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[3, 4, 1] 1.0007752 5106.530</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[3, 4, 2] 1.0004672 5317.196</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[3, 4, 3] 1.0013516 4636.500</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[3, 4, 4] 1.0014369 5085.755</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[4, 1, 1] 1.0020313 7668.029</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[4, 1, 2] 0.9998707 5746.712</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[4, 1, 3] 1.0029446 5596.504</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[4, 1, 4] 1.0005949 5743.286</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[4, 2, 1] 1.0007532 6337.060</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[4, 2, 2] 1.0012732 6275.168</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[4, 2, 3] 1.0018723 5634.306</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[4, 2, 4] 1.0000583 4982.776</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[4, 3, 1] 1.0010020 4982.843</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[4, 3, 2] 1.0008020 4722.004</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[4, 3, 3] 1.0003578 6515.672</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[4, 3, 4] 0.9992833 4610.018</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[4, 4, 1] 1.0011763 5273.404</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[4, 4, 2] 1.0014970 4649.697</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[4, 4, 3] 1.0004121 4204.700</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[4, 4, 4] 1.0010679 6231.757</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[5, 1, 1] 1.0001792 6557.049</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[5, 1, 2] 1.0005235 4866.532</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[5, 1, 3] 1.0007479 5437.706</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[5, 1, 4] 0.9995831 5603.904</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[5, 2, 1] 1.0002202 6726.497</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[5, 2, 2] 1.0011971 6782.414</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[5, 2, 3] 1.0030786 5382.966</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[5, 2, 4] 1.0000816 5473.616</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[5, 3, 1] 0.9996354 4485.019</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[5, 3, 2] 1.0002388 5957.994</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[5, 3, 3] 1.0017647 5595.337</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[5, 3, 4] 1.0020277 6514.691</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[5, 4, 1] 1.0004888 4921.206</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[5, 4, 2] 1.0004917 5317.187</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[5, 4, 3] 1.0007315 4188.021</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> theta[5, 4, 4] 1.0000796 6254.621</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Calculate the diagnostics just for the pi parameter.</span></span>
+<span class='r-in'><span class='fu'>mcmc_diagnostics</span><span class='op'>(</span><span class='va'>fit</span>, pars <span class='op'>=</span> <span class='st'>"pi"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>           Rhat ess_bulk</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> pi[1] 1.000669 7536.012</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> pi[2] 1.000282 7724.902</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> pi[3] 1.000322 6477.104</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> pi[4] 1.000544 5992.348</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># }</span></span>
+<span class='r-in'></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

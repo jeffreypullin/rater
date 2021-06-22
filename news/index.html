@@ -59,7 +59,6 @@
 
 
 
-
   
 
   
@@ -90,7 +89,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
+    <span class="fa fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -119,7 +118,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/Voltemand/rater">
-    <span class="fas fa-lg fa-github"></span>
+    <span class="fa fa-lg fa-github"></span>
      
   </a>
 </li>
@@ -142,24 +141,19 @@
 
     <div id="rater-development-version" class="section level1">
 <h1 class="page-header" data-toc-text="development version">
-<a href="#rater-development-version" class="anchor"></a>rater (development version)<small> Unreleased </small>
-</h1>
+<a href="#rater-development-version" class="anchor" aria-hidden="true"></a>rater (development version)<small> Unreleased </small></h1>
 </div>
     <div id="rater-110" class="section level1">
 <h1 class="page-header" data-toc-text="1.1.0">
-<a href="#rater-110" class="anchor"></a>rater 1.1.0<small> 2021-03-14 </small>
-</h1>
-<ul>
-<li><p><code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> now works with the class conditional and hierarchical Dawid-Skene models.</p></li>
+<a href="#rater-110" class="anchor" aria-hidden="true"></a>rater 1.1.0<small> 2021-03-14 </small></h1>
+<ul><li><p><code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> now works with the class conditional and hierarchical Dawid-Skene models.</p></li>
 <li><p>All functions applied to fitted class conditional Dawid-Skene models will automatically convert the relevant parameters of the model into a full theta parameter equivalent to the Dawid-Skene model. This is designed to allow easier comparison of the class conditional model with the full Dawid-Skene model.</p></li>
 <li>
 <p>Plotting via <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> of the <code>rater_fit</code> object has been changed in several ways. <code>plot.rater_fit</code> now:</p>
-<ul>
-<li>Only returns one plot</li>
+<ul><li>Only returns one plot</li>
 <li>Only returns the theta plot by default</li>
 <li>Exposes the <code>prob</code>, <code>which</code> (called <code>rater_index</code>) and new <code>item_index</code> arguments in the plot generic.</li>
-</ul>
-</li>
+</ul></li>
 <li><p>Add the ability to only plot a subset of items when plotting the class probabilities. This can be controlled by the new <code>item_index</code> argument to <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code></p></li>
 <li><p>Added the function <code><a href="../reference/wide_to_long.html">wide_to_long()</a></code> to convert wide data to long data.</p></li>
 <li><p>Add the option <code>data_format = "wide"</code> to <code><a href="../reference/rater.html">rater()</a></code> to allow wide data to be passed into <code><a href="../reference/rater.html">rater()</a></code> directly.</p></li>
@@ -173,16 +167,12 @@
 <li><p>Prior parameters for the Dawid-Skene and class conditional Dawid-Skene models have been altered slightly to improve convergence of optimization when the number of classes is small.</p></li>
 <li><p><code>summary.mcmc_fit</code> now displays the number of remaining parameters correctly.</p></li>
 <li><p>Added the <code><a href="../reference/as_mcmc.list.html">as_mcmc.list()</a></code> function to convert MCMC fits to {coda} <code>mcmc.list</code> objects.</p></li>
-</ul>
-</div>
+</ul></div>
     <div id="rater-100" class="section level1">
 <h1 class="page-header" data-toc-text="1.0.0">
-<a href="#rater-100" class="anchor"></a>rater 1.0.0<small> 2020-09-15 </small>
-</h1>
-<ul>
-<li>Initial release</li>
-</ul>
-</div>
+<a href="#rater-100" class="anchor" aria-hidden="true"></a>rater 1.0.0<small> 2020-09-15 </small></h1>
+<ul><li>Initial release</li>
+</ul></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

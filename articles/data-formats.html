@@ -42,7 +42,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
+    <span class="fa fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -71,7 +71,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/Voltemand/rater" class="external-link">
-    <span class="fas fa-lg fa-github"></span>
+    <span class="fa fa-lg fa-github"></span>
      
   </a>
 </li>
@@ -106,7 +106,7 @@
 <span class="co">#&gt; * This will allow Stan to run inference on multiple cores in parallel.</span></code></pre></div>
 <div id="data-formats-for-rater" class="section level2">
 <h2 class="hasAnchor">
-<a href="#data-formats-for-rater" class="anchor"></a>Data formats for rater</h2>
+<a href="#data-formats-for-rater" class="anchor" aria-hidden="true"></a>Data formats for rater</h2>
 <p>{rater} allows the user to fit statistical models to repeated categorical rating data. There are, however, different formats this rating data can be arranged in. {rater} supports three of the most common, which we call <code>"long"</code>, <code>"wide"</code> and <code>"grouped"</code>. This vignette explains:</p>
 <ul>
 <li>What characterises each format,</li>
@@ -116,7 +116,7 @@
 </div>
 <div id="long-format" class="section level2">
 <h2 class="hasAnchor">
-<a href="#long-format" class="anchor"></a>Long format</h2>
+<a href="#long-format" class="anchor" aria-hidden="true"></a>Long format</h2>
 <p>The default format for data passed to the <code><a href="../reference/rater.html">rater()</a></code> function is <code>"long"</code>. This is the default format because it is capable of representing rating data with incomplete designs (not every rater rates each item) and with repeated ratings (raters ratings items more than once). Long data is defined by having three columns:</p>
 <ol style="list-style-type: decimal">
 <li>The index of the rater</li>
@@ -168,7 +168,7 @@
 </div>
 <div id="wide-data" class="section level2">
 <h2 class="hasAnchor">
-<a href="#wide-data" class="anchor"></a>Wide data</h2>
+<a href="#wide-data" class="anchor" aria-hidden="true"></a>Wide data</h2>
 <p>The next data format which can be used in <code><a href="../reference/rater.html">rater()</a></code> is the wide format. In wide format data each column corresponds to the ratings of a particular rater, each row is an item and the entries of the corresponding table are the ratings themselves. For example the following table presents the previous long data example in wide format:</p>
 <table class="table">
 <thead><tr class="header">
@@ -195,7 +195,7 @@
 </div>
 <div id="grouped-data" class="section level2">
 <h2 class="hasAnchor">
-<a href="#grouped-data" class="anchor"></a>Grouped data</h2>
+<a href="#grouped-data" class="anchor" aria-hidden="true"></a>Grouped data</h2>
 <p>The final format of data supported by {rater} is the grouped format. This format can be thought of as an extension of the wide format where rating ‘patterns’ which occurs multiple times are collapsed together, while a new column is added to represent how many times each pattern occurred in the original data. For example in the running data example the pattern of both raters giving the rating 2 occurs twice, while the pattern of rater 1 giving the rating a 3 and rater 2 giving the rating 4 occurs once. This is illustrated in the grouped data representation of the example data below:</p>
 <table class="table">
 <thead><tr class="header">

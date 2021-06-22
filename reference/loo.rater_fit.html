@@ -60,9 +60,6 @@
 
 
 
-<!-- dependencies from examples -->
-
-
   
 
   
@@ -93,7 +90,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
+    <span class="fa fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -122,7 +119,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/Voltemand/rater">
-    <span class="fas fa-lg fa-github"></span>
+    <span class="fa fa-lg fa-github"></span>
      
   </a>
 </li>
@@ -148,8 +145,8 @@
     <p>Compute the PSIS LOO CV - a measure of model fit - of a rater fit object.</p>
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for rater_fit</span>
-<span class='fu'>loo</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span>, cores <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"mc.cores"</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span></pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='co'># S3 method for rater_fit</span>
+<span class='fu'>loo</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span>, cores <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"mc.cores"</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -198,28 +195,34 @@ Pareto smoothed importance sampling.
 <a href='https://arxiv.org/abs/1507.02646'>preprint arXiv:1507.02646</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='co'># \donttest{</span>
-<span class='va'>fit_ds</span> <span class='op'>&lt;-</span> <span class='fu'><a href='rater.html'>rater</a></span><span class='op'>(</span><span class='va'>anesthesia</span>, <span class='st'>"dawid_skene"</span>, verbose <span class='op'>=</span> <span class='cn'>FALSE</span>, chains <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
-<span class='va'>fit_ccds</span> <span class='op'>&lt;-</span> <span class='fu'><a href='rater.html'>rater</a></span><span class='op'>(</span><span class='va'>anesthesia</span>, <span class='st'>"class_conditional_dawid_skene"</span>,
-                  verbose <span class='op'>=</span> <span class='cn'>FALSE</span>, chains <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
-
-<span class='va'>loo_ds</span> <span class='op'>&lt;-</span> <span class='fu'>loo</span><span class='op'>(</span><span class='va'>fit_ds</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: Some Pareto k diagnostic values are too high. See help('pareto-k-diagnostic') for details.</span></div><div class='input'><span class='va'>loo_ccds</span> <span class='op'>&lt;-</span> <span class='fu'>loo</span><span class='op'>(</span><span class='va'>fit_ccds</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: Some Pareto k diagnostic values are slightly high. See help('pareto-k-diagnostic') for details.</span></div><div class='input'>
-<span class='co'># To compare the loos easily we can use the loo_compare function from the</span>
-<span class='co'># loo package:</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://mc-stan.org/loo/'>loo</a></span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>This is loo version 2.4.1</span></div><div class='output co'>#&gt; <span class='message'>- Online documentation and vignettes at mc-stan.org/loo</span></div><div class='output co'>#&gt; <span class='message'>- As of v2.0.0 loo defaults to 1 core but we recommend using as many as possible. Use the 'cores' argument or set options(mc.cores = NUM_CORES) for an entire session. </span></div><div class='input'>
-<span class='fu'><a href='https://mc-stan.org/loo/reference/loo_compare.html'>loo_compare</a></span><span class='op'>(</span><span class='va'>loo_ds</span>, <span class='va'>loo_ccds</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;        elpd_diff se_diff
-#&gt; model1   0.0       0.0  
-#&gt; model2 -11.7       3.2  </div><div class='input'>
-<span class='co'># The documentation of the loo package contains more information about how</span>
-<span class='co'># the output should be interpreted.</span>
-<span class='co'># }</span>
-
-</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'></span>
+<span class='r-in'><span class='co'># \donttest{</span></span>
+<span class='r-in'><span class='va'>fit_ds</span> <span class='op'>&lt;-</span> <span class='fu'><a href='rater.html'>rater</a></span><span class='op'>(</span><span class='va'>anesthesia</span>, <span class='st'>"dawid_skene"</span>, verbose <span class='op'>=</span> <span class='cn'>FALSE</span>, chains <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>fit_ccds</span> <span class='op'>&lt;-</span> <span class='fu'><a href='rater.html'>rater</a></span><span class='op'>(</span><span class='va'>anesthesia</span>, <span class='st'>"class_conditional_dawid_skene"</span>,</span>
+<span class='r-in'>                  verbose <span class='op'>=</span> <span class='cn'>FALSE</span>, chains <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>loo_ds</span> <span class='op'>&lt;-</span> <span class='fu'>loo</span><span class='op'>(</span><span class='va'>fit_ds</span><span class='op'>)</span></span>
+<span class='r-wrn co'><span class='r-pr'>#&gt;</span> <span class='warning'>Warning: </span>Some Pareto k diagnostic values are too high. See help('pareto-k-diagnostic') for details.</span>
+<span class='r-in'><span class='va'>loo_ccds</span> <span class='op'>&lt;-</span> <span class='fu'>loo</span><span class='op'>(</span><span class='va'>fit_ccds</span><span class='op'>)</span></span>
+<span class='r-wrn co'><span class='r-pr'>#&gt;</span> <span class='warning'>Warning: </span>Some Pareto k diagnostic values are slightly high. See help('pareto-k-diagnostic') for details.</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># To compare the loos easily we can use the loo_compare function from the</span></span>
+<span class='r-in'><span class='co'># loo package:</span></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://mc-stan.org/loo/'>loo</a></span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> This is loo version 2.4.1</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> - Online documentation and vignettes at mc-stan.org/loo</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> - As of v2.0.0 loo defaults to 1 core but we recommend using as many as possible. Use the 'cores' argument or set options(mc.cores = NUM_CORES) for an entire session. </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://mc-stan.org/loo/reference/loo_compare.html'>loo_compare</a></span><span class='op'>(</span><span class='va'>loo_ds</span>, <span class='va'>loo_ccds</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>        elpd_diff se_diff</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> model1   0.0       0.0  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> model2 -11.7       3.2  </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># The documentation of the loo package contains more information about how</span></span>
+<span class='r-in'><span class='co'># the output should be interpreted.</span></span>
+<span class='r-in'><span class='co'># }</span></span>
+<span class='r-in'></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
