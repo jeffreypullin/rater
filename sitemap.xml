@@ -97,6 +97,9 @@
     <loc>/reference/summary.rater_model.html</loc>
   </url>
   <url>
+    <loc>/reference/waic.rater_fit.html</loc>
+  </url>
+  <url>
     <loc>/reference/wide_to_long.html</loc>
   </url>
 </urlset>
