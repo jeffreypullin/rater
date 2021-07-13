@@ -1,5 +1,11 @@
 # rater (development version)
 
+* Add `waic()` function for model comparison
+
+* Silence warnings with the latest ggplot2 version 
+
+* Fix validation bug in `posterior_predict()`
+
 # rater 1.1.0
 
 * `summary()` now works with the class conditional and hierarchical Dawid-Skene models.
