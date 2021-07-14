@@ -1,3 +1,5 @@
+# rater (development version)
+
 # rater 1.2.0
 
 * Add `waic()` function for model comparison
