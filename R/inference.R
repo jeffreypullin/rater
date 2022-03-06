@@ -427,7 +427,7 @@ validate_data <- function(data, data_format) {
     }
 
     if (!(all(c("rater", "item", "rating") %in% colnames(data)))) {
-      stop("Long `data` must have three columns with names: `rater`, `item`",
+      stop("Long `data` must have three columns with names: `item`, `rater`",
            " and `rating`.", call. = FALSE)
     }
 
