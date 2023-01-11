@@ -2,7 +2,8 @@
 
     Code
       mcmc_diagnostics(hds_fit)
-    Error <simpleError>
-      theta cannot be extracted from the Hierachical Dawid-Skene model.
+    Condition
+      Error:
+      ! theta cannot be extracted from the Hierachical Dawid-Skene model.
       Consider using `pars = c('pi')`.
 
