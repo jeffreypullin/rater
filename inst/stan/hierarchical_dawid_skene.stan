@@ -1,12 +1,12 @@
 data {
-  int<lower=1> N;               // total number of annotations
-  int<lower=1> J;               // number of annotators
-  int<lower=1> K;               // number of annotation categories
-  int<lower=1> I;               // number of items
-  int<lower=1, upper=I> ii[N];  // item index for annotation n
-  int<lower=1, upper=J> jj[N];  // annotator for annotation n
-  int<lower=0, upper=K> y[N];   // annotation for observation n
-  vector<lower=0>[K] alpha;     // prior for pi
+  int<lower=1> N;               // Total number of ratings.
+  int<lower=1> J;               // Number of raters.
+  int<lower=1> K;               // Number of rating categories.
+  int<lower=1> I;               // Number of items.
+  int<lower=1, upper=I> ii[N];  // Item index for rating n.
+  int<lower=1, upper=J> jj[N];  // Rater for annotation n.
+  int<lower=0, upper=K> y[N];   // Rating for observation n.
+  vector<lower=0>[K] alpha;     // Prior on pi.
 }
 
 transformed data {
@@ -27,17 +27,17 @@ transformed parameters {
   vector[K] log_pi;
 
   for(j in 1:J) {
-    // non centered parameterization
+    // Non centered parameterization.
     beta[j] = zeta + omega .* beta_raw[j];
-    // fix last category to 0 (softmax non-identifiability)
+    // Fix last category to 0 (softmax non-identifiability).
     beta_norm[j] = append_col(beta[j], zeros);
     for(k in 1:K) {
-      // log_softmax
+      // Log softmax
       beta_norm[j,k] = beta_norm[j,k] - log_sum_exp(beta_norm[j,k]);
     }
   }
 
-  // compute outside the loop for efficency
+  // Compute outside the loop for efficency.
   log_pi = log(pi);
   for (i in 1:I) {
     log_p_z[i] = log_pi;
@@ -54,8 +54,16 @@ transformed parameters {
 model {
 
   pi ~ dirichlet(alpha);
-  to_vector(zeta) ~ normal(0,1);
-  to_vector(omega) ~ normal(0,1);
+  for (k in 1:K) {
+    for (i in 1:(K - 1)) {
+      if (k == i) {
+        zeta[k, i] ~ normal(6, 1);
+      } else {
+        zeta[k, i] ~ normal(0, 1);
+      }
+    }
+  }
+  to_vector(omega) ~ normal(0, 1);
 
   for(j in 1:J) {
     // part of the non centered parameterization
