@@ -1,8 +1,8 @@
-pandoc: 2.7.3
-pkgdown: 1.6.1.9001
-pkgdown_sha: ce9781a15c7ea07df9fb17a11295ba4abec0b54b
+pandoc: 2.19.2
+pkgdown: 2.0.7
+pkgdown_sha: ~
 articles:
   data-formats: data-formats.html
   workflow: workflow.html
-last_built: 2021-07-14T01:32Z
+last_built: 2023-02-05T03:20Z
 

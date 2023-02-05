@@ -34,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rater</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.0.9000</span>
       </span>
     </div>
 
@@ -50,7 +50,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -85,13 +85,13 @@
 
       
 
-      </header><script src="data-formats_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Data formats</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/jeffreypullin/rater/blob/master/vignettes/data-formats.Rmd" class="external-link"><code>vignettes/data-formats.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/jeffreypullin/rater/blob/HEAD/vignettes/data-formats.Rmd" class="external-link"><code>vignettes/data-formats.Rmd</code></a></small>
       <div class="hidden name"><code>data-formats.Rmd</code></div>
 
     </div>
@@ -99,31 +99,42 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jeffreypullin.github.io/rater/" class="external-link">rater</a></span><span class="op">)</span>
-<span class="co">#&gt; * The rater package uses `Stan` to fit bayesian models.</span>
-<span class="co">#&gt; * If you are working on a local, multicore CPU with excess RAM please call:</span>
-<span class="co">#&gt; * options(mc.cores = parallel::detectCores())</span>
-<span class="co">#&gt; * This will allow Stan to run inference on multiple cores in parallel.</span></code></pre></div>
-<div id="data-formats-for-rater" class="section level2">
-<h2 class="hasAnchor">
-<a href="#data-formats-for-rater" class="anchor" aria-hidden="true"></a>Data formats for rater</h2>
-<p>{rater} allows the user to fit statistical models to repeated categorical rating data. There are, however, different formats this rating data can be arranged in. {rater} supports three of the most common, which we call <code>"long"</code>, <code>"wide"</code> and <code>"grouped"</code>. This vignette explains:</p>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jeffreypullin.github.io/rater/" class="external-link">rater</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; * The rater package uses `Stan` to fit bayesian models.</span></span>
+<span><span class="co">#&gt; * If you are working on a local, multicore CPU with excess RAM please call:</span></span>
+<span><span class="co">#&gt; * options(mc.cores = parallel::detectCores())</span></span>
+<span><span class="co">#&gt; * This will allow Stan to run inference on multiple cores in parallel.</span></span></code></pre></div>
+<div class="section level2">
+<h2 id="data-formats-for-rater">Data formats for rater<a class="anchor" aria-label="anchor" href="#data-formats-for-rater"></a>
+</h2>
+<p>{rater} allows the user to fit statistical models to repeated
+categorical rating data. There are, however, different formats this
+rating data can be arranged in. {rater} supports three of the most
+common, which we call <code>"long"</code>, <code>"wide"</code> and
+<code>"grouped"</code>. This vignette explains:</p>
 <ul>
 <li>What characterises each format,</li>
 <li>What features of each format {rater} relies on, and,</li>
 <li>In what circumstances you may want to use each format.</li>
 </ul>
 </div>
-<div id="long-format" class="section level2">
-<h2 class="hasAnchor">
-<a href="#long-format" class="anchor" aria-hidden="true"></a>Long format</h2>
-<p>The default format for data passed to the <code><a href="../reference/rater.html">rater()</a></code> function is <code>"long"</code>. This is the default format because it is capable of representing rating data with incomplete designs (not every rater rates each item) and with repeated ratings (raters ratings items more than once). Long data is defined by having three columns:</p>
+<div class="section level2">
+<h2 id="long-format">Long format<a class="anchor" aria-label="anchor" href="#long-format"></a>
+</h2>
+<p>The default format for data passed to the <code><a href="../reference/rater.html">rater()</a></code>
+function is <code>"long"</code>. This is the default format because it
+is capable of representing rating data with incomplete designs (not
+every rater rates each item) and with repeated ratings (raters ratings
+items more than once). Long data is defined by having three columns:</p>
 <ol style="list-style-type: decimal">
 <li>The index of the rater</li>
 <li>The index of the item</li>
 <li>The rating given by that rater for that item</li>
 </ol>
-<p>in {rater}, for this data to be recognised, these columns must have names <code>"rater"</code>, <code>"item"</code> and <code>"rating"</code> respectively. An example of long data in the appropriate format for {rater} is given illustrated below:</p>
+<p>in {rater}, for this data to be recognised, these columns must have
+names <code>"rater"</code>, <code>"item"</code> and
+<code>"rating"</code> respectively. An example of long data in the
+appropriate format for {rater} is given illustrated below:</p>
 <table class="table">
 <thead><tr class="header">
 <th align="right">item</th>
@@ -163,13 +174,27 @@
 </tr>
 </tbody>
 </table>
-<p>We can read the first row, for example, of the dataset as saying that the item 1 was rated a 3 by rater 1. Repeated ratings are represented by rows with the same rater and item (and possibly rating) combination and missing data is represented simply by the absence of certain rater and item combinations. Long data is useful because it can represent <em>all</em> possible categorical rating data. The <code>anesthesia</code> data included with {rater} (which includes repeated ratings) is represented in this format.</p>
-<p>To illustrate the differences between formats, the data used in the long data example will be used also presented in the wide and grouped formats below.</p>
+<p>We can read the first row, for example, of the dataset as saying that
+the item 1 was rated a 3 by rater 1. Repeated ratings are represented by
+rows with the same rater and item (and possibly rating) combination and
+missing data is represented simply by the absence of certain rater and
+item combinations. Long data is useful because it can represent
+<em>all</em> possible categorical rating data. The
+<code>anesthesia</code> data included with {rater} (which includes
+repeated ratings) is represented in this format.</p>
+<p>To illustrate the differences between formats, the data used in the
+long data example will be used also presented in the wide and grouped
+formats below.</p>
 </div>
-<div id="wide-data" class="section level2">
-<h2 class="hasAnchor">
-<a href="#wide-data" class="anchor" aria-hidden="true"></a>Wide data</h2>
-<p>The next data format which can be used in <code><a href="../reference/rater.html">rater()</a></code> is the wide format. In wide format data each column corresponds to the ratings of a particular rater, each row is an item and the entries of the corresponding table are the ratings themselves. For example the following table presents the previous long data example in wide format:</p>
+<div class="section level2">
+<h2 id="wide-data">Wide data<a class="anchor" aria-label="anchor" href="#wide-data"></a>
+</h2>
+<p>The next data format which can be used in <code><a href="../reference/rater.html">rater()</a></code> is the
+wide format. In wide format data each column corresponds to the ratings
+of a particular rater, each row is an item and the entries of the
+corresponding table are the ratings themselves. For example the
+following table presents the previous long data example in wide
+format:</p>
 <table class="table">
 <thead><tr class="header">
 <th align="right">rater_1</th>
@@ -190,13 +215,30 @@
 </tr>
 </tbody>
 </table>
-<p>This format is natural if there are no repeated ratings, which cannot be represented in this format. Missing data can be represented by explicit <code>NA</code> entries in the data. In <code><a href="../reference/rater.html">rater()</a></code> this format can be used by setting <code>data_format = "wide"</code>. Internally this simply converts the data to long format; there is no computational advantage to using wide data.</p>
-<p>Note that when wide data is passed to <code><a href="../reference/rater.html">rater()</a></code> any column names (i.e. <code>rater_1</code> and <code>rater_2</code> above) will be ignored and the raters will be numbered as they appear in the data left to right. In future ‘labelling’ of the rater may be supported in which case the columns names will be interpreted as the labels.</p>
+<p>This format is natural if there are no repeated ratings, which cannot
+be represented in this format. Missing data can be represented by
+explicit <code>NA</code> entries in the data. In <code><a href="../reference/rater.html">rater()</a></code>
+this format can be used by setting <code>data_format = "wide"</code>.
+Internally this simply converts the data to long format; there is no
+computational advantage to using wide data.</p>
+<p>Note that when wide data is passed to <code><a href="../reference/rater.html">rater()</a></code> any column
+names (i.e. <code>rater_1</code> and <code>rater_2</code> above) will be
+ignored and the raters will be numbered as they appear in the data left
+to right. In future ‘labelling’ of the rater may be supported in which
+case the columns names will be interpreted as the labels.</p>
 </div>
-<div id="grouped-data" class="section level2">
-<h2 class="hasAnchor">
-<a href="#grouped-data" class="anchor" aria-hidden="true"></a>Grouped data</h2>
-<p>The final format of data supported by {rater} is the grouped format. This format can be thought of as an extension of the wide format where rating ‘patterns’ which occurs multiple times are collapsed together, while a new column is added to represent how many times each pattern occurred in the original data. For example in the running data example the pattern of both raters giving the rating 2 occurs twice, while the pattern of rater 1 giving the rating a 3 and rater 2 giving the rating 4 occurs once. This is illustrated in the grouped data representation of the example data below:</p>
+<div class="section level2">
+<h2 id="grouped-data">Grouped data<a class="anchor" aria-label="anchor" href="#grouped-data"></a>
+</h2>
+<p>The final format of data supported by {rater} is the grouped format.
+This format can be thought of as an extension of the wide format where
+rating ‘patterns’ which occurs multiple times are collapsed together,
+while a new column is added to represent how many times each pattern
+occurred in the original data. For example in the running data example
+the pattern of both raters giving the rating 2 occurs twice, while the
+pattern of rater 1 giving the rating a 3 and rater 2 giving the rating 4
+occurs once. This is illustrated in the grouped data representation of
+the example data below:</p>
 <table class="table">
 <thead><tr class="header">
 <th align="right">rater_1</th>
@@ -216,8 +258,22 @@
 </tr>
 </tbody>
 </table>
-<p>Here the column <code>n</code> represents the number of times each pattern occurs. <code><a href="../reference/rater.html">rater()</a></code> requires that a column named <code>n</code> is the right most column in grouped data and will interpret the remaining columns as for wide data. Currently grouped data passed to <code><a href="../reference/rater.html">rater()</a></code> cannot contain any missing values. The <code>caries</code> data included in the package is in the {rater} grouped data format.</p>
-<p>The grouped format can only represent the same data as wide format, but it is still useful. This is because using grouped data allows a different from of the likelihood of the statistical models implemented in rater to be used, which can greatly speed up model fitting. If the number of patterns in the data is much less than the number of item by rater combinations (i.e. the number of rows in the long format) then using grouped data can lead to large speed-ups. Currently this re-writing of the likelihood is only available for the Dawid-Skene model, not any of the extensions implemented in the package.</p>
+<p>Here the column <code>n</code> represents the number of times each
+pattern occurs. <code><a href="../reference/rater.html">rater()</a></code> requires that a column named
+<code>n</code> is the right most column in grouped data and will
+interpret the remaining columns as for wide data. Currently grouped data
+passed to <code><a href="../reference/rater.html">rater()</a></code> cannot contain any missing values. The
+<code>caries</code> data included in the package is in the {rater}
+grouped data format.</p>
+<p>The grouped format can only represent the same data as wide format,
+but it is still useful. This is because using grouped data allows a
+different from of the likelihood of the statistical models implemented
+in rater to be used, which can greatly speed up model fitting. If the
+number of patterns in the data is much less than the number of item by
+rater combinations (i.e. the number of rows in the long format) then
+using grouped data can lead to large speed-ups. Currently this
+re-writing of the likelihood is only available for the Dawid-Skene
+model, not any of the extensions implemented in the package.</p>
 <hr>
 </div>
   </div>
@@ -239,7 +295,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link external-link">pkgdown</a> 1.6.1.9001.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

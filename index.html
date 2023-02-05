@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">rater</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.0.9000</span>
       </span>
     </div>
 
@@ -54,7 +54,7 @@
   <a href="reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -74,7 +74,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/Voltemand/rater">
+  <a href="https://github.com/Voltemand/rater" class="external-link">
     <span class="fa fa-lg fa-github"></span>
      
   </a>
@@ -91,51 +91,51 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="rater-" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#rater-" class="anchor" aria-hidden="true"></a>rater <img src="reference/figures/rater.png" align="right" width="160">
+<div class="section level1">
+<div class="page-header"><h1 id="rater-">rater <img src="reference/figures/rater.png" align="right" width="160"><a class="anchor" aria-label="anchor" href="#rater-"></a>
 </h1></div>
 <!-- badges: start -->
 
+<!-- badges: end -->
 <p><strong>rater</strong> provides tools for fitting and interrogating statistical models of repeated categorical rating data. The package provides a simple interface to fit a selection of these models, with arbitrary prior parameters, using MCMC and optimisation provided by <a href="https://mc-stan.org/" class="external-link">Stan</a>. A selection of functions are also provided to plot parts of these models and extract key parameters.</p>
-<div id="example-usage" class="section level2">
-<h2 class="hasAnchor">
-<a href="#example-usage" class="anchor" aria-hidden="true"></a>Example usage:</h2>
+<div class="section level2">
+<h2 id="example-usage">Example usage:<a class="anchor" aria-label="anchor" href="#example-usage"></a>
+</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jeffreypullin.github.io/rater/" class="external-link">rater</a></span><span class="op">)</span>
-
-<span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/rater.html">rater</a></span><span class="op">(</span><span class="va">anesthesia</span>, <span class="st">"dawid_skene"</span><span class="op">)</span> <span class="co"># Sampling output suppressed.</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jeffreypullin.github.io/rater/" class="external-link">rater</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/rater.html">rater</a></span><span class="op">(</span><span class="va">anesthesia</span>, <span class="st">"dawid_skene"</span><span class="op">)</span> <span class="co"># Sampling output suppressed.</span></span></code></pre></div>
 <p>Get the posterior mean of the “pi” parameter.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/point_estimate.html">point_estimate</a></span><span class="op">(</span><span class="va">fit</span>, <span class="st">"pi"</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">## $pi</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="co">## [1] 0.37586040 0.40654649 0.14337154 0.07422156</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/point_estimate.html">point_estimate</a></span><span class="op">(</span><span class="va">fit</span>, <span class="st">"pi"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">## $pi</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.37559632 0.40734481 0.14321934 0.07383953</span></span></code></pre></div>
 <p>Plot the accuracy matrices of the raters.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">fit</span>, <span class="st">"raters"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">fit</span>, <span class="st">"raters"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-plot-demo-1.png"><!-- --></p>
 </div>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor" aria-hidden="true"></a>Installation</h2>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <p><strong>rater</strong> requires the <strong>rstan</strong> package to fit models. Detailed instructions to install <strong>rstan</strong> can be found <a href="https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started" class="external-link">here</a></p>
-<div id="cran" class="section level3">
-<h3 class="hasAnchor">
-<a href="#cran" class="anchor" aria-hidden="true"></a>CRAN</h3>
+<div class="section level3">
+<h3 id="cran">CRAN<a class="anchor" aria-label="anchor" href="#cran"></a>
+</h3>
 <p>Install <strong>rater</strong> from CRAN with:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"rater"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"rater"</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="development" class="section level3">
-<h3 class="hasAnchor">
-<a href="#development" class="anchor" aria-hidden="true"></a>Development</h3>
+<div class="section level3">
+<h3 id="development">Development<a class="anchor" aria-label="anchor" href="#development"></a>
+</h3>
 <p>To install the development version of <strong>rater</strong> from GitHub run:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># install.packages("remotes")</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"jeffreypullin/rater"</span><span class="op">)</span></code></pre></div>
-<div id="installation-notes" class="section level4">
-<h4 class="hasAnchor">
-<a href="#installation-notes" class="anchor" aria-hidden="true"></a>Installation notes:</h4>
+<code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"jeffreypullin/rater"</span><span class="op">)</span></span></code></pre></div>
+<div class="section level4">
+<h4 id="installation-notes">Installation notes:<a class="anchor" aria-label="anchor" href="#installation-notes"></a>
+</h4>
 <ul>
 <li><p>When installing from source, i.e. when installing the development version or installing from CRAN on Linux, the <strong>Stan</strong> models in the package will be compiled - this will lead to an install time of few minutes. Please be patient - this compilation means that <strong>no</strong> compilation is required when using the package</p></li>
 <li><p>During compilation many warnings may be displayed in the terminal; these are harmless but impossible to suppress.</p></li>
@@ -150,29 +150,33 @@
     <div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=rater">https://​cloud.r-project.org/​package=rater</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/jeffreypullin/rater/">https://​github.com/​jeffreypullin/​rater/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/jeffreypullin/rater/issues">https://​github.com/​jeffreypullin/​rater/​issues</a>
-</li>
+<li><a href="https://cloud.r-project.org/package=rater" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/jeffreypullin/rater/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/jeffreypullin/rater/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
 <div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.r-project.org/Licenses/GPL-2">GPL-2</a></li>
+<li><a href="https://www.r-project.org/Licenses/GPL-2" class="external-link">GPL-2</a></li>
 </ul>
 </div>
 
 
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing rater</a></li>
+</ul>
+</div>
+
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Jeffrey Pullin <br><small class="roles"> Author, maintainer, copyright holder </small> <a href="https://orcid.org/0000-0003-3651-5471" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Damjan Vukcevic <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-7780-9586" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li><a href="authors.html">More on authors...</a></li>
+<li>Jeffrey Pullin <br><small class="roles"> Author, maintainer, copyright holder </small> <a href="https://orcid.org/0000-0003-3651-5471" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Damjan Vukcevic <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-7780-9586" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
 
@@ -180,7 +184,7 @@
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://cran.r-project.org/package=rater" class="external-link"><img src="https://www.r-pkg.org/badges/version/rater" alt="CRAN_Status_Badge"></a></li>
-<li><a href="https://github.com/jeffreypullin/rater/actions" class="external-link"><img src="https://github.com/jeffreypullin/rater/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+<li><a href="https://github.com/jeffreypullin/rater/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/jeffreypullin/rater/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://codecov.io/github/jeffreypullin/rater?branch=master" class="external-link"><img src="https://codecov.io/gh/jeffreypullin/rater/branch/master/graph/badge.svg" alt="Coverage status"></a></li>
 </ul>
 </div>
@@ -196,7 +200,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
