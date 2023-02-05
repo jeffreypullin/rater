@@ -5,10 +5,6 @@ test_that("point estiamte output is named", {
   expect_named(just_pi, "pi")
 })
 
-test_that("point estimate for theta errors appropriatly", {
-  expect_snapshot(point_estimate(hds_fit, pars = "theta"), error = TRUE)
-})
-
 test_that("validate_which error appropriatly", {
   expect_error(
     validate_which("which", 2),
@@ -165,7 +161,7 @@ test_that("theta point_estimate for grouped DS (MCMC + optimisation) is correct"
   apply(ds_optim_grouped_out, 1, function(x) expect_equal(rowSums(x), rep(1, K)))
 })
 
-test_that("theta point_esimate for CCDS(MCMC + optimsation) has correct form", {
+test_that("theta point_estimate for CCDS(MCMC + optimsation) has correct form", {
   J <- 5
   K <- 4
 
@@ -181,4 +177,19 @@ test_that("theta point_esimate for CCDS(MCMC + optimsation) has correct form", {
   expect_equal(dim(ccds_optim_out), c(J, K, K))
   expect_equal(var(ccds_optim_out[1, 1, -1]), 0)
   apply(ccds_optim_out, 1, function(x) expect_equal(rowSums(x), rep(1, K)))
+})
+
+test_that("theta point_estimate for HDS (MCMC + optimsation) has correct form", {
+  J <- 5
+  K <- 4
+
+  hds_mcmc_out <- point_estimate(hds_fit, pars = "theta")[[1]]
+  expect_true(is.array(hds_mcmc_out))
+  expect_equal(dim(hds_mcmc_out), c(J, K, K))
+  apply(hds_mcmc_out, 1, function(x) expect_equal(rowSums(x), rep(1, K)))
+
+  hds_optim_out <- point_estimate(hds_fit_optim, pars = "theta")[[1]]
+  expect_true(is.array(hds_optim_out))
+  expect_equal(dim(hds_optim_out), c(J, K, K))
+  apply(hds_optim_out, 1, function(x) expect_equal(rowSums(x), rep(1, K)))
 })

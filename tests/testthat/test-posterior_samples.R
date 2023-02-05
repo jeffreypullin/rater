@@ -1,11 +1,8 @@
 test_that("posterior_samples works (smoke test)", {
   expect_ok(posterior_samples(ds_fit))
   expect_ok(posterior_samples(ccds_fit))
+  expect_ok(posterior_samples(hds_fit))
   expect_ok(posterior_samples(ds_fit_grouped))
-})
-
-test_that("HDS errors informatively", {
-  expect_snapshot(posterior_samples(hds_fit), error = TRUE)
 })
 
 test_that("posterior_samples output has the correct form", {

@@ -32,9 +32,13 @@ test_that("posterior_interval for theta has the correct form", {
   expect_equal(dim(ds_theta_interval), c(J * K * K , 2))
   expect_equal(colnames(ds_theta_interval), c("5%", "95%"))
 
-  ccds_theta_interval <- posterior_interval(ds_fit, pars = "theta")
+  ccds_theta_interval <- posterior_interval(ccds_fit, pars = "theta")
   expect_equal(dim(ccds_theta_interval), c(J * K * K , 2))
   expect_equal(colnames(ccds_theta_interval), c("5%", "95%"))
+
+  hds_theta_interval <- posterior_interval(hds_fit, pars = "theta")
+  expect_equal(dim(hds_theta_interval), c(J * K * K , 2))
+  expect_equal(colnames(hds_theta_interval), c("5%", "95%"))
 })
 
 test_that("DS and CCDS posterior_interval for theta have the same rownames", {
@@ -52,10 +56,6 @@ test_that("posterior_interval errors correctly", {
     posterior_interval(ds_fit, pars = "z"),
     "Cannot calculate quantiles for z"
   )
-})
-
-test_that("posterior_interval errors informatively with the HDS", {
-  expect_snapshot(posterior_interval(hds_fit), error = TRUE)
 })
 
 test_that("posterior_interval orders parameters correctly", {

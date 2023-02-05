@@ -190,10 +190,6 @@ theta_point_estimate <- function(fit, which = NULL, ...) {
 #' @noRd
 theta_point_estimate.mcmc_fit <- function(fit, which = NULL, ...) {
 
-  if (inherits(fit$model, "hier_dawid_skene")) {
-    theta_point_estimate_hds()
-  }
-
   # We now 'unspool' the theta parameter for the class conditional model by
   # default so this works for both the standard and class conditional models.
   theta_samps <- posterior_samples(fit, pars = "theta")[[1]]
@@ -212,11 +208,29 @@ theta_point_estimate.mcmc_fit <- function(fit, which = NULL, ...) {
 #' @noRd
 theta_point_estimate.optim_fit <- function(fit, which = NULL, ...) {
   switch(fit$model$file,
-    "hierarchical_dawid_skene" = theta_point_estimate_hds(),
+    "hierarchical_dawid_skene" = theta_point_estimate_hds_optim(fit, which, ...),
     "dawid_skene" = theta_point_estimate_ds_optim(fit, which, ...),
     "class_conditional_dawid_skene" =
       theta_point_estimate_ccds_optim(fit, which, ...),
     stop("Model type not supported", call. = FALSE))
+}
+
+theta_point_estimate_hds_optim <- function(fit, which, ...) {
+  par <- fit$estimates$par
+  beta_norm_values <- par[grep("\\bbeta_norm\\b", names(par))]
+  K <- fit$stan_data$K
+  J <- fit$stan_data$J
+  if (is.null(which)) {
+    which <- 1:J
+  }
+  beta_norm <- array(beta_norm_values, dim = c(J, K, K))
+  theta <- array(dim = c(J, K, K))
+  for (j in seq_len(J)) {
+    for (k in seq_len(K)) {
+      theta[j, k, ] <- softmax(beta_norm[j, k, ])
+    }
+  }
+  theta
 }
 
 theta_point_estimate_ds_optim <- function(fit, which, ...) {
@@ -242,11 +256,6 @@ theta_point_estimate_ccds_optim <- function(fit, which, ...) {
   cc_theta <- matrix(cc_theta_values, nrow = J, ncol = K)
   theta <- unspool_cc_theta(cc_theta)
   theta[which, , ]
-}
-
-theta_point_estimate_hds <- function() {
-  stop("theta cannot be extracted from the Hierachical Dawid-Skene model.",
-       "\nConsider using `pars = c('pi', 'z')`.", call. = FALSE)
 }
 
 # Helper functions

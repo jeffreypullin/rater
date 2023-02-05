@@ -136,11 +136,6 @@ plot.rater_fit <- function(x,
 
   par <- match.arg(pars, plot_names)
 
-  if (is.hier_dawid_skene(get_model(x)) && (par %in% c("theta", "raters"))) {
-    stop("Cannot plot rater error matrices - theta - for hierarchical model.",
-         call. = FALSE)
-  }
-
   plot <- switch(par,
     "theta" = plot_theta(x, which = which),
     "raters" = plot_theta(x, which = which),
@@ -195,16 +190,14 @@ summary.mcmc_fit <- function(object, n_pars = 8, ...) {
 
   pars <- pi
 
-  if (!inherits(get_model(fit), "hier_dawid_skene")) {
-    # Prepare theta.
-    theta_est <- theta_to_long_format(theta_point_estimate(fit))
-    colnames(theta_est) <- "mean"
-    theta_interval <- posterior_interval(fit, pars = "theta")
-    theta_mcmc_diagnostics <- mcmc_diagnostics(fit, pars = "theta")
-    theta <- cbind(theta_est, theta_interval, theta_mcmc_diagnostics)
+  # Prepare theta.
+  theta_est <- theta_to_long_format(theta_point_estimate(fit))
+  colnames(theta_est) <- "mean"
+  theta_interval <- posterior_interval(fit, pars = "theta")
+  theta_mcmc_diagnostics <- mcmc_diagnostics(fit, pars = "theta")
+  theta <- cbind(theta_est, theta_interval, theta_mcmc_diagnostics)
 
-    pars <- rbind(pi, theta)
-  }
+  pars <- rbind(pi, theta)
 
   # Prepare z.
   class_probs <- class_probabilities(fit)
@@ -272,11 +265,9 @@ summary.optim_fit <- function(object, n_pars = 8, ...) {
   pars <- pi
 
   # Prepare theta.
-  if (!inherits(get_model(fit), "hier_dawid_skene")) {
-    theta <- theta_to_long_format(theta_point_estimate(fit))
-    colnames(theta) <- "mean"
-    pars <- rbind(pi, theta)
-  }
+  theta <- theta_to_long_format(theta_point_estimate(fit))
+  colnames(theta) <- "mean"
+  pars <- rbind(pi, theta)
 
   # Prepare z.
   class_probs <- class_probabilities(fit)
