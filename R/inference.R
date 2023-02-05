@@ -254,7 +254,7 @@ create_inits <- function(model, stan_data) {
   switch(get_file(model),
     "dawid_skene" = dawid_skene_inits(K, J),
     "class_conditional_dawid_skene" = class_conditional_dawid_skene_inits(K, J),
-    "hierarchical_dawid_skene" = "random",
+    "hierarchical_dawid_skene" = hier_dawid_skene_inits(K, J),
     stop("Unsupported model type", call. = FALSE))
 }
 
@@ -289,6 +289,26 @@ class_conditional_dawid_skene_inits <- function(K, J) {
   pi_init <- rep(1/K, K)
   theta_init <- matrix(0.8, nrow = J, ncol = K)
   function(n) list(theta = theta_init, pi = pi_init)
+}
+
+#' Creates initialization points for the Hierarchical Dawid-Skene model.
+#'
+#' @param K number of categories
+#' @param J number of raters
+#'
+#' @return Initialization points in the format required by Stan.
+#'
+#' @noRd
+#'
+hier_dawid_skene_inits <- function(K, J) {
+  pi_init <- rep(1 / K, K)
+  zeta_init <- matrix(0, nrow = K, ncol = K - 1)
+  diag(zeta_init) <- 6
+  # Mean of half-normal distribution.
+  omega_init <- matrix(sqrt(2) / sqrt(pi), nrow = K, ncol = K - 1)
+  beta_raw_init <- array(0, c(J, K, K - 1))
+  function(n) list(pi = pi_init, zeta = zeta_init, omega = omega_init,
+                   beta_raw = beta_raw_init)
 }
 
 #' Helper to check if the prior parameters and data have consistent dimensions
