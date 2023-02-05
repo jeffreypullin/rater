@@ -11,9 +11,10 @@ set.seed(1)
 
 <!-- badges: start -->
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/rater)](https://cran.r-project.org/package=rater)
-[![R build status](https://github.com/jeffreypullin/rater/workflows/R-CMD-check/badge.svg)](https://github.com/jeffreypullin/rater/actions)
+[![R-CMD-check](https://github.com/jeffreypullin/rater/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jeffreypullin/rater/actions/workflows/R-CMD-check.yaml)
 [![Coverage status](https://codecov.io/gh/jeffreypullin/rater/branch/master/graph/badge.svg)](https://codecov.io/github/jeffreypullin/rater?branch=master)
 ![pkgdown](https://github.com/jeffreypullin/rater/workflows/pkgdown/badge.svg)
+
 <!-- badges: end -->
 
 **rater** provides tools for fitting and interrogating statistical models of repeated categorical rating data. The package provides a simple interface to fit a selection of these models, with arbitrary prior parameters, using MCMC and optimisation provided by [Stan](https://mc-stan.org/). A selection of functions are also provided to plot parts of these models and extract key parameters. 
