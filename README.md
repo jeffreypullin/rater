@@ -3,12 +3,12 @@
 
 <!-- badges: start -->
 
-[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/rater)](https://cran.r-project.org/package=rater)
-[![R build
-status](https://github.com/jeffreypullin/rater/workflows/R-CMD-check/badge.svg)](https://github.com/jeffreypullin/rater/actions)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/rater)](https://cran.r-project.org/package=rater)
+[![R-CMD-check](https://github.com/jeffreypullin/rater/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jeffreypullin/rater/actions/workflows/R-CMD-check.yaml)
 [![Coverage
 status](https://codecov.io/gh/jeffreypullin/rater/branch/master/graph/badge.svg)](https://codecov.io/github/jeffreypullin/rater?branch=master)
 ![pkgdown](https://github.com/jeffreypullin/rater/workflows/pkgdown/badge.svg)
+
 <!-- badges: end -->
 
 **rater** provides tools for fitting and interrogating statistical
@@ -33,7 +33,7 @@ point_estimate(fit, "pi")
 ```
 
     ## $pi
-    ## [1] 0.37586040 0.40654649 0.14337154 0.07422156
+    ## [1] 0.37559632 0.40734481 0.14321934 0.07383953
 
 Plot the accuracy matrices of the raters.
 
@@ -68,11 +68,11 @@ remotes::install_github("jeffreypullin/rater")
 
 #### Installation notes:
 
--   When installing from source, i.e. when installing the development
-    version or installing from CRAN on Linux, the **Stan** models in the
-    package will be compiled - this will lead to an install time of few
-    minutes. Please be patient - this compilation means that **no**
-    compilation is required when using the package
+- When installing from source, i.e. when installing the development
+  version or installing from CRAN on Linux, the **Stan** models in the
+  package will be compiled - this will lead to an install time of few
+  minutes. Please be patient - this compilation means that **no**
+  compilation is required when using the package
 
--   During compilation many warnings may be displayed in the terminal;
-    these are harmless but impossible to suppress.
+- During compilation many warnings may be displayed in the terminal;
+  these are harmless but impossible to suppress.
