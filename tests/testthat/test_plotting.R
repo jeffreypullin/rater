@@ -8,10 +8,7 @@ test_that("Plotting works for long data models fit with MCMC (smoke test)", {
   expect_ok(plot(ccds_fit, "class_probabilities"))
 
   expect_ok(plot(hds_fit, "pi"))
-  expect_error(
-    plot(hds_fit, "theta"),
-    "Cannot plot rater error matrices - theta - for hierarchical model."
-  )
+  expect_ok(plot(hds_fit, "theta"))
   expect_ok(plot(hds_fit, "class_probabilities"))
 })
 
@@ -25,10 +22,7 @@ test_that("Plotting works for long data models fit with optimisation (smoke test
   expect_ok(plot(ccds_fit_optim, "class_probabilities"))
 
   expect_ok(plot(hds_fit_optim, "pi"))
-  expect_error(
-    plot(hds_fit_optim, "theta"),
-    "Cannot plot rater error matrices - theta - for hierarchical model."
-  )
+  expect_ok(plot(hds_fit_optim, "theta"))
   expect_ok(plot(hds_fit_optim, "class_probabilities"))
 })
 

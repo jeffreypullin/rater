@@ -56,11 +56,6 @@ mcmc_diagnostics <- function(fit, pars = c("pi", "theta")) {
          call. = FALSE)
   }
 
-  if (is.hier_dawid_skene(get_model(fit)) && ("theta" %in% pars)) {
-     stop("theta cannot be extracted from the Hierachical Dawid-Skene model.",
-          "\nConsider using `pars = c('pi')`.", call. = FALSE)
-  }
-
   diagnostics <- matrix(nrow = 0, ncol = 2)
 
   if ("pi" %in% pars) {
@@ -83,12 +78,34 @@ mcmc_diagnostics <- function(fit, pars = c("pi", "theta")) {
   if ("theta" %in% pars) {
     K <- fit$stan_data$K
     J <- fit$stan_data$J
-    draws <- rstan::extract(get_samples(fit), pars = "theta", permuted = FALSE)
+
+    if (inherits(get_model(fit), "hier_dawid_skene")) {
+      draws <- rstan::extract(get_samples(fit), pars = "beta_norm",
+                              permuted = FALSE)
+    } else {
+      draws <- rstan::extract(get_samples(fit), pars = "theta",
+                              permuted = FALSE)
+    }
 
     theta_diagnostics <- matrix(nrow = J * K * K, ncol = 2)
     row_names <- character(J * K * K)
 
-    if (inherits(get_model(fit), "class_conditional_dawid_skene")) {
+    if (inherits(get_model(fit), "hier_dawid_skene")) {
+      # Here we assume that the MCMC diagnostics apply to the derived
+      # theta parameter.
+      n <- 1
+      for (j in 1:J) {
+        for (k in 1:K) {
+          for (i in 1:K) {
+            stan_name <- sprintf("beta_norm[%s,%s,%s]", j, k, i)
+            theta_diagnostics[n, 1] <- rstan::Rhat(draws[, , stan_name])
+            theta_diagnostics[n, 2] <- rstan::ess_bulk(draws[, , stan_name])
+            row_names[[n]] <- sprintf("theta[%s, %s, %s]", j, k, i)
+            n <- n + 1
+          }
+        }
+      }
+    } else if (inherits(get_model(fit), "class_conditional_dawid_skene")) {
       n <- 1
       for (j in 1:J) {
         for (k in 1:K) {
