@@ -144,3 +144,8 @@ waic.rater_fit <- function(x, ...) {
 
   waic
 }
+
+# Re-export the loo_compare function.
+#' @importFrom loo loo_compare
+#' @export
+loo::loo_compare
