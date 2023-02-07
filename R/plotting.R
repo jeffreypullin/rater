@@ -156,7 +156,7 @@ plot_class_probabilities <- function(fit, item_index = NULL) {
     )
   } else {
 
-    if (!is.numeric(item_index) || !(item_index %in% 1:I)) {
+    if (!is.numeric(item_index) || !all(item_index %in% 1:I)) {
       stop("`item_index` must be a numeric vector with elements in 1:I",
            call. = FALSE)
     }
