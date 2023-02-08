@@ -40,10 +40,6 @@ posterior_predict.rater_fit <- function(object, new_data, seed = NULL, ...) {
   }
 
   fit <- object
-  if (inherits(get_model(fit), "hier_dawid_skene")) {
-    stop("The posterior_predict is not currently implmented for the ",
-         "\n Hierarchical Dawid-Skene model.", call. = FALSE)
-  }
 
   new_data <- as.data.frame(new_data)
   col_names <- colnames(new_data)

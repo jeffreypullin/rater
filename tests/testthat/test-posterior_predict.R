@@ -1,9 +1,3 @@
-test_that("posterior_predict errors for the HDS model", {
-  new_data <- data.frame(item = rep(1:2, each = J), rater = rep(1:J, 2))
-  expect_snapshot(posterior_predict(hds_fit, new_data), error = TRUE)
-  expect_snapshot(posterior_predict(hds_fit_optim, new_data), error = TRUE)
-})
-
 test_that("posterior_predict works for all other model types (smoke test)", {
   J <- 5
   new_data <- data.frame(item = rep(1:2, each = J), rater = rep(1:J, 2))
@@ -16,6 +10,9 @@ test_that("posterior_predict works for all other model types (smoke test)", {
 
   expect_ok(posterior_predict(ds_fit_grouped, new_data))
   expect_ok(posterior_predict(ds_fit_grouped_optim, new_data))
+
+  expect_ok(posterior_predict(hds_fit, new_data))
+  expect_ok(posterior_predict(hds_fit_optim, new_data))
 })
 
 test_that("posterior_predict respects the seed", {
