@@ -27,9 +27,6 @@ Draw from the posterior predictive distribution
 \details{
 The number of raters implied by the entries in the rater column
 must match the number of raters in the fitted model.
-
-Due to technical issues drawing from the posterior predictive distribution
-of the hierarchical Dawid-Skene model is currently not supported.
 }
 \examples{
 
