@@ -26,7 +26,7 @@ test_that("loo output is the right format", {
 test_that("loo_compare works (smoke test)", {
   loo_ds <- suppressWarnings(loo(ds_fit))
   loo_ccds <- suppressWarnings(loo(ccds_fit))
-  expect_no_error(loo_compare(loo_ds, loo_ccds))
+  expect_ok(loo_compare(loo_ds, loo_ccds))
 })
 
 test_that("waic errors appropriately", {
