@@ -9,6 +9,7 @@ rater(
   model,
   method = "mcmc",
   data_format = "long",
+  long_data_colnames = c(item = "item", rater = "rater", rating = "rating"),
   inits = NULL,
   verbose = TRUE,
   ...
@@ -28,6 +29,16 @@ This will be fitting method used by Stan. By default \code{"mcmc"}}
 \item{data_format}{A length 1 character vector, \code{"long"}, \code{"wide"} and
 \code{"grouped"}. The format that the passed data is in. Defaults to \code{"long"}.
 See \verb{vignette("data-formats)} for details.}
+
+\item{long_data_colnames}{A 3-element named character vector that specifies
+the names of the three required columns in the long data format. The vector
+must have the required names:
+* item: the name of the column containing the item indexes,
+* rater: the name of the column containing the rater indexes,
+* rating: the name of the column containing the ratings.
+By default, the names of the columns are the same as the names of the
+vector: \code{"item"}, \code{"rater"}, and \code{"rating"} respectively. This argument is
+ignored when the \code{data_format} argument is either \code{"wide"} or \code{"grouped"}.}
 
 \item{inits}{The initialization points of the fitting algorithm}
 

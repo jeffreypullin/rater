@@ -22,6 +22,12 @@ ds_model <- dawid_skene()
 hds_model <- hier_dawid_skene()
 ccds_model <- class_conditional_dawid_skene()
 
+default_colnames <- c(
+  item = "item",
+  rater = "rater",
+  rating = "rating"
+)
+
 J <- 5
 I <- 45
 K <- 4

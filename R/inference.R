@@ -16,6 +16,15 @@
 #' @param data_format A length 1 character vector, `"long"`, `"wide"` and
 #'   `"grouped"`. The format that the passed data is in. Defaults to `"long"`.
 #'   See `vignette("data-formats)` for details.
+#' @param long_data_colnames A 3-element named character vector that specifies
+#'   the names of the three required columns in the long data format. The vector
+#'   must have the required names:
+#'     * item: the name of the column containing the item indexes,
+#'     * rater: the name of the column containing the rater indexes,
+#'     * rating: the name of the column containing the ratings.
+#'   By default, the names of the columns are the same as the names of the
+#'   vector: `"item"`, `"rater"`, and `"rating"` respectively. This argument is
+#'   ignored when the `data_format` argument is either `"wide"` or `"grouped"`.
 #' @param inits The initialization points of the fitting algorithm
 #' @param verbose Should `rater()` produce information about the progress
 #'   of the chains while using the MCMC algorithm. Defaults to `TRUE`
@@ -52,17 +61,25 @@ rater <- function(data,
                   model,
                   method = "mcmc",
                   data_format = "long",
+                  long_data_colnames = c(
+                    item = "item",
+                    rater = "rater",
+                    rating = "rating"
+                  ),
                   inits = NULL,
                   verbose = TRUE,
-                  ...) {
+                  ...
+                  ) {
 
   method <- match.arg(method, choices = c("mcmc", "optim"))
   data_format <- match.arg(data_format, choices = c("long", "grouped", "wide"))
 
-  model <- validate_model(model)
-  data <- validate_input(data, model, data_format)
+  check_long_data_colnames(long_data_colnames, data_format)
 
-  stan_data_list <- as_stan_data(data, data_format)
+  model <- validate_model(model)
+  data <- validate_input(data, model, data_format, long_data_colnames)
+
+  stan_data_list <- as_stan_data(data, data_format, long_data_colnames)
 
   # Check the priors and data are consistent.
   check_K(stan_data_list, model)
@@ -105,6 +122,8 @@ rater <- function(data,
 #'
 #' @param data Validated passed data
 #' @param data_format String specifying the format of the data
+#' @param long_data_colnames A named vector specifying the names of the
+#'   three column names in the long data format.
 #'
 #' @details The function accepts validated data. So we know that the data
 #'   will be a data.frame with the appropriate column names. See
@@ -114,7 +133,7 @@ rater <- function(data,
 #'
 #' @noRd
 #'
-as_stan_data <- function(data, data_format) {
+as_stan_data <- function(data, data_format, long_data_colnames) {
 
   if (data_format == "grouped") {
     tally <- data[, ncol(data)]
@@ -134,16 +153,20 @@ as_stan_data <- function(data, data_format) {
     data <- wide_to_long(data)
   }
 
-  # The data must be in long format here.
+  # Data is now in long format.
+
+  item_col_name <- long_data_colnames[["item"]]
+  rater_col_name <- long_data_colnames[["rater"]]
+  rating_col_name <- long_data_colnames[["rating"]]
 
   stan_data <- list(
     N = nrow(data),
-    I = max(data$item),
-    J = max(data$rater),
-    K = max(data$rating),
-    ii = data$item,
-    jj = data$rater,
-    y = data$rating
+    I = max(data[[item_col_name]]),
+    J = max(data[[rater_col_name]]),
+    K = max(data[[rating_col_name ]]),
+    ii = data[[item_col_name]],
+    jj = data[[rater_col_name]],
+    y = data[[rating_col_name]]
   )
 
   stan_data
@@ -377,38 +400,77 @@ validate_model <- function(model) {
   model
 }
 
+#' Helper function to check that the `long_data_colnames` is valid.
+#'
+#' @param long_data_colnames The `long_data_colnames` argument
+#'   passed to [rater()]
+#' @param data_format The `data` argument passed to [rater()]
+#' @noRd
+#'
+check_long_data_colnames <- function(long_data_colnames, data_format) {
+
+  if (!length(long_data_colnames) == 3L) {
+    stop("`long_data_colnames` must be length three.", call. = FALSE)
+  }
+
+  if (!is.character(long_data_colnames)) {
+    stop("`long_data_colnames` must be a character vector.", call. = FALSE)
+  }
+
+  required_names <- c("item", "rater", "rating")
+  passed_names <- names(long_data_colnames)
+  if (is.null(passed_names) || !all(passed_names %in% required_names)) {
+    stop("`long_data_colnames` must have names: `item`, `rater` and `rating`.",
+         call. = FALSE)
+  }
+
+  default_long_data_colnames <- c(
+    item = "item",
+    rater = "rater",
+    rating = "rating"
+  )
+  same_as_default <- all(long_data_colnames == default_long_data_colnames)
+  if (!same_as_default && data_format != "long") {
+    warning("Non-default `long_data_colnames` will be ignored as ",
+            "`data_format` is not `'long'`.", call. = FALSE)
+  }
+}
+
 #' Helper to check if passed data and model are valid and consistent
 #'
 #' @param data The `data` argument passed to [rater()]
 #' @param model The `model` argument passed to [rater()]
 #' @param data_format The `data_format` argument passed to [rater()]
+#' @param long_data_colnames The `long_data_colnames` argument passed to
+#'   [rater()]
 #'
 #' @return Validated data. This will always be a data.frame with the
 #'   appropriate column names for the column names.
 #'
 #' @noRd
 #'
-validate_input <- function(data, model, data_format) {
+validate_input <- function(data, model, data_format, long_data_colnames) {
 
   if (data_format == "grouped" & !is.dawid_skene(model)) {
     stop("Grouped data can only be used with the Dawid and Skene model.",
          call. = FALSE)
   }
 
-  validate_data(data, data_format)
+  validate_data(data, data_format, long_data_colnames)
 }
 
 #' Validate the data passed into the rater function
 #'
 #' @param data The `data` argument passed to [rater()]
 #' @param data_format The `data_format` argument passed to [rater()]
-#'
+#' @param long_data_colnames The `long_data_colnames` argument passed to
+#'   [rater()]
 #' @return Validated data. This will always be a data.frame with the
 #'   appropriate column names for the column names.
 #'
 #' @noRd
 #'
-validate_data <- function(data, data_format) {
+validate_data <- function(data, data_format, long_data_colnames) {
 
   # TODO: The error message in this function should refer to a vignette
   # or vignette section about data format.
@@ -431,7 +493,6 @@ validate_data <- function(data, data_format) {
 
     # The data probably isn't in long format.
     if (ncol(data) > 3) {
-
       # If there is a value greater than 30 then the data probability includes
       # a count/tally as a 30 category rating would be silly.
       if (max(data, na.rm = TRUE) > 30) {
@@ -446,27 +507,27 @@ validate_data <- function(data, data_format) {
       stop("Long format `data` must have exactly three columns.", call. = FALSE)
     }
 
-    if (!(all(c("rater", "item", "rating") %in% colnames(data)))) {
-      stop("Long `data` must have three columns with names: `rater`, `item`",
-           " and `rating`.", call. = FALSE)
+    if (!(all(long_data_colnames %in% colnames(data)))) {
+      stop("Long format `data` must have three columns with names: ",
+           paste0(long_data_colnames, collapse = ", "), ".", call. = FALSE)
     }
 
     # The following are errors about 0 elements. We try to show these errors
     # all at once to prevent undue frustration.
     error_messages <- character(0)
-    if (any(data[[1]] == 0)) {
+    if (any(data[[long_data_colnames[["item"]]]] == 0)) {
        error_messages <- c(error_messages, paste0(
         "Some item indexes are 0. All indexes must be in 1:I",
         " where I is the number of items."))
     }
 
-    if (any(data[[2]] == 0)) {
+    if (any(data[[long_data_colnames[["rater"]]]] == 0)) {
       error_messages <- c(error_messages, paste0(
         "Some rater indexes are 0. All indexes must be in 1:J",
         " where J is the number of raters."))
     }
 
-    if (any(data[[3]] == 0)) {
+    if (any(data[[long_data_colnames[["rating"]]]] == 0)) {
       error_messages <- c(error_messages, paste0(
         "Some ratings are 0. All ratings must be in 1:K",
         " where K is the number of classes."))

@@ -59,7 +59,7 @@ test_that("rater errors correctly", {
   )
   expect_error(
     rater(data.frame(item = 1, rater = 1, ratingg = 1), dawid_skene()),
-    "Long `data` must have three columns with names: `rater`, `item` and `rating`."
+    "Long format `data` must have three columns with names: item, rater, rating."
   )
   expect_error(
     rater(data.frame(anything = 1, not_n = 1), dawid_skene(), data_format = "grouped"),
@@ -100,7 +100,7 @@ test_that("rater provides useful messages for probably not long data", {
 
 test_that("parse_priors is correct for the Dawid-Skene model", {
 
-  anesthesia_list <- as_stan_data(anesthesia, "long")
+  anesthesia_list <- as_stan_data(anesthesia, "long", default_colnames)
 
   K <- anesthesia_list$K
   J <- anesthesia_list$J
@@ -187,12 +187,12 @@ test_that("as_stan_data handles wide data correctly", {
                           rater = c(1, 2, 1, 2, 1, 2),
                           rating = c(3, 4, 2, 2, 2, 2))
 
-  expect_equal(as_stan_data(wide_data, "wide"),
-               as_stan_data(long_data, "long"))
+  expect_equal(as_stan_data(wide_data, "wide", default_colnames),
+               as_stan_data(long_data, "long", default_colnames))
 })
 
 test_that("create_inits() works for the Dawid-Skene model", {
-  anesthesia_stan_data <- as_stan_data(anesthesia, "long")
+  anesthesia_stan_data <- as_stan_data(anesthesia, "long", default_colnames)
   K <- anesthesia_stan_data$K
   J <- anesthesia_stan_data$J
 
@@ -210,7 +210,7 @@ test_that("create_inits() works for the Dawid-Skene model", {
 })
 
 test_that("create_inits() works for the class conditional Dawid-Skene model", {
-  anesthesia_stan_data <- as_stan_data(anesthesia, "long")
+  anesthesia_stan_data <- as_stan_data(anesthesia, "long", default_colnames)
   K <- anesthesia_stan_data$K
   J <- anesthesia_stan_data$J
 
@@ -225,8 +225,65 @@ test_that("create_inits() works for the class conditional Dawid-Skene model", {
 })
 
 test_that("create_inits() works for the hierarchical Dawid-Skene model", {
-  anesthesia_stan_data <- as_stan_data(anesthesia, "long")
+  anesthesia_stan_data <- as_stan_data(anesthesia, "long", default_colnames)
 
   hds_init_func <- create_inits(hier_dawid_skene(), anesthesia_stan_data)
   expect_named(hds_init_func(), c("pi", "zeta", "omega", "beta_raw"))
 })
+
+test_that("Invalid `long_data_colnames` generates appropriate errors", {
+
+  expect_error(
+    rater(anesthesia, "dawid_skene", long_data_colnames = lapply(1:4, identity)),
+    "`long_data_colnames` must be length three."
+  )
+
+  expect_error(
+    rater(anesthesia, "dawid_skene", long_data_colnames = 1:3),
+    "`long_data_colnames` must be a character vector."
+  )
+
+  expect_error(
+    rater(anesthesia, "dawid_skene", long_data_colnames = letters[1:3]),
+    "`long_data_colnames` must have names: `item`, `rater` and `rating`."
+  )
+
+  expect_error(
+    rater(anesthesia, "dawid_skene",
+          long_data_colnames = c(item = "a", rater = "b", ratingg = "c")),
+    "`long_data_colnames` must have names: `item`, `rater` and `rating`."
+  )
+
+  expect_warning(
+    rater(caries, "dawid_skene", data_format = "grouped", method = "optim",
+          long_data_colnames = c(item = "a", rater = "b", rating = "c")),
+    "Non-default `long_data_colnames` will be ignored as `data_format` is not `'long'`"
+  )
+})
+
+test_that("Non-default `long_data_colnames` works", {
+
+  skip_on_cran()
+
+  new_anesthesia_1 <- anesthesia
+  colnames(new_anesthesia_1) <- c("a", "b", "c")
+
+  expect_identical(
+    rater(new_anesthesia_1, "dawid_skene", method = "optim",
+          long_data_colnames = c(item = "a", rater = "b", rating = "c")
+          ),
+    rater(anesthesia, "dawid_skene", method = "optim")
+  )
+
+  new_anesthesia_2 <- anesthesia
+  colnames(new_anesthesia_2) <- c("a", "b", "c")
+  new_anesthesia_2 <- new_anesthesia_2[, c(2, 1, 3)]
+
+  expect_identical(
+    rater(new_anesthesia_2, "dawid_skene", method = "optim",
+          long_data_colnames = c(item = "a", rater = "b", rating = "c")
+          ),
+    rater(anesthesia, "dawid_skene", method = "optim")
+  )
+})
+
