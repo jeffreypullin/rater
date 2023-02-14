@@ -46,6 +46,12 @@
     <loc>/reference/loo.rater_fit.html</loc>
   </url>
   <url>
+    <loc>/reference/make_complete_rating_design_sim_data.html</loc>
+  </url>
+  <url>
+    <loc>/reference/make_theta.html</loc>
+  </url>
+  <url>
     <loc>/reference/mcmc_diagnostics.html</loc>
   </url>
   <url>
@@ -89,6 +95,12 @@
   </url>
   <url>
     <loc>/reference/reexports.html</loc>
+  </url>
+  <url>
+    <loc>/reference/simulate_dawid_skene_model.html</loc>
+  </url>
+  <url>
+    <loc>/reference/simulate_hier_dawid_skene_model.html</loc>
   </url>
   <url>
     <loc>/reference/summary.mcmc_fit.html</loc>
