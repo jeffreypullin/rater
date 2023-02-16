@@ -106,35 +106,43 @@ test_that("class_probabilites output has correct form", {
 
   out <- class_probabilities(ds_fit)
   expect_equal(dim(out), c(I, K))
-  expect_equal(rowSums(out), rep(1, I))
+  expect_equal(unname(rowSums(out)), rep(1, I))
+  expect_equal(rownames(out), as.character(1:I))
 
   out <- class_probabilities(ds_fit_optim)
   expect_equal(dim(out), c(I, K))
-  expect_equal(rowSums(out), rep(1, I))
+  expect_equal(unname(rowSums(out)), rep(1, I))
+  expect_equal(rownames(out), as.character(1:I))
 
   out <- class_probabilities(ds_fit_grouped)
   expect_equal(dim(out), c(I_caries, K_caries))
-  expect_equal(rowSums(out), rep(1, I_caries))
+  expect_equal(unname(rowSums(out)), rep(1, I_caries))
+  expect_equal(rownames(out), as.character(1:I_caries))
 
   out <- class_probabilities(ds_fit_grouped_optim)
   expect_equal(dim(out), c(I_caries, K_caries))
-  expect_equal(rowSums(out), rep(1, I_caries))
+  expect_equal(unname(rowSums(out)), rep(1, I_caries))
+  expect_equal(rownames(out), as.character(1:I_caries))
 
   out <- class_probabilities(ccds_fit)
   expect_equal(dim(out), c(I, K))
-  expect_equal(rowSums(out), rep(1, I))
+  expect_equal(unname(rowSums(out)), rep(1, I))
+  expect_equal(rownames(out), as.character(1:I))
 
   out <- class_probabilities(ccds_fit_optim)
   expect_equal(dim(out), c(I, K))
-  expect_equal(rowSums(out), rep(1, I))
+  expect_equal(unname(rowSums(out)), rep(1, I))
+  expect_equal(rownames(out), as.character(1:I))
 
   out <- class_probabilities(hds_fit)
   expect_equal(dim(out), c(I, K))
-  expect_equal(rowSums(out), rep(1, I))
+  expect_equal(unname(rowSums(out)), rep(1, I))
+  expect_equal(rownames(out), as.character(1:I))
 
   out <- class_probabilities(hds_fit_optim)
   expect_equal(dim(out), c(I, K))
-  expect_equal(rowSums(out), rep(1, I))
+  expect_equal(unname(rowSums(out)), rep(1, I))
+  expect_equal(rownames(out), as.character(1:I))
 })
 
 test_that("theta point_estimate for long DS (MCMC + optimisation) is correct", {
