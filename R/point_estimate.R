@@ -148,6 +148,7 @@ class_probabilities.mcmc_fit <- function(fit, ...) {
   if (fit$data_format == "grouped") {
     p_z <- enlarge_z(p_z, fit)
   }
+  rownames(p_z) <- as.character(seq_len(nrow(p_z)))
   p_z
 }
 
@@ -167,6 +168,7 @@ class_probabilities.optim_fit <- function(fit, ...) {
   if (fit$data_format == "grouped") {
     p_z <- enlarge_z(p_z, fit)
   }
+  rownames(p_z) <- as.character(seq_len(nrow(p_z)))
   p_z
 }
 
