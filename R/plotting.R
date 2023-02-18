@@ -128,6 +128,60 @@ plot_theta <- function(fit, which = NULL) {
   plot
 }
 
+#' Plot the rater accuracy estimates with uncertainty
+#'
+#' @param fit rater fit object
+#' @param which which raters to plot
+#'
+#' @return Plot of the rater accuracy estimates with uncertainty visualised
+#'
+#' @importFrom ggplot2 ggplot aes geom_tile geom_text facet_wrap labs guides
+#'      scale_fill_gradient theme_bw theme element_rect element_blank
+#' @importFrom rlang .data
+#'
+#' @noRd
+#'
+plot_theta_points <- function(fit, prob = 0.9, which = NULL) {
+
+  theta_point_est <- point_estimate(fit, pars = "theta")$theta
+  theta_cred_int <- posterior_interval(fit, pars = "theta", prob = prob)
+  theta_point_est_long <- theta_to_long_format(theta_point_est)
+  J <- fit$stan_data$J
+  K <- fit$stan_data$K
+
+  if (is.null(which)) {
+    which <- 1:J
+  }
+
+  plot_data <- data.frame(cbind(theta_point_est_long, theta_cred_int))
+  plot_data$theta_name <- rownames(plot_data)
+  rownames(plot_data) <- NULL
+  colnames(plot_data) <- c("theta", "theta_lower", "theta_upper", "theta_name")
+
+  ind <- rep(1:J, each = K * K)
+  which_ind <- which(ind %in% which)
+  plot_data <- plot_data[which_ind, ]
+
+  plot_data$theta_name <- factor(plot_data$theta_name,
+                                 levels = rev(plot_data$theta_name))
+
+  percent <- paste0(prob * 100, "%")
+  plot <- ggplot2::ggplot(plot_data, ggplot2::aes(x = .data$theta_name,
+                                                  y = .data$theta)) +
+    ggplot2::geom_point(size = 2, colour = "steelblue") +
+    ggplot2::geom_errorbar(ggplot2::aes(ymin = .data$theta_lower,
+                                        ymax = .data$theta_upper),
+                           width = 0.15, colour = "steelblue") +
+    ggplot2::coord_flip(ylim = c(0, 1)) +
+    ggplot2::scale_y_continuous(breaks = seq(0, 1, by = 0.2)) +
+    ggplot2::labs(x = "",
+                  y = "Rater probability",
+                  caption = paste0(percent, " credible intervals")) +
+    ggplot2::theme_bw()
+
+  plot
+}
+
 #' Plot the latent class estimates of a rater fit.
 #'
 #' @param fit A `rater_fit` object.

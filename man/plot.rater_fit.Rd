@@ -4,7 +4,15 @@
 \alias{plot.rater_fit}
 \title{Plot a \code{rater_fit} object}
 \usage{
-\method{plot}{rater_fit}(x, pars = "theta", prob = 0.9, rater_index = NULL, item_index = NULL, ...)
+\method{plot}{rater_fit}(
+  x,
+  pars = "theta",
+  prob = 0.9,
+  rater_index = NULL,
+  item_index = NULL,
+  theta_plot_type = "matrix",
+  ...
+)
 }
 \arguments{
 \item{x}{An object of class \code{rater_fit}.}
@@ -23,7 +31,15 @@ which means that all raters will be plotted.}
 plot. If not plotting the class probabilities this argument will be
 ignored. By default \code{NULL} which means that all items will be plotted.
 This argument is particularly useful to focus the subset of items with
-substantial uncertiuanlty in their class assignments.}
+substantial uncertainty in their class assignments.}
+
+\item{theta_plot_type}{The type of plot of the "theta" parameter. Can be
+either \code{"matrix"} or \code{"points"}. If \code{"matrix"} (the default) the plot
+will show the point estimates of the individual rater error matrices,
+visualised as tile plots. If \code{"points"}, the elements of the theta
+parameter will be displayed as points, with associated credible intervals.
+Overall, the \code{"matrix"} type is likely more intuitive, but the \code{"points"}
+type can also visualise the uncertainty in the parameter estimates.}
 
 \item{...}{Other arguments.}
 }
@@ -47,6 +63,9 @@ plot(fit)
 
 # Select which parameter to plot.
 plot(fit, pars = "pi")
+
+# Plot the theta parameter for rater 1, showing uncertainty.
+plot(fit, pars = "theta", theta_plot_type = "points", rater_index = 1)
 
 }
 
