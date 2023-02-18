@@ -95,7 +95,14 @@ print.optim_fit <- function(x, ...) {
 #'   plot. If not plotting the class probabilities this argument will be
 #'   ignored. By default `NULL` which means that all items will be plotted.
 #'   This argument is particularly useful to focus the subset of items with
-#'   substantial uncertiuanlty in their class assignments.
+#'   substantial uncertainty in their class assignments.
+#' @param theta_plot_type The type of plot of the "theta" parameter. Can be
+#'   either `"matrix"` or `"points"`. If `"matrix"` (the default) the plot
+#'   will show the point estimates of the individual rater error matrices,
+#'   visualised as tile plots. If `"points"`, the elements of the theta
+#'   parameter will be displayed as points, with associated credible intervals.
+#'   Overall, the `"matrix"` type is likely more intuitive, but the `"points"`
+#'   type can also visualise the uncertainty in the parameter estimates.
 #' @param ... Other arguments.
 #'
 #' @return A ggplot2 object.
@@ -114,6 +121,9 @@ print.optim_fit <- function(x, ...) {
 #' # Select which parameter to plot.
 #' plot(fit, pars = "pi")
 #'
+#' # Plot the theta parameter for rater 1, showing uncertainty.
+#' plot(fit, pars = "theta", theta_plot_type = "points", rater_index = 1)
+#'
 #' }
 #'
 #' @export
@@ -123,10 +133,17 @@ plot.rater_fit <- function(x,
                            prob = 0.9,
                            rater_index = NULL,
                            item_index = NULL,
+                           theta_plot_type = "matrix",
                            ...) {
 
   if (length(pars) > 1 || !is.character(pars)) {
     stop("`pars` must be a length 1 character vector.", call. = FALSE)
+  }
+
+  if (inherits(x, "optim_fit") && theta_plot_type == "points") {
+    stop("`'points'` plot type is not supported for models fit using",
+         "optimisation, use `theta_plot_type = 'matrix' instead.",
+         call. = FALSE)
   }
 
   which <- rater_index
@@ -135,10 +152,17 @@ plot.rater_fit <- function(x,
                   "class_probabilities", "latent_class")
 
   par <- match.arg(pars, plot_names)
+  theta_type <- match.arg(theta_plot_type, c("matrix", "points"))
+
+  if (par %in% c("theta", "raters")) {
+    par <- paste0(par, "_", theta_type)
+  }
 
   plot <- switch(par,
-    "theta" = plot_theta(x, which = which),
-    "raters" = plot_theta(x, which = which),
+    "theta_matrix" = plot_theta(x, which = which),
+    "raters_matrix" = plot_theta(x, which = which),
+    "theta_points" = plot_theta_points(x, prob = prob, which = which),
+    "raters_points" = plot_theta_points(x, prob = prob, which = which),
     "class_probabilities" = plot_class_probabilities(x,
                                                      item_index = item_index),
     "latent_class" = plot_class_probabilities(x, item_index = item_index),
