@@ -51,15 +51,15 @@ posterior_samples <- function(fit, pars = c("pi", "theta")) {
       "theta" = {
         raw_theta <- rstan::extract(get_samples(fit))$theta
         if (inherits(fit$model, "hier_dawid_skene")) {
-          beta_norm <- rstan::extract(get_samples(fit))$beta_norm
-          N <- dim(beta_norm)[[1]]
+          beta <- rstan::extract(get_samples(fit))$beta
+          N <- dim(beta)[[1]]
           J <- fit$stan_data$J
           K <- fit$stan_data$K
           full_theta <- array(dim = c(N, J, K, K))
           for (i in seq_len(N)) {
             for (j in seq_len(J)) {
               for (k in seq_len(K))
-                full_theta[i, j, k, ] <- softmax(beta_norm[i, j, k, ])
+                full_theta[i, j, k, ] <- softmax(beta[i, j, k, ])
             }
           }
         } else if (inherits(fit$model, "class_conditional_dawid_skene")) {

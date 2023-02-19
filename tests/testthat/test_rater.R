@@ -228,7 +228,7 @@ test_that("create_inits() works for the hierarchical Dawid-Skene model", {
   anesthesia_stan_data <- as_stan_data(anesthesia, "long", default_colnames)
 
   hds_init_func <- create_inits(hier_dawid_skene(), anesthesia_stan_data)
-  expect_named(hds_init_func(), c("pi", "zeta", "omega", "beta_raw"))
+  expect_named(hds_init_func(), c("pi", "mu", "sigma", "beta_raw"))
 })
 
 test_that("Invalid `long_data_colnames` generates appropriate errors", {

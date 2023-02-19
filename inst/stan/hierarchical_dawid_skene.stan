@@ -9,31 +9,24 @@ data {
   vector<lower=0>[K] alpha;     // Prior on pi.
 }
 
-transformed data {
-  vector[K] zeros = rep_vector(0,K);
-}
-
 parameters {
   simplex[K] pi;
-  matrix[K, K-1] beta_raw[J];
-  matrix[K, K-1] zeta;
-  matrix<lower=0>[K,K-1] omega;
+  matrix[K, K] beta_raw[J];
+  matrix[K, K] mu;
+  matrix<lower=0>[K, K] sigma;
 }
 
 transformed parameters {
-  matrix[K,K-1] beta[J];
-  matrix[K,K] beta_norm[J];
+  matrix[K,K] beta[J];
   vector[K] log_p_z[I];
   vector[K] log_pi;
 
   for(j in 1:J) {
     // Non centered parameterization.
-    beta[j] = zeta + omega .* beta_raw[j];
-    // Fix last category to 0 (softmax non-identifiability).
-    beta_norm[j] = append_col(beta[j], zeros);
+    beta[j] = mu + sigma .* beta_raw[j];
     for(k in 1:K) {
       // Log softmax
-      beta_norm[j,k] = beta_norm[j,k] - log_sum_exp(beta_norm[j,k]);
+      beta[j,k] = beta[j,k] - log_sum_exp(beta[j,k]);
     }
   }
 
@@ -45,7 +38,7 @@ transformed parameters {
 
   for (n in 1:N) {
     for (k in 1:K) {
-      log_p_z[ii[n], k] = log_p_z[ii[n], k] + beta_norm[jj[n], k, y[n]];
+      log_p_z[ii[n], k] = log_p_z[ii[n], k] + beta[jj[n], k, y[n]];
     }
   }
 
@@ -55,15 +48,15 @@ model {
 
   pi ~ dirichlet(alpha);
   for (k in 1:K) {
-    for (i in 1:(K - 1)) {
+    for (i in 1:K) {
       if (k == i) {
-        zeta[k, i] ~ normal(6, 1);
+        mu[k, i] ~ normal(2, 1);
       } else {
-        zeta[k, i] ~ normal(0, 1);
+        mu[k, i] ~ normal(0, 1);
       }
     }
   }
-  to_vector(omega) ~ normal(0, 1);
+  to_vector(sigma) ~ normal(0, 1);
 
   for(j in 1:J) {
     // part of the non centered parameterization

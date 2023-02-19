@@ -219,17 +219,17 @@ theta_point_estimate.optim_fit <- function(fit, which = NULL, ...) {
 
 theta_point_estimate_hds_optim <- function(fit, which, ...) {
   par <- fit$estimates$par
-  beta_norm_values <- par[grep("\\bbeta_norm\\b", names(par))]
+  beta_values <- par[grep("\\bbeta\\b", names(par))]
   K <- fit$stan_data$K
   J <- fit$stan_data$J
   if (is.null(which)) {
     which <- 1:J
   }
-  beta_norm <- array(beta_norm_values, dim = c(J, K, K))
+  beta <- array(beta_values, dim = c(J, K, K))
   theta <- array(dim = c(J, K, K))
   for (j in seq_len(J)) {
     for (k in seq_len(K)) {
-      theta[j, k, ] <- softmax(beta_norm[j, k, ])
+      theta[j, k, ] <- softmax(beta[j, k, ])
     }
   }
   theta
