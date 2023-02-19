@@ -325,12 +325,12 @@ class_conditional_dawid_skene_inits <- function(K, J) {
 #'
 hier_dawid_skene_inits <- function(K, J) {
   pi_init <- rep(1 / K, K)
-  zeta_init <- matrix(0, nrow = K, ncol = K - 1)
-  diag(zeta_init) <- 6
+  mu_init <- matrix(0, nrow = K, ncol = K)
+  diag(mu_init) <- 2
   # Mean of half-normal distribution.
-  omega_init <- matrix(sqrt(2) / sqrt(pi), nrow = K, ncol = K - 1)
-  beta_raw_init <- array(0, c(J, K, K - 1))
-  function(n) list(pi = pi_init, zeta = zeta_init, omega = omega_init,
+  sigma_init <- matrix(sqrt(2) / sqrt(pi), nrow = K, ncol = K)
+  beta_raw_init <- array(0, c(J, K, K))
+  function(n) list(pi = pi_init, mu = mu_init, sigma = sigma_init,
                    beta_raw = beta_raw_init)
 }
 

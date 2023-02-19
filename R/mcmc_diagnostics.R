@@ -80,7 +80,7 @@ mcmc_diagnostics <- function(fit, pars = c("pi", "theta")) {
     J <- fit$stan_data$J
 
     if (inherits(get_model(fit), "hier_dawid_skene")) {
-      draws <- rstan::extract(get_samples(fit), pars = "beta_norm",
+      draws <- rstan::extract(get_samples(fit), pars = "beta",
                               permuted = FALSE)
     } else {
       draws <- rstan::extract(get_samples(fit), pars = "theta",
@@ -97,7 +97,7 @@ mcmc_diagnostics <- function(fit, pars = c("pi", "theta")) {
       for (j in 1:J) {
         for (k in 1:K) {
           for (i in 1:K) {
-            stan_name <- sprintf("beta_norm[%s,%s,%s]", j, k, i)
+            stan_name <- sprintf("beta[%s,%s,%s]", j, k, i)
             theta_diagnostics[n, 1] <- rstan::Rhat(draws[, , stan_name])
             theta_diagnostics[n, 2] <- rstan::ess_bulk(draws[, , stan_name])
             row_names[[n]] <- sprintf("theta[%s, %s, %s]", j, k, i)
