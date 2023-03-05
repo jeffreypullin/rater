@@ -25,7 +25,7 @@ specifies:
 The passed \code{sim_data} augmented with columns:
 \itemize{
 \item \code{"z"} containing the latent class of each item,
-\item \code{"rating"} containing the simulated rating.
+\item \code{"rating"} containing the simulated ratings.
 }
 }
 \description{
@@ -35,9 +35,9 @@ Simulate data from the Dawid-Skene model
 The number of raters implied by the entries in the rater column
 must match the number of raters implied by the passed theta parameter.
 
-This function can also be used to simulate from the class conditional
+This function can also be used to simulate from the class-conditional
 Dawid-Skene model by specifying theta in the required form (i.e where
-all off-diagonal matrices of the error matrices are the same.)
+all off-diagonal entries of the error matrices are equal.)
 }
 \examples{
 
