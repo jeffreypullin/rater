@@ -1,5 +1,17 @@
 # rater (development version)
 
+* Updated the Stan implementation, priors, and initialisation points of the hierarchical Dawid-Skene model, leading to much more reliable convergence. 
+
+* Added the ability to visualise the theta parameter with uncertainty.
+
+* Added row names to the output of `class_probabilities()`.
+
+* Added the ability to specify the column names of long format data passed to `rater()`.
+
+* Added `simulate_dawid_skene_model()` and `simulate_hier_dawid_skene_model()` to simulate data from the Dawid-Skene and hierarchical Dawid-Skene models.
+
+* Allowed the theta parameter to be extracted from the hierarchical Dawid-Skene model.
+
 # rater 1.2.0
 
 * Add `waic()` function for model comparison
