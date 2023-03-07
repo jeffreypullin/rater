@@ -10,6 +10,8 @@
 
 * Added `simulate_dawid_skene_model()` and `simulate_hier_dawid_skene_model()` to simulate data from the Dawid-Skene and hierarchical Dawid-Skene models.
 
+* Re-export `loo_compare()`.
+
 * Allowed the theta parameter to be extracted from the hierarchical Dawid-Skene model.
 
 # rater 1.2.0
