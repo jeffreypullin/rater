@@ -133,7 +133,7 @@ Pareto smoothed importance sampling.
 <span class="r-in"><span>                  verbose <span class="op">=</span> <span class="cn">FALSE</span>, chains <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">loo_ds</span> <span class="op">&lt;-</span> <span class="fu">loo</span><span class="op">(</span><span class="va">fit_ds</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Some Pareto k diagnostic values are slightly high. See help('pareto-k-diagnostic') for details.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Some Pareto k diagnostic values are too high. See help('pareto-k-diagnostic') for details.</span>
 <span class="r-in"><span><span class="va">loo_ccds</span> <span class="op">&lt;-</span> <span class="fu">loo</span><span class="op">(</span><span class="va">fit_ccds</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># To compare the loos easily we can use the loo_compare function from the</span></span></span>
@@ -146,7 +146,7 @@ Pareto smoothed importance sampling.
 <span class="r-in"><span><span class="fu"><a href="https://mc-stan.org/loo/reference/loo_compare.html" class="external-link">loo_compare</a></span><span class="op">(</span><span class="va">loo_ds</span>, <span class="va">loo_ccds</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        elpd_diff se_diff</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> model1   0.0       0.0  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> model2 -12.1       3.1  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> model2 -11.5       3.2  </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># The documentation of the loo package contains more information about how</span></span></span>
 <span class="r-in"><span><span class="co"># the output should be interpreted.</span></span></span>
