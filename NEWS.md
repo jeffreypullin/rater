@@ -1,4 +1,4 @@
-# rater (development version)
+# rater 1.3.0
 
 * Updated the Stan implementation, priors, and initialisation points of the hierarchical Dawid-Skene model, leading to much more reliable convergence. 
 
