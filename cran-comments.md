@@ -1,20 +1,20 @@
-## rater 1.2.0
+## rater 1.3.0
 
-This is a new version of the package fixes bugs and adds many new model comparison function.
+This is a new version of the package that adds new functionality focused on the hierarchical Dawid-Skene model.
 
 ## Test environments
 
-* local mac OS install, R 4.1.0
-* ubuntu 16.04 (on github actions), R 4.1.0
-* mac OS 10.15.4 (on github actions) R 4.1.0
-* Microsoft Windows Server 2019 10.0.17763 (on github actions) R 4.1.0
+* local mac OS install, R 4.2.2
+* ubuntu 22.04 (on github actions), R 4.2.2
+* mac OS Monterey 12 (on github actions) R 4.2.2
+* Microsoft Windows Server 2022 (on github actions) R 4.2.2
 * win-builder (devel)
 
 ## R CMD check results
 
 Dawid and Skene are names and not misspelled.
 
-rater uses rstan which causes the two additional notes.  
+rater uses the rstan package which causes the two additional notes.  
 
 0 errors | 0 warnings | 3 notes
 
