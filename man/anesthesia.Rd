@@ -16,10 +16,10 @@ A \code{data.frame} with 315 rows and 3 columns:
 anesthesia
 }
 \description{
-The data consist of ratings, on a 4-point scale, made by four anaesthetists
+The data consist of ratings, on a 4-point scale, made by five anaesthetists
 of patients' pre-operative health. The ratings were based on the
 anaesthetists assessments of a standard form completed for all of the
-patients. There are 45 patients (items) and four anaesthetists (raters) in
+patients. There are 45 patients (items) and five anaesthetists (raters) in
 total. The first anaesthetist assessed the forms a total of three times,
 spaced several weeks apart. The other anaesthetists each assessed the forms
 once. The data is in 'long' format.
