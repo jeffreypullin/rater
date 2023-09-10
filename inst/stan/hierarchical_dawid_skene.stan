@@ -3,22 +3,22 @@ data {
   int<lower=1> J;               // Number of raters.
   int<lower=1> K;               // Number of rating categories.
   int<lower=1> I;               // Number of items.
-  int<lower=1, upper=I> ii[N];  // Item index for rating n.
-  int<lower=1, upper=J> jj[N];  // Rater for annotation n.
-  int<lower=0, upper=K> y[N];   // Rating for observation n.
+  array[N] int<lower=1, upper=I> ii;  // Item index for rating n.
+  array[N] int<lower=1, upper=J> jj;  // Rater for annotation n.
+  array[N] int<lower=0, upper=K> y;   // Rating for observation n.
   vector<lower=0>[K] alpha;     // Prior on pi.
 }
 
 parameters {
   simplex[K] pi;
-  matrix[K, K] beta_raw[J];
+  array[J] matrix[K, K] beta_raw;
   matrix[K, K] mu;
   matrix<lower=0>[K, K] sigma;
 }
 
 transformed parameters {
-  matrix[K,K] beta[J];
-  vector[K] log_p_z[I];
+  array[J] matrix[K,K] beta;
+  array[I] vector[K] log_p_z;
   vector[K] log_pi;
 
   for(j in 1:J) {

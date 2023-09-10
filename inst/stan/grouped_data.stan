@@ -2,19 +2,19 @@ data {
   int<lower=1> N;                  // number of different amounts
   int<lower=1> K;                  // number of annotation categories
   int<lower=1> J;                  // number of annotators
-  real tally[N];                   // total of each different combination
-  int<lower=1,upper=K> key[N, J];  //
+  array[N] real tally;                   // total of each different combination
+  array[N, J] int<lower=1,upper=K> key;  //
   vector<lower=0>[K] alpha;        // prior for pi
-  vector<lower=0>[K] beta[J, K];   // prior for theta
+  array[J, K] vector<lower=0>[K] beta;   // prior for theta
 }
 
 parameters {
   simplex[K] pi;
-  simplex[K] theta[J, K];
+  array[J, K] simplex[K] theta;
 }
 
 transformed parameters {
-  vector[K] log_p_z[N];
+  array[N] vector[K] log_p_z;
   // use the prior for the prevalence
   for (i in 1:N) {
     log_p_z[i] = log(pi);

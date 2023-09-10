@@ -13,20 +13,20 @@ data {
   int<lower=1> J;               // number of annotators
   int<lower=1> K;               // number of annotation categories
   int<lower=1> I;               // number of items
-  int<lower=1, upper=I> ii[N];  // item index for annotation n
-  int<lower=1, upper=J> jj[N];  // annotator for annotation n
-  int<lower=0, upper=K> y[N];   // annotation for observation n
+  array[N] int<lower=1, upper=I> ii;  // item index for annotation n
+  array[N] int<lower=1, upper=J> jj;  // annotator for annotation n
+  array[N] int<lower=0, upper=K> y;   // annotation for observation n
   vector<lower=0>[K] alpha;     // prior for pi
-  vector<lower=0>[K] beta[J, K];   // prior for theta
+  array[J, K] vector<lower=0>[K] beta;   // prior for theta
 }
 
 parameters {
   simplex[K] pi;
-  simplex[K] theta[J, K];
+  array[J, K] simplex[K] theta;
 }
 
 transformed parameters {
-  vector[K] log_p_z[I];
+  array[I] vector[K] log_p_z;
   for (i in 1:I) {
     log_p_z[i] = log(pi);
   }
