@@ -1,6 +1,8 @@
 # rater (development version)
 
-* Fix the description of the number of raters in the anesthesia data. The documentation had erroneously stated there were four anesthetists, not five. 
+* Fix the description of the number of raters in the anesthesia data. The documentation had erroneously stated there were four anesthetists, not five.
+
+* Update the stan code for compatibility with rstan v2.26.0 (@andrjohns)
 
 # rater 1.3.0
 
