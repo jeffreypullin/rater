@@ -1,13 +1,13 @@
-## rater 1.3.0
+## rater 1.3.1
 
-This is a new version of the package that adds new functionality focused on the hierarchical Dawid-Skene model.
+This is a new patch release of the package that updates the stan code to be compatible with a future release of the rstan package. 
 
 ## Test environments
 
 * local mac OS install, R 4.2.2
-* ubuntu 22.04 (on github actions), R 4.2.2
-* mac OS Monterey 12 (on github actions) R 4.2.2
-* Microsoft Windows Server 2022 (on github actions) R 4.2.2
+* ubuntu 22.04 (on github actions), R 4.3.1
+* mac OS Monterey 12 (on github actions) R 4.3.1
+* Microsoft Windows Server 2022 (on github actions) R 4.3.1
 * win-builder (devel)
 
 ## R CMD check results
