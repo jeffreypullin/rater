@@ -1,3 +1,5 @@
+# rater (development version)
+
 # rater 1.3.1
 
 * Fix the description of the number of raters in the anesthesia data. The documentation had erroneously stated there were four anesthetists, not five.
