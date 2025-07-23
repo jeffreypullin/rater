@@ -1,120 +1,42 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>/articles/data-formats.html</loc>
-  </url>
-  <url>
-    <loc>/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>/articles/workflow.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/anesthesia.html</loc>
-  </url>
-  <url>
-    <loc>/reference/as_mcmc.list.html</loc>
-  </url>
-  <url>
-    <loc>/reference/caries.html</loc>
-  </url>
-  <url>
-    <loc>/reference/class_probabilities.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_stanfit.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/loo.rater_fit.html</loc>
-  </url>
-  <url>
-    <loc>/reference/make_complete_rating_design_sim_data.html</loc>
-  </url>
-  <url>
-    <loc>/reference/make_theta.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mcmc_diagnostics.html</loc>
-  </url>
-  <url>
-    <loc>/reference/models.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plot.rater_fit.html</loc>
-  </url>
-  <url>
-    <loc>/reference/point_estimate.html</loc>
-  </url>
-  <url>
-    <loc>/reference/posterior_interval.mcmc_fit.html</loc>
-  </url>
-  <url>
-    <loc>/reference/posterior_interval.optim_fit.html</loc>
-  </url>
-  <url>
-    <loc>/reference/posterior_predict.rater_fit.html</loc>
-  </url>
-  <url>
-    <loc>/reference/posterior_samples.html</loc>
-  </url>
-  <url>
-    <loc>/reference/print.mcmc_fit.html</loc>
-  </url>
-  <url>
-    <loc>/reference/print.optim_fit.html</loc>
-  </url>
-  <url>
-    <loc>/reference/print.rater_model.html</loc>
-  </url>
-  <url>
-    <loc>/reference/prior_summary.rater_fit.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rater-package.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rater.html</loc>
-  </url>
-  <url>
-    <loc>/reference/reexports.html</loc>
-  </url>
-  <url>
-    <loc>/reference/simulate_dawid_skene_model.html</loc>
-  </url>
-  <url>
-    <loc>/reference/simulate_hier_dawid_skene_model.html</loc>
-  </url>
-  <url>
-    <loc>/reference/summary.mcmc_fit.html</loc>
-  </url>
-  <url>
-    <loc>/reference/summary.optim_fit.html</loc>
-  </url>
-  <url>
-    <loc>/reference/summary.rater_model.html</loc>
-  </url>
-  <url>
-    <loc>/reference/waic.rater_fit.html</loc>
-  </url>
-  <url>
-    <loc>/reference/wide_to_long.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/LICENSE-text.html</loc></url>
+<url><loc>/articles/data-formats.html</loc></url>
+<url><loc>/articles/index.html</loc></url>
+<url><loc>/articles/workflow.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/news/index.html</loc></url>
+<url><loc>/reference/anesthesia.html</loc></url>
+<url><loc>/reference/as_mcmc.list.html</loc></url>
+<url><loc>/reference/caries.html</loc></url>
+<url><loc>/reference/class_probabilities.html</loc></url>
+<url><loc>/reference/get_stanfit.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/loo.rater_fit.html</loc></url>
+<url><loc>/reference/make_complete_rating_design_sim_data.html</loc></url>
+<url><loc>/reference/make_theta.html</loc></url>
+<url><loc>/reference/mcmc_diagnostics.html</loc></url>
+<url><loc>/reference/models.html</loc></url>
+<url><loc>/reference/plot.rater_fit.html</loc></url>
+<url><loc>/reference/point_estimate.html</loc></url>
+<url><loc>/reference/posterior_interval.mcmc_fit.html</loc></url>
+<url><loc>/reference/posterior_interval.optim_fit.html</loc></url>
+<url><loc>/reference/posterior_predict.rater_fit.html</loc></url>
+<url><loc>/reference/posterior_samples.html</loc></url>
+<url><loc>/reference/print.mcmc_fit.html</loc></url>
+<url><loc>/reference/print.optim_fit.html</loc></url>
+<url><loc>/reference/print.rater_model.html</loc></url>
+<url><loc>/reference/prior_summary.rater_fit.html</loc></url>
+<url><loc>/reference/rater-package.html</loc></url>
+<url><loc>/reference/rater.html</loc></url>
+<url><loc>/reference/reexports.html</loc></url>
+<url><loc>/reference/simulate_dawid_skene_model.html</loc></url>
+<url><loc>/reference/simulate_hier_dawid_skene_model.html</loc></url>
+<url><loc>/reference/summary.mcmc_fit.html</loc></url>
+<url><loc>/reference/summary.optim_fit.html</loc></url>
+<url><loc>/reference/summary.rater_model.html</loc></url>
+<url><loc>/reference/waic.rater_fit.html</loc></url>
+<url><loc>/reference/wide_to_long.html</loc></url>
 </urlset>
+
