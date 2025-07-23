@@ -1,4 +1,6 @@
-# rater (development version)
+# rater 1.3.2
+
+Fix the compatibility of plotting tests with upcoming ggplot2 version.
 
 # rater 1.3.1
 

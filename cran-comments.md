@@ -1,13 +1,13 @@
-## rater 1.3.1
+## rater 1.3.2
 
-This is a new patch release of the package that updates the stan code to be compatible with a future release of the rstan package. 
+This is a new patch release of the package that updates tests for compatibility with an upcoming release of ggplot2. 
 
 ## Test environments
 
-* local mac OS install, R 4.2.2
-* ubuntu 22.04 (on github actions), R 4.3.1
-* mac OS Monterey 12 (on github actions) R 4.3.1
-* Microsoft Windows Server 2022 (on github actions) R 4.3.1
+* local mac OS install, R 4.3.1
+* ubuntu 24.04 (on github actions), R 4.5.1
+* mac OS Sonoma 14 (on github actions) R 4.5.1
+* Microsoft Windows Server 2022 (on github actions) R 4.5.1
 * win-builder (devel)
 
 ## R CMD check results
@@ -24,7 +24,7 @@ rater uses the rstan package which causes the two additional notes.
 * checking installed package size ... NOTE
     installed size is  5.8Mb
     sub-directories of 1Mb or more:
-    libs   4.6Mb
+    libs   4.3Mb
 
 * checking for GNU extensions in Makefiles ... NOTE
     GNU make is a SystemRequirements.
