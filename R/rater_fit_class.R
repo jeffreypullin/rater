@@ -326,11 +326,11 @@ summary.optim_fit <- function(object, n_pars = 8, ...) {
   cat(paste0("Fit converged: ", as.logical(x$estimates$return_code - 1), "\n"))
 }
 
-#' Convert a rater_fit object to a {coda} `mcmc.list` object.
+#' Convert a rater_fit object to a coda `mcmc.list` object.
 #'
 #' @param fit A rater_fit object.
 #'
-#' @return A {coda} mcmc.list object.
+#' @return A coda mcmc.list object.
 #'
 #' @importFrom rstan As.mcmc.list
 #'

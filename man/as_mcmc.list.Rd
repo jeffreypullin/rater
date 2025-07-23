@@ -2,7 +2,7 @@
 % Please edit documentation in R/rater_fit_class.R
 \name{as_mcmc.list}
 \alias{as_mcmc.list}
-\title{Convert a rater_fit object to a {coda} \code{mcmc.list} object.}
+\title{Convert a rater_fit object to a coda \code{mcmc.list} object.}
 \usage{
 as_mcmc.list(fit)
 }
@@ -10,10 +10,10 @@ as_mcmc.list(fit)
 \item{fit}{A rater_fit object.}
 }
 \value{
-A {coda} mcmc.list object.
+A coda mcmc.list object.
 }
 \description{
-Convert a rater_fit object to a {coda} \code{mcmc.list} object.
+Convert a rater_fit object to a coda \code{mcmc.list} object.
 }
 \examples{
 \donttest{
