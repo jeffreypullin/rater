@@ -26,10 +26,10 @@
 #' It consists of binary ratings, made by 5 dentists, of whether a given tooth
 #' was healthy (sound) or had caries, also known as cavities. The ratings were
 #' performed using X-ray only, which was thought to be more error-prone than
-#' visual/tactile assessment of each tooth. In total 3,689 ratings were made.
-#' This data is in 'grouped' format. Each row is one of the 'pattern' with
-#' the final columns being a tally of how many times that pattern occurs in
-#' the dataset.
+#' visual/tactile assessment of each tooth. In total 19,295 ratings on 3,689
+#' items (caries) were made. This data is in 'grouped' format. Each row is one
+#' of the 'pattern' with the final columns being a tally of how many times that
+#' pattern occurs in the dataset.
 #'
 #' @format A `data.frame` with 6 columns and 32 rows.
 #' \describe{
